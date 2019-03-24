@@ -45,7 +45,9 @@ class ImageResults extends Component {
         key= {images[i]}
         title={imageTitle[i]}
         >
-          <img style={{"padding":"50px" ,"border":"10px #662D91"}} src={images[i]} alt={imageTitle[i]}/>
+
+          <img style={{"padding":"50px" }} src={images[i]} alt={imageTitle[i]}/>
+          
         </GridTile>)
     }
     return imagesTiles;
@@ -82,6 +84,8 @@ render(){
 
       <div style={{"margin":"75px"}}>
         {imageListContent }
+        <Link to='/timer'>Try it out</Link>
+        
       </div>
 
       // <div>

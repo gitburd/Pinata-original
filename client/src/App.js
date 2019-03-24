@@ -12,6 +12,7 @@ import Search from './components/Search/Search';
 import ImageResults from './components/Image-Results/ImageResults';
 import AutoCompleteText from './components/AutoCompleteText';
 import Timer from './components/Timer';
+import pinata_big from './components/img/pinata_big.png';
 // import
 
 // import withStyles from './components/Form/Field';
@@ -61,7 +62,10 @@ getAllSkills = ()=>{
           <header className="App-header">
   
           <h1>Piñata</h1>
-          
+          <Link to ='/assessment'>
+          <img style={{"padding":"50px", "width":"35%"}} src={pinata_big} alt={'pinata'}/>
+          </Link>
+
           </header>
           </React.Fragment>)} />
 
@@ -91,8 +95,6 @@ getAllSkills = ()=>{
             <Route exact path="/timer" exact render = { props =>(
             <React.Fragment>
               
-            
-             <h1>Skill </h1>
              <Timer/>
              <Search/>
               
