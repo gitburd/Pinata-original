@@ -1,0 +1,32 @@
+{
+  "name": "aikidoapi",
+  "version": "1.0.0",
+  "description": "API of quotes by O Sensei, Morihei Ueshiba. ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dena",
+  "license": "ISC",
+  "plugins": [
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ]
+  ],
+
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "gridfs": "^1.0.0",
+    "inquirer": "^6.2.2",
+    "mongoose": "^5.4.18",
+    "nodemon": "^1.18.10",
+    "pg": "^7.8.1",
+    "request": "^2.88.0"
+  }
+}
