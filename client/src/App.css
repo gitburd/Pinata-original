@@ -1,3 +1,66 @@
+.addFullRecordForm{
+
+}
+
+.skillsGrid{
+  margin-top:20px; 
+  align-items: center;
+  justify-content: center;
+  max-height: 95vh;
+}
+
+.skill_icon{
+  width:73%; 
+}
+
+.skill{
+  width:32.75%;
+  float: left;
+
+}
+
+
+.sidenav {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  /* z-index: 1; */
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+h1{
+  font-size: calc(20px + 2vmin);
+}
+
+.main {
+  margin-left: 20%; /* Same as the width of the sidenav */
+  font-size: calc(12px + 2vmin);
+  padding: 0px 10px;
+}
+
+.link {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: calc(12px + 2vmin);
+  color: #818181;
+  display: block;
+}
+
+.link:hover {
+  color: #f1f1f1;
+}
+
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
 .AutoCompleteText{
   width: 100%;
   border: 1px solid gray;
@@ -59,7 +122,6 @@ background-color: rgba(128, 128, 128, 0.28);
   margin: 150px auto 0 auto;
   width: 600px;
 }
-
 
 
 .App {

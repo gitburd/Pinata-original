@@ -14,8 +14,7 @@ export default class AutoCompleteText extends Component {
     "Unreal",
     "Jittery",
     "Anxious",
-    "Depressed",
-    "Music"
+    "Depressed"
         
     ];
     this.state={
@@ -54,7 +53,7 @@ suggestionSelected(value){
         }
         return (
             <ul>
-                <Link to={`/skills`}>
+                <Link to={`/grid`}>
                 {suggestions.map((item) => <li onClick={()=> 
                   this.suggestionSelected(item)
                   

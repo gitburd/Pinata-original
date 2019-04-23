@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {GridList, GridTile} from 'material-ui/GridList';
-// import IconButton from 'material-ui/IconButton';
-// import ZoomIn from 'material-ui/svg-icons/action/zoom-in';
-// import Dialog from 'material-ui/Dialog';
-// import FlatButton from 'material-ui/FlatButton';
+
 import { Link } from 'react-router-dom'
 import { IconButton } from 'material-ui';
 import wringtowel from '../img/wringtowel.png';
@@ -31,8 +28,7 @@ class ImageResults extends Component {
 }
 
   renderImages() {
-    // let images =[music]
-    // let imageTitle= ['music']
+   
 
     let images = [punchpillow,takebreather, wringtowel,takewalk ,wildcard,workout,playvideogames,cookfood,phonefriend];
   let imageTitle= ['Punch Pillow', 'Take Breather','Wring Towel','Take Walk' ,'Wild Card','Workout','Play Video Games','Cook Food','Phone Friend'];
@@ -63,24 +59,7 @@ render(){
 
   )
 
-
-  // render() {
-  //   let imageListContent;
-  //   console.log(this.props)
-  
-   
-  
-    
-    // if(images){
-    //     imageListContent = (
-            
-    //     )
-    // }else{
-    //     imageListContent =  ["music"];
-    // }   
-
     return (
-
 
       <div style={{"margin":"75px"}}>
         {imageListContent }
@@ -88,9 +67,6 @@ render(){
         
       </div>
 
-      // <div>
-      //   {this.renderImages()}
-      // </div>
     )
   }
 }

@@ -14,7 +14,7 @@ class SkillsList extends Component {
     
   }
 }
-
+ 
 // PropTypes
 SkillsList.propTypes= {
     skillsList: PropTypes.array.isRequired

@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import logo from './logo.svg';
+
 import './App.css';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import GetAllSkills from './components/GetAllSkills.js';
-import Skill from './components/Skill.js';
-import SkillsList from './components/SkillsList.js';
-import music from './components/img/music.png';
-import NavBar from './components/NavBar/NavBar';
+
+import SkillsList from './components/SkillsList';
 import Search from './components/Search/Search';
 import ImageResults from './components/Image-Results/ImageResults';
 import AutoCompleteText from './components/AutoCompleteText';
-import Timer from './components/Timer';
-import pinata_big from './components/img/pinata_big.png';
-// import
 
-// import withStyles from './components/Form/Field';
-// import ComposedTextField from './components/Form/Field';
+import pinata_big from './components/img/pinata_big.png';
+import SkillsGrid from './components/SkillsGrid';
+
+import Record from './components/Record';
+import RecordsList from './components/RecordsList'
+import AddFullRecord from './components/AddFullRecord'
+import AddRecordEmotion from './components/AddRecordEmotion'
+import AddRecordSkill from './components/AddRecordSkill'
+import UpdateRecord from './components/UpdateRecord'
+
 
 
 const http = require('http');
@@ -25,26 +27,298 @@ const fetch = require('node-fetch');
 class App extends Component {
 state ={ 
   skillsList:[],
-  postFeeling:'',
-  preFeeling:'',
-  levelChange:'',
-  item:''
-  
+    user_id:'2',
+    record_id:'',
+    before_lvl:'',
+    after_lvl:'',
+    impact:'',
+    emotion:'Angry',
+    skill:'',
+    si:'',
+    sh:'',
+    recordsList : [],
+    userSkillsArray : [],
+    emotionSkillsArray : [],
+    skillsGridArray : [],
+    pinata :   {
+      "skill_title": "piñata",
+      "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+      "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+      "skill_id": 0
+    },
 
-  // resultSkills:[],
-  // selectedSkills:null
+    emotionsArray:[
+      {
+          "emotion_id": 1,
+          "emotion_text": "test emotion);\n"
+      },
+      {
+          "emotion_id": 2,
+          "emotion_text": "test emotion"
+      },
+      {
+          "emotion_id": 3,
+          "emotion_text": "Angry"
+      },
+      {
+          "emotion_id": 4,
+          "emotion_text": "Sad"
+      },
+      {
+          "emotion_id": 5,
+          "emotion_text": "Depressed"
+      },
+      {
+          "emotion_id": 6,
+          "emotion_text": "Isolated"
+      },
+      {
+          "emotion_id": 7,
+          "emotion_text": "Lonely"
+      },
+      {
+          "emotion_id": 8,
+          "emotion_text": "Scared"
+      },
+      {
+          "emotion_id": 9,
+          "emotion_text": "Hopeless"
+      }
+  ],
+   
+    baseSkillsArray :
+    [
+      {
+          "skill_title": "Test skill",
+          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+          "skill_id": 1
+      },
+      {
+          "skill_title": "Play Video Games",
+          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/playvideogames.png",
+          "skill_id": 2
+      },
+      {
+          "skill_title": "Wring a Towel",
+          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wringtowel.png",
+          "skill_id": 3
+      },
+      {
+          "skill_title": "Workout",
+          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/workout.png",
+          "skill_id": 4
+      },
+      {
+          "skill_title": "Take a Breather",
+          "skill_details": "https://s3-us-west-2.amazonaws.com/pinata-images/takebreather.png",
+          "skill_icon": "url to the image",
+          "skill_id": 5
+      },
+      {
+          "skill_title": "Punch a Pillow",
+          "skill_details": "https://s3-us-west-2.amazonaws.com/pinata-images/punchpillow.png",
+          "skill_icon": "url to the image",
+          "skill_id": 6
+      }, 
+      {
+        "skill_title": "Dance",
+        "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+        "skill_id": 7
+    }, 
+    {
+      "skill_title": "Listen to Music",
+      "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+      "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+      "skill_id": 8
+  }, 
+  {
+    "skill_title": "Make Art",
+    "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+    "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+    "skill_id": 9
+}, 
+{
+  "skill_title": "Phone a Friend",
+  "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+  "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/phonefriend.png",
+  "skill_id": 10
+}, 
+{
+  "skill_title": "Take a Walk",
+  "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+  "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/takewalk.png",
+  "skill_id": 11
+}, 
+{
+  "skill_title": "Cook",
+  "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+  "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/cookfood.png",
+  "skill_id": 12
+},
+{
+  "skill_title": "Play with Pet",
+  "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+  "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+  "skill_id": 12
+}  
+]
 }
 
-getAllSkills = ()=>{
-  fetch("http://localhost:3001/api/skills", {
+getUserRecords = () => {
+
+  let url = `http://localhost:3001/api/userRecords?user_id=${this.state.user_id}`
+
+  fetch(url, {
     method: 'get',
     headers: { 'Content-Type': 'application/json'}
     })
-    .then(res => res.json()).then(json => this.setState({skillsList: json})).catch(function(e) {
+    .then(res => res.json()).then(json => this.setState({recordsList: json})).catch(function(e) {
     console.log(e); // “oh, no!”
    })
-  
+
+}
+
+
+
+updateRecord = (record_id, before_lvl, after_lvl) => {
+
+  let url = `http://localhost:3001/api/userRecords?record_id=${record_id}`
+
+  let update = {
+    before_lvl: parseInt(before_lvl),
+    after_lvl: parseInt(after_lvl)
   }
+
+  console.log(update)
+
+  fetch(url, {
+    method: 'put',
+    body: JSON.stringify(update),
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .catch(function(e) {console.log(`something is wrong ${e}`)})
+
+}
+
+
+addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh) => {
+  let url = `http://localhost:3001/api/fullRecord`
+
+  let newRecord = 
+
+    {
+    skill_id,
+    emotion_id,
+    before_lvl,
+    after_lvl,
+    si,
+    sh,
+    user_id:this.state.user_id,
+    date:  "2099-02-20",
+    impact: before_lvl - after_lvl
+    }
+
+  fetch(url, {
+    method: 'post',
+    body: JSON.stringify(newRecord),
+    headers: { 'Content-Type': 'application/json'}
+    
+    })
+  .catch(function(e) {console.log(`something is wrong! : ${e}`); })
+
+
+}
+
+
+getUserSkills = () => {
+
+  let url = `http://localhost:3001/api/userSkills?id=${this.state.user_id}&emotion=${this.state.emotion}`
+
+  fetch(url, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(json => this.setState({userSkillsArray: json})).catch(function(e) {
+    console.log(e); // “oh, no!”
+   })
+
+}
+
+getEmotionSkills = () => {
+  let url = `http://localhost:3001/api/emotionSkills?emotion=${this.state.emotion}`
+  fetch(url, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(json => this.setState({emotionSkillsArray: json})).catch(function(e) {
+    console.log(e); // “oh, no!”
+   })
+
+}
+
+getSkillsGrid = () => {
+
+  let idx;
+  let i = 0;
+  let target;
+
+  // add user skills 
+
+  while (this.state.skillsGridArray.length < 3) {
+    if (this.state.skillsGridArray.length === 1) {
+      this.state.skillsGridArray.push(this.state.pinata)
+    } else if (this.state.userSkillsArray.length > 0) {
+      idx = Math.floor((Math.random() * this.state.userSkillsArray.length))
+      target = this.state.userSkillsArray[idx]
+      this.state.skillsGridArray.push(target)
+      this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+      this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+      this.state.userSkillsArray = this.state.userSkillsArray.filter(e => e.skill_id !== target.skill_id);
+
+    } else {
+      idx = Math.floor((Math.random() * this.state.baseSkillsArray.length))
+      target = this.state.baseSkillsArray[idx]
+      this.state.skillsGridArray.push(target)
+      this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+      this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+    }
+  }
+
+  // add emotion skills 
+
+  while (this.state.skillsGridArray.length < 6) {
+    if (this.state.emotionSkillsArray.length > 0) {
+      idx = Math.floor(Math.random() * this.state.emotionSkillsArray.length)
+      target = this.state.emotionSkillsArray[idx]
+      this.state.skillsGridArray.unshift(target)
+      console.log(`${target} emotion`)
+      this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+      this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+
+    } else {
+      idx = Math.floor(Math.random() * this.state.baseSkillsArray.length)
+      target = this.state.baseSkillsArray[idx]
+      this.state.skillsGridArray.unshift(target)
+      this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+    }
+  }
+  // add base skills 
+  while (this.state.skillsGridArray.length < 9) {
+    idx = Math.floor(Math.random() * this.state.baseSkillsArray.length)
+    target = this.state.baseSkillsArray[idx]
+    this.state.skillsGridArray.push(this.state.baseSkillsArray[idx])
+    this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+  }
+
+}
+
+
+
 
 
   render() {
@@ -62,47 +336,111 @@ getAllSkills = ()=>{
           <header className="App-header">
   
           <h1>Piñata</h1>
-          <Link to ='/assessment'>
+          <Link to ='/feeling'>
           <img style={{"padding":"50px", "width":"35%"}} src={pinata_big} alt={'pinata'}/>
           </Link>
 
           </header>
           </React.Fragment>)} />
 
-          <Route path="/assessment" exact render = { props =>(
+          <Route path="/feeling" exact render = { props =>(
             <React.Fragment>
               <div className="App-Component">
-              <div className="App-Component">
-              <AutoCompleteText/>
-              </div>
+                <AutoCompleteText />
+
+                <button onClick={this.getUserSkills}>get user skills</button>
+                <button onClick={this.getEmotionSkills}>get emotion skills</button>
+                <button onClick={this.getSkillsGrid}>get emotion skills</button>
+
+
               </div>
           </React.Fragment>)} />
+
+
+          <Route exact path="/grid" exact render = { props =>(
+            <React.Fragment>
+
+          <SkillsGrid userSkillsArray = {this.state.userSkillsArray} emotionSkillsArray={this.state.emotionSkillsArray} baseSkillsArray={this.state.baseSkillsArray} skillsGridArray={this.state.skillsGridArray}/>
+              
+            </React.Fragment>)} />
+
+
+
+            <Route path="/records" render = { props =>(
+            <React.Fragment>
+
+              <div class="sidenav">
+             
+              <Link to ='/feeling' className="link"> Start</Link>
+              <Link to ='/records/list' className="link"> List</Link>
+                <Link to ='/records/add' className="link"> Add</Link>
+                <Link to ='/records/update' className="link">Update</Link>
+                <Link to ='/records/search' className="link">Search</Link>
+              
+              </div>
+
+
+              <div className="main">
+              <h1>Records</h1>
+              
+               </div>
+            </React.Fragment>)} />
+
+            <Route exact path="/records/list" exact render = { props =>(
+            <React.Fragment>
+
+              <div className="main">
+
+              <button onClick={this.getUserRecords}>get user Records</button>
+               <RecordsList recordsList = {this.state.recordsList}/>
+               
+              </div>
+            </React.Fragment>)} />
+
+            <Route exact path="/records/add" exact render = { props =>(
+            <React.Fragment>
+
+
+              <AddRecordEmotion />
+              <AddRecordSkill/>
+               <AddFullRecord addFullRecord = {this.addFullRecord}/>
+        
+            </React.Fragment>)} />
+
+            <Route exact path="/records/update" exact render = { props =>(
+            <React.Fragment>
+
+            <UpdateRecord updateRecord = {this.updateRecord} />
+              <div className="main">
+              
+              <button onClick={this.getUserRecords}>get user Records</button>
+               <RecordsList recordsList = {this.state.recordsList}/>
+               
+              </div>
+            </React.Fragment>)} />
+
+
+
+
+
+
+
+
+
   
           <Route exact path="/skills" exact render = { props =>(
             <React.Fragment>
               
             
               <Search/>
-              {/* <NavBar/> */}
-              {/* <GetAllSkills getAllSkills={this.getAllSkills}/> */}
+              
               <SkillsList  skillsList= {this.state.skillsList} /> 
               <ImageResults />   
               
             </React.Fragment>)} />
             
 
-{/* change this to /:skill/timer  */}
-            <Route exact path="/timer" exact render = { props =>(
-            <React.Fragment>
-              
-             <Timer/>
-             <Search/>
-              
-            </React.Fragment>)} />
-  
-  
-          {/* <Route path="/quotes/:id" exact component = {getQuoteById}/> */}
-  
+
     
         </div>
         </Router>
