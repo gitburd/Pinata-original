@@ -13,8 +13,8 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import SkillsList from './components/SkillsList';
-import Search from './components/Search/Search';
-import ImageResults from './components/Image-Results/ImageResults';
+
+
 import AutoCompleteText from './components/AutoCompleteText';
 
 import pinata_big from './components/img/pinata_big.png';
@@ -407,14 +407,15 @@ getEmotionId =(emotion) => {
           
           <Route path="/feeling" exact render = { props =>(
             <React.Fragment>
-              <div className="App-Component">
-                <AutoCompleteText />
+              <div className="main">
+              <div style={{width:'50%', paddingTop:'100px', margin:'0 auto'}}>
+
+                <AutoCompleteText user_id= {this.state.user_id}/>
 
                 <button onClick={this.getUserSkills}>get user skills</button>
-                <button onClick={this.getEmotionSkills}>get emotion skills</button>
-                <button onClick={this.getSkillsGrid}>get emotion skills</button>
+                <button onClick={this.getSkillsGrid}>get grid </button>
 
-
+</div>
               </div>
           </React.Fragment>)} />
 
@@ -510,16 +511,6 @@ getEmotionId =(emotion) => {
 
 
   
-          <Route exact path="/skills" exact render = { props =>(
-            <React.Fragment>
-              
-            
-              <Search/>
-              
-              <SkillsList  skillsList= {this.state.skillsList} /> 
-              <ImageResults />   
-              
-            </React.Fragment>)} />
             
 
 

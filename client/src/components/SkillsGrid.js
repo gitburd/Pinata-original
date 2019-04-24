@@ -39,7 +39,7 @@ export default class SkillsGrid extends Component {
   }
 }
 
-
+ 
 // see everything
 // return (         
 //   <div>

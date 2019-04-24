@@ -59,6 +59,7 @@ export default class FinishRecordPrompt extends Component {
 
 
         <h2>How did it go?</h2>
+        <div style={{width:'50%', margin:'0 auto'}}>
         <Form>
         <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>After Level</Form.Label>
@@ -79,6 +80,7 @@ export default class FinishRecordPrompt extends Component {
   <input type="submit" value="Submit" className="btn" style={{ margin:'20px'} }
        onClick={this.onSubmit.bind(this)} />
 </Form>
+</div>
       </div>
     )
   }

@@ -25,7 +25,7 @@ export default class Skill extends Component {
 
  
 
-
+ 
 // export class Skill extends Component {
 //     getStyle= ()=> {
 //         return {
