@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import './App.css';
@@ -13,26 +21,34 @@ import pinata_big from './components/img/pinata_big.png';
 import SkillsGrid from './components/SkillsGrid';
 
 import Record from './components/Record';
+import RecordUpdate from './components/RecordUpdate';
 import RecordsList from './components/RecordsList'
+import RecordsListUpdate from './components/RecordsListUpdate'
+
 import AddFullRecord from './components/AddFullRecord'
 import AddRecordEmotion from './components/AddRecordEmotion'
 import AddRecordSkill from './components/AddRecordSkill'
-import UpdateRecord from './components/UpdateRecord'
 
+
+import FormBlank from './components/FormBlank';
+import Update from './components/Update';
+import FinishRecordPrompt from './components/FinishRecordPrompt';
 
 
 const http = require('http');
 const fetch = require('node-fetch');
 
 class App extends Component {
-state ={ 
+state = { 
   skillsList:[],
     user_id:'2',
     record_id:'',
     before_lvl:'',
-    after_lvl:'',
-    impact:'',
+    after_lvl:'3',
+    impact:null,
     emotion:'Angry',
+    emotion_id:'',
+    skill_id:'',
     skill:'',
     si:'',
     sh:'',
@@ -40,6 +56,7 @@ state ={
     userSkillsArray : [],
     emotionSkillsArray : [],
     skillsGridArray : [],
+    resEmotionId:'',
     pinata :   {
       "skill_title": "piñata",
       "skill_details": "Lorium sermpra filler text is filling the text sapce.",
@@ -168,6 +185,23 @@ state ={
 }  
 ]
 }
+
+selectRecord =(record) =>{
+  this.setState({  
+  record_id:record.record_id,
+  before_lvl:record.before_lvl,
+  after_lvl:record.after_lvl,
+  emotion:record.emotion_text,
+  emotion_id:record.emotion_id,
+  skill:record.skill_title,
+  skill_id:record.skill_id,
+  si:record.si,
+  sh:record.sh,
+  date:record.date  
+
+})
+}
+
 
 getUserRecords = () => {
 
@@ -317,7 +351,18 @@ getSkillsGrid = () => {
 
 }
 
+getEmotionId =(emotion) => {
+  let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
+  console.log(url)
+  fetch(url, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(json => {return json[0].emotion_id}).catch(function(e) {
+    console.log(e); // “oh, no!”
+   })
 
+}
 
 
 
@@ -343,6 +388,22 @@ getSkillsGrid = () => {
           </header>
           </React.Fragment>)} />
 
+
+          <Route path="/" render = { props =>(
+            <React.Fragment>
+         
+         <div className="sidenav">
+             
+             <Link to ='/feeling' className="link"> Start</Link>
+             <Link to ='/records/list' className="link"> List</Link>
+               <Link to ='/records/add' className="link"> Add</Link>
+               <Link to ='/records/update' className="link">Update</Link>
+               <Link to ='/records/search' className="link">Search</Link>
+             
+             </div>
+
+          </React.Fragment>)} />
+          
           <Route path="/feeling" exact render = { props =>(
             <React.Fragment>
               <div className="App-Component">
@@ -359,8 +420,13 @@ getSkillsGrid = () => {
 
           <Route exact path="/grid" exact render = { props =>(
             <React.Fragment>
+               <div className="main">
+             
+               <SkillsGrid userSkillsArray = {this.state.userSkillsArray} emotionSkillsArray={this.state.emotionSkillsArray} baseSkillsArray={this.state.baseSkillsArray} skillsGridArray={this.state.skillsGridArray}/>
+              
+             </div>
 
-          <SkillsGrid userSkillsArray = {this.state.userSkillsArray} emotionSkillsArray={this.state.emotionSkillsArray} baseSkillsArray={this.state.baseSkillsArray} skillsGridArray={this.state.skillsGridArray}/>
+         
               
             </React.Fragment>)} />
 
@@ -369,13 +435,8 @@ getSkillsGrid = () => {
             <Route path="/records" render = { props =>(
             <React.Fragment>
 
-              <div class="sidenav">
+              <div className="main">
              
-              <Link to ='/feeling' className="link"> Start</Link>
-              <Link to ='/records/list' className="link"> List</Link>
-                <Link to ='/records/add' className="link"> Add</Link>
-                <Link to ='/records/update' className="link">Update</Link>
-                <Link to ='/records/search' className="link">Search</Link>
               
               </div>
 
@@ -399,25 +460,40 @@ getSkillsGrid = () => {
 
             <Route exact path="/records/add" exact render = { props =>(
             <React.Fragment>
+             
+             <FormBlank addFullRecord= {this.addFullRecord} getEmotionId={this.getEmotionId} />
 
-
-              <AddRecordEmotion />
-              <AddRecordSkill/>
-               <AddFullRecord addFullRecord = {this.addFullRecord}/>
+             
+               {/* <AddFullRecord addFullRecord = {this.addFullRecord}/> */}
         
             </React.Fragment>)} />
 
             <Route exact path="/records/update" exact render = { props =>(
             <React.Fragment>
 
-            <UpdateRecord updateRecord = {this.updateRecord} />
+              <div className="main">
+              {this.state.date} - {this.state.emotion} :  {this.state.skill}
+              <br/>
+              Before : {this.state.before_lvl}
+              <br/>
+              After : {this.state.after_lvl}
+              </div>
+
+            
               <div className="main">
               
+              <Update updateRecord = {this.updateRecord}  record_id = {this.state.record_id} before_lvl = {this.state.before_lvl} />
+
+              <hr/>
               <button onClick={this.getUserRecords}>get user Records</button>
-               <RecordsList recordsList = {this.state.recordsList}/>
+              
+              <RecordsListUpdate handleSelectRecord = { this.selectRecord.bind(this) } recordsList = {this.state.recordsList}/>
+
+               {/* <RecordsList recordsList = {this.state.recordsList}/> */}
                
               </div>
             </React.Fragment>)} />
+
 
 
 

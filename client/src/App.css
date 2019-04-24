@@ -2,6 +2,10 @@
 
 }
 
+.form{
+  width:40%;
+}
+
 .skillsGrid{
   margin-top:20px; 
   align-items: center;

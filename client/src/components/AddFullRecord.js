@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 export default class AddFullRecord extends Component {
     state = {
     skill_id:1,
