@@ -399,6 +399,7 @@ getEmotionId =(emotion) => {
                <Link to ='/records/add' className="link"> Add</Link>
                <Link to ='/records/update' className="link">Update</Link>
                <Link to ='/records/search' className="link">Search</Link>
+               <Link to ='/finish' className="link">Finish</Link>
              
              </div>
 
@@ -494,10 +495,15 @@ getEmotionId =(emotion) => {
               </div>
             </React.Fragment>)} />
 
+{/* finish record */}
 
-
-
-
+            <Route path="/finish" exact render = { props =>(
+            <React.Fragment>
+         <div className='main'>
+         <FinishRecordPrompt updateRecord = {this.updateRecord}/>
+         
+         </div>
+          </React.Fragment>)} />
 
 
 
