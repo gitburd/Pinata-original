@@ -19,6 +19,8 @@ export default class AutoCompleteText extends Component {
     "Depressed"
         
     ];
+
+    
     this.state={
         emotion_id:5,
         suggestions:[],
@@ -128,11 +130,11 @@ export default class AutoCompleteText extends Component {
     
         {
         before_lvl:this.state.before_lvl,
-        emotion_text:this.state.emotion_id,
+        emotion_id:this.state.emotion_id,
         si:this.state.si,
         sh:this.state.sh,
         user_id:this.props.user_id,
-        date:  "9999-99-01"
+        date:  "2099-09-09"
         }
     
         fetch(url, {
@@ -267,8 +269,9 @@ export default class AutoCompleteText extends Component {
         
       </div>
       <br/>
-
+      
       <Form>
+      <div className = {this.state.emotion_text === 'TEST' ? 'hidden': ''}>
         <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>Before Level</Form.Label>
     <Form.Control as="select"  defaultValue={this.state.before_lvl}
@@ -285,18 +288,22 @@ export default class AutoCompleteText extends Component {
      
     </Form.Control>
   </Form.Group>
- 
-  <Form.Group id="formGridCheckbox">
+  </div>
   
-        <Form.Check type="checkbox" label='Thinking About Suicide'  onChange={this.handleSIChange.bind(this)}/> 
+ 
+    <div className = {this.state.before_lvl<6 ? 'hidden': ''}>
+        <Form.Group id="formGridCheckbox">
+            <Form.Check type="checkbox" label='Thinking About Suicide'  onChange={this.handleSIChange.bind(this)}/> 
         </Form.Group>
 
         <Form.Group id="formGridCheckbox">
-        <Form.Check type="checkbox" label='Thinking About Self Harm' onChange={this.handleSHChange.bind(this)}/>
+            <Form.Check type="checkbox" label='Thinking About Self Harm' onChange={this.handleSHChange.bind(this)}/>
         </Form.Group>
 
-
+    </div>
+        
         <input type="submit" value="Submit" className="btn" style={{ margin:'20px'} }
+            onClick={this.newRecord.bind(this)}
                 />
                 
         </Form>

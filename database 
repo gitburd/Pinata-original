@@ -5,13 +5,18 @@ CREATE TABLE users (user_id SERIAL PRIMARY KEY, first_name VARCHAR, last_name VA
 CREATE TABLE skills (skill_id SERIAL PRIMARY KEY, skill_title VARCHAR, skill_details VARCHAR, skill_icon VARCHAR);
 CREATE TABLE emotions (emotion_id SERIAL PRIMARY KEY, emotion_text VARCHAR);
 CREATE TABLE emotion_skills (emotion_skills_id SERIAL PRIMARY KEY, skill_id INT REFERENCES skills(skill_id), emotion_id INT REFERENCES emotions(emotion_id));
-CREATE TABLE records (record_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id), skill_id INT REFERENCES skills(skill_id), emotion_id INT REFERENCES emotions(emotion_id), before_lvl INT, after_lvl INT, impact INT, date DATE );
+CREATE TABLE records (record_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id), skill_id INT REFERENCES skills(skill_id), emotion_id INT REFERENCES emotions(emotion_id), before_lvl INT, after_lvl INT, impact INT, date DATE, SI BOOLEAN, sh BOOLEAN);
+
+//ALTER TABLE records ADD COLUMN SI boolean;
+//ALTER TABLE records ADD COLUMN SH boolean; 
+
 
 INSERT INTO users (first_name, last_name, email) VALUES('firstname test','lastname test','test@email.com');
 INSERT INTO skills (skill_title, skill_details, skill_icon) VALUES('Test skill', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image');
 INSERT INTO emotions (emotion_text) VALUES('test emotion');
 INSERT INTO emotion_skills (skill_id, emotion_id) VALUES(1,2);
-INSERT INTO records (user_id, skill_id, emotion_id, before_lvl, after_lvl, impact, date) VALUES (2,1,2,8,5,3,'2019-04-17');
+
+INSERT INTO records (user_id, skill_id, emotion_id, before_lvl, after_lvl, impact, date, si, sh) VALUES (2,1,2,8,5,3,'2019-04-20', true, true);
 
 SELECT * FROM users;
 SELECT * FROM skills;
@@ -19,7 +24,11 @@ SELECT * FROM emotions;
 SELECT * FROM emotion_skills;
 SELECT * FROM records;
 
+
+
 INSERT INTO skills (skill_title, skill_details, skill_icon) VALUES('Play Video Games','Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Wring a Towel', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Workout', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),  ('Take a Breather', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Punch a Pillow','Lorium sermpra filler text is filling the text sapce.', 'url to the image');
+INSERT INTO skills (skill_title, skill_details, skill_icon) VALUES('Dance','Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Listen to Music', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Make Art', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),  ('Phone a Friend', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Take a Walk','Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Cook','Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Pinata','Lorium sermpra filler text is filling the text sapce.', 'url to the image');
+
 INSERT INTO emotions (emotion_text) VALUES('Angry'),('Sad'),('Depressed'),('Isolated'),('Lonely'),('Scared'),('Hopeless');
 INSERT INTO emotion_skills (emotion_id, skill_id) VALUES(3,6), (3,5), (3,4), (3,3);
 INSERT INTO records (user_id, skill_id, emotion_id, before_lvl, after_lvl, impact, date) VALUES (2,2,3,8,5,3,'2019-04-15'), (2,5,3,7,2,5,'2019-04-16'), (2,6,3,8,9,-1,'2019-04-17');
@@ -44,4 +53,37 @@ JOIN emotions AS e ON r.emotion_id = e.emotion_id
 WHERE u.user_id = 2
 AND r.impact > 0
 AND e.emotion_text = 'Angry'; 
+
+
+add image urls 
+
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/cookfood.png' WHERE skill_title = 'Cook';
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/phonefriend.png' WHERE skill_title = 'Phone a Friend';
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/playvideogames.png' WHERE skill_title = 'Play Video Games';
+
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/punchpillow.png' WHERE skill_title = 'Punch a Pillow';
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/takebreather.png' WHERE skill_title = 'Take a Breather';
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/takewalk.png' WHERE skill_title = 'Take a Walk';
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/workout.png' WHERE skill_title = 'Workout';
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/wringtowel.png' WHERE skill_title = 'Wring a Towel';
+
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png' WHERE skill_title = 'Pinata';
+
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png' WHERE skill_title IN ('Test skill', 'Dance','Listen to Music','Make Art');
+
+
+
+
+
+///
+skills 
+
+from pg. 40: 
+
+
+
+
+
+
+mindfulness : 1st book pg 27
 

@@ -1,6 +1,9 @@
 .addFullRecordForm{
 
 }
+.hidden{
+  display: none;
+}
 
 .form{
   width:40%;

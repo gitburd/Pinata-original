@@ -34,7 +34,11 @@ app.get('/api/emotion_id/', db.getEmotionId)
 app.get('/api/userRecords', db.getUserRecords)
     // http://localhost:3001/api/userRecords?id=2
 
-app.post('/api/userRecords', db.addRecord)
+// app.post('/api/userRecords', db.addRecord) 
+
+app.post('/api/records', db.newRecord) 
+
+
 // {
 //     "user_id":"2",
 //     "skill_id":"2",
