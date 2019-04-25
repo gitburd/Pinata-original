@@ -410,10 +410,10 @@ getEmotionId =(emotion) => {
               <div className="main">
               <div style={{width:'50%', paddingTop:'100px', margin:'0 auto'}}>
 
-                <AutoCompleteText user_id= {this.state.user_id}/>
+                <AutoCompleteText baseSkillsArray={this.state.baseSkillsArray}  user_id= {this.state.user_id}/>
 
-                <button onClick={this.getUserSkills}>get user skills</button>
-                <button onClick={this.getSkillsGrid}>get grid </button>
+               
+                
 
 </div>
               </div>

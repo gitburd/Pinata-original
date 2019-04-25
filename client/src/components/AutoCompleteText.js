@@ -20,14 +20,32 @@ export default class AutoCompleteText extends Component {
         
     ];
     this.state={
-        emotions:[],
+        emotion_id:5,
+        suggestions:[],
+        user_id:2,
+        skillsGridArray:[],
+        userSkillsArray:[],
         text:"",
         record_id:'',
-        emotion_id:'',
         emotion_text:'',
         before_lvl:'',
-        si:'',
-        sh:''
+        si:false,
+        sh:false,
+        emotions:{
+            Scared:8,
+            Angry:3,
+            Sad:4,
+            Depressed:5,
+            Isolated:6,
+            Lonely:7,
+            Hopeless:9, 
+            Disconnected:11,
+            Disoriented:12,
+            Unreal:10,
+            Jittery:13,
+            Anxious:14,
+            Depressed:15
+        }
     };
 
     this.onSubmit= this.onSubmit.bind(this);
@@ -39,6 +57,21 @@ export default class AutoCompleteText extends Component {
         handleBefore_lvlChange(before_lvl) {
         this.setState({before_lvl: before_lvl.target.value})
         }
+
+        handleSHChange() {
+  
+            if(this.state.sh){
+              this.setState({sh: false})
+            }else {this.setState({sh: true})}
+          }
+        
+          handleSIChange() {
+           
+            if(this.state.si){
+              this.setState({si: false})
+            }else {this.setState({si: true})}
+        
+          }
 
         onSubmit =(e)=> {
         e.preventDefault();
@@ -62,34 +95,36 @@ export default class AutoCompleteText extends Component {
 
   onTextChanged = (e) =>{
     const value = e.target.value; 
-    let emotions = [];
+    let suggestions = [];
     if (value.length >0){
         const regex = new RegExp(`^${value}`, 'i');
-        emotions = this.items.sort().filter(v => regex.test(v));
+        suggestions = this.items.sort().filter(v => regex.test(v));
     }
-        this.setState(() => ({emotions, text:value}));
+        this.setState(() => ({suggestions, text:value}));
 
     }
   
-emotionSelected(value){
+suggestionSelected(value){
     
     this.setState(() =>({
         emotion_text:value,
         emotions:[],
-        text:value
+        text:value,
+        emotion_id:this.state.emotions.value
     }))
-    this.getEmotionSkills();
+    // this.getEmotionSkills();
 }
 
 
-addRecord  = () => {
+newRecord  = () => {
 
-    let url = `http://localhost:3001/api/record`
+    let url = `http://localhost:3001/api/records`
 
     let newRecord = 
   
       {
       before_lvl:this.state.before_lvl,
+      emotion_text:this.state.emotion_id,
       si:this.state.si,
       sh:this.state.sh,
       user_id:this.props.user_id,
@@ -119,31 +154,96 @@ console.log(e); // “oh, no!”
 
 }
 
- 
+getUserSkills = () => {
 
-    renderEmotions(){
-        const {emotions} = this.state;
-        if (emotions.length === 0 ){
-            return null
-        }
-        return (
-            <div>
-            <ul>
-                
-                {emotions.map((item) => <li onClick={()=> 
-                  this.emotionSelected(item)
-                  
-                }>{item}</li>)
-                  
-                  }
-               
-            </ul>
+    let url = `http://localhost:3001/api/userSkills?id=${this.state.user_id}&emotion=${this.state.emotion_text}`
+  
+    console.log(`userSkills ${url}`)
+    fetch(url, {
+      method: 'get',
+      headers: { 'Content-Type': 'application/json'}
+      })
+      .then(res => res.json()).then(json => this.setState({userSkillsArray: json})).catch(function(e) {
+      console.log(e); // “oh, no!”
+     })
+  
+  }
 
-           
-            </div>
-        )
+getSkillsGrid = () => {
+
+    let idx;
+    let i = 0;
+    let target;
+  
+    // add user skills 
+  
+    while (this.state.skillsGridArray.length < 3) {
+      if (this.state.skillsGridArray.length === 1) {
+        this.state.skillsGridArray.push(this.state.pinata)
+      } else if (this.state.userSkillsArray.length > 0) {
+        idx = Math.floor((Math.random() * this.state.userSkillsArray.length))
+        target = this.state.userSkillsArray[idx]
+        this.state.skillsGridArray.push(target)
+        this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+        this.props.baseSkillsArray = this.props.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+        this.state.userSkillsArray = this.state.userSkillsArray.filter(e => e.skill_id !== target.skill_id);
+  
+      } else {
+        idx = Math.floor((Math.random() * this.props.baseSkillsArray.length))
+        target = this.props.baseSkillsArray[idx]
+        this.state.skillsGridArray.push(target)
+        this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+        this.props.baseSkillsArray = this.props.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+      }
     }
   
+    // add emotion skills 
+  
+    while (this.state.skillsGridArray.length < 6) {
+      if (this.state.emotionSkillsArray.length > 0) {
+        idx = Math.floor(Math.random() * this.state.emotionSkillsArray.length)
+        target = this.state.emotionSkillsArray[idx]
+        this.state.skillsGridArray.unshift(target)
+        console.log(`${target} emotion`)
+        this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+        this.props.baseSkillsArray = this.props.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+  
+      } else {
+        idx = Math.floor(Math.random() * this.props.baseSkillsArray.length)
+        target = this.props.baseSkillsArray[idx]
+        this.state.skillsGridArray.unshift(target)
+        this.props.baseSkillsArray = this.props.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+      }
+    }
+    // add base skills 
+    while (this.state.skillsGridArray.length < 9) {
+      idx = Math.floor(Math.random() * this.props.baseSkillsArray.length)
+      target = this.props.baseSkillsArray[idx]
+      this.state.skillsGridArray.push(this.props.baseSkillsArray[idx])
+      this.props.baseSkillsArray = this.props.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+    }
+  
+  }
+ 
+
+  renderSuggestions(){
+    const {suggestions} = this.state;
+    if (suggestions.length === 0 ){
+        return null
+    }
+    return (
+        <ul>
+           
+            {suggestions.map((item) => <li onClick={()=> 
+              this.suggestionSelected(item)
+              
+            }>{item}</li>)
+              
+              }
+            
+        </ul>
+    )
+}
   
     render() {
         const { text } = this.state
@@ -153,7 +253,7 @@ console.log(e); // “oh, no!”
       <div className="AutoCompleteText">
         <input value={text} type="text" onChange={this.onTextChanged} />
         <ul>
-            {this.renderEmotions()}
+            {this.renderSuggestions()}
         </ul>
         
       </div>
@@ -177,11 +277,24 @@ console.log(e); // “oh, no!”
     </Form.Control>
   </Form.Group>
  
+  <Form.Group id="formGridCheckbox">
+  
+  <Form.Check type="checkbox" label='Thinking About Suicide'  onChange={this.handleSIChange.bind(this)}/> 
+</Form.Group>
+
+<Form.Group id="formGridCheckbox">
+  <Form.Check type="checkbox" label='Thinking About Self Harm' onChange={this.handleSHChange.bind(this)}/>
+</Form.Group>
+
+
   <input type="submit" value="Submit" className="btn" style={{ margin:'20px'} }
         />
+        
 </Form>
 
       <button onClick={this.getEmotionSkills}>get emotion skills</button>
+      <button onClick={this.getUserSkills}>get user skills</button>
+      <button onClick={this.getSkillsGrid}>get grid </button>
 
       <Link to={`/grid`}> Click me!</Link>
 
