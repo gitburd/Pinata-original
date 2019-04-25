@@ -11,20 +11,20 @@ export default class SkillsGrid extends Component {
   render() {
   
     let emotionSkills =  this.props.emotionSkillsArray.map((s)=>(
-    <Skill key={s.id} skill={s}/>
+    <Skill skillClicked = {this.props.skillClicked} key={s.id} skill={s}/>
   ))
   
 
   let userSkills =  this.props.userSkillsArray.map((skill)=>(
-    <Skill key={skill.id} skill={skill}/>
+    <Skill skillClicked = {this.props.skillClicked} key={skill.id} skill={skill}/>
   ))
 
   let baseSkills = this.props.baseSkillsArray.map((skill)=>(
-    <Skill key={skill.id} skill={skill}/>
+    <Skill skillClicked = {this.props.skillClicked} key={skill.id} skill={skill}/>
   ))
 
   let skillsGrid = this.props.skillsGridArray.map((skill)=>(
-    <Skill key={skill.id} skill={skill}/>
+    <Skill skillClicked = {this.props.skillClicked} key={skill.id} skill={skill}/>
   ))
 
 

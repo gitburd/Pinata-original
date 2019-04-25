@@ -22,3 +22,5 @@ SkillsList.propTypes= {
 
 
 export default SkillsList 
+
+// grid- list - skill then skill will call it and it can go all the way back up 

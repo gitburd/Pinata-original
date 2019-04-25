@@ -56,7 +56,9 @@ state = {
     emotion:'Angry',
     emotion_id:'',
     skill_id:'',
-    skill:'',
+    skill_icon:'',
+    skill_title:'',
+    skill_details:'',
     si:'',
     sh:'',
     recordsList : [],
@@ -371,6 +373,8 @@ getEmotionId =(emotion) => {
 
 }
 
+skillClicked=()=>{ console.log('skill clicked')}
+
 myCallback= (skillsGridArray)=>{
   this.setState({skillsGridArray:skillsGridArray})
 }
@@ -438,17 +442,18 @@ myCallback= (skillsGridArray)=>{
               <ButtonToolbar>
                 <Button
                   variant="primary"
-                  onClick={() => this.setState({ modalShow: true })}>
+                  onClick={() => this.setState({ modalShow: true, skill_id:'changed', skill_title:' title changed', skill_icon:'icon CHANGED!!', skill_details:' details changed' })}>
                   Launch vertically centered modal
                 </Button>
 
-                <SkillDetails show={this.state.modalShow}
+                <SkillDetails skill_title={this.state.skill_title} skill_icon = {this.props.skill_icon} skill_details={this.props.skill_details} show={this.state.modalShow}
                   onHide={modalClose}/>
               </ButtonToolbar>
 
            
+           {/* make a function in app that  does this says it was selected - pass  */}
 
-               <SkillsGrid userSkillsArray = {this.state.userSkillsArray} emotionSkillsArray={this.state.emotionSkillsArray} baseSkillsArray={this.state.baseSkillsArray} skillsGridArray={this.state.skillsGridArray}/>
+               <SkillsGrid  skillClicked = {this.skillClicked} userSkillsArray = {this.state.userSkillsArray} emotionSkillsArray={this.state.emotionSkillsArray} baseSkillsArray={this.state.baseSkillsArray} skillsGridArray={this.state.skillsGridArray}/>
               
              </div>
 

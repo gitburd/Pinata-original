@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import '../App.css';
+import { ButtonToolbar, Button }  from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default class Skill extends Component {
@@ -12,10 +14,12 @@ export default class Skill extends Component {
     return (
       <div>
           <div className="skill">
-                <img src={skill_icon} className="skill_icon" /> 
+                <img onClick = {()=>{this.props.skillClicked()}} src={skill_icon} className="skill_icon" /> 
                 <br/>
                 {skill_title}
-             </div>
+
+                <Button style={{margin:'10px'}} onClick = {console.log("u clicked a button")} variant="outline-success">Select</Button>
+            </div>
         
       </div>
     )

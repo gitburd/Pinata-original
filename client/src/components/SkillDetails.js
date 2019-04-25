@@ -13,15 +13,14 @@ export default class SkillDetails extends Component {
           >
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-vcenter">
-                Modal heading
+              {this.props.skill_title}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <h4>Centered Modal</h4>
+              <h4>{this.props.skill_details}</h4>
               <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-                ac consectetur ac, vestibulum at eros.
+                
+                {this.props.skill_icon}
               </p>
             </Modal.Body>
             <Modal.Footer>
