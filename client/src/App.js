@@ -40,6 +40,7 @@ const fetch = require('node-fetch');
 
 class App extends Component {
 state = { 
+  test:'fail',
   skillsList:[],
     user_id:'2',
     record_id:'',
@@ -364,7 +365,9 @@ getEmotionId =(emotion) => {
 
 }
 
-
+myCallback= (skillsGridArray)=>{
+  this.setState({skillsGridArray:skillsGridArray})
+}
 
   render() {
     return (
@@ -410,7 +413,7 @@ getEmotionId =(emotion) => {
               <div className="main">
               <div style={{width:'50%', paddingTop:'100px', margin:'0 auto'}}>
 
-                <AutoCompleteText baseSkillsArray={this.state.baseSkillsArray}  user_id= {this.state.user_id}/>
+                <AutoCompleteText myCallback = {this.myCallback} baseSkillsArray={this.state.baseSkillsArray}  user_id= {this.state.user_id}/>
 
                
                 
