@@ -6,13 +6,18 @@ import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
 
 
 
+
+import { ButtonToolbar, Button }  from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+
 
 import './App.css';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import SkillsList from './components/SkillsList';
+import SkillDetails from './components/SkillDetails';
 
 
 import AutoCompleteText from './components/AutoCompleteText';
@@ -41,6 +46,7 @@ const fetch = require('node-fetch');
 class App extends Component {
 state = { 
   test:'fail',
+  modalShow: false,
   skillsList:[],
     user_id:'2',
     record_id:'',
@@ -370,6 +376,8 @@ myCallback= (skillsGridArray)=>{
 }
 
   render() {
+    let modalClose = () => this.setState({ modalShow: false });
+
     return (
       
       <MuiThemeProvider>
@@ -415,18 +423,31 @@ myCallback= (skillsGridArray)=>{
 
                 <AutoCompleteText myCallback = {this.myCallback} baseSkillsArray={this.state.baseSkillsArray}  user_id= {this.state.user_id}/>
 
-               
-                
-
+   
 </div>
               </div>
           </React.Fragment>)} />
 
 
           <Route exact path="/grid" exact render = { props =>(
+
+  
             <React.Fragment>
-               <div className="main">
-             
+              <div className="main">
+
+              <ButtonToolbar>
+                <Button
+                  variant="primary"
+                  onClick={() => this.setState({ modalShow: true })}>
+                  Launch vertically centered modal
+                </Button>
+
+                <SkillDetails show={this.state.modalShow}
+                  onHide={modalClose}/>
+              </ButtonToolbar>
+
+           
+
                <SkillsGrid userSkillsArray = {this.state.userSkillsArray} emotionSkillsArray={this.state.emotionSkillsArray} baseSkillsArray={this.state.baseSkillsArray} skillsGridArray={this.state.skillsGridArray}/>
               
              </div>

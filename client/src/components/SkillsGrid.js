@@ -30,8 +30,10 @@ export default class SkillsGrid extends Component {
 
   return (
     
-    <div className="skillsGrid">    
+    <div className="skillsGrid"> 
+
       {skillsGrid}
+      
     </div>
     
 
@@ -40,24 +42,3 @@ export default class SkillsGrid extends Component {
 }
 
  
-// see everything
-// return (         
-//   <div>
-// {skillsGrid}
-// <h2>skills grid </h2>
-// <br/>
-// {userSkills}
-// <h2> user skills </h2>
-// <br/>
-// {emotionSkills}
-// <h2>emotion skills</h2>
-// <br/>
-//   {baseSkills}
-//   <h2>base skills </h2>
-//   </div>
-// )
-
-  // PropTypes
-  // SkillsGrid.propTypes= {
-  //   SkillsGrid: PropTypes.array.isRequired
-  // }
