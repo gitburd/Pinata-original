@@ -6,6 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default class Skill extends Component {
+  state={
+    skill_id:'skill.js state', 
+    skill_icon:'skill.js state', 
+    skill_details:'skill.js state', 
+    skill_title:'skill.js state'
+  }
 
 
   render() {
@@ -14,11 +20,9 @@ export default class Skill extends Component {
     return (
       <div>
           <div className="skill">
-                <img onClick = {()=>{this.props.skillClicked()}} src={skill_icon} className="skill_icon" /> 
+                <img onClick = {()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}} src={skill_icon} className="skill_icon" /> 
                 <br/>
                 {skill_title}
-
-                <Button style={{margin:'10px'}} onClick = {console.log("u clicked a button")} variant="outline-success">Select</Button>
             </div>
         
       </div>

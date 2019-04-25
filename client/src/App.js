@@ -211,7 +211,6 @@ selectRecord =(record) =>{
 })
 }
 
-
 getUserRecords = () => {
 
   let url = `http://localhost:3001/api/userRecords?user_id=${this.state.user_id}`
@@ -225,8 +224,6 @@ getUserRecords = () => {
    })
 
 }
-
-
 
 updateRecord = (record_id, before_lvl, after_lvl) => {
 
@@ -247,7 +244,6 @@ updateRecord = (record_id, before_lvl, after_lvl) => {
     .catch(function(e) {console.log(`something is wrong ${e}`)})
 
 }
-
 
 addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh) => {
   let url = `http://localhost:3001/api/fullRecord`
@@ -276,7 +272,6 @@ addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh) => {
 
 
 }
-
 
 getUserSkills = () => {
 
@@ -373,7 +368,9 @@ getEmotionId =(emotion) => {
 
 }
 
-skillClicked=()=>{ console.log('skill clicked')}
+
+  
+skillClicked=(skill_id, skill_icon, skill_details, skill_title)=>{ this.setState({skill_id:skill_id, skill_icon:skill_icon, skill_details:skill_details, skill_title:skill_title, modalShow: true})}
 
 myCallback= (skillsGridArray)=>{
   this.setState({skillsGridArray:skillsGridArray})
@@ -442,11 +439,11 @@ myCallback= (skillsGridArray)=>{
               <ButtonToolbar>
                 <Button
                   variant="primary"
-                  onClick={() => this.setState({ modalShow: true, skill_id:'changed', skill_title:' title changed', skill_icon:'icon CHANGED!!', skill_details:' details changed' })}>
+                  onClick={() => this.skillClicked()}>
                   Launch vertically centered modal
                 </Button>
 
-                <SkillDetails skill_title={this.state.skill_title} skill_icon = {this.props.skill_icon} skill_details={this.props.skill_details} show={this.state.modalShow}
+                <SkillDetails skill_title={this.state.skill_title} skill_icon = {this.state.skill_icon}skill_details={this.state.skill_details}  skill_id = {this.state.skill_id} show={this.state.modalShow}
                   onHide={modalClose}/>
               </ButtonToolbar>
 
