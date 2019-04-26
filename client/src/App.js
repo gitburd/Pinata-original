@@ -443,7 +443,7 @@ myCallback= (skillsGridArray)=>{
                   Launch vertically centered modal
                 </Button>
 
-                <SkillDetails skill_title={this.state.skill_title} skill_icon = {this.state.skill_icon}skill_details={this.state.skill_details}  skill_id = {this.state.skill_id} show={this.state.modalShow}
+                <SkillDetails user_id={this.state.user_id} skill_title={this.state.skill_title} skill_icon = {this.state.skill_icon}skill_details={this.state.skill_details}  skill_id = {this.state.skill_id} show={this.state.modalShow}
                   onHide={modalClose}/>
               </ButtonToolbar>
 

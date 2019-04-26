@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../App.css';
 import { ButtonToolbar, Button }  from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SkillsGrid from './SkillsGrid';
 
 
 export default class Skill extends Component {
@@ -32,6 +33,21 @@ export default class Skill extends Component {
 
 
  
+// OKAY! 
+//   put to the record by id 
+//     function 
+//       record id :   
+//         function to get the most recent id - it will be the one made from the last page - it will also not have a skill assigned.
+//       skill id : 
+//         in the state of the modal/ SkillsGrid(Skill)
+    
+//     UI 
+//       button to skip- close for now 
+//       button to run the funtion above 
+
+
+
+
 
  
 // export class Skill extends Component {

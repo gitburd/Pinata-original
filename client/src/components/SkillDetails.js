@@ -4,6 +4,19 @@ import { Modal, Button, ButtonToolbar }  from 'react-bootstrap';
 
 export default class SkillDetails extends Component {
     render() {
+
+      let getRecentRecord = () => {
+
+        let url = `http://localhost:3001/api/mostRecentRecord?user_id=2`
+      
+        fetch(url, {
+          method: 'get',
+          headers: { 'Content-Type': 'application/json'}
+          })
+          .then(res => res.json()).then(json => console.log(json)).catch(function(e) {console.log(e)})
+      
+      }
+      
         return (
           <Modal
             {...this.props}
@@ -17,14 +30,22 @@ export default class SkillDetails extends Component {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <h4>{this.props.skill_details}</h4>
-              <p>
-                
-                {this.props.skill_icon}
-              </p>
+            
+              {this.props.skill_icon}
+              <p>{this.props.skill_details}</p>
+
+              
+              
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.props.onHide}>Close</Button>
+            <Button onClick={()=>this.props.onHide}>Close</Button>
+            <Button style={{margin:'10px'}} onClick = {this.getRecentRecord} 
+
+
+
+            
+            variant="outline-success">Try it</Button>
+             
             </Modal.Footer>
           </Modal>
         );
