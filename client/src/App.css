@@ -1,6 +1,10 @@
 .addFullRecordForm{
 
 }
+
+.background{
+  background: rgb(33,0,36);
+background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%);}
 .hidden{
   display: none;
 }
@@ -17,15 +21,35 @@
 }
 
 .skill_icon{
-  width:73%; 
+  width:75%; 
+
+}
+.skill_details_icon{
+  width:40%;
+  float: left;
 }
 
 .skill{
-  width:32.75%;
+  width:25%;
   float: left;
+  margin:10px;
+  /* color:red; */
+  font-size: calc(9px + 1vmin);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
+.topSkill  :hover{
+  /* background:red; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black;
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+
+.modal{
+  text-align: center;
+}
 
 .sidenav {
   height: 100%;
@@ -142,7 +166,8 @@ background-color: rgba(128, 128, 128, 0.28);
 }
 
 .App-header {
-  background-color: #662D91;
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;

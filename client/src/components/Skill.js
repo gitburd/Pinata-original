@@ -19,12 +19,13 @@ export default class Skill extends Component {
     const { skill_id, skill_title, skill_details, skill_icon} = this.props.skill;
            
     return (
-      <div>
-          <div className="skill">
-                <img onClick = {()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}} src={skill_icon} className="skill_icon" /> 
-                <br/>
-                {skill_title}
-            </div>
+      <div className="topSkill">
+          <div className="skill" onClick = {()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
+          {skill_title}
+          <br/>
+                <img  src={skill_icon} className="skill_icon" />    
+                
+          </div>
         
       </div>
     )

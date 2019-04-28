@@ -16,7 +16,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './App.css';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-import SkillsList from './components/SkillsList';
+
 import SkillDetails from './components/SkillDetails';
 
 
@@ -195,7 +195,8 @@ state = {
 ]
 }
 
-selectRecord =(record) =>{
+selectRecord =(record) => {
+  console.log(record)
   this.setState({  
   record_id:record.record_id,
   before_lvl:record.before_lvl,
@@ -209,6 +210,19 @@ selectRecord =(record) =>{
   date:record.date  
 
 })
+}
+
+setRecord_id=(record_id) => {
+  console.log('app 215 sent',record_id)
+  this.setState({record_id:record_id})
+  console.log('app 217 state ',this.state.record_id)
+}
+
+getRecentRecord = (record) => {
+this.setState({
+  recentRecord: record
+})
+
 }
 
 getUserRecords = () => {
@@ -239,6 +253,25 @@ updateRecord = (record_id, before_lvl, after_lvl) => {
   fetch(url, {
     method: 'put',
     body: JSON.stringify(update),
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .catch(function(e) {console.log(`something is wrong ${e}`)})
+
+}
+
+addSkillToRecord = (skill_id) => {
+
+  let url = `http://localhost:3001/api/setSkill`
+
+  let body = {
+    record_id:this.state.recentRecord[0].record_id,
+    skill_id:this.state.skill_id
+}
+  console.log(body)
+
+  fetch(url, {
+    method: 'put',
+    body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json'}
     })
     .catch(function(e) {console.log(`something is wrong ${e}`)})
@@ -368,12 +401,11 @@ getEmotionId =(emotion) => {
 
 }
 
-
   
 skillClicked=(skill_id, skill_icon, skill_details, skill_title)=>{ this.setState({skill_id:skill_id, skill_icon:skill_icon, skill_details:skill_details, skill_title:skill_title, modalShow: true})}
 
-myCallback= (skillsGridArray)=>{
-  this.setState({skillsGridArray:skillsGridArray})
+myCallback= (skillsGridArray,record_id)=>{
+  this.setState({skillsGridArray:skillsGridArray, record_id:record_id})
 }
 
   render() {
@@ -443,15 +475,36 @@ myCallback= (skillsGridArray)=>{
                   Launch vertically centered modal
                 </Button>
 
-                <SkillDetails user_id={this.state.user_id} skill_title={this.state.skill_title} skill_icon = {this.state.skill_icon}skill_details={this.state.skill_details}  skill_id = {this.state.skill_id} show={this.state.modalShow}
+                <SkillDetails 
+                addSkillToRecord = {this.addSkillToRecord}
+                 recentRecord = {this.state.recentRecord}
+                user_id={this.state.user_id} 
+                skill_title={this.state.skill_title} 
+                skill_icon = {this.state.skill_icon}
+                skill_details={this.state.skill_details}  
+                skill_id = {this.state.skill_id} 
+                show={this.state.modalShow} 
+               
                   onHide={modalClose}/>
               </ButtonToolbar>
 
            
            {/* make a function in app that  does this says it was selected - pass  */}
 
-               <SkillsGrid  skillClicked = {this.skillClicked} userSkillsArray = {this.state.userSkillsArray} emotionSkillsArray={this.state.emotionSkillsArray} baseSkillsArray={this.state.baseSkillsArray} skillsGridArray={this.state.skillsGridArray}/>
-              
+               <SkillsGrid  
+               user_id = {this.state.user_id}
+               addSkillToRecord = {this.addSkillToRecord}
+               skillClicked = {this.skillClicked} 
+               userSkillsArray = {this.state.userSkillsArray} 
+               emotionSkillsArray={this.state.emotionSkillsArray} 
+               baseSkillsArray={this.state.baseSkillsArray} 
+               skillsGridArray={this.state.skillsGridArray}
+               setRecord_id = {this.setRecord_id}
+               getRecentRecord = {this.getRecentRecord}
+               recentRecord = {this.state.recentRecord}
+               />
+               
+               
              </div>
 
          

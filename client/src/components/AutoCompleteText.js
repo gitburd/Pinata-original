@@ -212,7 +212,10 @@ export default class AutoCompleteText extends Component {
         }
 
 
-        newRecord  = () => {
+        newRecord  = (e) => {
+            // make new record
+
+            e.preventDefault();
 
             let url = `http://localhost:3001/api/records`
 
@@ -233,9 +236,34 @@ export default class AutoCompleteText extends Component {
             headers: { 'Content-Type': 'application/json'}
             
             })
+
+            .then(r => this.getRecentRecord)
+
             .catch(function(e) {console.log(`something is wrong! : ${e}`); })
-        
+
+            
         }
+
+        
+        getRecentRecord = () => {
+
+            console.log(  `hello from recent record`)
+      
+            let url2 = `http://localhost:3001/api/mostRecentRecord?user_id=2`
+          
+            fetch(url2, {
+              method: 'get',
+              headers: { 'Content-Type': 'application/json'}
+              })
+              .then(res => res.json()).then(json => console.log(json)).catch(function(e) {console.log(e)})
+          
+          }
+
+
+
+
+
+
 
         getEmotionSkills = (emotion_text) => {
             console.log(`line 148`, this.state.emotion_text)
@@ -354,8 +382,9 @@ export default class AutoCompleteText extends Component {
 
         someFn(){
             let skillsGridArray= this.state.skillsGridArray
+            let record_id= this.state.record_id
             
-            this.props.myCallback(skillsGridArray);
+            this.props.myCallback(skillsGridArray, record_id);
         }
 
 

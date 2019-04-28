@@ -1,0 +1,43 @@
+
+6/7 and self harm direct to the 4 grid- this is good. 
+
+
+fun fact/skill detail - nice but not mvp 
+
+function req. doc? 
+
+technical req. doc? 
+
+what
+how 
+technical 
+
+icons 
+emotion/skills list 
+    how? should we ask kate for help 
+    
+
+
+
+record state flow : 
+
+/feelings page :
+    <AutocompleteText.js>
+      onClick  this.newRecord() -- post with this.state 
+/skillsGrid page :
+    <SkillsGrid.js>
+        #get the most recent record and send it to the state of app.js # 
+        componentDidMount  this.getRecentRecord() {
+            # from app.js # this.props.getRecentRecord
+        }
+    <SkillDetails.js> 
+    #pass the skill_i form this.state to app.js and put it to the database #
+        onClick this.setSkill(){
+       #from app.js#     this.props.addSkillToRecord
+        }
+
+        
+
+ 
+
+

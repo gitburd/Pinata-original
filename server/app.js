@@ -36,19 +36,22 @@ app.get('/api/userRecords', db.getUserRecords)
 
 // app.post('/api/userRecords', db.addRecord) 
 
+app.get('/api/mostRecentRecord', db.getMostRecentRecord)
+// /api/mostRecentRecord?user_id=2
+
+
 app.post('/api/records', db.newRecord) 
 
+app.put('/api/setSkill', db.setSkill)
+// /api/setSkill
 
-// {
-//     "user_id":"2",
-//     "skill_id":"2",
-//     "emotion_id":"2",
-//     "before_lvl":"2",
-//     "date":"2020-02-20",
-//     "si":"true",
-//     "sh":"true"
-
+// body 
+//   {
+//     "record_id": "",
+//    "skill_id":""
 //   }
+
+
 
 
 app.post('/api/fullRecord', db.addFullRecord)
