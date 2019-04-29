@@ -8,17 +8,7 @@ export default class FinishRecordPrompt extends Component {
     constructor(props) {
         super(props)
         this.state={
-          record_id:'26',
-          emotion:'Sad',
-          emotion_id:'',
-          skill:'Make Art',
-          skill_id:'',
-          before_lvl:'6',
-          after_lvl:'',
-          date:'2019-02-27',
-          si:false,
-          sh:false,
-          message:''
+          after_lvl:''  
         }
         this.onSubmit= this.onSubmit.bind(this);
         this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
@@ -33,7 +23,10 @@ export default class FinishRecordPrompt extends Component {
             onSubmit =(e)=> {
             e.preventDefault();
             console.log(this.props.state)
-            this.props.updateRecord(this.state.record_id, this.state.before_lvl, this.state.after_lvl);
+
+            let recentRecord = this.props.recentRecord[0]
+
+            this.props.updateRecord(recentRecord.record_id, recentRecord.before_lvl, this.state.after_lvl);
         
             this.setState({
                 emotion:'',
@@ -55,7 +48,7 @@ export default class FinishRecordPrompt extends Component {
     return (
       <div>
           <h2>Most Recent Record: </h2>
-        {this.state.date} {this.state.emotion} {this.state.skill}
+        {this.props.recentRecord[0].date} {this.props.recentRecord[0].emotion_text} {this.props.recentRecord[0].skill_title}
 
 
         <h2>How did it go?</h2>
@@ -63,7 +56,7 @@ export default class FinishRecordPrompt extends Component {
         <Form>
         <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>After Level</Form.Label>
-    <Form.Control as="select"  defaultValue={this.state.after_lvl}
+    <Form.Control as="select"  
   onChange={this.handleAfter_lvlChange.bind(this)}>
     
       <option>1</option>

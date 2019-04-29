@@ -38,6 +38,7 @@ import AddRecordSkill from './components/AddRecordSkill'
 import FormBlank from './components/FormBlank';
 import Update from './components/Update';
 import FinishRecordPrompt from './components/FinishRecordPrompt';
+import AfterLvlPrompt from './components/AfterLvlPrompt';
 
 
 const http = require('http');
@@ -51,9 +52,9 @@ state = {
     user_id:'2',
     record_id:'',
     before_lvl:'',
-    after_lvl:'3',
+    after_lvl:'',
     impact:null,
-    emotion:'Angry',
+    emotion:'',
     emotion_id:'',
     skill_id:'',
     skill_icon:'',
@@ -476,14 +477,16 @@ myCallback= (skillsGridArray,record_id)=>{
                 </Button>
 
                 <SkillDetails 
+                updateRecord = {this.updateRecord}
                 addSkillToRecord = {this.addSkillToRecord}
-                 recentRecord = {this.state.recentRecord}
+                recentRecord = {this.state.recentRecord}
                 user_id={this.state.user_id} 
                 skill_title={this.state.skill_title} 
                 skill_icon = {this.state.skill_icon}
                 skill_details={this.state.skill_details}  
                 skill_id = {this.state.skill_id} 
                 show={this.state.modalShow} 
+                />
                
                   onHide={modalClose}/>
               </ButtonToolbar>
@@ -502,16 +505,56 @@ myCallback= (skillsGridArray,record_id)=>{
                setRecord_id = {this.setRecord_id}
                getRecentRecord = {this.getRecentRecord}
                recentRecord = {this.state.recentRecord}
-               />
-               
+               />               
                
              </div>
-
-         
-              
+     
             </React.Fragment>)} />
 
 
+
+            <Route exact path="/after" exact render = { props =>(
+            <React.Fragment>
+
+              <div className="main">
+
+              <AfterLvlPrompt
+                addSkillToRecord = {this.addSkillToRecord}
+                 recentRecord = {this.state.recentRecord}
+                user_id={this.state.user_id} 
+                skill_title={this.state.skill_title} 
+                skill_icon = {this.state.skill_icon}
+                skill_details={this.state.skill_details}  
+                skill_id = {this.state.skill_id} 
+                show={this.state.modalShow} 
+               
+                  onHide={modalClose}/>
+
+
+              {this.state.date} - {this.state.emotion} :  {this.state.skill}
+              <br/>
+              Before : {this.state.before_lvl}
+              <br/>
+              After : {this.state.after_lvl}
+              </div>
+
+            
+              <div className="main">
+              
+              <Update updateRecord = {this.updateRecord}  record_id = {this.state.record_id} before_lvl = {this.state.before_lvl} />
+
+              <hr/>
+              <button onClick={this.getUserRecords}>get user Records</button>
+              
+              <RecordsListUpdate handleSelectRecord = { this.selectRecord.bind(this) } recordsList = {this.state.recordsList}/>
+
+               {/* <RecordsList recordsList = {this.state.recordsList}/> */}
+               
+              </div>
+            </React.Fragment>)} />
+
+
+          
 
             <Route path="/records" render = { props =>(
             <React.Fragment>
@@ -580,7 +623,9 @@ myCallback= (skillsGridArray,record_id)=>{
             <Route path="/finish" exact render = { props =>(
             <React.Fragment>
          <div className='main'>
-         <FinishRecordPrompt updateRecord = {this.updateRecord}/>
+         <FinishRecordPrompt 
+         recentRecord = {this.state.recentRecord}
+         updateRecord = {this.updateRecord}/>
          
          </div>
           </React.Fragment>)} />

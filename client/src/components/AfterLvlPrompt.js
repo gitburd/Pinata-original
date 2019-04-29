@@ -1,4 +1,4 @@
-import React, { Component } from 'react'import React, { Component } from 'react'
+import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, ButtonToolbar }  from 'react-bootstrap';
 
@@ -57,7 +57,9 @@ export default class AfterLvlPrompt extends Component {
             <Modal.Body>
             <img  src={this.props.skill_icon} className="skill_details_icon" /> 
            
-              <p>{this.props.skill_details}</p>
+              <p>{this.props.skill_details}
+              hey look i made a new thing! how easy will this one be? 
+              </p>
 
               
               
