@@ -114,7 +114,7 @@ export default class FormBlank extends Component {
            
     return (
       <div className='main'>
-      <div className='form'>
+      <div className='form main'>
          <Form>
   
  

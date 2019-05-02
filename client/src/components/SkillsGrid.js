@@ -82,7 +82,7 @@ export default class SkillsGrid extends Component {
 
   return (
     
-    <div className="skillsGrid"> 
+    <div className="main skillsGrid"> 
 
       {skillsGrid}
       

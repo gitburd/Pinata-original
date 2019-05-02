@@ -260,11 +260,6 @@ export default class AutoCompleteText extends Component {
           }
 
 
-
-
-
-
-
         getEmotionSkills = (emotion_text) => {
             console.log(`line 148`, this.state.emotion_text)
         let url = `http://localhost:3001/api/emotionSkills?emotion=${emotion_text}`

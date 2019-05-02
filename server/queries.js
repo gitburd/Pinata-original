@@ -127,8 +127,7 @@ const newRecord = (request, response) => {
       console.log("was the skill set to the record successfully? NO FREAKING WAY - yay!");
     } )
   }
-
-
+ 
 
   const getMostRecentRecord = (request, response) => {
 
@@ -141,13 +140,32 @@ const newRecord = (request, response) => {
     })
   }
 
-   // body 
-  // {
+  const GetUserId = (request, response) => {
+    var auth0_id = request.query.auth0_id;
+    
+    pool.query(`SELECT * FROM users WHERE auth0_id='${auth0_id}' `, (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    })
+    
   
-  //   "after_lvl": "",
-  //   "before_lvl": ""
- 
-  // }
+  }
+  
+
+
+  const MakeNewUser = (request, response) => {
+    pool.query(`INSERT INTO users (auth0_id, first_name, last_name) VALUES('${request.body.auth0_id}','${request.body.first_name}','${request.body.last_name}');`,(error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log("add user successful - yay!");
+    } )
+
+  }
+
+  
  
   
 
@@ -163,5 +181,7 @@ const newRecord = (request, response) => {
     setSkill,
     getSkillId, 
     getEmotionId,
-    getMostRecentRecord
+    getMostRecentRecord,
+    MakeNewUser, 
+    GetUserId
   }

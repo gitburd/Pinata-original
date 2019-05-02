@@ -62,9 +62,9 @@ console.log(this.props.state)
     
            
     return (
-      <div className='main'>
-      <div className='form'>
-         <Form>
+      <div >
+      <div className=' main'>
+         <Form style={{marginLeft:'150px', textAlign:'center'}}className='form'>
   
  
   

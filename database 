@@ -74,11 +74,34 @@ UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images
 
 
 
+INSERT INTO users (username, email, password) VALUES('dena','denaburd@gmail.com','8899Luck!9988');
+
 
 ///
 skills 
 
 from pg. 40: 
+
+
+
+user's table : 
+user_id, auth0_id, user_name, first_name, last_name, email
+
+
+
+CREATE TABLE users (user_id SERIAL PRIMARY KEY, auth0_id VARCH, user_name VARCHAR, first_name VARCHAR, last_name VARCHAR, email VARCHAR);
+
+
+
+ALTER TABLE users ADD COLUMN auth0_id VARCHAR;
+ALTER TABLE users ADD COLUMN email VARCHAR;
+ALTER TABLE users ADD COLUMN first_name VARCHAR;
+ALTER TABLE users ADD COLUMN last_name VARCHAR;
+
+ALTER TABLE users DROP password;
+
+
+INSERT INTO users (auth0_id, first_name, last_name) VALUES('Authtest','first_name test','last_name test');
 
 
 

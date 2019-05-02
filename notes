@@ -36,7 +36,28 @@ record state flow :
        #from app.js#     this.props.addSkillToRecord
         }
 
-        
+
+
+
+or i could add an Auth0_user_id to users table : 
+
+when they log in - get their Auth0_user_id - set user id based on that. and let everything else be. 
+but what puts them in the user's table? 
+
+user logs in 
+    get their Auth0_user_id -
+        select * from users where Auth0_user_id = Auth0_user_id
+
+        if res.lenght=0 
+        insert into users : 
+        Auth0_user_id, email
+
+        select * from users where Auth0_user_id = Auth0_user_id
+          
+        this.setState({user_id : res[0].user_id})
+
+
+
 
  
 
