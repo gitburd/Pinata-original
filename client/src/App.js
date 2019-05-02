@@ -229,58 +229,65 @@ class App extends Component {
     }
 
     getUserRecords = () => {
+      if (this.state.user_id!==''){
 
-      let url = `http://localhost:3001/api/userRecords?user_id=${this.state.user_id}`
-      console.log(url)
+        let url = `http://localhost:3001/api/userRecords?user_id=${this.state.user_id}`
+        console.log(url)
 
-      fetch(url, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json'}
+        fetch(url, {
+          method: 'get',
+          headers: { 'Content-Type': 'application/json'}
+          })
+          .then(res => res.json()).then(json => this.setState({recordsList: json})).catch(function(e) {
+          console.log(e); // “oh, no!”
         })
-        .then(res => res.json()).then(json => this.setState({recordsList: json})).catch(function(e) {
-        console.log(e); // “oh, no!”
-      })
-
+      }
     }
 
     updateRecord = (record_id, before_lvl, after_lvl) => {
 
-      let url = `http://localhost:3001/api/userRecords?record_id=${record_id}`
+      if(record_id!==''&& before_lvl!=='' && after_lvl!==''){
 
-      let update = {
-        before_lvl: parseInt(before_lvl),
-        after_lvl: parseInt(after_lvl)
+        let url = `http://localhost:3001/api/userRecords?record_id=${record_id}`
+
+        let update = {
+          before_lvl: parseInt(before_lvl),
+          after_lvl: parseInt(after_lvl)
+        }
+
+        console.log(update)
+
+        fetch(url, {
+          method: 'put',
+          body: JSON.stringify(update),
+          headers: { 'Content-Type': 'application/json'}
+          })
+          .catch(function(e) {console.log(`something is wrong ${e}`)})
+
       }
-
-      console.log(update)
-
-      fetch(url, {
-        method: 'put',
-        body: JSON.stringify(update),
-        headers: { 'Content-Type': 'application/json'}
-        })
-        .catch(function(e) {console.log(`something is wrong ${e}`)})
-
-    }
+  }
 
     addSkillToRecord = (skill_id) => {
 
-      let url = `http://localhost:3001/api/setSkill`
+      if(skill_id !== ''){
 
-      let body = {
-        record_id:this.state.recentRecord[0].record_id,
-        skill_id:this.state.skill_id
+        let url = `http://localhost:3001/api/setSkill`
+
+        let body = {
+          record_id:this.state.recentRecord[0].record_id,
+          skill_id:this.state.skill_id
+        }
+        console.log(body)
+
+        fetch(url, {
+          method: 'put',
+          body: JSON.stringify(body),
+          headers: { 'Content-Type': 'application/json'}
+          })
+          .catch(function(e) {console.log(`something is wrong ${e}`)})
+
     }
-      console.log(body)
-
-      fetch(url, {
-        method: 'put',
-        body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json'}
-        })
-        .catch(function(e) {console.log(`something is wrong ${e}`)})
-
-    }
+  }
 
     addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh) => {
       let url = `http://localhost:3001/api/fullRecord`
@@ -312,16 +319,18 @@ class App extends Component {
 
     getUserSkills = () => {
 
-      let url = `http://localhost:3001/api/userSkills?id=${this.state.user_id}&emotion=${this.state.emotion}`
+      if (this.state.user_id){
+     
+          let url = `http://localhost:3001/api/userSkills?id=${this.state.user_id}&emotion=${this.state.emotion}`
 
-      fetch(url, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json'}
-        })
-        .then(res => res.json()).then(json => this.setState({userSkillsArray: json})).catch(function(e) {
-        console.log(e); // “oh, no!”
-      })
-
+          fetch(url, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json'}
+            })
+            .then(res => res.json()).then(json => this.setState({userSkillsArray: json})).catch(function(e) {
+            console.log(e); // “oh, no!”
+          })
+      }
     }
 
     getEmotionSkills = () => {
@@ -396,15 +405,19 @@ class App extends Component {
     }
 
     getEmotionId =(emotion) => {
-      let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
-      console.log(url)
-      fetch(url, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json'}
-        })
-        .then(res => res.json()).then(json => {return json[0].emotion_id}).catch(function(e) {
-        console.log(e); // “oh, no!”
-      })
+
+      if (emotion!==''){
+
+          let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
+          console.log(url)
+          fetch(url, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json'}
+            })
+            .then(res => res.json()).then(json => {return json[0].emotion_id}).catch(function(e) {
+            console.log(e); // “oh, no!”
+          })
+      }
 
     }
 
@@ -413,6 +426,10 @@ class App extends Component {
 
     myCallback= (skillsGridArray,record_id)=>{
       this.setState({skillsGridArray:skillsGridArray, record_id:record_id})
+    }
+
+    showModalCallback = () =>{
+      this.setState({modalShow:false})
     }
 
    userIdCallback= (json)=>{
@@ -462,10 +479,11 @@ class App extends Component {
   }
 
   
+  
 
     render() {
     
-let modalClose = () => this.setState({ modalShow: false });
+let modalClose = () => console.log('app 469');
     return (
       
       <MuiThemeProvider>
@@ -547,7 +565,9 @@ let modalClose = () => this.setState({ modalShow: false });
                 skill_details={this.state.skill_details}  
                 skill_id = {this.state.skill_id} 
                 show={this.state.modalShow}
-                modalClose={this.modalClose}
+                showModalCallback={this.showModalCallback}
+                // modalClose={this.modalClose}
+                // modalShow={this.state.modalShow}
                 
 
                 />
@@ -563,7 +583,10 @@ let modalClose = () => this.setState({ modalShow: false });
                setRecord_id = {this.setRecord_id}
                getRecentRecord = {this.getRecentRecord}
                recentRecord = {this.state.recentRecord}
-               modalClose={this.modalClose}
+               show={this.state.modalShow}
+                showModalCallback={this.showModalCallback}
+              //  modalClose={this.modalClose}
+              //  modalShow={this.state.modalShow}
                />               
                
               </div>    

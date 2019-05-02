@@ -23,7 +23,8 @@ export default class SkillsGrid extends Component {
     console.log(  `hello from SkillsGrid`)
 
     let url2 = `http://localhost:3001/api/mostRecentRecord?user_id=${this.props.user_id}`
-  
+  if (this.props.user_id && this.props.user_id!==''){
+
     fetch(url2, {
       method: 'get',
       headers: { 'Content-Type': 'application/json'}
@@ -33,7 +34,8 @@ export default class SkillsGrid extends Component {
       // .then(json=>{console.log('line 32',json); return json})
       .catch(function(e) {console.log(e)})
   
-  }
+  }else {console.log(`user id is required`)}
+}
 
 
   
@@ -45,7 +47,10 @@ export default class SkillsGrid extends Component {
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 
     skillClicked = {this.props.skillClicked} 
-    key={s.id} skill={s}/>
+    key={s.id} skill={s}
+    modalClose= {this.props.modalClose}
+    modalShow={this.props.modalShow}
+    />
   ))
   
 
@@ -56,7 +61,10 @@ export default class SkillsGrid extends Component {
     record = {this.state.recentRecord} 
     skillClicked = {this.props.skillClicked} 
     key={skill.id} 
-    skill={skill}/>
+    skill={skill}
+    modalClose= {this.props.modalClose}
+    modalShow={this.props.modalShow}
+    />
   ))
 
   let baseSkills = this.props.baseSkillsArray.map((skill)=>(
@@ -66,7 +74,10 @@ export default class SkillsGrid extends Component {
     record = {this.state.recentRecord} 
     skillClicked = {this.props.skillClicked} 
     key={skill.id} 
-    skill={skill}/>
+    skill={skill}
+    modalClose= {this.props.modalClose}
+    modalShow={this.props.modalShow}
+    />
   ))
 
   let skillsGrid = this.props.skillsGridArray.map((skill)=>(
@@ -76,7 +87,10 @@ export default class SkillsGrid extends Component {
     record = {this.state.recentRecord} 
     skillClicked = {this.props.skillClicked} 
     key={skill.id} 
-    skill={skill}/>
+    skill={skill}
+    modalClose= {this.props.modalClose}
+    modalShow={this.props.modalShow}
+    />
   ))
 
 

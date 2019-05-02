@@ -7,12 +7,19 @@ export default class SkillDetails extends Component {
     super(props)
     this.state={
       after_lvl:'',
-      tryItClicked:false 
+      tryItClicked:false, 
+      show: false
     }
     this.onSubmit= this.onSubmit.bind(this);
     this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
-   
+
+    this.closeModal = this.closeModal.bind(this)
+
     }
+
+ closeModal= ()=>{
+   this.props.showModalCallback();
+ }
 
   setSkill =(e)=> {
     e.preventDefault();
@@ -23,12 +30,9 @@ export default class SkillDetails extends Component {
     console.log(this.props.skill_id)
     // console.log(record_id)
     console.log('from details', this.props.recentRecord[0].record_id)
-
     this.props.addSkillToRecord(this.props.skill_id)
     this.setState({tryItClicked:true})
-
-
-    }
+  }
 
 
     getRecentRecord = () => {
@@ -74,11 +78,10 @@ export default class SkillDetails extends Component {
       }
   
       render() {
- 
-
-
-        return (
+      return (
           <Modal
+          // show={this.props.modalShow} 
+          onHide={this.closeModal}
             {...this.props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
@@ -133,7 +136,7 @@ export default class SkillDetails extends Component {
               
             </Modal.Body>
             <Modal.Footer>
-            <Button onClick={()=>this.props.onHide}>Close</Button>
+            <Button onClick={this.closeModal}>Close</Button>
             <Button style={{margin:'10px'}} onClick = {this.setSkill}
               variant="outline-success">Try it</Button>
 
