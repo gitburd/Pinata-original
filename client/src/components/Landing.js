@@ -12,6 +12,7 @@ export default class Landing extends Component {
             let first_name = this.props.first_name
             let last_name = this.props.last_name
 
+            // app.js 440
             this.props.getUserInfo(auth0_id, first_name, last_name);
         }
       }

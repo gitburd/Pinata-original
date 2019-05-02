@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, ButtonToolbar, Form}  from 'react-bootstrap';
-
+ 
 export default class SkillDetails extends Component {
   constructor(props) {
     super(props)

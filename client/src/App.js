@@ -199,6 +199,17 @@ class App extends Component {
     ]
   }
 
+  componentDidMount(){
+
+  if(this.props.auth.isAuthenticated()
+  && !this.state.user_id){
+    this.setState({user_id:localStorage.getItem('user_id')})
+
+  }
+}
+
+
+
     selectRecord =(record) => {
       console.log(record)
       this.setState({  
@@ -448,7 +459,7 @@ class App extends Component {
               .then(res => res.json())
               .then(json => {
                 if (json.length>0) { 
-                  this.setState({user_id:json[0].user_id})}
+                  this.setState({user_id:json[0].user_id}); localStorage.setItem( 'user_id', json[0].user_id )}
                 else{
                   this.makeNewUser(auth0_id, first_name, last_name);
                   console.log('Welcome new user!')}
@@ -482,6 +493,7 @@ class App extends Component {
   
 
     render() {
+     
     
 let modalClose = () => console.log('app 469');
     return (
@@ -566,10 +578,7 @@ let modalClose = () => console.log('app 469');
                 skill_id = {this.state.skill_id} 
                 show={this.state.modalShow}
                 showModalCallback={this.showModalCallback}
-                // modalClose={this.modalClose}
-                // modalShow={this.state.modalShow}
-                
-
+              
                 />
        
                <SkillsGrid  
@@ -585,8 +594,7 @@ let modalClose = () => console.log('app 469');
                recentRecord = {this.state.recentRecord}
                show={this.state.modalShow}
                 showModalCallback={this.showModalCallback}
-              //  modalClose={this.modalClose}
-              //  modalShow={this.state.modalShow}
+        
                />               
                
               </div>    
@@ -612,6 +620,7 @@ let modalClose = () => console.log('app 469');
                   skill_details={this.state.skill_details}  
                   skill_id = {this.state.skill_id} 
                   show={this.state.modalShow} 
+                  showModalCallback={this.showModalCallback}
                 
                 onHide={modalClose}/>
 
