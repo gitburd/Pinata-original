@@ -8,9 +8,9 @@ export default class Landing extends Component {
  
     componentDidMount(){
         if (this.props.auth.isAuthenticated){
-            let auth0_id = this.props.auth0_id
-            let first_name = this.props.first_name
-            let last_name = this.props.last_name
+            let auth0_id = this.props.auth0_id;
+            let first_name = this.props.first_name;
+            let last_name = this.props.last_name;
 
             // app.js 440
             this.props.getUserInfo(auth0_id, first_name, last_name);

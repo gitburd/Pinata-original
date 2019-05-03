@@ -31,6 +31,8 @@ app.get('/api/userRecords', db.getUserRecords)
 
 app.get('/api/mostRecentRecord', db.getMostRecentRecord)
 
+app.get('/api/newRecord', db.getNewRecord)
+
 app.post('/api/records', db.newRecord) 
 
 app.put('/api/setSkill', db.setSkill)

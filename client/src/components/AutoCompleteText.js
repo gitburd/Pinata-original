@@ -8,7 +8,8 @@ import { Form }  from 'react-bootstrap';
 export default class AutoCompleteText extends Component {
   constructor(props){
       super(props);
-    this.items = ["Fear",
+    this.items = [
+    "Fear",
     "Angry",
     "Sad",
     "Disconnected",
@@ -16,16 +17,18 @@ export default class AutoCompleteText extends Component {
     "Unreal",
     "Jittery",
     "Anxious",
-    "Depressed"
-        
+    "Depressed",
+    "Scared",
+    "Isolated",
+    "Lonely",
+    "Hopeless", 
+    "Unreal"   
     ];
 
     
     this.state={
         test:'callback test',
-        emotion_id:5,
         suggestions:[],
-        user_id:2,
         skillsGridArray:[],
         userSkillsArray:[],
         text:"",
@@ -173,11 +176,7 @@ export default class AutoCompleteText extends Component {
 
         this.setState({
             
-        //     before_lvl:'',
-        //     date:'',
-        //     si:false,
-        //     sh:false,
-            message:`Record updated.`
+            message:`Record Made.`
             });
     
         }
@@ -214,51 +213,74 @@ export default class AutoCompleteText extends Component {
 
         newRecord  = (e) => {
             // make new record
-
+            console.log('216 newRecord')
             e.preventDefault();
-
             let url = `http://localhost:3001/api/records`
-
-            let newRecord = 
-        
-            {
-            before_lvl:this.state.before_lvl,
-            emotion_id:this.state.emotion_id,
-            si:this.state.si,
-            sh:this.state.sh,
-            user_id:this.props.user_id,
-            date:  "2099-09-09"
-            }
+            let record = 
+                {
+                before_lvl:this.state.before_lvl,
+                emotion_id:this.state.emotion_id,
+                si:this.state.si,
+                sh:this.state.sh,
+                user_id:this.props.user_id,
+                date:  "2019-05-02"
+                };
         
             fetch(url, {
-            method: 'post',
-            body: JSON.stringify(newRecord),
-            headers: { 'Content-Type': 'application/json'}
-            
+                method: 'post',
+                body: JSON.stringify(record),
+                headers: { 'Content-Type': 'application/json'}
             })
-
-            .then(r => this.getRecentRecord)
+            .then(r => r.json())
+            .then(json=>{this.setState({recent_record:json}); return json})
+            // .then(json=>{console.log('line 236'); return json})
+            // .then(r =>{console.log(r.status)})
+            // .then(r => console.log('what is up?') )
+            // this.getNewRecord()
 
             .catch(function(e) {console.log(`something is wrong! : ${e}`); })
 
             
         }
 
+        getNewRecord = (e) => {
+            console.log('216 getNewRecord')
+            e.preventDefault();
+            let auth0_id= this.props.auth0_id
+            let url = `http://localhost:3001/api/newRecord?auth0_id=${auth0_id}`
+          if (this.props.auth0_id && this.props.auth0_id!==''){
         
-        getRecentRecord = () => {
-
-            console.log(  `hello from recent record`)
-      
-            let url2 = `http://localhost:3001/api/mostRecentRecord?user_id=2`
-          
-            fetch(url2, {
+            fetch(url, {
               method: 'get',
               headers: { 'Content-Type': 'application/json'}
               })
-              .then(res => res.json()).then(json => console.log(json)).catch(function(e) {console.log(e)})
+              .then(res => res.json())
+              .then(json => console.log('256',json))
+              // .then(json=>{console.log('line 32',json); return json})
+              .catch(function(e) {console.log(e)})
           
-          }
+          }else {console.log(`user id is required`)}
+        }
+        
+        getRecentRecord = () => {
 
+          this.setState({test:'test successful'})
+      
+        //     let url = `http://localhost:3001/api/mostRecentRecord?user_id=${this.props.user_id}`
+        //   console.log('252', url)
+
+
+        //   if (this.props.user_id){
+        //     fetch(url, {
+        //         method: 'get',
+        //         headers: { 'Content-Type': 'application/json'}
+        //         })
+        //         .then(res => res.json()).then(json => console.log(json)).catch(function(e) {console.log(e)})
+            
+        //     }
+  
+          }
+            
 
         getEmotionSkills = (emotion_text) => {
             console.log(`line 148`, this.state.emotion_text)
@@ -280,14 +302,14 @@ export default class AutoCompleteText extends Component {
 
         getUserSkills = () => {
 
-            let url = `http://localhost:3001/api/userSkills?id=${this.state.user_id}&emotion=${this.state.emotion_text}`
+            let url = `http://localhost:3001/api/userSkills?id=${this.props.user_id}&emotion=${this.state.emotion_text}`
         
             console.log(`userSkills ${url}`)
             fetch(url, {
             method: 'get',
             headers: { 'Content-Type': 'application/json'}
             })
-            .then(res => res.json()).then(json => this.setState({userSkillsArray: json})).catch(function(e) {
+            .then(res => res.json()).then(json => this.setState({userSkillsArray: json},() =>this.getSkillsGrid())).catch(function(e) {
             console.log(e); // “oh, no!”
             })
         
@@ -352,6 +374,7 @@ export default class AutoCompleteText extends Component {
 
             if (this.state.skillsGridArray.length === 9 ){
                 console.log('correct length at end of function')
+                this.setState({skillsGridArray:this.state.skillsGridArray},() => this.someFn())
             }
         
         }
@@ -377,9 +400,9 @@ export default class AutoCompleteText extends Component {
 
         someFn(){
             let skillsGridArray= this.state.skillsGridArray
-            let record_id= this.state.record_id
-            
-            this.props.myCallback(skillsGridArray, record_id);
+            // let record_id= this.state.record_id
+            let recent_record = this.state.recent_record.record
+            this.props.myCallback(skillsGridArray, recent_record);
         }
 
 
@@ -437,11 +460,11 @@ export default class AutoCompleteText extends Component {
                 
         </Form>
 
-      <button onClick={this.getEmotionSkills}>get emotion skills</button>
+      {/* <button onClick={this.getEmotionSkills}>get emotion skills</button> */}
       <button onClick={this.getUserSkills}>get user skills</button>
-      <button onClick={this.getSkillsGrid.bind(this)}>get grid </button>
+      {/* <button onClick={this.getSkillsGrid.bind(this)}>get grid </button> */}
 
-      <button onClick={this.someFn.bind(this)}>someFn </button>
+      {/* <button onClick={this.someFn.bind(this)}>someFn </button> */}
 
 
       

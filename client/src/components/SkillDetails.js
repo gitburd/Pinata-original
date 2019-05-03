@@ -23,31 +23,15 @@ export default class SkillDetails extends Component {
 
   setSkill =(e)=> {
     e.preventDefault();
-    // let record_id = this.props.recentRecord[0].record_id
     console.log(`this is a test`)
     // this.props.updateRecord(this.state.record_id, this.state.skill_id);
     console.log(this.props.skill_title)
     console.log(this.props.skill_id)
     // console.log(record_id)
-    console.log('from details', this.props.recentRecord[0].record_id)
+    console.log('from details', this.props.recent_record.record_id)
     this.props.addSkillToRecord(this.props.skill_id)
     this.setState({tryItClicked:true})
   }
-
-
-    getRecentRecord = () => {
-
-      console.log(  `hello from line 10ish`)
-
-      let url = `http://localhost:3001/api/mostRecentRecord?user_id=2`
-    
-      fetch(url, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json'}
-        })
-        .then(res => res.json()).then(json => this.setState({record_id:json.record_id})).catch(function(e) {console.log(e)})
-    
-    }
 
 
     handleAfter_lvlChange(after_lvl) {
@@ -58,9 +42,9 @@ export default class SkillDetails extends Component {
       e.preventDefault();
       console.log(this.props.state)
 
-      let recentRecord = this.props.recentRecord[0]
+      let recent_record = this.props.recent_record
 
-      this.props.updateRecord(recentRecord.record_id, recentRecord.before_lvl, this.state.after_lvl);
+      this.props.updateRecord(recent_record.record_id, recent_record.before_lvl, this.state.after_lvl);
   
       this.setState({
           emotion:'',

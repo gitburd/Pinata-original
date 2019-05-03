@@ -13,24 +13,40 @@ export default class SkillsGrid extends Component {
       recentRecord:[]
     }
   }
-
+ 
   componentDidMount(){
-    this.getRecentRecord();
+    this.getNewRecord();
   }
 
-  getRecentRecord = () => {
 
-    console.log(  `hello from SkillsGrid`)
+// getUser = () => {
+//   let url = `http://localhost:3001/api/user?auth0_id=${this.props.auth0_id}`
+//   if (this.props.auth0_id && this.props.auth0_id!==''){
 
-    let url2 = `http://localhost:3001/api/mostRecentRecord?user_id=${this.props.user_id}`
-  if (this.props.user_id && this.props.user_id!==''){
+//     fetch(url, {
+//       method: 'get',
+//       headers: { 'Content-Type': 'application/json'}
+//       })
+//       .then(res => res.json())
+//       .then(json => this.setState({user_id:json[0].user_id},() => this.getNewRecord(json[0].user_id)))
+//       // .then(json=>{console.log('line 32',json); return json})
+//       .catch(function(e) {console.log(e)})
+  
+//   }else {console.log(`auth0 id is required`)}
+// }
 
-    fetch(url2, {
+
+  getNewRecord = (user_id) => {
+ 
+    let url = `http://localhost:3001/api/newRecord?auth0_id=${this.props.auth0_id}`
+  if (this.props.auth0_id && this.props.auth0_id!==''){
+
+    fetch(url, {
       method: 'get',
       headers: { 'Content-Type': 'application/json'}
       })
       .then(res => res.json())
-      .then(json => this.props.getRecentRecord(json))
+      .then(json => console.log(json))
       // .then(json=>{console.log('line 32',json); return json})
       .catch(function(e) {console.log(e)})
   
@@ -56,6 +72,7 @@ export default class SkillsGrid extends Component {
 
   let userSkills =  this.props.userSkillsArray.map((skill)=>(
     <Skill 
+    {...this.props} 
     addSkillToRecord = {this.props.addSkillToRecord}
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 
@@ -69,6 +86,7 @@ export default class SkillsGrid extends Component {
 
   let baseSkills = this.props.baseSkillsArray.map((skill)=>(
     <Skill 
+    {...this.props} 
     addSkillToRecord = {this.props.addSkillToRecord}
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 
@@ -82,6 +100,7 @@ export default class SkillsGrid extends Component {
 
   let skillsGrid = this.props.skillsGridArray.map((skill)=>(
     <Skill 
+    {...this.props} 
     addSkillToRecord = {this.props.addSkillToRecord}
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 

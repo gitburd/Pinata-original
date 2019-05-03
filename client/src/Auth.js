@@ -68,6 +68,7 @@ export default class Auth {
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
       localStorage.setItem('isLoggedIn', 'false');
+      localStorage.removeItem('backup');
       this.state={}
       
       // navigate to the home route

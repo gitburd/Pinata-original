@@ -51,7 +51,6 @@ class App extends Component {
     test:'fail',
     modalShow: false,
     skillsList:[],
-      user_id:'',
       user_info:[],
       record_id:'',
       before_lvl:'',
@@ -70,6 +69,7 @@ class App extends Component {
       emotionSkillsArray : [],
       skillsGridArray : [],
       resEmotionId:'',
+      prompt_count:0,
       pinata :   {
         "skill_title": "piñata",
         "skill_details": "Lorium sermpra filler text is filling the text sapce.",
@@ -199,13 +199,104 @@ class App extends Component {
     ]
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    this.hydrateStateWithLocalStorage();
 
-  if(this.props.auth.isAuthenticated()
-  && !this.state.user_id){
-    this.setState({user_id:localStorage.getItem('user_id')})
-
+    // add event listener to save state to localStorage
+    // when user leaves/refreshes the page
+    window.addEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
   }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+    // saves if component has a chance to unmount
+    this.saveStateToLocalStorage();
+  }
+
+  hydrateStateWithLocalStorage() {
+    // set state to back up in local storage 
+    this.setState(JSON.parse(localStorage.getItem('backup')))
+  }
+
+  saveStateToLocalStorage() {
+    localStorage.setItem('backup', JSON.stringify(this.state))
+  }
+
+  
+  getUserInfo = (auth0_id, first_name, last_name) => {
+    let url = `http://localhost:3001/api/user?auth0_id=${auth0_id}`
+    
+    if (auth0_id ){
+        fetch(url, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json'}
+            })
+            .then(res => res.json())
+            .then(json => {
+              if (json.length>0) { 
+                this.setState({user_id:json[0].user_id}, ()=> this.recentRecord(json)); 
+                // localStorage.setItem( 'user_id', json[0].user_id )
+              }else{
+                this.makeNewUser(auth0_id, first_name, last_name);
+                console.log('Welcome new user!')}
+                }) 
+            
+            // .then(json => {return json[0].emotion_id})
+            .catch(function(e) {
+            console.log(e); // “oh, no!”
+          })
+    }
+  }
+  
+  
+  
+  recentRecord = (json) => {
+  let url = `http://localhost:3001/api/mostRecentRecord?user_id=${json[0].user_id}`
+    if (json[0].user_id && json[0].user_id!==''){
+      fetch(url, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(json => this.getRecentRecord(json))
+        .catch(function(e) {console.log(e)}) 
+    }else {console.log(`user id is required`)}
+  }
+  
+  getRecentRecord = (record) => {
+    this.setState({
+      recentRecord: record
+    });
+    if (record.length>0 && this.state.prompt_count===0){
+      this.state.prompt_count+=1;
+      window.location='/'; 
+    }
+  }
+
+
+newRecord = () =>{
+  let url = `http://localhost:3001/api/newRecord?user_id=${this.state.user_id}`
+    if (this.state.user_id && this.state.user_id!==''){
+      fetch(url, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(json => this.getNewtRecord(json))
+        .catch(function(e) {console.log(e)}) 
+    }else {console.log(`user id is required`)}
+}
+
+getNewRecord = (record) => {
+  this.setState({
+   newRecord: record
+  });
 }
 
 
@@ -233,11 +324,7 @@ class App extends Component {
       console.log('app 217 state ',this.state.record_id)
     }
 
-    getRecentRecord = (record) => {
-    this.setState({
-      recentRecord: record
-    })
-    }
+  
 
     getUserRecords = () => {
       if (this.state.user_id!==''){
@@ -256,11 +343,8 @@ class App extends Component {
     }
 
     updateRecord = (record_id, before_lvl, after_lvl) => {
-
       if(record_id!==''&& before_lvl!=='' && after_lvl!==''){
-
         let url = `http://localhost:3001/api/userRecords?record_id=${record_id}`
-
         let update = {
           before_lvl: parseInt(before_lvl),
           after_lvl: parseInt(after_lvl)
@@ -280,12 +364,12 @@ class App extends Component {
 
     addSkillToRecord = (skill_id) => {
 
-      if(skill_id !== ''){
+      if(skill_id !== '' && this.state.recent_record.record_id){
 
         let url = `http://localhost:3001/api/setSkill`
 
         let body = {
-          record_id:this.state.recentRecord[0].record_id,
+          record_id:this.state.recent_record.record_id,
           skill_id:this.state.skill_id
         }
         console.log(body)
@@ -297,7 +381,7 @@ class App extends Component {
           })
           .catch(function(e) {console.log(`something is wrong ${e}`)})
 
-    }
+    }else{console.log('missing skill or record id')}
   }
 
     addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh) => {
@@ -435,42 +519,17 @@ class App extends Component {
   
     skillClicked=(skill_id, skill_icon, skill_details, skill_title)=>{ this.setState({skill_id:skill_id, skill_icon:skill_icon, skill_details:skill_details, skill_title:skill_title, modalShow: true})}
 
-    myCallback= (skillsGridArray,record_id)=>{
-      this.setState({skillsGridArray:skillsGridArray, record_id:record_id})
+    myCallback= (skillsGridArray,recent_record)=>{
+      this.setState({skillsGridArray:skillsGridArray, recent_record:recent_record})
     }
 
     showModalCallback = () =>{
-      this.setState({modalShow:false})
+      this.setState({modalShow:false, skill_id:'', skill_details:'', skill_icon:''})
     }
 
    userIdCallback= (json)=>{
       this.setState({user_id:json.user_id})
     }
-
-    
-    getUserInfo = (auth0_id, first_name, last_name) => {
-      let url = `http://localhost:3001/api/user?auth0_id=${auth0_id}`
-      
-      if (auth0_id ){
-          fetch(url, {
-              method: 'get',
-              headers: { 'Content-Type': 'application/json'}
-              })
-              .then(res => res.json())
-              .then(json => {
-                if (json.length>0) { 
-                  this.setState({user_id:json[0].user_id}); localStorage.setItem( 'user_id', json[0].user_id )}
-                else{
-                  this.makeNewUser(auth0_id, first_name, last_name);
-                  console.log('Welcome new user!')}
-                  }) 
-              
-              // .then(json => {return json[0].emotion_id})
-              .catch(function(e) {
-              console.log(e); // “oh, no!”
-            })
-      }
-  }
   
 
   makeNewUser =  (auth0_id, first_name, last_name) =>{
@@ -493,7 +552,11 @@ class App extends Component {
   
 
     render() {
-     
+      // if(this.props.auth.isAuthenticated()
+      //   && !this.state.user_id){
+      //     this.setState({user_id:localStorage.getItem( 'user_id' )})
+
+      //   }
     
 let modalClose = () => console.log('app 469');
     return (
@@ -564,13 +627,11 @@ let modalClose = () => console.log('app 469');
             ? <React.Fragment>
               <div >
 
-             
-               
-
                 <SkillDetails 
                 updateRecord = {this.updateRecord}
+                newRecord={this.newRecord}
                 addSkillToRecord = {this.addSkillToRecord}
-                recentRecord = {this.state.recentRecord}
+                recent_record = {this.state.recent_record}
                 user_id={this.state.user_id} 
                 skill_title={this.state.skill_title} 
                 skill_icon = {this.state.skill_icon}
@@ -578,11 +639,14 @@ let modalClose = () => console.log('app 469');
                 skill_id = {this.state.skill_id} 
                 show={this.state.modalShow}
                 showModalCallback={this.showModalCallback}
+                {...this.props} 
+                {...props}
               
                 />
        
                <SkillsGrid  
                user_id = {this.state.user_id}
+               newRecord={this.newRecord}
                addSkillToRecord = {this.addSkillToRecord}
                skillClicked = {this.skillClicked} 
                userSkillsArray = {this.state.userSkillsArray} 
@@ -590,10 +654,12 @@ let modalClose = () => console.log('app 469');
                baseSkillsArray={this.state.baseSkillsArray} 
                skillsGridArray={this.state.skillsGridArray}
                setRecord_id = {this.setRecord_id}
-               getRecentRecord = {this.getRecentRecord}
-               recentRecord = {this.state.recentRecord}
+               getRecentRecordWithoutSkill = {this.getRecentRecord}
+               recent_record = {this.state.recent_record}
                show={this.state.modalShow}
                 showModalCallback={this.showModalCallback}
+                {...this.props} 
+                {...props}
         
                />               
                
@@ -608,7 +674,7 @@ let modalClose = () => console.log('app 469');
 
 
 
-            <Route exact path="/after" exact render = { props =>(
+            <Route exact path="/finish" exact render = { props =>(
             <React.Fragment>
               <div >
                 <AfterLvlPrompt
@@ -624,20 +690,17 @@ let modalClose = () => console.log('app 469');
                 
                 onHide={modalClose}/>
 
-                {this.state.date} - {this.state.emotion} :  {this.state.skill}
+                {this.state.recentRecord[0].date}
                 <br/>
-                Before : {this.state.before_lvl}
+                {this.state.recentRecord[0].emotion_text} :  {this.state.recentRecord[0].skill_title}
                 <br/>
-                After : {this.state.after_lvl}
+                Before : {this.state.recentRecord[0].before_lvl}
+                
               </div>
 
             
               <div >              
-                <Update updateRecord = {this.updateRecord}  record_id = {this.state.record_id} before_lvl = {this.state.before_lvl} />
-                <hr/>
-                <button onClick={this.getUserRecords}>get user Records</button>             
-                <RecordsListUpdate handleSelectRecord = { this.selectRecord.bind(this) } recordsList = {this.state.recordsList}/>
-                {/* <RecordsList recordsList = {this.state.recordsList}/> */}               
+                <Update updateRecord = {this.updateRecord}  record_id = {this.state.recentRecord[0].record_id} before_lvl = {this.state.recentRecord[0].before_lvl} />               
               </div>
             </React.Fragment>)} />
 
@@ -701,22 +764,6 @@ let modalClose = () => console.log('app 469');
                     <Landing {...this.props} {...props}/>
                   </React.Fragment>
             )} />
-
-{/* finish record */}
-
-            <Route path="/finish" exact render = { props =>(
-              this.props.auth.isAuthenticated() 
-              ? <React.Fragment>
-                  <div >
-                    <FinishRecordPrompt 
-                      recentRecord = {this.state.recentRecord}
-                      updateRecord = {this.updateRecord}/>
-                  </div>
-                  </React.Fragment>
-              : <React.Fragment>
-                 <Landing {...this.props} {...props}/>
-                </React.Fragment>
-              )} />
 
         </div>
         </Router>

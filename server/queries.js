@@ -64,11 +64,12 @@ const getUserSkills = (request, response) => {
   }
 
 const newRecord = (request, response) => {
-  pool.query(`INSERT INTO records (user_id, emotion_id, before_lvl, date, si, sh)  VALUES('${request.body.user_id}','${request.body.emotion_id}','${request.body.before_lvl}','${request.body.date}','${request.body.si}','${request.body.sh}');`,(error, results) => {
+  pool.query(`INSERT INTO records (user_id, emotion_id, before_lvl, date, si, sh)  VALUES('${request.body.user_id}','${request.body.emotion_id}','${request.body.before_lvl}','${request.body.date}','${request.body.si}','${request.body.sh}') RETURNING *;`,(error, results) => {
     if (error) {
       throw error
     }
-    console.log("add record successful - yay!");
+    console.log('new record successful')
+    response.send({record:results.rows[0]});
   } )
 
 }
@@ -124,7 +125,7 @@ const newRecord = (request, response) => {
       if (error) {
         throw error
       }
-      console.log("was the skill set to the record successfully? NO FREAKING WAY - yay!");
+      console.log("skill set to the record successfully!");
     } )
   }
  
@@ -132,7 +133,17 @@ const newRecord = (request, response) => {
   const getMostRecentRecord = (request, response) => {
 
   var userId = request.query.user_id;
-    pool.query(`SELECT s.skill_title, s.skill_id, r.record_id,  r.before_lvl, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.user_id =${userId} AND r.after_lvl IS NULL ORDER BY r.record_id DESC LIMIT 1;`, (error, results) => {
+    pool.query(`SELECT s.skill_title, s.skill_id, r.record_id,  r.before_lvl, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.user_id =${userId} AND r.after_lvl IS NULL AND r.skill_id IS NOT NULL ORDER BY r.record_id DESC LIMIT 1;`, (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    })
+  }
+
+  const getNewRecord = (request, response) => {
+    var auth0_id = request.query.auth0_id;
+    pool.query(`SELECT * FROM records AS r FULL OUTER JOIN users AS u ON u.user_id = r.user_id WHERE r.after_lvl IS NULL AND u.auth0_id='${auth0_id}'  ORDER BY r.record_id DESC LIMIT 1;`, (error, results) => {
       if (error) {
         throw error
       }
@@ -158,7 +169,7 @@ const newRecord = (request, response) => {
   const MakeNewUser = (request, response) => {
     pool.query(`INSERT INTO users (auth0_id, first_name, last_name) VALUES('${request.body.auth0_id}','${request.body.first_name}','${request.body.last_name}');`,(error, results) => {
       if (error) {
-        throw error
+        throw errorR
       }
       console.log("add user successful - yay!");
     } )
@@ -182,6 +193,7 @@ const newRecord = (request, response) => {
     getSkillId, 
     getEmotionId,
     getMostRecentRecord,
+    getNewRecord,
     MakeNewUser, 
     GetUserId
   }
