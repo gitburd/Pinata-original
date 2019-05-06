@@ -4,6 +4,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
 import { Form }  from 'react-bootstrap';
+import Moment from 'react-moment';
 
 export default class AutoCompleteText extends Component {
   constructor(props){
@@ -57,88 +58,88 @@ export default class AutoCompleteText extends Component {
             "skill_details": "Lorium sermpra filler text is filling the text sapce.",
             "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
             "skill_id": 0
-          },
+        },
         baseSkillsArray :
         [
-          {
-              "skill_title": "Test skill",
-              "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-              "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-              "skill_id": 1
-          },
-          {
-              "skill_title": "Play Video Games",
-              "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-              "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/playvideogames.png",
-              "skill_id": 2
-          },
-          {
-              "skill_title": "Wring a Towel",
-              "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-              "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wringtowel.png",
-              "skill_id": 3
-          },
-          {
-              "skill_title": "Workout",
-              "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-              "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/workout.png",
-              "skill_id": 4
-          },
-          {
-              "skill_title": "Take a Breather",
-              "skill_details": "https://s3-us-west-2.amazonaws.com/pinata-images/takebreather.png",
-              "skill_icon": "url to the image",
-              "skill_id": 5
-          },
-          {
-              "skill_title": "Punch a Pillow",
-              "skill_details": "https://s3-us-west-2.amazonaws.com/pinata-images/punchpillow.png",
-              "skill_icon": "url to the image",
-              "skill_id": 6
-          }, 
-          {
+            {
+            "skill_title": "Test skill",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+            "skill_id": 1
+            },
+            {
+            "skill_title": "Play Video Games",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/playvideogames.png",
+            "skill_id": 2
+            },
+            {
+            "skill_title": "Wring a Towel",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wringtowel.png",
+            "skill_id": 3
+            },
+            {
+            "skill_title": "Workout",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/workout.png",
+            "skill_id": 4
+            },
+            {
+            "skill_title": "Take a Breather",
+            "skill_details":"later later later write it later" ,
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/takebreather.png",
+            "skill_id": 5
+            },
+            {
+            "skill_title": "Punch a Pillow",
+            "skill_details": "punch pillow text. texty text text text",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/punchpillow.png",
+            "skill_id": 6
+            }, 
+            {
             "skill_title": "Dance",
             "skill_details": "Lorium sermpra filler text is filling the text sapce.",
             "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
             "skill_id": 7
-        }, 
-        {
-          "skill_title": "Listen to Music",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-          "skill_id": 8
-      }, 
-      {
-        "skill_title": "Make Art",
-        "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-        "skill_id": 9
-    }, 
-    {
-      "skill_title": "Phone a Friend",
-      "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-      "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/phonefriend.png",
-      "skill_id": 10
-    }, 
-    {
-      "skill_title": "Take a Walk",
-      "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-      "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/takewalk.png",
-      "skill_id": 11
-    }, 
-    {
-      "skill_title": "Cook",
-      "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-      "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/cookfood.png",
-      "skill_id": 12
-    },
-    {
-      "skill_title": "Play with Pet",
-      "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-      "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-      "skill_id": 12
-    }  
-    ]
+            }, 
+            {
+            "skill_title": "Listen to Music",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+            "skill_id": 8
+            }, 
+            {
+            "skill_title": "Make Art",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+            "skill_id": 9
+            }, 
+            {
+            "skill_title": "Phone a Friend",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/phonefriend.png",
+            "skill_id": 10
+            }, 
+            {
+            "skill_title": "Take a Walk",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/takewalk.png",
+            "skill_id": 11
+            }, 
+            {
+            "skill_title": "Cook",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/cookfood.png",
+            "skill_id": 12
+            },
+            {
+            "skill_title": "Play with Pet",
+            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+            "skill_id": 12
+            }  
+        ]
     };
 
     this.onSubmit= this.onSubmit.bind(this);
@@ -216,6 +217,8 @@ export default class AutoCompleteText extends Component {
             console.log('216 newRecord')
             e.preventDefault();
             let url = `http://localhost:3001/api/records`
+            
+
             let record = 
                 {
                 before_lvl:this.state.before_lvl,
@@ -223,7 +226,8 @@ export default class AutoCompleteText extends Component {
                 si:this.state.si,
                 sh:this.state.sh,
                 user_id:this.props.user_id,
-                date:  "2019-05-02"
+                date: Math.round((new Date()).getTime() / 1000),
+                skill_id:null
                 };
         
             fetch(url, {
@@ -374,10 +378,43 @@ export default class AutoCompleteText extends Component {
 
             if (this.state.skillsGridArray.length === 9 ){
                 console.log('correct length at end of function')
-                this.setState({skillsGridArray:this.state.skillsGridArray},() => this.someFn())
+                this.setState({skillsGridArray:this.state.skillsGridArray},() => this.getCriticalSkills())
+                // this.setState({skillsGridArray:this.state.skillsGridArray},() => this.someFn())
             }
         
         }
+
+
+        getCriticalSkills = () => {
+            console.log('made it to critical skills')
+            if (this.state.si || this.state.sh || this.state.before_lvl>5 ){
+     
+                let url = 'http://localhost:3001/api/criticalSkills'
+      
+                fetch(url, {
+                  method: 'get',
+                  headers: { 'Content-Type': 'application/json'}
+                  })
+                  .then(res => res.json())
+                //   .then(json => this.setState({criticalSkills:json}, () => console.log(json)))
+                  .then(json => this.setState({criticalSkills:json}, () => this.someFn()))
+                  .catch(function(e) {
+                  console.log(e); // “oh, no!”
+                })
+            }
+
+        }
+
+        someFn(){
+            console.log('made it to somefn')
+            let skillsGridArray= this.state.skillsGridArray
+            // let record_id= this.state.record_id
+            let recent_record = this.state.recent_record.record;
+            let criticalSkills = this.state.criticalSkills;
+            this.props.myCallback(skillsGridArray, recent_record, criticalSkills);
+        }
+
+
  
         renderSuggestions(){
             const {suggestions} = this.state;
@@ -398,12 +435,6 @@ export default class AutoCompleteText extends Component {
             )
         }
 
-        someFn(){
-            let skillsGridArray= this.state.skillsGridArray
-            // let record_id= this.state.record_id
-            let recent_record = this.state.recent_record.record
-            this.props.myCallback(skillsGridArray, recent_record);
-        }
 
 
     

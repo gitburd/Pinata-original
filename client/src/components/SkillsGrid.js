@@ -14,9 +14,9 @@ export default class SkillsGrid extends Component {
     }
   }
  
-  componentDidMount(){
-    this.getNewRecord();
-  }
+  // componentDidMount(){
+  //   this.getNewRecord();
+  // }
 
 
 // getUser = () => {
@@ -121,7 +121,7 @@ export default class SkillsGrid extends Component {
       
     </div>
     
-
+ 
   )
   }
 }

@@ -1,14 +1,18 @@
 CREATE DATABASE pinata;
 \connect pinata;
 
-CREATE TABLE users (user_id SERIAL PRIMARY KEY, first_name VARCHAR, last_name VARCHAR, email VARCHAR);
-CREATE TABLE skills (skill_id SERIAL PRIMARY KEY, skill_title VARCHAR, skill_details VARCHAR, skill_icon VARCHAR);
+CREATE TABLE users (user_id SERIAL PRIMARY KEY, auth0_id VARCH, user_name VARCHAR, first_name VARCHAR, last_name VARCHAR, email VARCHAR);
+
+CREATE TABLE skills (skill_id SERIAL PRIMARY KEY, skill_title VARCHAR, skill_details VARCHAR, skill_icon VARCHAR, is_critical BOOLEAN);
+
 CREATE TABLE emotions (emotion_id SERIAL PRIMARY KEY, emotion_text VARCHAR);
 CREATE TABLE emotion_skills (emotion_skills_id SERIAL PRIMARY KEY, skill_id INT REFERENCES skills(skill_id), emotion_id INT REFERENCES emotions(emotion_id));
 CREATE TABLE records (record_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id), skill_id INT REFERENCES skills(skill_id), emotion_id INT REFERENCES emotions(emotion_id), before_lvl INT, after_lvl INT, impact INT, date DATE, SI BOOLEAN, sh BOOLEAN);
 
 //ALTER TABLE records ADD COLUMN SI boolean;
 //ALTER TABLE records ADD COLUMN SH boolean; 
+
+//ALTER TABLE skills ADD COLUMN is_critical boolean; 
 
 
 INSERT INTO users (first_name, last_name, email) VALUES('firstname test','lastname test','test@email.com');
@@ -73,8 +77,7 @@ UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images
 
 
 
-
-INSERT INTO users (username, email, password) VALUES('dena','denaburd@gmail.com','8899Luck!9988');
+UPDATE skills SET skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png' WHERE skill_id > 13;
 
 
 ///
@@ -89,7 +92,7 @@ user_id, auth0_id, user_name, first_name, last_name, email
 
 
 
-CREATE TABLE users (user_id SERIAL PRIMARY KEY, auth0_id VARCH, user_name VARCHAR, first_name VARCHAR, last_name VARCHAR, email VARCHAR);
+
 
 
 
@@ -104,7 +107,9 @@ ALTER TABLE users DROP password;
 INSERT INTO users (auth0_id, first_name, last_name) VALUES('Authtest','first_name test','last_name test');
 
 
+critical skills 
 
+INSERT INTO skills (skill_title, skill_details, skill_icon, is_critical) VALUES('Tempurature','Lorium sermpra filler text is filling the text sapce.', 'url to the image', true),('Intense Exercise', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image', true),('Practiced Breathing', 'Even somehting as simple as controlling your breathing can have a profound impact on reducing emotional pain. If you have a favorite breath it out. If not try a technigue called "box breathing" Slowly. Count to four while brething out. Count to four while holding your breath. Count to four while breathing in.', 'url to the image', true),  ('Progressive Muscle Relaxation', 'Slowly tense and realax every muscel in your body. Start with your toes and feet then your arms and hands. Tense and release the muscels in your face and jaw, neck, shoulders, back, torse and  lower back. Feel the change in your body of releasing all the tension spend as much time as you need on each area and feel the difference of releasing tension.', 'url to the image', true);
 
 
 

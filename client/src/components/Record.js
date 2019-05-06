@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment';
 
 export default class Record extends Component {
   render() {
@@ -10,13 +11,15 @@ export default class Record extends Component {
     function isSh(){
       return sh ? 'Y':'N';
     }
-    const isSiD = isSi(si)
-    const isShD = isSh(sh)
+    const isSiDisplay = isSi(si)
+    const isShDisplay = isSh(sh)
     
     return (
       <div>
           <div className="record">
-          {date} - si: {isSiD}  sh:{isShD} <br/>
+
+
+          <Moment unix>{date}</Moment>  - si: {isSiDisplay}  sh:{isShDisplay} <br/>
                {emotion_text} : {skill_title} ({impact})  
              </div>
       </div>

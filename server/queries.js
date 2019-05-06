@@ -16,6 +16,16 @@ const getBaseSkills = (request, response) => {
     })
   }
 
+  const getCriticalSkills = (request, response) => {
+  
+    pool.query(`SELECT * FROM skills WHERE is_critical='true'`, (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    })
+  }
+
 
 const getEmotionSkills = (request, response) => {
   var emotion = request.query.emotion;
@@ -26,7 +36,7 @@ const getEmotionSkills = (request, response) => {
       response.status(200).json(results.rows)
     })
   }
-
+ 
 const getUserSkills = (request, response) => {
   var userId = request.query.id;
   var emotion = request.query.emotion;
@@ -65,6 +75,17 @@ const getUserSkills = (request, response) => {
 
 const newRecord = (request, response) => {
   pool.query(`INSERT INTO records (user_id, emotion_id, before_lvl, date, si, sh)  VALUES('${request.body.user_id}','${request.body.emotion_id}','${request.body.before_lvl}','${request.body.date}','${request.body.si}','${request.body.sh}') RETURNING *;`,(error, results) => {
+    if (error) {
+      throw error
+    }
+    console.log('new record successful')
+    response.send({record:results.rows[0]});
+  } )
+
+}
+
+const newRecordSkill = (request, response) => {
+  pool.query(`INSERT INTO records (user_id, emotion_id, before_lvl, date, si, sh, skill_id)  VALUES('${request.body.user_id}','${request.body.emotion_id}','${request.body.before_lvl}','${request.body.date}','${request.body.si}','${request.body.sh}','${request.body.skill_id}' ) RETURNING *;`,(error, results) => {
     if (error) {
       throw error
     }
@@ -121,19 +142,21 @@ const newRecord = (request, response) => {
   const setSkill = (request, response) => {
    let record_id = request.body.record_id;
     let skill_id = request.body.skill_id;
-    pool.query(` UPDATE records SET skill_id ='${skill_id}' WHERE record_id ='${record_id}';`,(error, results) => {
+    pool.query(` UPDATE records SET skill_id ='${skill_id}' WHERE record_id ='${record_id}' RETURNING *;`,(error, results) => {
       if (error) {
         throw error
       }
-      console.log("skill set to the record successfully!");
+      console.log("skill set to the record successfully!")
+      // response.send({record:results.rows[0]});
+      response.send({record:results.rows[0]});
     } )
   }
  
 
-  const getMostRecentRecord = (request, response) => {
+  const getPromptRecord = (request, response) => {
 
-  var userId = request.query.user_id;
-    pool.query(`SELECT s.skill_title, s.skill_id, r.record_id,  r.before_lvl, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.user_id =${userId} AND r.after_lvl IS NULL AND r.skill_id IS NOT NULL ORDER BY r.record_id DESC LIMIT 1;`, (error, results) => {
+  var auth0_id = request.query.auth0_id;
+    pool.query(`SELECT s.skill_title, s.skill_id, r.record_id,  r.before_lvl, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.auth0_id ='${auth0_id}' AND r.after_lvl IS NULL AND r.skill_id IS NOT NULL ORDER BY r.record_id DESC LIMIT 1;`, (error, results) => {
       if (error) {
         throw error
       }
@@ -182,6 +205,7 @@ const newRecord = (request, response) => {
 
   module.exports = {
     getBaseSkills,
+    getCriticalSkills, 
     getEmotionSkills,
     getUserSkills,
     getUserRecords,
@@ -192,7 +216,7 @@ const newRecord = (request, response) => {
     setSkill,
     getSkillId, 
     getEmotionId,
-    getMostRecentRecord,
+    getPromptRecord,
     getNewRecord,
     MakeNewUser, 
     GetUserId

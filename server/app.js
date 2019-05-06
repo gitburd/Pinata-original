@@ -19,6 +19,8 @@ app.get('/', function(req,res){
 
 app.get('/api/all', db.getBaseSkills)
 
+app.get('/api/criticalSkills', db.getCriticalSkills)
+
 app.get('/api/emotionSkills', db.getEmotionSkills)
    
 app.get('/api/userSkills/', db.getUserSkills)
@@ -29,7 +31,7 @@ app.get('/api/emotion_id/', db.getEmotionId)
 
 app.get('/api/userRecords', db.getUserRecords)
 
-app.get('/api/mostRecentRecord', db.getMostRecentRecord)
+app.get('/api/promptRecord', db.getPromptRecord)
 
 app.get('/api/newRecord', db.getNewRecord)
 
@@ -102,10 +104,10 @@ app.get('/api/user', db.GetUserId)
 // // /api/setSkill
 
 // // body 
-// //   {
-// //     "record_id": "",
-// //    "skill_id":""
-// //   }
+//   {
+//     "record_id": "",
+//    "skill_id":""
+//   }
 
 
 

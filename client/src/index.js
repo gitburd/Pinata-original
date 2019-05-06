@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App'
 import Auth from './Auth'
-import Routes from './Routes';
+// import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 
 const auth = new Auth();

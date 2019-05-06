@@ -9,17 +9,7 @@ export default class Update extends Component {
   constructor(props) {
 super(props)
 this.state={
-  record_id:'26',
-  emotion:'',
-  emotion_id:'',
-  skill:'',
-  skill_id:'',
-  before_lvl:'6',
-  after_lvl:'',
-  date:'',
-  si:false,
-  sh:false,
-  message:''
+
 }
 this.onSubmit= this.onSubmit.bind(this);
 this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);

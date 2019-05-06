@@ -16,11 +16,11 @@ export default class Skill extends Component {
 
 
   render() {
-    const { skill_id, skill_title, skill_details, skill_icon} = this.props.skill;
+    const { skill_id, skill_title, skill_details, skill_icon, is_critical} = this.props.skill;
            
     return (
       <div className="topSkill">
-          <div className="skill" onClick = {()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
+          <div className= {this.props.skill.is_critical ? "criticalSkill" : "skill"} onClick = {()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
           {skill_title}
           <br/>
                 <img  src={skill_icon} className="skill_icon" />    
@@ -33,53 +33,4 @@ export default class Skill extends Component {
 }
 
 
- 
-// OKAY! 
-//   put to the record by id 
-//     function 
-//       record id :   
-//         function to get the most recent id - it will be the one made from the last page - it will also not have a skill assigned.
-//       skill id : 
-//         in the state of the modal/ SkillsGrid(Skill)
-    
-//     UI 
-//       button to skip- close for now 
-//       button to run the funtion above 
-
-
-
-
-
- 
-// export class Skill extends Component {
-//     getStyle= ()=> {
-//         return {
-//         backgroundColor:'#fff',
-//         padding: '10px', 
-//         fontSize:'18px', 
-//         color:'#007fff'
-
-//         }
-//     }
   
-    
-//     render() {
-//     const { id, skill, completedStatus, icon, helpful, feel_change} = this.props.skill;
-//         return (
-//         <div style={this.getStyle()}>
-//             {skill}
-//             {Music}
-
-//         </div>
-//     )
-//   }
-// }
-
-// PropTypes
-// Skill.propTypes= {
-//     skill: PropTypes.object.isRequired
-// }
-
-
-
-// export default Skill
