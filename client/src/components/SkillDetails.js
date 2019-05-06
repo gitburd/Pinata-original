@@ -33,33 +33,33 @@ export default class SkillDetails extends Component {
     this.setState({tryItClicked:true})
   }
 
-
-    handleAfter_lvlChange(after_lvl) {
-      this.setState({after_lvl: after_lvl.target.value})
-      }
-
-      onSubmit =(e)=> {
-      e.preventDefault();
-      console.log(this.props.state)
-
-      let recent_record = this.props.recent_record
-
-      this.props.updateRecord(recent_record.record_id, recent_record.before_lvl, this.state.after_lvl);
   
-      this.setState({
-          emotion:'',
-          emotion_id:'',
-          skill:'',
-          skill_id:'',
-          before_lvl:'',
-          after_lvl:'',
-          date:'',
-          si:false,
-          sh:false,
-          message:`Record updated.`
-          });
-  
-      }
+  handleAfter_lvlChange(after_lvl) {
+    this.setState({after_lvl: after_lvl.target.value})
+    }
+
+    onSubmit =(e)=> {
+    e.preventDefault();
+    console.log(this.props.state)
+
+    let recent_record = this.props.recent_record
+
+    this.props.updateRecord(recent_record.record_id, recent_record.before_lvl, this.state.after_lvl);
+
+    this.setState({
+        emotion:'',
+        emotion_id:'',
+        skill:'',
+        skill_id:'',
+        before_lvl:'',
+        after_lvl:'',
+        date:'',
+        si:false,
+        sh:false,
+        message:`Record updated.`
+        });
+
+    }
   
       render() {
       return (

@@ -36,6 +36,7 @@ export default class SkillsGrid extends Component {
 // }
 
 
+
   getNewRecord = (user_id) => {
  
     let url = `http://localhost:3001/api/newRecord?auth0_id=${this.props.auth0_id}`

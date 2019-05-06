@@ -37,6 +37,8 @@ app.get('/api/newRecord', db.getNewRecord)
 
 app.post('/api/records', db.newRecord) 
 
+app.post('/api/recordwithskill', db.newRecordWithSkill) 
+
 app.put('/api/setSkill', db.setSkill)
 
 app.post('/api/fullRecord', db.addFullRecord)

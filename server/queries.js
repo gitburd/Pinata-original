@@ -84,7 +84,7 @@ const newRecord = (request, response) => {
 
 }
 
-const newRecordSkill = (request, response) => {
+const newRecordWithSkill = (request, response) => {
   pool.query(`INSERT INTO records (user_id, emotion_id, before_lvl, date, si, sh, skill_id)  VALUES('${request.body.user_id}','${request.body.emotion_id}','${request.body.before_lvl}','${request.body.date}','${request.body.si}','${request.body.sh}','${request.body.skill_id}' ) RETURNING *;`,(error, results) => {
     if (error) {
       throw error
@@ -200,9 +200,6 @@ const newRecordSkill = (request, response) => {
   }
 
   
- 
-  
-
   module.exports = {
     getBaseSkills,
     getCriticalSkills, 
@@ -211,6 +208,7 @@ const newRecordSkill = (request, response) => {
     getUserRecords,
     addRecord,
     newRecord,
+    newRecordWithSkill,
     addFullRecord,
     finishRecord,
     setSkill,

@@ -216,9 +216,7 @@ export default class AutoCompleteText extends Component {
             // make new record
             console.log('216 newRecord')
             e.preventDefault();
-            let url = `http://localhost:3001/api/records`
-            
-
+            let url = `http://localhost:3001/api/records`            
             let record = 
                 {
                 before_lvl:this.state.before_lvl,
@@ -226,10 +224,8 @@ export default class AutoCompleteText extends Component {
                 si:this.state.si,
                 sh:this.state.sh,
                 user_id:this.props.user_id,
-                date: Math.round((new Date()).getTime() / 1000),
-                skill_id:null
-                };
-        
+                date: Math.round((new Date()).getTime() / 1000)
+                };       
             fetch(url, {
                 method: 'post',
                 body: JSON.stringify(record),
@@ -237,14 +233,7 @@ export default class AutoCompleteText extends Component {
             })
             .then(r => r.json())
             .then(json=>{this.setState({recent_record:json}); return json})
-            // .then(json=>{console.log('line 236'); return json})
-            // .then(r =>{console.log(r.status)})
-            // .then(r => console.log('what is up?') )
-            // this.getNewRecord()
-
-            .catch(function(e) {console.log(`something is wrong! : ${e}`); })
-
-            
+            .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
         }
 
         getNewRecord = (e) => {

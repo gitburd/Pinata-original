@@ -376,31 +376,51 @@ class App extends Component {
   }
 
   addSkillToRecord = (skill_id) => {
-
-    if(skill_id !== '' && this.state.recent_record.record_id){
       if (!this.state.recent_record.skill_id){
-      let url = `http://localhost:3001/api/setSkill`
-      let body = {
-        record_id:this.state.recent_record.record_id,
-        skill_id:this.state.skill_id
+        let url = `http://localhost:3001/api/setSkill`
+        let body = {
+          record_id:this.state.recent_record.record_id,
+          skill_id:this.state.skill_id
+        }
+        console.log(body)
+        fetch(url, {
+          method: 'put',
+          body: JSON.stringify(body),
+          headers: { 'Content-Type': 'application/json'}
+        })
+        .then(r => r.json())
+        // .then(json=>{ console.log(json); return json})
+        .then(json=>{this.setState({recent_record:json.record}); console.log(json); return json})
+        .catch(function(e) {console.log(`something is wrong ${e}`)})
+      }else{
+        this.makeNewRecordWithSkill();
       }
-      console.log(body)
-      fetch(url, {
-        method: 'put',
-        body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json'}
-      })
-      .then(r => r.json())
-      // .then(json=>{ console.log(json); return json})
-      .then(json=>{this.setState({recent_record:json.record}); console.log(json); return json})
-      .catch(function(e) {console.log(`something is wrong ${e}`)})
-    }else{console.log('missing skill or record id')}
+}
 
-      }
-      
+  makeNewRecordWithSkill  = () => {
+    
+    console.log('grid 40 newRecord')
+ 
+    let url = `http://localhost:3001/api/recordwithskill`            
+    let record = 
+      {
+      before_lvl:this.state.recent_record.before_lvl,
+      emotion_id:this.state.recent_record.emotion_id,
+      si:this.state.recent_record.si,
+      sh:this.state.recent_record.sh,
+      user_id:this.state.recent_record.user_id,
+      date: Math.round((new Date()).getTime() / 1000),
+      skill_id:this.state.skill_id
+      };       
+    fetch(url, {
+      method: 'post',
+      body: JSON.stringify(record),
+      headers: { 'Content-Type': 'application/json'}
+    })
+    .then(r => r.json())
+    .then(json=>{this.setState({recent_record:json.record}); return json})
+    .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
   }
-
-
 
   addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh) => {
     let url = `http://localhost:3001/api/fullRecord`
