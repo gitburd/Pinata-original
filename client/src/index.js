@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App'
 import Auth from './Auth'
-// import Routes from './Routes';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+import "./assets/scss/mdb.scss"
+
+
 import * as serviceWorker from './serviceWorker';
 
 const auth = new Auth();

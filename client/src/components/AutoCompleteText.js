@@ -150,287 +150,285 @@ export default class AutoCompleteText extends Component {
     // end of constructor
     }
         
-        handleBefore_lvlChange(before_lvl) {
-        this.setState({before_lvl: before_lvl.target.value})
-        }
+    handleBefore_lvlChange(before_lvl) {
+    this.setState({before_lvl: before_lvl.target.value})
+    }
 
-        handleSHChange() {
-  
-            if(this.state.sh){
-              this.setState({sh: false})
-            }else {this.setState({sh: true})}
-        }
-        
-        handleSIChange() {
-        
-        if(this.state.si){
-            this.setState({si: false})
-        }else {this.setState({si: true})}
+    handleSHChange() {
+
+        if(this.state.sh){
+            this.setState({sh: false})
+        }else {this.setState({sh: true})}
+    }
     
-        }
-
-        onSubmit =(e)=> {
-        e.preventDefault();
-        // console.log(this.props.state)
-        // this.props.updateRecord(this.state.record_id, this.state.before_lvl, this.state.before_lvl);
+    handleSIChange() {
     
+    if(this.state.si){
+        this.setState({si: false})
+    }else {this.setState({si: true})}
 
+    }
+
+    onSubmit =(e)=> {
+    e.preventDefault();
+    // console.log(this.props.state)
+    // this.props.updateRecord(this.state.record_id, this.state.before_lvl, this.state.before_lvl);
+
+
+    this.setState({
+        
+        message:`Record Made.`
+        });
+
+    }
+
+
+    onTextChanged = (e) =>{
+        const value = e.target.value; 
+        let suggestions = [];
+        if (value.length >0){
+            const regex = new RegExp(`^${value}`, 'i');
+            suggestions = this.items.sort().filter(v => regex.test(v));
+        }
+            this.setState({suggestions, text:value});
+
+    }
+
+    suggestionSelected(value){
+        console.log('line 106',value)
+        console.log('line 107',this.state.emotion_text)
+        let the_id = this.state.emotions[value]
         this.setState({
-            
-            message:`Record Made.`
-            });
+            emotion_text:value,
+            suggestions:[],
+            text:value ,
+            emotion_id:the_id 
+        })
+        console.log('line 116',this.state.emotion_text)
+        
+        console.log(`line 117`, this.state.emotion_text)
+        this.getEmotionSkills(value);
+        console.log(`line 121`, this.state.emotion_text)
+    }
+
+
+    newRecord  = (e) => {
+        // make new record
+        console.log('216 newRecord')
+        e.preventDefault();
+        let url = `http://localhost:3001/api/records`            
+        let record = 
+            {
+            before_lvl:this.state.before_lvl,
+            emotion_id:this.state.emotion_id,
+            si:this.state.si,
+            sh:this.state.sh,
+            user_id:this.props.user_id,
+            date: Math.round((new Date()).getTime() / 1000)
+            };       
+        fetch(url, {
+            method: 'post',
+            body: JSON.stringify(record),
+            headers: { 'Content-Type': 'application/json'}
+        })
+        .then(r => r.json())
+        .then(json=>{this.setState({recent_record:json}); return json})
+        .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
+    }
+
+    getNewRecord = (e) => {
+        console.log('216 getNewRecord')
+        e.preventDefault();
+        let auth0_id= this.props.auth0_id
+        let url = `http://localhost:3001/api/newRecord?auth0_id=${auth0_id}`
+        if (this.props.auth0_id && this.props.auth0_id!==''){
     
-        }
-
-
-        onTextChanged = (e) =>{
-            const value = e.target.value; 
-            let suggestions = [];
-            if (value.length >0){
-                const regex = new RegExp(`^${value}`, 'i');
-                suggestions = this.items.sort().filter(v => regex.test(v));
-            }
-                this.setState({suggestions, text:value});
-
-        }
-
-        suggestionSelected(value){
-            console.log('line 106',value)
-            console.log('line 107',this.state.emotion_text)
-            let the_id = this.state.emotions[value]
-            this.setState({
-                emotion_text:value,
-                suggestions:[],
-                text:value ,
-                emotion_id:the_id 
+        fetch(url, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json'}
             })
-            console.log('line 116',this.state.emotion_text)
-            
-            console.log(`line 117`, this.state.emotion_text)
-            this.getEmotionSkills(value);
-            console.log(`line 121`, this.state.emotion_text)
-        }
-
-
-        newRecord  = (e) => {
-            // make new record
-            console.log('216 newRecord')
-            e.preventDefault();
-            let url = `http://localhost:3001/api/records`            
-            let record = 
-                {
-                before_lvl:this.state.before_lvl,
-                emotion_id:this.state.emotion_id,
-                si:this.state.si,
-                sh:this.state.sh,
-                user_id:this.props.user_id,
-                date: Math.round((new Date()).getTime() / 1000)
-                };       
-            fetch(url, {
-                method: 'post',
-                body: JSON.stringify(record),
-                headers: { 'Content-Type': 'application/json'}
-            })
-            .then(r => r.json())
-            .then(json=>{this.setState({recent_record:json}); return json})
-            .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
-        }
-
-        getNewRecord = (e) => {
-            console.log('216 getNewRecord')
-            e.preventDefault();
-            let auth0_id= this.props.auth0_id
-            let url = `http://localhost:3001/api/newRecord?auth0_id=${auth0_id}`
-          if (this.props.auth0_id && this.props.auth0_id!==''){
+            .then(res => res.json())
+            .then(json => console.log('256',json))
+            // .then(json=>{console.log('line 32',json); return json})
+            .catch(function(e) {console.log(e)})
         
-            fetch(url, {
-              method: 'get',
-              headers: { 'Content-Type': 'application/json'}
-              })
-              .then(res => res.json())
-              .then(json => console.log('256',json))
-              // .then(json=>{console.log('line 32',json); return json})
-              .catch(function(e) {console.log(e)})
-          
-          }else {console.log(`user id is required`)}
+        }else {console.log(`user id is required`)}
+    }
+    
+    getRecentRecord = () => {
+
+        this.setState({test:'test successful'})
+    
+    //     let url = `http://localhost:3001/api/mostRecentRecord?user_id=${this.props.user_id}`
+    //   console.log('252', url)
+
+
+    //   if (this.props.user_id){
+    //     fetch(url, {
+    //         method: 'get',
+    //         headers: { 'Content-Type': 'application/json'}
+    //         })
+    //         .then(res => res.json()).then(json => console.log(json)).catch(function(e) {console.log(e)})
+        
+    //     }
+
         }
         
-        getRecentRecord = () => {
 
-          this.setState({test:'test successful'})
-      
-        //     let url = `http://localhost:3001/api/mostRecentRecord?user_id=${this.props.user_id}`
-        //   console.log('252', url)
+    getEmotionSkills = (emotion_text) => {
+        console.log(`line 148`, this.state.emotion_text)
+    let url = `http://localhost:3001/api/emotionSkills?emotion=${emotion_text}`
+    console.log(url)
+    console.log("line 151", this.state.emotion_text)
+    fetch(url, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .then(res => res.json())
+    .then(json=>{console.log(json); return json})
+    .then(json=>{console.log('line 158',this.state.emotion_text); return json})
+    .then(json => this.setState({emotionSkillsArray: json}))
+    .then(json=>{console.log('line 160',this.state.emotion_text); return json})
+    .catch(e => {console.log(e)})
 
+    }
 
-        //   if (this.props.user_id){
-        //     fetch(url, {
-        //         method: 'get',
-        //         headers: { 'Content-Type': 'application/json'}
-        //         })
-        //         .then(res => res.json()).then(json => console.log(json)).catch(function(e) {console.log(e)})
-            
-        //     }
-  
-          }
-            
+    getUserSkills = () => {
 
-        getEmotionSkills = (emotion_text) => {
-            console.log(`line 148`, this.state.emotion_text)
-        let url = `http://localhost:3001/api/emotionSkills?emotion=${emotion_text}`
-        console.log(url)
-        console.log("line 151", this.state.emotion_text)
+        let url = `http://localhost:3001/api/userSkills?id=${this.props.user_id}&emotion=${this.state.emotion_text}`
+    
+        console.log(`userSkills ${url}`)
         fetch(url, {
         method: 'get',
         headers: { 'Content-Type': 'application/json'}
         })
-        .then(res => res.json())
-        .then(json=>{console.log(json); return json})
-        .then(json=>{console.log('line 158',this.state.emotion_text); return json})
-        .then(json => this.setState({emotionSkillsArray: json}))
-        .then(json=>{console.log('line 160',this.state.emotion_text); return json})
-        .catch(e => {console.log(e)})
+        .then(res => res.json()).then(json => this.setState({userSkillsArray: json},() =>this.getSkillsGrid())).catch(function(e) {
+        console.log(e); // “oh, no!”
+        })
+    
+    }
 
-        }
 
-        getUserSkills = () => {
-
-            let url = `http://localhost:3001/api/userSkills?id=${this.props.user_id}&emotion=${this.state.emotion_text}`
+    getSkillsGrid = () => {
         
-            console.log(`userSkills ${url}`)
-            fetch(url, {
-            method: 'get',
-            headers: { 'Content-Type': 'application/json'}
-            })
-            .then(res => res.json()).then(json => this.setState({userSkillsArray: json},() =>this.getSkillsGrid())).catch(function(e) {
-            console.log(e); // “oh, no!”
-            })
+        let idx;
+        let i = 0;
+        let target;
+    
+        // add user skills 
         
-        }
-
-        getSkillsGrid = () => {
+        while (this.state.skillsGridArray.length < 3) {
+        if (this.state.skillsGridArray.length === 1) {
+            this.state.skillsGridArray.push(this.state.pinata)
             
-            let idx;
-            let i = 0;
-            let target;
-        
-            // add user skills 
-            
-            while (this.state.skillsGridArray.length < 3) {
-            if (this.state.skillsGridArray.length === 1) {
-                this.state.skillsGridArray.push(this.state.pinata)
-                
-            } else if (this.state.userSkillsArray.length > 0) {
-    console.log('grid length from 284', this.state.userSkillsArray.length)
-                idx = Math.floor((Math.random() * this.state.userSkillsArray.length))
-                target = this.state.userSkillsArray[idx]            
-    console.log('target from 287', target)
-                this.state.skillsGridArray.push(target)
-                this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
-                this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
-                this.state.userSkillsArray = this.state.userSkillsArray.filter(e => e.skill_id !== target.skill_id);
-    console.log('grid array from 285', this.state.skillsGridArray)
-            } else {
-                idx = Math.floor((Math.random() * this.state.baseSkillsArray.length))
-                target = this.state.baseSkillsArray[idx]
-                this.state.skillsGridArray.push(target)
-                this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
-                this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
-            }
-            }
-        
-            // add emotion skills 
-        
-            while (this.state.skillsGridArray.length < 6) {
-            if (this.state.emotionSkillsArray.length > 0) {
-                idx = Math.floor(Math.random() * this.state.emotionSkillsArray.length)
-                target = this.state.emotionSkillsArray[idx]
-                this.state.skillsGridArray.unshift(target)
-                console.log(`${target} emotion`)
-                this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
-                this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
-        
-            } else {
-                idx = Math.floor(Math.random() * this.state.baseSkillsArray.length)
-                target = this.state.baseSkillsArray[idx]
-                this.state.skillsGridArray.unshift(target)
-                this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
-            }
-            }
-            // add base skills 
-            while (this.state.skillsGridArray.length < 9) {
+        } else if (this.state.userSkillsArray.length > 0) {
+console.log('grid length from 284', this.state.userSkillsArray.length)
+            idx = Math.floor((Math.random() * this.state.userSkillsArray.length))
+            target = this.state.userSkillsArray[idx]            
+console.log('target from 287', target)
+            this.state.skillsGridArray.push(target)
+            this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+            this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+            this.state.userSkillsArray = this.state.userSkillsArray.filter(e => e.skill_id !== target.skill_id);
+console.log('grid array from 285', this.state.skillsGridArray)
+        } else {
+            idx = Math.floor((Math.random() * this.state.baseSkillsArray.length))
+            target = this.state.baseSkillsArray[idx]
+            this.state.skillsGridArray.push(target)
+            this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+            this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+        }
+        }
+    
+        // add emotion skills 
+    
+        while (this.state.skillsGridArray.length < 6) {
+        if (this.state.emotionSkillsArray.length > 0) {
+            idx = Math.floor(Math.random() * this.state.emotionSkillsArray.length)
+            target = this.state.emotionSkillsArray[idx]
+            this.state.skillsGridArray.unshift(target)
+            console.log(`${target} emotion`)
+            this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+            this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+    
+        } else {
             idx = Math.floor(Math.random() * this.state.baseSkillsArray.length)
             target = this.state.baseSkillsArray[idx]
-            this.state.skillsGridArray.push(this.state.baseSkillsArray[idx])
+            this.state.skillsGridArray.unshift(target)
             this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
-            }
-
-            if (this.state.skillsGridArray.length === 9 ){
-                console.log('correct length at end of function')
-                this.setState({skillsGridArray:this.state.skillsGridArray},() => this.getCriticalSkills())
-                // this.setState({skillsGridArray:this.state.skillsGridArray},() => this.someFn())
-            }
-        
+        }
+        }
+        // add base skills 
+        while (this.state.skillsGridArray.length < 9) {
+        idx = Math.floor(Math.random() * this.state.baseSkillsArray.length)
+        target = this.state.baseSkillsArray[idx]
+        this.state.skillsGridArray.push(this.state.baseSkillsArray[idx])
+        this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
         }
 
-
-        getCriticalSkills = () => {
-            console.log('made it to critical skills')
-            if (this.state.si || this.state.sh || this.state.before_lvl>5 ){
-     
-                let url = 'http://localhost:3001/api/criticalSkills'
-      
-                fetch(url, {
-                  method: 'get',
-                  headers: { 'Content-Type': 'application/json'}
-                  })
-                  .then(res => res.json())
-                //   .then(json => this.setState({criticalSkills:json}, () => console.log(json)))
-                  .then(json => this.setState({criticalSkills:json}, () => this.someFn()))
-                  .catch(function(e) {
-                  console.log(e); // “oh, no!”
-                })
-            }
-
+        if (this.state.skillsGridArray.length === 9 ){
+            console.log('correct length at end of function')
+            this.setState({skillsGridArray:this.state.skillsGridArray},() => this.getCriticalSkills())
+            // this.setState({skillsGridArray:this.state.skillsGridArray},() => this.someFn())
         }
-
-        someFn(){
-            console.log('made it to somefn')
-            let skillsGridArray= this.state.skillsGridArray
-            // let record_id= this.state.record_id
-            let recent_record = this.state.recent_record.record;
-            let criticalSkills = this.state.criticalSkills;
-            this.props.myCallback(skillsGridArray, recent_record, criticalSkills);
-        }
-
-
- 
-        renderSuggestions(){
-            const {suggestions} = this.state;
-            if (suggestions.length === 0 ){
-                return null
-            }
-            return (
-                <ul>
-                
-                    {suggestions.map((item) => <li onClick={()=> 
-                    this.suggestionSelected(item)
-                    
-                    }>{item}</li>)
-                    
-                    }
-                    
-                </ul>
-            )
-        }
-
-
-
     
-     
-  
+    }
+
+
+    getCriticalSkills = () => {
+        console.log('made it to critical skills')
+        if (this.state.si || this.state.sh || this.state.before_lvl>5 ){
+    
+            let url = 'http://localhost:3001/api/criticalSkills'
+    
+            fetch(url, {
+                method: 'get',
+                headers: { 'Content-Type': 'application/json'}
+                })
+                .then(res => res.json())
+            //   .then(json => this.setState({criticalSkills:json}, () => console.log(json)))
+                .then(json => this.setState({criticalSkills:json}, () => this.someFn()))
+                .catch(function(e) {
+                console.log(e); // “oh, no!”
+            })
+        }
+
+    }
+
+    someFn(){
+        console.log('made it to somefn')
+        let skillsGridArray= this.state.skillsGridArray
+        let userSkillsArray= this.state.userSkillsArray
+        // let record_id= this.state.record_id
+        let recent_record = this.state.recent_record.record;
+        let criticalSkills = this.state.criticalSkills;
+        this.props.myCallback(skillsGridArray, recent_record, criticalSkills, userSkillsArray);
+    }
+
+
+
+    renderSuggestions(){
+        const {suggestions} = this.state;
+        if (suggestions.length === 0 ){
+            return null
+        }
+        return (
+            <ul>
+            
+                {suggestions.map((item) => <li onClick={()=> 
+                this.suggestionSelected(item)
+                
+                }>{item}</li>)
+                
+                }
+                
+            </ul>
+        )
+    }
+
     render() {
         const { text } = this.state
+        let grid = this.state.before_lvl>5 ? '/criticalgrid' : '/grid'
         return (
             <div>
                 <h1>I am feeling</h1>
@@ -488,7 +486,7 @@ export default class AutoCompleteText extends Component {
 
 
       
-      <Link to={`/grid`}> Click me!</Link>
+      <Link to={grid}> Click me!</Link>
 
       {/* <p className='flagText'>Thoughs of suicide</p> */}
       </div>

@@ -32,6 +32,8 @@ import pinata_big from './components/img/pinata_big.png';
 
 
 
+library.add(faStroopwafel)
+
 
 
 const http = require('http');
@@ -262,7 +264,7 @@ class App extends Component {
 
   setPromptRecord = (record) => {  
     if (record.length>0 
-      // && !this.state.has_prompted
+      && !this.state.has_prompted
       ){
       this.setState({
         has_prompted:true,
@@ -450,17 +452,19 @@ class App extends Component {
   }
 
   getUserSkills = () => {
-    if (this.state.user_id){   
-      let url = `http://localhost:3001/api/userSkills?id=${this.state.user_id}&emotion=${this.state.emotion}`
+    if (this.state.user_id && this.state.emotion){   
+      let url = `http://localhost:3001/api/userSkills?user_id=${this.state.user_id}&emotion=${this.state.emotion}`
 
       fetch(url, {
         method: 'get',
         headers: { 'Content-Type': 'application/json'}
         })
-        .then(res => res.json()).then(json => this.setState({userSkillsArray: json})).catch(function(e) {
+        .then(res => res.json())
+        .then(json => this.setState({userSkillsArray: json}))
+        .catch(function(e) {
         console.log(e); // “oh, no!”
       })
-    }else {console.log('user id required')}
+    }else {console.log('user id and emotion required')}
   }
 
   getEmotionSkills = () => {
@@ -555,8 +559,8 @@ class App extends Component {
     })
   }
 
-  myCallback= (skillsGridArray,recent_record,criticalSkills)=>{
-    this.setState({skillsGridArray:skillsGridArray, recent_record:recent_record, criticalSkills:criticalSkills})
+  myCallback= (skillsGridArray,recent_record,criticalSkills, userSkillsArray)=>{
+    this.setState({skillsGridArray:skillsGridArray, recent_record:recent_record, criticalSkills:criticalSkills, userSkillsArray:userSkillsArray})
   }
 
   showModalCallback = () =>{
@@ -640,7 +644,10 @@ class App extends Component {
             <React.Fragment>
                 <div >
                 <div style={{width:'50%', paddingTop:'100px', margin:'0 auto'}}>
-                  <AutoCompleteText myCallback = {this.myCallback} baseSkillsArray={this.state.baseSkillsArray}  user_id= {this.state.user_id}/>   
+                  <AutoCompleteText 
+                  myCallback = {this.myCallback} 
+                  baseSkillsArray={this.state.baseSkillsArray}  
+                  user_id= {this.state.user_id}/>   
                 </div>
                 </div>
               </React.Fragment>

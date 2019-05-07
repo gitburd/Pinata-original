@@ -60,6 +60,7 @@ export default class SkillsGrid extends Component {
   
     let emotionSkills =  this.props.emotionSkillsArray.map((s)=>(
     <Skill 
+    userSkillsArray= {this.props.userSkillsArray}
     addSkillToRecord = {this.props.addSkillToRecord}
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 
@@ -74,6 +75,7 @@ export default class SkillsGrid extends Component {
   let userSkills =  this.props.userSkillsArray.map((skill)=>(
     <Skill 
     {...this.props} 
+    userSkillsArray= {this.props.userSkillsArray}
     addSkillToRecord = {this.props.addSkillToRecord}
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 
@@ -88,6 +90,7 @@ export default class SkillsGrid extends Component {
   let baseSkills = this.props.baseSkillsArray.map((skill)=>(
     <Skill 
     {...this.props} 
+    userSkillsArray= {this.props.userSkillsArray}
     addSkillToRecord = {this.props.addSkillToRecord}
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 
@@ -102,6 +105,7 @@ export default class SkillsGrid extends Component {
   let skillsGrid = this.props.skillsGridArray.map((skill)=>(
     <Skill 
     {...this.props} 
+    userSkillsArray= {this.props.userSkillsArray}
     addSkillToRecord = {this.props.addSkillToRecord}
     recentRecord = {this.props.recentRecord}
     record = {this.state.recentRecord} 

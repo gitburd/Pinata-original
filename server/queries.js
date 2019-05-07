@@ -29,7 +29,7 @@ const getBaseSkills = (request, response) => {
 
 const getEmotionSkills = (request, response) => {
   var emotion = request.query.emotion;
-    pool.query(`SELECT s.skill_id, s.skill_title, s.skill_details, s.skill_icon FROM skills AS s JOIN emotion_skills AS es ON es.skill_id = s.skill_id JOIN emotions AS e ON es.emotion_id = e.emotion_id WHERE e.emotion_text ='${emotion}';`, (error, results) => {
+    pool.query(`SELECT s.skill_id, s.skill_title, s.skill_details, s.skill_icon, es.is_star FROM skills AS s FULL OUTER JOIN emotion_skills AS es ON es.skill_id = s.skill_id JOIN emotions AS e ON es.emotion_id = e.emotion_id WHERE e.emotion_text ='${emotion}';`, (error, results) => {
       if (error) {
         throw error
       }
@@ -41,7 +41,7 @@ const getUserSkills = (request, response) => {
   var userId = request.query.id;
   var emotion = request.query.emotion;
   
-    pool.query(`SELECT s.skill_title, s.skill_details, s.skill_icon, s.skill_id FROM skills AS s JOIN records AS r ON r.skill_id = s.skill_id JOIN users AS u ON r.user_id = u.user_id JOIN emotions AS e ON r.emotion_id = e.emotion_id WHERE u.user_id=${userId} AND r.impact > 0 AND e.emotion_text ='${emotion}'; `, (error, results) => {
+    pool.query(`SELECT s.skill_title, s.skill_details, s.skill_icon, s.skill_id, s.is_heart FROM skills AS s JOIN records AS r ON r.skill_id = s.skill_id JOIN users AS u ON r.user_id = u.user_id JOIN emotions AS e ON r.emotion_id = e.emotion_id WHERE u.user_id=${userId} AND r.impact > 0 AND e.emotion_text ='${emotion}'; `, (error, results) => {
       if (error) {
         throw error
       }

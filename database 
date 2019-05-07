@@ -113,5 +113,11 @@ INSERT INTO skills (skill_title, skill_details, skill_icon, is_critical) VALUES(
 
 
 
+
+ALTER TABLE emotion_skills ADD COLUMN is_star boolean;
+update emotion_skills set is_star = true WHERE emotion_skills_id>0;
+
+
+
 mindfulness : 1st book pg 27
 
