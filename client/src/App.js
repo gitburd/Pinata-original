@@ -11,6 +11,7 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import './App.css';
@@ -23,11 +24,13 @@ import RecordsListUpdate from './components/RecordsListUpdate'
 import FormBlank from './components/FormBlank';
 import Update from './components/Update';
 import AfterLvlPrompt from './components/AfterLvlPrompt';
-import Landing from './components/Landing'
-import Secret from './components/Secret'
-import Callback from './Callback'
-import Navbar from './components/Navbar'
+import Landing from './components/Landing';
+import Secret from './components/Secret';
+import Callback from './Callback';
+import Navbar from './components/Navbar';
+import Sidenavbar from './components/Sidenavbar';
 
+import SIResources from './components/SIResources';
 import pinata_big from './components/img/pinata_big.png';
 
 
@@ -365,7 +368,7 @@ class App extends Component {
         before_lvl: parseInt(before_lvl),
         after_lvl: parseInt(after_lvl)
       }
-      console.log(update)
+      console.log('app 371 update',update)
       fetch(url, {
         method: 'put',
         body: JSON.stringify(update),
@@ -424,7 +427,7 @@ class App extends Component {
     .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
   }
 
-  addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh) => {
+  addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh, date) => {
     let url = `http://localhost:3001/api/fullRecord`
 
     let newRecord = 
@@ -437,7 +440,7 @@ class App extends Component {
       si,
       sh,
       user_id:this.state.user_id,
-      date:  "2099-02-20",
+      date,
       impact: before_lvl - after_lvl
       }
 
@@ -559,8 +562,20 @@ class App extends Component {
     })
   }
 
-  myCallback= (skillsGridArray,recent_record,criticalSkills, userSkillsArray)=>{
-    this.setState({skillsGridArray:skillsGridArray, recent_record:recent_record, criticalSkills:criticalSkills, userSkillsArray:userSkillsArray})
+  myCallback= (skillsGridArray,recent_record,criticalSkills, userSkillsArray, si, sh, before_lvl)=>{
+    this.setState({skillsGridArray:skillsGridArray,recent_record:recent_record, criticalSkills:criticalSkills, userSkillsArray:userSkillsArray}, () =>{
+      let grid;
+
+        if (si){
+            grid = '/suicideprevention'
+        } else if (before_lvl>5){
+            grid='/criticalgrid'
+        } else {
+            grid = '/grid'
+        }
+        window.location=grid;
+    })
+
   }
 
   showModalCallback = () =>{
@@ -597,10 +612,12 @@ class App extends Component {
       
       <MuiThemeProvider>
         <Router>
+        <div className='background'>
           <div className="App main">
 
           <Route path="/" exact render = { props =>(
             <React.Fragment >
+             
               <Landing 
               {...this.props}{...props} 
               user_id ={this.props.user_id} 
@@ -617,8 +634,9 @@ class App extends Component {
           />
           
           <Route path="/" render = { props =>(
-            <React.Fragment>        
-              <Navbar/>
+            <React.Fragment>    
+              <Sidenavbar/>    
+              {/* <Navbar/> */}
             </React.Fragment>)} 
           />
 
@@ -642,14 +660,14 @@ class App extends Component {
             this.props.auth.isAuthenticated() 
             ?
             <React.Fragment>
-                <div >
-                <div style={{width:'50%', paddingTop:'100px', margin:'0 auto'}}>
+                
+                <div style={{ paddingTop:'50px', margin:'0 auto'}}>
                   <AutoCompleteText 
                   myCallback = {this.myCallback} 
                   baseSkillsArray={this.state.baseSkillsArray}  
                   user_id= {this.state.user_id}/>   
                 </div>
-                </div>
+                
               </React.Fragment>
               :
               <React.Fragment>
@@ -767,6 +785,22 @@ class App extends Component {
             </React.Fragment>         
             )} 
             />
+
+          <Route path="/suicideprevention" exact render = { props =>(
+            !this.props.auth.isAuthenticated() 
+              ? <React.Fragment>
+                  <header className="App-header"> 
+                        Let's learn Auth: 
+                  </header>                 
+                  <Secret {...this.props}/>
+              </React.Fragment>
+              :
+              <React.Fragment>
+                <SIResources />             
+              </React.Fragment>              
+          )} />
+
+
             <Route exact path="/finish" exact render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
@@ -793,7 +827,7 @@ class App extends Component {
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
                   <div >
-                    <h1>Records</h1>             
+                               
                   </div>
                 </React.Fragment>
             :
@@ -839,19 +873,38 @@ class App extends Component {
                 </React.Fragment>
                 
             )} />
+            <Route path="/search" exact render = { props =>(
+              this.props.auth.isAuthenticated() 
+                ? <React.Fragment>
+                    <header className="App-header"> 
+                          We will be able to search soon  
+                    </header>                 
+                    
+                </React.Fragment>
+                :
+                <React.Fragment>
+                    <header className="App-header"> 
+                    Uh oh! You have to log in first! 
+                    </header>               
+                </React.Fragment>              
+            )} />
+
 
             <Route exact path="/records/update" exact render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
-                  <div >
-                    {this.state.date} - {this.state.emotion} :  {this.state.skill}
-                    <br/>
-                    Before : {this.state.before_lvl}
-                    <br/>
-                    After : {this.state.after_lvl}
-                  </div>
+                  
                   <div >  
-                    <Update updateRecord = {this.updateRecord}  record_id = {this.state.record_id} before_lvl = {this.state.before_lvl} />
+                    <Update 
+                    updateRecord = {this.updateRecord}  
+                    record_id = {this.state.record_id} 
+                    before_lvl = {this.state.before_lvl} 
+                    after_lvl = {this.state.after_lvl}
+                    date = {this.state.date}
+                    emotion= {this.state.emotion}
+                    skill = {this.state.skill}
+
+                    />
                     <hr/>
                     <button onClick={this.getUserRecords}>get user Records</button>  
                     <RecordsListUpdate handleSelectRecord = { this.selectRecord.bind(this) } recordsList = {this.state.recordsList}/>   
@@ -868,6 +921,7 @@ class App extends Component {
                 </React.Fragment>
               )} 
             />
+          </div>
           </div>
         </Router>
       </MuiThemeProvider> 

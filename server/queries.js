@@ -131,7 +131,7 @@ const newRecordWithSkill = (request, response) => {
   const finishRecord = (request, response) => {
     var record_id = request.query.record_id;
     let impact = request.body.before_lvl - request.body.after_lvl;
-    pool.query(` UPDATE records SET after_lvl ='${request.body.after_lvl}', impact = ${impact}  WHERE record_id ='${record_id}';`,(error, results) => {
+    pool.query(` UPDATE records SET after_lvl ='${request.body.after_lvl}', impact = ${impact} WHERE record_id ='${record_id}';`,(error, results) => {
       if (error) {
         throw error
       }

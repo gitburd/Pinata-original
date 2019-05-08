@@ -116,11 +116,11 @@ export default class SkillsGrid extends Component {
     modalShow={this.props.modalShow}
     />
   ))
-
+ 
 
   return (
     
-    <div className="main skillsGrid"> 
+    <div className="skillsGrid"> 
 
       {skillsGrid}
       

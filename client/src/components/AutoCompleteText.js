@@ -154,15 +154,16 @@ export default class AutoCompleteText extends Component {
     this.setState({before_lvl: before_lvl.target.value})
     }
 
-    handleSHChange() {
+    handleSHChange(e) {
+        e.preventDefault();
 
         if(this.state.sh){
             this.setState({sh: false})
         }else {this.setState({sh: true})}
     }
     
-    handleSIChange() {
-    
+    handleSIChange(e) {
+        e.preventDefault();
     if(this.state.si){
         this.setState({si: false})
     }else {this.setState({si: true})}
@@ -369,6 +370,7 @@ console.log('grid array from 285', this.state.skillsGridArray)
         if (this.state.skillsGridArray.length === 9 ){
             console.log('correct length at end of function')
             this.setState({skillsGridArray:this.state.skillsGridArray},() => this.getCriticalSkills())
+
             // this.setState({skillsGridArray:this.state.skillsGridArray},() => this.someFn())
         }
     
@@ -391,6 +393,9 @@ console.log('grid array from 285', this.state.skillsGridArray)
                 .catch(function(e) {
                 console.log(e); // “oh, no!”
             })
+        }else {
+            this.setState({criticalSkills:[]}, () => this.someFn())
+
         }
 
     }
@@ -399,10 +404,13 @@ console.log('grid array from 285', this.state.skillsGridArray)
         console.log('made it to somefn')
         let skillsGridArray= this.state.skillsGridArray
         let userSkillsArray= this.state.userSkillsArray
+        let si = this.state.si
+        let sh= this.state.sh
+        let before_lvl =this.state.before_lvl
         // let record_id= this.state.record_id
         let recent_record = this.state.recent_record.record;
         let criticalSkills = this.state.criticalSkills;
-        this.props.myCallback(skillsGridArray, recent_record, criticalSkills, userSkillsArray);
+        this.props.myCallback(skillsGridArray, recent_record, criticalSkills, userSkillsArray, si, sh, before_lvl);
     }
 
 
@@ -428,10 +436,18 @@ console.log('grid array from 285', this.state.skillsGridArray)
 
     render() {
         const { text } = this.state
-        let grid = this.state.before_lvl>5 ? '/criticalgrid' : '/grid'
+        let grid;
+
+        if (this.state.si){
+            grid = '/suicideprevention'
+        } else if (this.state.before_lvl>5){
+            grid='/criticalgrid'
+        } else {
+            grid = '/grid'
+        }
         return (
-            <div>
-                <h1>I am feeling</h1>
+            <div >
+                <h1 style={{padding:'60px'}}>I am feeling</h1>
                 <div className="AutoCompleteText">
                     <input value={text} type="text" onChange={this.onTextChanged} />
                     <ul>
@@ -443,8 +459,15 @@ console.log('grid array from 285', this.state.skillsGridArray)
                 
                 <Form>
                     <div className = {this.state.emotion_text === 'TEST' ? 'hidden': ''}>
+                    <h3>
+                        On a scale from 1-7 
+                        <br/>
+                        the intensity of this feeling is 
+                    </h3>
                         <Form.Group controlId="exampleForm.ControlSelect1">
-                            <Form.Label>Before Level</Form.Label>
+                            <Form.Label>
+                               
+                            </Form.Label>
                             <Form.Control as="select"  defaultValue={this.state.before_lvl}
                                 onChange={this.handleBefore_lvlChange.bind(this)}>
     
@@ -462,31 +485,32 @@ console.log('grid array from 285', this.state.skillsGridArray)
   
  
     <div className = {this.state.before_lvl<6 ? 'hidden': ''}>
-        <Form.Group id="formGridCheckbox">
-            <Form.Check type="checkbox" label='Thinking About Suicide'  onChange={this.handleSIChange.bind(this)}/> 
-        </Form.Group>
 
-        <Form.Group id="formGridCheckbox">
-            <Form.Check type="checkbox" label='Thinking About Self Harm' onChange={this.handleSHChange.bind(this)}/>
-        </Form.Group>
+   
+     <h3>I am also thinking about </h3>  
+     <input type="submit" value="Suicide" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
+            onClick={this.handleSIChange.bind(this)}
+                />  
+    <input type="submit" value="Self Harm" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
+            onClick={this.handleSHChange.bind(this)}
+                />  
+     
 
     </div>
         
-        <input type="submit" value="Submit" className="btn" style={{ margin:'20px'} }
+        <input type="submit" value="Submit" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
             onClick={this.newRecord.bind(this)}
                 />
                 
         </Form>
 
-      {/* <button onClick={this.getEmotionSkills}>get emotion skills</button> */}
-      <button onClick={this.getUserSkills}>get user skills</button>
-      {/* <button onClick={this.getSkillsGrid.bind(this)}>get grid </button> */}
-
-      {/* <button onClick={this.someFn.bind(this)}>someFn </button> */}
+   
+      <button onClick={this.getUserSkills}>Get Activities</button>
+    
 
 
       
-      <Link to={grid}> Click me!</Link>
+      
 
       {/* <p className='flagText'>Thoughs of suicide</p> */}
       </div>

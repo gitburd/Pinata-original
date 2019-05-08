@@ -30,9 +30,9 @@ onSelectRecord(record){
   
         return (
           
-          <div>
+          <div className='recordsList'>
               
-        {recordsList}
+            {recordsList}
        
           </div>
           

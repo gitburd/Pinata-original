@@ -68,10 +68,10 @@ export default class criticalSkillsGrid extends Component {
                 </div>
             </div>
             <div className='skipButton'>
-            <Link to="/grid">
-                    <button type="button">
-                        Skip these
-                    </button>
+                <Link to="/grid">
+                        <button type="button">
+                            Skip these
+                        </button>
                 </Link>
             </div>
     </div>
