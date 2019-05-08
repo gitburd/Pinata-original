@@ -233,7 +233,7 @@ export default class AutoCompleteText extends Component {
             headers: { 'Content-Type': 'application/json'}
         })
         .then(r => r.json())
-        .then(json=>{this.setState({recent_record:json}); return json})
+        .then(json=>{this.setState({recent_record:json}, this.getUserSkills())})
         .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
     }
 
@@ -388,16 +388,13 @@ console.log('grid array from 285', this.state.skillsGridArray)
                 headers: { 'Content-Type': 'application/json'}
                 })
                 .then(res => res.json())
-            //   .then(json => this.setState({criticalSkills:json}, () => console.log(json)))
                 .then(json => this.setState({criticalSkills:json}, () => this.someFn()))
                 .catch(function(e) {
                 console.log(e); // “oh, no!”
             })
         }else {
             this.setState({criticalSkills:[]}, () => this.someFn())
-
         }
-
     }
 
     someFn(){
@@ -407,13 +404,10 @@ console.log('grid array from 285', this.state.skillsGridArray)
         let si = this.state.si
         let sh= this.state.sh
         let before_lvl =this.state.before_lvl
-        // let record_id= this.state.record_id
         let recent_record = this.state.recent_record.record;
         let criticalSkills = this.state.criticalSkills;
         this.props.myCallback(skillsGridArray, recent_record, criticalSkills, userSkillsArray, si, sh, before_lvl);
     }
-
-
 
     renderSuggestions(){
         const {suggestions} = this.state;
@@ -421,15 +415,11 @@ console.log('grid array from 285', this.state.skillsGridArray)
             return null
         }
         return (
-            <ul>
-            
+            <ul>       
                 {suggestions.map((item) => <li onClick={()=> 
-                this.suggestionSelected(item)
-                
-                }>{item}</li>)
-                
-                }
-                
+                this.suggestionSelected(item)             
+                }>{item}</li>)              
+                }             
             </ul>
         )
     }
@@ -447,23 +437,22 @@ console.log('grid array from 285', this.state.skillsGridArray)
         }
         return (
             <div >
-                <h1 style={{padding:'60px'}}>I am feeling</h1>
+                <h1 style={{padding:'25px 70px'}}>I am feeling</h1>
                 <div className="AutoCompleteText">
                     <input value={text} type="text" onChange={this.onTextChanged} />
                     <ul>
                         {this.renderSuggestions()}
-                    </ul>
-                    
+                    </ul>                
                 </div>
                 <br/>
                 
                 <Form>
                     <div className = {this.state.emotion_text === 'TEST' ? 'hidden': ''}>
-                    <h3>
+                        <h3>
                         On a scale from 1-7 
                         <br/>
                         the intensity of this feeling is 
-                    </h3>
+                        </h3>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>
                                
@@ -482,40 +471,25 @@ console.log('grid array from 285', this.state.skillsGridArray)
                             </Form.Control>
                         </Form.Group>
                     </div>
-  
- 
-    <div className = {this.state.before_lvl<6 ? 'hidden': ''}>
+                    <div className = {this.state.before_lvl<6 ? 'hidden': ''}>
+                        <h3>I am also thinking about </h3>  
+                        <input type="submit" value="Suicide" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
+                        onClick={this.handleSIChange.bind(this)}
+                        />  
+                        <input type="submit" value="Self Harm" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
+                        onClick={this.handleSHChange.bind(this)}
+                        />  
+                    </div>
+                    <div className = {this.state.before_lvl ? '':'hidden'}>
 
-   
-     <h3>I am also thinking about </h3>  
-     <input type="submit" value="Suicide" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
-            onClick={this.handleSIChange.bind(this)}
-                />  
-    <input type="submit" value="Self Harm" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
-            onClick={this.handleSHChange.bind(this)}
-                />  
-     
-
-    </div>
-        
-        <input type="submit" value="Submit" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
-            onClick={this.newRecord.bind(this)}
-                />
-                
-        </Form>
-
-   
-      <button onClick={this.getUserSkills}>Get Activities</button>
-    
-
-
-      
-      
-
-      {/* <p className='flagText'>Thoughs of suicide</p> */}
-      </div>
-    )
-  }
+                    <input type="submit" value="Submit" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.5)'} }
+                    onClick={this.newRecord.bind(this)}
+                    />  
+                    </div>             
+                </Form>
+            </div>
+        )
+    }
 
  
 }
