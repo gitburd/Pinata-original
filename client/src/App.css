@@ -1,19 +1,19 @@
-.sidenav {
+.pinataNav {
   /* height: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0; */
-  background-color:hsla(360, 100%, 0%, 0);
+  background:hsla(360, 100%, 0%, 0 );
   /* overflow-x: hidden;
   padding-top: 20px; */
 }
 
-.transparent{
-  background-color:hsla(360, 100%, 0%, 0);
+#clear{
+  background:hsla(360, 100%, 0%, 0) ;
 }
 
-.sidenav a {
+.pinataNav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: calc(10px + 1vmin);
@@ -29,19 +29,19 @@
 }
 
 
-.sidenav a:hover {
+.pinataNav a:hover {
   color: #f1f1f1;
 }
 
 .main {
-  padding-left: 150px; /* Same as the width of the sidenav */
+  padding-left: 150px; /* Same as the width of the pinataNav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
 
 .recordsList{
   /* background-color:white; */
-  background-color:hsla(360, 100%, 100%, 0.3);
+  background-color:hsla(0, 100%, 100%, 0.1);
   
   padding:15px 50px;
   margin-top:20px;
@@ -137,8 +137,8 @@
 }
 
 .skill_details_icon{
-  width:50%;
-  float: left;
+  width:75%;
+  
 }
 
 .skipButton{

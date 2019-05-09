@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import Moment from 'react-moment';
+import './App.css';
+import Chart from './components/Chart';
+import Emotion from './components/Emotion'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
 
-import { ButtonToolbar, Button }  from 'react-bootstrap';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
-import './App.css';
 import SkillDetails from './components/SkillDetails';
 import AutoCompleteText from './components/AutoCompleteText';
 import SkillsGrid from './components/SkillsGrid';
@@ -27,15 +24,9 @@ import AfterLvlPrompt from './components/AfterLvlPrompt';
 import Landing from './components/Landing';
 import Secret from './components/Secret';
 import Callback from './Callback';
-import Navbar from './components/Navbar';
 import Sidenavbar from './components/Sidenavbar';
-
 import SIResources from './components/SIResources';
-import pinata_big from './components/img/pinata_big.png';
-
-
-
-library.add(faStroopwafel)
+import UpdateModal from './components/UpdateModal';
 
 
 
@@ -44,8 +35,12 @@ const fetch = require('node-fetch');
 
 class App extends Component {
   state = { 
+    searchList:[],
+    key:'SH',
+    query:'true',
     test:'fail',
     modalShow: false,
+    recordModalShow: false,
     skillsList:[],
       user_info:[],
       record_id:'',
@@ -324,21 +319,35 @@ class App extends Component {
 
 
   selectRecord =(record) => {
-    console.log(record)
+    console.log('in record select')
     this.setState({  
-    record_id:record.record_id,
-    before_lvl:record.before_lvl,
-    after_lvl:record.after_lvl,
-    emotion:record.emotion_text,
-    emotion_id:record.emotion_id,
-    skill:record.skill_title,
-    skill_id:record.skill_id,
-    si:record.si,
-    sh:record.sh,
-    date:record.date  
+    update_record_id:record.record_id,
+    update_before_lvl:record.before_lvl,
+    update_after_lvl:record.after_lvl,
+    update_emotion:record.emotion_text,
+    update_emotion_id:record.emotion_id,
+    update_skill:record.skill_title,
+    update_skill_id:record.skill_id,
+    update_si:record.si,
+    update_sh:record.sh,
+    update_date:record.date  
 
-  })
+  },this.recordClicked(),console.log('after recordClicked')  )
   }
+
+  recordClicked=()=>{ 
+    console.log(this.state.update_record_id, this.state.update_before_lvl, this.state.update_date)
+    this.setState({
+      recordModalShow:true
+    })
+      
+  }
+  
+  recordModalClose = () =>{
+    this.setState({recordModalShow:false}, console.log('it should close?'))
+  }
+
+
 
   setRecord_id=(record_id) => {
     console.log('app 215 sent',record_id)
@@ -360,6 +369,36 @@ class App extends Component {
       })
     }
   }
+
+  searchByQuery = () => {
+    
+    let url = `http://localhost:3001/api/search/SH?user_id=${this.state.user_id}&keyword=${this.state.query}`
+
+    console.log(`the url is ${url}`)
+    fetch(url, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .then(json => this.setState({
+        searchList: json
+      }, console.log(this.state.searchList)))
+      .catch(e => {
+        console.log(`fetch failed`)
+      })
+    console.log(this.state.searchList)
+  }
+
+
+
+
+
+
+
+
+
+
 
   updateRecord = (record_id, before_lvl, after_lvl) => {
     if(record_id!==''&& before_lvl!=='' && after_lvl!==''){
@@ -558,9 +597,13 @@ class App extends Component {
       skill_details:skill_details, 
       skill_title:skill_title, 
       modalShow: true}, 
+      // recordModalShow
       ()=> {console.log(skill_icon)
     })
   }
+
+ 
+
 
   myCallback= (skillsGridArray,recent_record,criticalSkills, userSkillsArray, si, sh, before_lvl)=>{
     this.setState({skillsGridArray:skillsGridArray,recent_record:recent_record, criticalSkills:criticalSkills, userSkillsArray:userSkillsArray}, () =>{
@@ -636,7 +679,6 @@ class App extends Component {
           <Route path="/" render = { props =>(
             <React.Fragment>    
               <Sidenavbar/>    
-              {/* <Navbar/> */}
             </React.Fragment>)} 
           />
 
@@ -688,7 +730,7 @@ class App extends Component {
               <div >
 
                 <SkillDetails 
-                updateRecord = {this.updateRecord}
+                // updateRecord = {this.updateRecord}
                 newRecord={this.newRecord}
                 addSkillToRecord = {this.addSkillToRecord}
                 recent_record = {this.state.recent_record}
@@ -739,7 +781,7 @@ class App extends Component {
               <div >
 
                 <SkillDetails 
-                  updateRecord = {this.updateRecord}
+                  // updateRecord = {this.updateRecord}
                   newRecord={this.newRecord}
                   addSkillToRecord = {this.addSkillToRecord}
                   recent_record = {this.state.recent_record}
@@ -889,13 +931,46 @@ class App extends Component {
                 </React.Fragment>              
             )} />
 
+            <Route path="/chart" exact render = { props =>(
+              this.props.auth.isAuthenticated() 
+                ? <React.Fragment>
+                  <Chart/>
+                </React.Fragment>
+                :
+                <React.Fragment>
+                    <header className="App-header"> 
+                    Uh oh! You have to log in first! 
+                    </header>               
+                </React.Fragment>              
+              )} />
 
             <Route exact path="/records/update" exact render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
-                  
+                   
                   <div >  
-                    <Update 
+                  <UpdateModal 
+                  recordModalShow={this.state.recordModalShow}
+                  update_date={this.state.update_date}
+                  update_record_id = {this.state.update_record_id}
+                  update_before_lvl = {this.state.update_before_lvl}
+                  update_after_lvl = {this.state.update_after_lvl}
+                  update_emotion = {this.state.update_emotion}
+                  update_skill = {this.state.update_skill}
+                  update_si = {this.state.update_si}
+                  update_sh = {this.state.update_sh}
+
+                  recordClicked = {this.recordClicked}
+                  recordModalShow={this.state.recordModalShow}
+                  recordModalClose = {this.recordModalClose}
+                  searchList = {this.state.searchList}
+                  handleSelectRecord = { this.selectRecord.bind(this) } 
+                  recordsList = {this.state.recordsList}
+                  updateRecord = {this.updateRecord} 
+     
+                  />
+
+                    {/* <Update 
                     updateRecord = {this.updateRecord}  
                     record_id = {this.state.record_id} 
                     before_lvl = {this.state.before_lvl} 
@@ -903,11 +978,18 @@ class App extends Component {
                     date = {this.state.date}
                     emotion= {this.state.emotion}
                     skill = {this.state.skill}
-
+                    searchByquery={this.searchByQuery}
                     />
-                    <hr/>
+                    <hr/> */}
+                    
                     <button onClick={this.getUserRecords}>get user Records</button>  
-                    <RecordsListUpdate handleSelectRecord = { this.selectRecord.bind(this) } recordsList = {this.state.recordsList}/>   
+                    <RecordsListUpdate 
+                    recordClicked = {this.recordClicked}
+                    recordModalCloseCallback = {this.recordModalCloseCallback}
+                    searchList = {this.state.searchList}
+                    handleSelectRecord = { this.selectRecord.bind(this) } 
+                    recordsList = {this.state.recordsList}
+                    />   
                   </div>
                 </React.Fragment>
               : <React.Fragment>

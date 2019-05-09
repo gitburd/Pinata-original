@@ -5,7 +5,6 @@ import pinata_big from './img/pinata_big.png';
 
 import { MDBRow, MDBCol, MDBIcon } from "mdbreact";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
@@ -36,7 +35,7 @@ export default class Landing extends Component {
               <hr/>        
               <h2> Welcome, {this.props.first_name}  <MDBIcon icon="heart" /> </h2>   
               <div>
-    Favorite Food: <FontAwesomeIcon icon="stroopwafel" />
+    
   </div>       
                 <button style={{ cursor: 'pointer' }} onClick={()=>{
                   this.props.auth.logout()

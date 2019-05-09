@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
-import {Link, withRouter} from 'react-router-dom';
-import auth0Client from '../Auth';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import React, { Component } from 'react';
+import '../App.css';
+import {Link} from 'react-router-dom';
+import SideNav, {  NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import history from '../history';
-import { MDBRow, MDBCol, MDBIcon } from "mdbreact";
+
+
 
 export default class Sidenavbar extends Component {
     render() {
-       
+        
         return (
-          <div className='transparent'>
-              <SideNav className='sidenav'>
+          <div className='clear'>
+              <SideNav id='clear' className='pinataNav'>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="/">
                     <NavItem eventKey="/">

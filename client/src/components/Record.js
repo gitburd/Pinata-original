@@ -39,7 +39,7 @@ export default class Record extends Component {
             <Card.Header className="mb-2 text-muted"><Moment unix  format="D MMM YYYY">{date}</Moment></Card.Header> 
             <div className='recordTitle'>    
               <Card.Title  as="h2">I'm feeling <b>{emotion_text}</b> </Card.Title>
-              <Card.Title as="h2" >My will <b>{skillDisplay}</b></Card.Title>
+              <Card.Title as="h2" >I will <b>{skillDisplay}</b></Card.Title>
             <Card.Footer className="mb-2 text-muted"><small>Impact on intensity of the emotion : <b>{impactDisplay} </b></small></Card.Footer>
             </div>
           </Card.Body>

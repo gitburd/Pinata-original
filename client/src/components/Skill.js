@@ -39,7 +39,7 @@ export default class Skill extends Component {
           </Card.Footer>
         </Card>
       
-        </div>
+        </div> 
       </div>
 
 

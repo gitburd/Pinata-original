@@ -50,6 +50,19 @@ app.post('/api/user', db.MakeNewUser)
 app.get('/api/user', db.GetUserId)
 // http://localhost:3001/api/user?auth0_id=hbo28
 
+app.get('/api/search/SI', db.searchBySI)
+
+app.get('/api/search/SH', db.searchBySH)
+
+app.get('/api/search/Impact', db.searchByImpact)
+
+app.get('/api/search/Feeling', db.searchByFeeling)
+
+app.get('/api/search/Skill', db.searchBySkill)
+
+app.get('/api/search/Unfinished', db.searchByUnfinished)
+
+
 
  
 

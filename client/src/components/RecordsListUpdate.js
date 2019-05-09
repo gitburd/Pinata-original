@@ -5,22 +5,29 @@ import Record from './Record.js';
 import RecordUpdate from './RecordUpdate';
 
 
-
-
  class RecordsListUpdate extends Component {
-  constructor(props) {
-    super(props);
+
+  onSelectRecord(record){
+    this.props.handleSelectRecord(record)
   }
 
-onSelectRecord(record){
-    this.props.handleSelectRecord(record)
-}
-
   render() {
-  
+  let searchList  = this.props.searchList.map((record)=>(
+         
+    <RecordUpdate 
+    key={record.record_id} 
+    record={record} 
+    onSelectRecord = {this.onSelectRecord.bind(this)}
+    currentRecord = {record}
+     />
+     
+  ))
+
+
   let recordsList = this.props.recordsList.map((record)=>(
          
-    <RecordUpdate key={record.record_id} record={record} 
+    <RecordUpdate 
+    key={record.record_id} record={record} 
     onSelectRecord = {this.onSelectRecord.bind(this)}
     currentRecord = {record}
      />
@@ -31,6 +38,7 @@ onSelectRecord(record){
         return (
           
           <div className='recordsList'>
+            
               
             {recordsList}
        
@@ -41,7 +49,7 @@ onSelectRecord(record){
   }
 }
   
-
+// {searchList}
      
 
 // PropTypes

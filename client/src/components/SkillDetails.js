@@ -67,7 +67,7 @@ export default class SkillDetails extends Component {
           // show={this.props.modalShow} 
           onHide={this.closeModal}
             {...this.props}
-            size="lg"
+            size="sm"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             className='modal' 
@@ -80,17 +80,13 @@ export default class SkillDetails extends Component {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <img  src={this.props.skill_icon} className="skill_details_icon" /> 
-           
             <div className = {this.state.tryItClicked? 'hidden': ''}>
+            <img  src={this.props.skill_icon} className="skill_details_icon" /> 
               <p>{this.props.skill_details}</p>
             </div>
 
             <div className = {this.state.tryItClicked? '': 'hidden'}>
-              <p>Good work choosing a coping strategy!
-              <br/> Check back in after finishing the activity and rate your distress level again. 
-              </p>
-              <hr/>
+              <p>Great work!</p>
               <p>How did it go?</p>
 
               <div style={{width:'50%', margin:'0 auto'}}>
@@ -110,9 +106,7 @@ export default class SkillDetails extends Component {
             
                   </Form.Control>
                   </Form.Group>
-        
-                  <input type="submit" value="Submit" className="btn" style={{ margin:'20px'} }
-                  onClick={this.onSubmit.bind(this)} />
+      
                 </Form>
               </div>
             </div>
@@ -120,13 +114,18 @@ export default class SkillDetails extends Component {
               
             </Modal.Body>
             <Modal.Footer>
+            <div className = {this.state.tryItClicked? 'hidden': ''}>
             <Button onClick={this.closeModal}>Close</Button>
             <Button style={{margin:'10px'}} onClick = {this.setSkill}
               variant="outline-success">Try it</Button>
+            </div>
 
-
- 
-
+            <div className = {this.state.tryItClicked? '': 'hidden'}>
+            <Button onClick={this.closeModal}>Skip</Button>
+            <Button style={{margin:'10px'}}
+                  onClick={this.onSubmit.bind(this)} 
+                  variant="outline-success"> Submit </Button>
+            </div>
              
             </Modal.Footer>
           </Modal>

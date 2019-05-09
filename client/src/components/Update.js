@@ -44,6 +44,10 @@ console.log(this.props.state)
 
   }
 
+  search=(e)=>{
+    e.preventDefault();
+    this.props.searchByquery();
+  }
 
 
   render() {
@@ -114,6 +118,8 @@ console.log(this.props.state)
           {this.state.message}
 
         </div>
+
+        <button onClick={this.search.bind(this)}>Search</button>  
       </div>
         
       
