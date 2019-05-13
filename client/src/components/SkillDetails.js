@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, ButtonToolbar, Form}  from 'react-bootstrap';
+
+import AfterLvlSlider from './AfterLvlSlider';
+
  
 export default class SkillDetails extends Component {
   constructor(props) {
@@ -35,7 +38,7 @@ export default class SkillDetails extends Component {
 
   
   handleAfter_lvlChange(after_lvl) {
-    this.setState({after_lvl: after_lvl.target.value})
+    this.setState({after_lvl})
     }
 
     onSubmit =(e)=> {
@@ -79,35 +82,26 @@ export default class SkillDetails extends Component {
              
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body >
             <div className = {this.state.tryItClicked? 'hidden': ''}>
             <img  src={this.props.skill_icon} className="skill_details_icon" /> 
               <p>{this.props.skill_details}</p>
             </div>
 
-            <div className = {this.state.tryItClicked? '': 'hidden'}>
+            <div style={{fontSize:'22px'}} className = {this.state.tryItClicked? '': 'hidden'}>
               <p>Great work!</p>
-              <p>How did it go?</p>
+              <p>How do you feel now?</p>
 
-              <div style={{width:'50%', margin:'0 auto'}}>
-                <Form>
-                  <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>After Level</Form.Label>
-                  <Form.Control as="select"  
-                    onChange={this.handleAfter_lvlChange.bind(this)}>
-            
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-            
-                  </Form.Control>
-                  </Form.Group>
-      
-                </Form>
+              <div style={{margin:'20px auto 30px auto'}}>
+              
+              <div className = {this.state.after_lvl? 'hidden': 'recordTitles'}>
+                Slide to set
+              
+              </div>
+
+              <span className='recordTitles'><b>  {this.state.after_lvl}</b></span>
+              <AfterLvlSlider  handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
+                
               </div>
             </div>
               

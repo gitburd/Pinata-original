@@ -27,6 +27,7 @@ import Callback from './Callback';
 import Sidenavbar from './components/Sidenavbar';
 import SIResources from './components/SIResources';
 import UpdateModal from './components/UpdateModal';
+import MySlider from './components/MySlider';
 
 
 
@@ -36,8 +37,8 @@ const fetch = require('node-fetch');
 class App extends Component {
   state = { 
     searchList:[],
-    key:'SH',
-    query:'true',
+    key:'feeling',
+    query:'Sad',
     test:'fail',
     modalShow: false,
     recordModalShow: false,
@@ -65,7 +66,7 @@ class App extends Component {
       pinata :   {
         "skill_title": "piñata",
         "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wind.png",
         "skill_id": 0
       },
 
@@ -111,85 +112,177 @@ class App extends Component {
       baseSkillsArray :
       [
         {
-            "skill_title": "Test skill",
-            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-            "skill_id": 1
+            "skill_title": "Aroma",
+            "skill_details": "Breathing in something that smells good, essential oils, incense, candles, flowers, perfume, any smell you like.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/aroma.png ",
+            "skill_id": 22
         },
         {
-            "skill_title": "Play Video Games",
-            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/playvideogames.png",
-            "skill_id": 2
-        },
-        {
-            "skill_title": "Wring a Towel",
-            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wringtowel.png",
-            "skill_id": 3
-        },
-        {
-            "skill_title": "Workout",
-            "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/workout.png",
-            "skill_id": 4
-        },
-        {
-            "skill_title": "Take a Breather",
-            "skill_details": "filler text will be written later",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/takebreather.png",
-            "skill_id": 5
-        },
-        {
-            "skill_title": "Punch a Pillow",
-            "skill_details": "filler text will be written later",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/punchpillow.png",
-            "skill_id": 6
-        }, 
-        {
-          "skill_title": "Dance",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-          "skill_id": 7
-        }, 
-        {
-          "skill_title": "Listen to Music",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-          "skill_id": 8
-        }, 
-        {
-          "skill_title": "Make Art",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-          "skill_id": 9
-        }, 
-        {
-          "skill_title": "Phone a Friend",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/phonefriend.png",
-          "skill_id": 10
-        }, 
-        {
-          "skill_title": "Take a Walk",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/takewalk.png",
-          "skill_id": 11
-        }, 
-        {
-          "skill_title": "Cook",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/cookfood.png",
-          "skill_id": 12
-        },
-        {
-          "skill_title": "Play with Pet",
-          "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-          "skill_id": 12
-        }  
+          "skill_title": "Compassion",
+          "skill_details": "Find love in your heart for yourself and others.",
+          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/compassion.png",
+          "skill_id": 23
+      },
+      {
+        "skill_title": "Cute Overload",
+        "skill_details": "Time for a few cat videos! Take some time to appreciate anything adorable.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/cute.png",
+        "skill_id": 24
+      },
+
+      {
+        "skill_title": "Goals",
+        "skill_details": "Make a todo list. Plan out your future or next steps.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/goals.png",
+        "skill_id": 25
+      },
+      {
+        "skill_title": "Gratitude ",
+        "skill_details": "Remember the kind words and deeds of loving people. Reflect on the things you are grateful for.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/gratitude.png",
+        "skill_id": 26
+      },
+      {
+        "skill_title": "Nautre",
+        "skill_details": "Garden, visit the forest, go for a walk or hike. Spend sometime time with plants.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/nature.png",
+        "skill_id": 27
+      },
+      {
+        "skill_title": "Read",
+        "skill_details": "Get out of your head and into a book. Break out your favorite or try something new.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/read.png",
+        "skill_id": 28
+      },
+      {
+        "skill_title": "Punch a Pillow",
+        "skill_details": "Get out some of those feelings on a pillow.",
+        "skill_icon": " https://s3-us-west-2.amazonaws.com/pinata-images/icons/punchpillow.png",
+        "skill_id": 29
+      },
+      {
+        "skill_title": "Video Games",
+        "skill_details": "Have fun! Take some time off and enjoy yourself.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/playvideogames.png",
+        "skill_id": 30
+      },
+      {
+        "skill_title": "Listen to Music",
+        "skill_details": "Play your favorites or check out something new.",
+        "skill_icon": " https://s3-us-west-2.amazonaws.com/pinata-images/icons/listenmusic.png",
+        "skill_id": 31
+      },
+      {
+        "skill_title": "Take a Walk",
+        "skill_details": "Get outside. Breath in the fresh air and get a bit of exercise.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takewalk.png ",
+        "skill_id": 32
+      },
+      {
+        "skill_title": "Workout",
+        "skill_details": "Exercise, lift weights, or otherwise get moving at the gym or anywhere else.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/workout.png",
+        "skill_id": 33
+      },
+      {
+        "skill_title": "Wring Towel",
+        "skill_details": "Let out your feelings physically.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wringtowel.png",
+        "skill_id": 34
+      },
+      {
+        "skill_title": "Make Art",
+        "skill_details": "Draw, paint, color, sculpt, dance, make music, write, be creative!",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/makeart.png",
+        "skill_id": 35
+      },
+
+      {
+        "skill_title": "Write",
+        "skill_details": "Journal, write a story or stream of consciousness, write a letter no need to send it, express yourself.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/write.png",
+        "skill_id": 36
+      },
+      {
+        "skill_title": "Perform",
+        "skill_details": "Karaoke, act out a scene, do comedy, dance, express yourself.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png",
+        "skill_id": 37
+      },
+      {
+        "skill_title": "Take a Bath",
+        "skill_details": "Bath or shower. Relax in the water, try some candles, music or bath salts.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebath.png",
+        "skill_id": 39
+      },
+  
+      {
+        "skill_title": "Tidy Up",
+        "skill_details": "Clean up your space.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/tidy.png",
+        "skill_id": 43
+      },
+      {
+        "skill_title": "Lay in Sun",
+        "skill_details": "Get outside and soak up some Vitamin D.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/sun.png ",
+        "skill_id": 44
+      },
+      {
+        "skill_title": "Phone a Friend",
+        "skill_details": "Reach out and call someone you trust.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/phonefriend.png",
+        "skill_id": 45
+      },
+      {
+        "skill_title": "Support Network",
+        "skill_details": "Spend time with friends or family. Reach out to your support network in person, over the phone or online.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/social1.png",
+        "skill_id": 46
+      },
+      {
+        "skill_title": "Comedy",
+        "skill_details": "Standup, improve, satire you have so many options!",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/comedy.png",
+        "skill_id": 47
+      },
+      {
+        "skill_title": "Stretch",
+        "skill_details": "Stretch out or practice yoga with others or on your own.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/strech.png",
+        "skill_id": 48
+      },
+      {
+        "skill_title": "Meditate",
+        "skill_details": "Clear your mind. Follow a guided practice or meditate on your own.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/meditate1.png",
+        "skill_id": 49
+      },
+      {
+        "skill_title": "Take a Breath",
+        "skill_details": "If you have a favorite breath it out. If try 'box breathing' Slowly. Count to four while breathing out. Count to four while holding your breath. Count to four while breathing in.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebreather2.png",
+        "skill_id": 50
+      },
+      {
+        "skill_title": "Play with Pet",
+        "skill_details": "Show some love to your fuzzy friend.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/playpet.png",
+        "skill_id": 51
+      },
+   
+      {
+        "skill_title": "Fix Something",
+        "skill_details": "Work on your car/bike or other project. Tinker around and solve a problem.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/fix.png",
+        "skill_id": 52
+      }
+  
     ]
   }
+  
+
+ 
 
   componentDidMount() {
     this.hydrateStateWithLocalStorage();
@@ -357,7 +450,7 @@ class App extends Component {
 
 
   getUserRecords = () => {
-    if (this.state.user_id!==''){
+    if (this.state.user_id){
       let url = `http://localhost:3001/api/userRecords?user_id=${this.state.user_id}`
       console.log(url)
       fetch(url, {
@@ -367,12 +460,12 @@ class App extends Component {
         .then(res => res.json()).then(json => this.setState({recordsList: json})).catch(function(e) {
         console.log(e); // “oh, no!”
       })
-    }
+    }else {console.log('user id req.')}
   }
 
-  searchByQuery = () => {
-    
-    let url = `http://localhost:3001/api/search/SH?user_id=${this.state.user_id}&keyword=${this.state.query}`
+  searchByQuery = (key, query) => {
+   
+    let url = `http://localhost:3001/api/search/${key}?user_id=${this.state.user_id}&keyword=${query}`
 
     console.log(`the url is ${url}`)
     fetch(url, {
@@ -381,13 +474,15 @@ class App extends Component {
           'Content-Type': 'application/json'
         }
       }).then(res => res.json())
+      // .then(json => console.log(json))
       .then(json => this.setState({
         searchList: json
-      }, console.log(this.state.searchList)))
+      }, console.log('search results?',this.state.searchList)))
       .catch(e => {
         console.log(`fetch failed`)
       })
-    console.log(this.state.searchList)
+    
+    console.log(' app state searchList', this.state.searchList)
   }
 
 
@@ -520,9 +615,19 @@ class App extends Component {
     })
   }
 
+
+
   getSkillsGrid = () => {
-    let idx;
-    let target;
+  
+   this.setState({skillsGridArray:[]}, 
+    this.makeSkillsGrid()
+    )
+   }
+
+    makeSkillsGrid = () => {
+      console.log('made it to make')
+      let idx;
+      let target;
     // add user skills 
     while (this.state.skillsGridArray.length < 3) {
       if (this.state.skillsGridArray.length === 1) {
@@ -530,11 +635,12 @@ class App extends Component {
       } else if (this.state.userSkillsArray.length > 0) {
         idx = Math.floor((Math.random() * this.state.userSkillsArray.length))
         target = this.state.userSkillsArray[idx]
+        console.log('make 545', target)
         this.state.skillsGridArray.push(target)
         if (this.state.emotionSkillsArray){
-        this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id)};
-        this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
-        this.state.userSkillsArray = this.state.userSkillsArray.filter(e => e.skill_id !== target.skill_id);
+          this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id)};
+          this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+          this.state.userSkillsArray = this.state.userSkillsArray.filter(e => e.skill_id !== target.skill_id);
 
       } else {
         idx = Math.floor((Math.random() * this.state.baseSkillsArray.length))
@@ -542,8 +648,8 @@ class App extends Component {
         this.state.skillsGridArray.push(target)
         if (this.state.emotionSkillsArray){
           this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id)};
-        this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
-        this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
+          this.state.emotionSkillsArray = this.state.emotionSkillsArray.filter(e => e.skill_id !== target.skill_id);
+          this.state.baseSkillsArray = this.state.baseSkillsArray.filter(e => e.skill_id !== target.skill_id);
       }
     }
 
@@ -605,8 +711,8 @@ class App extends Component {
  
 
 
-  myCallback= (skillsGridArray,recent_record,criticalSkills, userSkillsArray, si, sh, before_lvl)=>{
-    this.setState({skillsGridArray:skillsGridArray,recent_record:recent_record, criticalSkills:criticalSkills, userSkillsArray:userSkillsArray}, () =>{
+  myCallback= (skillsGridArray, recent_record, criticalSkills, userSkillsArray, emotionSkillsArray, baseSkillsArray, si, sh, before_lvl)=>{
+    this.setState({skillsGridArray, recent_record, criticalSkills, userSkillsArray, emotionSkillsArray, baseSkillsArray, si, sh, before_lvl}, () =>{
       let grid;
 
         if (si){
@@ -686,6 +792,8 @@ class App extends Component {
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
                     <header className="App-header"> 
+                  <MySlider/>
+
                           Let's learn Auth: 
                     </header>                 
                     <Secret {...this.props}/>
@@ -704,6 +812,7 @@ class App extends Component {
             <React.Fragment>
                 
                 <div style={{ paddingTop:'50px', margin:'0 auto'}}>
+
                   <AutoCompleteText 
                   myCallback = {this.myCallback} 
                   baseSkillsArray={this.state.baseSkillsArray}  
@@ -730,7 +839,7 @@ class App extends Component {
               <div >
 
                 <SkillDetails 
-                // updateRecord = {this.updateRecord}
+                updateRecord = {this.updateRecord}
                 newRecord={this.newRecord}
                 addSkillToRecord = {this.addSkillToRecord}
                 recent_record = {this.state.recent_record}
@@ -745,6 +854,7 @@ class App extends Component {
                 {...props}             
                 />
               <SkillsGrid  
+              getSkillsGrid = {this.getSkillsGrid}
               user_id = {this.state.user_id}
               newRecord={this.newRecord}
               addSkillToRecord = {this.addSkillToRecord}
@@ -781,7 +891,7 @@ class App extends Component {
               <div >
 
                 <SkillDetails 
-                  // updateRecord = {this.updateRecord}
+                  updateRecord = {this.updateRecord}
                   newRecord={this.newRecord}
                   addSkillToRecord = {this.addSkillToRecord}
                   recent_record = {this.state.recent_record}
@@ -796,6 +906,7 @@ class App extends Component {
                   {...props}         
                 />
                 <CriticalSkillsGrid  
+                updateRecord = {this.updateRecord}
                   criticalSkills= {this.state.criticalSkills}
                   user_id = {this.state.user_id}
                   newRecord={this.newRecord}
@@ -880,7 +991,7 @@ class App extends Component {
                 </React.Fragment>
             )} />
 
-            <Route exact path="/records/list" exact render = { props =>(
+            <Route exact path="/records/old" exact render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
                   <div >
@@ -944,7 +1055,7 @@ class App extends Component {
                 </React.Fragment>              
               )} />
 
-            <Route exact path="/records/update" exact render = { props =>(
+            <Route exact path="/records/list" exact render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
                    
@@ -961,7 +1072,7 @@ class App extends Component {
                   update_sh = {this.state.update_sh}
 
                   recordClicked = {this.recordClicked}
-                  recordModalShow={this.state.recordModalShow}
+                  
                   recordModalClose = {this.recordModalClose}
                   searchList = {this.state.searchList}
                   handleSelectRecord = { this.selectRecord.bind(this) } 
@@ -978,12 +1089,14 @@ class App extends Component {
                     date = {this.state.date}
                     emotion= {this.state.emotion}
                     skill = {this.state.skill}
-                    searchByquery={this.searchByQuery}
-                    />
-                    <hr/> */}
+                    searchByQuery={this.searchByQuery}
+                    /> */}
                     
-                    <button onClick={this.getUserRecords}>get user Records</button>  
+                    
+                    {/* <button onClick={this.getUserRecords}>get user Records</button>   */}
+                     
                     <RecordsListUpdate 
+                    getUserRecords = {this.getUserRecords}
                     recordClicked = {this.recordClicked}
                     recordModalCloseCallback = {this.recordModalCloseCallback}
                     searchList = {this.state.searchList}

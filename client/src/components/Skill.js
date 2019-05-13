@@ -18,29 +18,34 @@ export default class Skill extends Component {
 
   render() {
     const { skill_id, skill_title, skill_details, skill_icon, is_critical} = this.props.skill;
-           
+    // const { location } = this.props
     return (
       <div>
-      <div className= {this.props.skill.is_critical ? "criticalSkill" : "skill"} onClick = {()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
-        <Card >
-          <Card.Header style={{height:'40px'}}>
-          <div className= {this.props.skill.is_heart ? '':'hidden'}> 
-          <MDBIcon style={{float:'right'}}icon="heart" size="1x" className="pink-text pr-3" />
-          </div>
-          {/* <MDBIcon far icon="heart" /> */}
+      <div className= {window.location.pathname === "/grid"  ?  "skill":"criticalSkill"} 
+      onClick = 
+        { this.props.skill.skill_id === 0 ? this.props.getNewGrid : ()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
 
-          <div className= {this.props.skill.is_star ? '':'hidden'}>
-          <MDBIcon style={{float:'right'}} icon="star" size="1x" className="yellow-text pr-3"/>
-          </div>
-          </Card.Header>
-          <Card.Img variant="top" src={skill_icon} />
-          <Card.Footer>
-            <small className="text-muted">{skill_title}</small>
+      <div >
+        <Card >
+         
+          <Card.Body>
+            <div className= {this.props.skill.is_heart ? '':'hidden'}> 
+            <MDBIcon style={{position:'absolute', top: '10px', right: '10px', zIndex:'2'}}icon="heart" size="1x" className="pink-text pr-3" />
+            </div>
+            <div className= {this.props.skill.is_star ? '':'hidden'}>
+              <MDBIcon style={{position:'absolute', top: '10px', right: '10px', zIndex:'2'}} icon="star" size="1x" className="yellow-text pr-3"/>
+            </div>
+            <div >
+            <Card.Img variant="top" src={skill_icon} />
+            </div>
+          </Card.Body>
+          <Card.Footer  style={{padding:'2px', height:'30px', background:'white', color:'purple'}}>
+            {skill_title}
           </Card.Footer>
         </Card>
-      
-        </div> 
       </div>
+    </div> 
+    </div>
 
 
 

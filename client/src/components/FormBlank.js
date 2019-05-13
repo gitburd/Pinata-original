@@ -5,6 +5,8 @@ import '../App.css';
 import { Form, Button}  from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import MySlider from './MySlider';
+import AfterLvlSlider from './AfterLvlSlider';
 
 export default class FormBlank extends Component {
   constructor(props) {
@@ -22,6 +24,8 @@ export default class FormBlank extends Component {
       message:'',
       startDate: new Date()
     }
+    this.handleBefore_lvlChange = this.handleBefore_lvlChange.bind(this);
+    this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
   this.handleDateChange = this.handleDateChange.bind(this);
   }
 
@@ -32,7 +36,7 @@ export default class FormBlank extends Component {
   }
 
   
-  handleChange(emotion) {
+  handleEmotionChange(emotion) {
     // let fieldName = event.target.name;
     // let fleldVal = event.target.value;
     this.setState({emotion: emotion.target.value})
@@ -68,13 +72,13 @@ export default class FormBlank extends Component {
   handleBefore_lvlChange(before_lvl) {
     // let fieldName = event.target.name;
     // let fleldVal = event.target.value;
-    this.setState({before_lvl: before_lvl.target.value})
+    this.setState({before_lvl})
   }
 
   handleAfter_lvlChange(after_lvl) {
     // let fieldName = event.target.name;
     // let fleldVal = event.target.value;
-    this.setState({after_lvl: after_lvl.target.value})
+    this.setState({after_lvl})
   }
 
   handleDateChange(date) {
@@ -132,11 +136,11 @@ export default class FormBlank extends Component {
           <h1 style={{padding:'20px'}}>Add a New Record</h1>
           <Form>
             <Form.Group controlId="exampleForm.ControlSelect1">
-              <h3>I'm feeling </h3>
+              <h3>I was feeling </h3>
               
               <Form.Control as="select"  
-                onChange={this.handleChange.bind(this)}>
-            
+                onChange={this.handleEmotionChange.bind(this)}>
+                <option></option>
                 <option>Angry</option>
                 <option>Depressed</option>
                 <option>Hopeless</option>
@@ -147,28 +151,15 @@ export default class FormBlank extends Component {
             
               </Form.Control>
             </Form.Group>
+   
+              <h3>The intensity was  </h3>
+              <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>
 
             <Form.Group controlId="exampleForm.ControlSelect1">
-              <h3>The intensity of this feeling is </h3>
-            
-              <Form.Control as="select"  
-                onChange={this.handleBefore_lvlChange.bind(this)}>
-      
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-            
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="exampleForm.ControlSelect1">
-              <h3>I will </h3>
+              <h3>I tried </h3>
               <Form.Control as="select" 
                 onChange={this.handleSkillChange.bind(this)}>
+                <option></option>
                 <option>Cook</option>
                 <option>Dance</option>
                 <option>Listen to Music</option>
@@ -183,22 +174,10 @@ export default class FormBlank extends Component {
               </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="exampleForm.ControlSelect1">
-              <h3>Now the intensity of the feeling is </h3>
+              <h3>then the intensity was </h3>
+
+              <AfterLvlSlider handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
               
-              <Form.Control as="select"  
-                onChange={this.handleAfter_lvlChange.bind(this)}>
-              
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-              
-              </Form.Control>
-            </Form.Group>
 
             <h3> Date </h3>
             <DatePicker
@@ -207,15 +186,22 @@ export default class FormBlank extends Component {
               onChange={this.handleDateChange} 
             />
 
-            <h3>I am also thinking about </h3>  
-            <input type="submit" value="Suicide" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.7)'} }
-                onClick={this.handleSIChange.bind(this)}
-              />  
-            <input type="submit" value="Self Harm" className="btn" style={{ margin:'20px', background:'hsla(360, 100%, 100%, 0.7)'} }
-              onClick={this.handleSHChange.bind(this)}
-            />  
+            <h3>I was also thinking about </h3>  
+
+            <div style={{margin:'15px auto 0px auto'}}>
+          
+             <button  style={{margin:'10px', fontSize:'16px',  width:'38%'}} className='myBtn' type="button" onClick = {this.handleSIChange.bind(this)} >Suicide
+             </button>
+
+              <button  style={{margin:'15px auto 0px auto', fontSize:'16px',  width:'38%'}} className='myBtn' type="button" onClick = {this.handleSHChange.bind(this)} >Self harm
+             </button>
+            
+             </div>
+
             <br/>
-            <Button variant="secondary" size="lg" block onClick = {this.onSubmit.bind(this)} >Create Record</Button>
+            
+            <button  style={{margin:'0px auto 30px auto', fontSize:'20px',  width:'100%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Record
+             </button>
           </Form>
           {this.state.message}
 

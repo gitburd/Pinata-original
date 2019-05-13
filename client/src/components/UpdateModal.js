@@ -5,6 +5,7 @@ import '../App.css';
 import Moment from 'react-moment';
 import { Button, Form,OverlayTrigger,Tooltip, Card, Modal}  from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
+import AfterLvlSlider from './AfterLvlSlider';
 
  
 export default class UpdateModal extends Component {
@@ -28,7 +29,7 @@ export default class UpdateModal extends Component {
 
   
   handleAfter_lvlChange(after_lvl) {
-    this.setState({after_lvl: after_lvl.target.value})
+    this.setState({after_lvl})
     }
 
     onSubmit =(e)=> {
@@ -63,7 +64,7 @@ export default class UpdateModal extends Component {
             centered
             className='modal' 
           >
-            <Modal.Header closeButton>
+            <Modal.Header style={{color:'purple', textAlign:'center'}} closeButton>
               <Modal.Title id="contained-modal-title-vcenter">
              
               <Moment unix>{this.props.update_date}</Moment>
@@ -93,42 +94,26 @@ export default class UpdateModal extends Component {
                 </div> 
               </div>
               
-               <h2> I'm feeling <b>{this.props.update_emotion}</b> </h2>
-               <h2> I will <b>{this.props.update_skill}</b></h2>
-               <h2>Intensity of feeling is <b> {this.props.update_before_lvl} </b></h2>
-               
-              
-              
+               <h2> I was feeling <span className='recordTitles'><b>{this.props.update_emotion}</b> </span></h2>
+               <h2> I tried <span className='recordTitles'><b>{this.props.update_skill}</b></span></h2>
+               <h2>Intensity was <span className='recordTitles'><b> {this.props.update_before_lvl} </b></span></h2>
+  
         <hr/>
+        <div style={{padding:'10px', margin:'0 auto', alignItems:'center'}}>
+            <h2>The intensity became <span className='recordTitles'><b>  {this.state.after_lvl}</b></span></h2>
+              <div style={{ margin:'30px auto', width:'50%', alignItems:'center'}}>
 
-              <div style={{width:'50%', margin:'0 auto'}}>
-                <Form>
-                  <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>How did it go?</Form.Label>
-                  <Form.Control as="select"  
-                    onChange={this.handleAfter_lvlChange.bind(this)}>
-            
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-            
-                  </Form.Control>
-                  </Form.Group>
-                  <input type="submit" value="Submit" className="btn" style={{ margin:'20px'} }
-              onClick={this.onSubmit.bind(this)} />
-                </Form>
+              <AfterLvlSlider  handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
+           
+                
               </div>
-         
-              
-              
+              </div>    
             </Modal.Body>
             <Modal.Footer>
             
-            <Button onClick={this.closeModal}>Close</Button>
+
+            <button  style={{ margin:'0 auto',border:'2px solid purple', fontSize:'20px',  width:'40%'}} className='closeBtn' type="button" onClick={this.closeModal}>Close</button>
+            <button  style={{ margin:'0 auto',fontSize:'20px',  width:'40%'}} className='myBtn' type="button" onClick = {this.onSubmit.bind(this)} > Update</button>
         
              
             </Modal.Footer>

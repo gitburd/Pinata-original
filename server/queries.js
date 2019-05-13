@@ -74,7 +74,8 @@ const getUserSkills = (request, response) => {
   }
 
 const newRecord = (request, response) => {
-  pool.query(`INSERT INTO records (user_id, emotion_id, before_lvl, date, si, sh)  VALUES('${request.body.user_id}','${request.body.emotion_id}','${request.body.before_lvl}','${request.body.date}','${request.body.si}','${request.body.sh}') RETURNING *;`,(error, results) => {
+  emotion_id = parseInt(request.body.emotion_id)
+  pool.query(`INSERT INTO records (user_id, emotion_id, before_lvl, date, si, sh)  VALUES('${request.body.user_id}','${emotion_id}','${request.body.before_lvl}','${request.body.date}','${request.body.si}','${request.body.sh}') RETURNING *;`,(error, results) => {
     if (error) {
       throw error
     }
@@ -222,7 +223,7 @@ const newRecordWithSkill = (request, response) => {
 
   const searchByImpact = (request,response) =>{
     var user_id = request.query.user_id;
-    var impact = request.query.search;
+    var impact = request.query.keyword;
     const query = `SELECT * FROM records WHERE user_id='${user_id} ' AND impact >'${impact}'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
@@ -234,7 +235,7 @@ const newRecordWithSkill = (request, response) => {
   };
   const searchByFeeling = (request,response) =>{
     var user_id = request.query.user_id;
-    var emotion = request.query.search;
+    var emotion = request.query.keyword;
     const query = `SELECT * FROM records as r JOIN emotions AS e ON r.emotion_id = e.emotion_id WHERE r.user_id=${user_id} AND e.emotion_text ='${emotion}'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
@@ -247,7 +248,7 @@ const newRecordWithSkill = (request, response) => {
 
   const searchBySkill = (request,response) =>{
     var user_id = request.query.user_id;
-    var skill = request.query.search;
+    var skill = request.query.keyword;
     const query = `SELECT * FROM records as r JOIN skills AS s ON r.skill_id = s.skill_id WHERE r.user_id='${user_id} ' AND s.skill_title='${skill}'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {

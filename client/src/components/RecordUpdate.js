@@ -46,31 +46,37 @@ onSelectRecord(){
             <div className= {this.props.record.si ? '':'hidden'}> 
               <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Thinking about suicide</Tooltip>}>
                 <span className="d-inline-block">
-                  <div style={{ pointerEvents: 'none', float:'right' }}>
-                    <i style={{float:'right'}} class="fas fa-star-of-life"></i>
+                  <div style={{ pointerEvents: 'none', float:'right',color: 'purple' }}>
+                    <i style={{float:'right'}} class="fas fa-star-of-life fa-sm"></i>
                   </div>
                   </span>
               </OverlayTrigger>
             </div>
-
+ 
             <div className= {this.props.record.sh ? '':'hidden'}> 
               <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Thinking about self harm</Tooltip>}>
                   <span className="d-inline-block">
-                    <div style={{ pointerEvents: 'none', float:'right' }}>
-                      <i style={{float:'right'}} class="fas fa-star-of-life"></i>
+                    <div style={{ pointerEvents: 'none', float:'right', color: 'purple', padding:'1px' }}>
+                      <i style={{float:'right'}} class="fas fa-star-of-life fa-sm"></i>
                     </div>
                     </span>
                 </OverlayTrigger>       
             </div> 
           </div>
 
-          <Card.Header className="mb-2 text-muted"><Moment unix>{date}</Moment></Card.Header> 
+          <Card.Header style={{background:'white', color:'purple'}} className="mb-2 "><span ><Moment unix>{date}</Moment></span></Card.Header> 
           <div className='recordTitle'>    
-            <Card.Title  as="h2">I'm feeling <b>{emotion_text}</b> </Card.Title>
-            <Card.Title as="h2" >I will <b>{skillDisplay}</b></Card.Title>
+            <Card.Title  as="h2">I was Feeling <span className='recordTitles'> <b> {emotion_text} </b> </span> </Card.Title>
+            <Card.Title as="h2">I Tried <span className='recordTitles'><b>{skillDisplay}</b></span></Card.Title>
           </div>
-          <Card.Footer className="mb-2 text-muted"><small>Impact on intensity of the emotion : <b>{impactDisplay} </b></small></Card.Footer>
-          <Card.Footer >  <Button variant="secondary" size="lg" block onClick = {this.onSelectRecord.bind(this)} >Update</Button></Card.Footer>
+          <Card.Footer style={{background:'white', margin:'5px'}} className="mb-2 text-muted">
+            <small>The Impact was <span className='recordTitles'><b>{impactDisplay} </b></span></small>
+            <button  style={{margin:'15px auto 0 auto', fontSize:'20px',  width:'100%'}} className='myBtn' type="button" onClick = {this.onSelectRecord.bind(this)} >Update
+             </button>
+        
+         </Card.Footer>
+
+        
         </Card.Body>
       </Card>
     

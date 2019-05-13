@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import Skill from './Skill';
 import {Link} from 'react-router-dom';
+import { ButtonToolbar, Button, OverlayTrigger, Tooltip, Card }  from 'react-bootstrap';
 
 export default class criticalSkillsGrid extends Component {
     constructor(props) {
@@ -12,31 +13,31 @@ export default class criticalSkillsGrid extends Component {
           criticalSkills: 
           [
             {
-                "skill_id": 14,
+                "skill_id": 18,
                 "skill_title": "Tempurature",
-                "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
-                "is_critical": true
+                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/temperature.png",
+                "is_critical": true,
+                "skill_details": "Try to change your body temperature. Splash your face with cold water or hold an ice cube to focus your mind on something else.",
             },
             {
-                "skill_id": 15,
+                "skill_id": 19,
                 "skill_title": "Intense Exercise",
-                "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+                "skill_details": "Try some intense exercise to help increase oxygen flow to the brain. Sprinting or a good workout at the gym.",
+                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/intenseexercise.png",
                 "is_critical": true
             },
             {
-                "skill_id": 16,
-                "skill_title": "Practiced Breathing",
-                "skill_details": "Even somehting as simple as controlling your breathing can have a profound impact on reducing emotional pain. If you have a favorite breath it out. If not try a technigue called \"box breathing\" Slowly. Count to four while brething out. Count to four while holding your breath. Count to four while breathing in.",
-                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+                "skill_id": 20,
+                "skill_title": "Paced Breathing",
+                "skill_details": "Try taking some deep breaths. Paced breathing can help stop the fight or flight or freeze shallow breathing response. Breath in from your diaphragm for 6 seconds. Hold for 7. Breath out for 8. Pause for 4 seconds and start again.",
+                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/pacedbreathing.png",
                 "is_critical": true
             },
             {
-                "skill_id": 17,
+                "skill_id": 21,
                 "skill_title": "Muscle Relaxation",
-                "skill_details": "Slowly tense and realax every muscel in your body. Start with your toes and feet then your arms and hands. Tense and release the muscels in your face and jaw, neck, shoulders, back, torse and  lower back. Feel the change in your body of releasing all the tension spend as much time as you need on each area and feel the difference of releasing tension.",
-                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/wildcard.png",
+                "skill_details": "Try to release the tension in your body by alternate between tightening and relaxing your muscles. Focus on muscle groups one at a time. You may be holding tension in you face, jaw, neck, shoulders, back, lower back, arms, hands, legs, feet or toes and not realize it.",
+                "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/musclerelax.png",
                 "is_critical": true
             }
         ]
@@ -58,23 +59,16 @@ export default class criticalSkillsGrid extends Component {
         modalShow={this.props.modalShow}
         />
       ))
-
-
     return (
-    <div>
-            <div>
-                <div className="main criticalGrid"> 
-                    {criticalSkillsGrid}
-                </div>
-            </div>
-            <div className='skipButton'>
-                <Link to="/grid">
-                        <button type="button">
-                            Skip these
-                        </button>
-                </Link>
-            </div>
-    </div>
+        <div>          
+            <Link to="/grid">
+                <button  style={{margin:'10px auto', fontSize:'20px',  width:'50%', alignItems:'center'}} className='subBtn' type="button">Skip these
+                </button>
+            </Link>               
+            <div className="criticalGrid"> 
+                {criticalSkillsGrid}
+            </div>      
+        </div>
     )
   }
 }

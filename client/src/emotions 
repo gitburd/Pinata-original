@@ -1,0 +1,150 @@
+INSERT INTO emotions (emotion_text) VALUES('Bitter'),('Bored'),('Confused'),('Disdain'),('Disgusted'),('Embarrassed'), ('Envious'), ('Hurt'),('Inadequate'),('Insecure'),('Irritated'),('Jealous'),('Lost'),('Miserable'),('Mistreated'),('Abused'),('Nervous'),('Stupid'),('Tense'), ('Suspicious'),('Shocked'),('Self-conscious'),('Delusional'),('Terrified'),('Trapped'),('Uncomfortable'),('Worried'),('Worthless'),('Sad'),('Depressed'),('Isolated'),('Lonely'),('Scared'),('Hopeless'), ('Helpless'),('Foolish'), ('Frustrated'),('Grieving'),('Hurt'),('Overwhelmed'),('Resentful'),('Ashamed'), ('Aggressive'),('Disappointed'),('Distant'),('Enraged'), ('Furious'),('Hateful'),('Hostile'),('Irate'),('Mad'),('Pissed Off'),('Provoked'),('Violent'),('Violated'),('Wronged'),('Abandoned'),('Alone'),('Apathetic'),('Numb'),('Disparaged'),('Desperate'),('Empty'),('Hollow'),('Ignored'),('Remorse'),('Tired'),('Exhausted'),('Flat'),('Sleepy'),('Awful'),('Exposed'),('Humiliated'),('Pained'),('Rejected'),('Withdrawn'),('Alienated'),('Devastated'),('Disrespected'),('Inferior'),('Insignificant'),('Ridiculed'),('Powerless'),('Victimized'),('Threatened'),('Constricted'),('Indifferent'),('Unaware'),('Tight'),('Pressure'),('Bewildered'),('Discouraged'),('Dismayed'),('Fearful'),('Frightened'),('Hesitant'),('Disillusioned'),('Judged'),('Judgmental'),('Self-Critical'),('Aversion'),('Avoidant'),('Weak'),('Vulnerable'),('Apologetic'), ('Disconnected'),('Angry'),('Sad'),('Depressed'),('Isolated'),('Lonely'),('Scared'),('Hopeless');
+
+
+emotion groups: 
+
+
+"emotion_id":,
+"emotion_text"
+[
+    {
+        "emotion_id: 3,
+        "emotion_text:"Angry"
+    },
+     {
+        "emotion_id: 4,
+        "emotion_text:"Sad"
+    },
+     {
+        "emotion_id: 5,
+        "emotion_text:"Depressed"
+    },
+    
+
+]    
+
+
+7 | Lonely
+14 | Anxious
+16 | Bitter
+17 | Bored
+18 | Confused
+25 | Insecure
+30 | Mistreated
+38 | Delusional
+90 | Rejected
+81 | Remorse
+3 | Angry 
+4 | Sad
+5 | Depressed
+6 | Isolated
+7 | Lonely
+8 | Scared
+9 | Hopeless
+10 | Unreal
+12 | Disoriented
+13 | Jittery
+14 | Anxious
+16 | Bitter
+17 | Bored
+18 | Confused
+19 | Disdain
+20 | Disgusted
+21 | Embarrassed
+22 | Envious
+23 | Hurt
+24 | Inadequate
+25 | Insecure
+26 | Irritated
+27 | Jealous
+28 | Lost
+29 | Miserable
+30 | Mistreated
+31 | Abused
+32 | Nervous
+33 | Stupid
+34 | Tense
+35 | Suspicious
+36 | Shocked
+37 | Self-conscious
+38 | Delusional
+39 | Terrified
+40 | Trapped
+41 | Uncomfortable
+42 | Worried
+43 | Worthless
+50 | Helpless
+51 | Foolish
+52 | Frustrated
+53 | Grieving
+54 | Hurt
+55 | Overwhelmed
+56 | Resentful
+57 | Ashamed
+58 | Aggressive
+59 | Disappointed
+60 | Distant
+61 | Enraged
+62 | Furious
+63 | Hateful
+64 | Hostile
+65 | Irate
+66 | Mad
+67 | Pissed Off
+68 | Provoked
+69 | Violent
+70 | Violated
+71 | Wronged
+72 | Abandoned
+73 | Alone
+74 | Apathetic
+75 | Numb
+76 | Disparaged
+77 | Desperate
+78 | Empty
+79 | Hollow
+80 | Ignored
+81 | Remorse
+82 | Tired
+83 | Exhausted
+84 | Flat
+85 | Sleepy
+86 | Awful
+87 | Exposed
+88 | Humiliated
+89 | Pained
+90 | Rejected
+91 | Withdrawn
+92 | Alienated
+93 | Devastated
+94 | Disrespected
+95 | Inferior
+96 | Insignificant
+97 | Ridiculed
+98 | Powerless
+99 | Victimized
+100 | Threatened
+101 | Constricted
+102 | Indifferent
+103 | Unaware
+104 | Tight
+105 | Pressure
+106 | Bewildered
+107 | Discouraged
+108 | Dismayed
+109 | Fearful
+110 | Frightened
+111 | Hesitant
+112 | Disillusioned
+113 | Judged
+114 | Judgmental
+115 | Self-Critical
+116 | Aversion
+117 | Avoidant
+118 | Weak
+119 | Vulnerable
+120 | Apologetic
+121 | Disconnected
+122 | Stressed Out
+
+

@@ -26,7 +26,7 @@ export default class Landing extends Component {
       <div className="App ">
         <header className="App-header ">
           
-            <h1>Piñata!</h1>
+            <h1 id="landing">Piñata!</h1>
             <img style={{"padding":"50px", "width":"25%"}} src={pinata_big} alt={'pinata'}/>
 
             {this.props.auth.isAuthenticated() 
