@@ -19,6 +19,8 @@ app.get('/', function(req,res){
 
 app.get('/api/all', db.getBaseSkills)
 
+app.get('/api/criticalSkills', db.getCriticalSkills)
+
 app.get('/api/emotionSkills', db.getEmotionSkills)
    
 app.get('/api/userSkills/', db.getUserSkills)
@@ -29,9 +31,13 @@ app.get('/api/emotion_id/', db.getEmotionId)
 
 app.get('/api/userRecords', db.getUserRecords)
 
-app.get('/api/mostRecentRecord', db.getMostRecentRecord)
+app.get('/api/promptRecord', db.getPromptRecord)
+
+app.get('/api/newRecord', db.getNewRecord)
 
 app.post('/api/records', db.newRecord) 
+
+app.post('/api/recordwithskill', db.newRecordWithSkill) 
 
 app.put('/api/setSkill', db.setSkill)
 
@@ -44,8 +50,21 @@ app.post('/api/user', db.MakeNewUser)
 app.get('/api/user', db.GetUserId)
 // http://localhost:3001/api/user?auth0_id=hbo28
 
+app.get('/api/search/SI', db.searchBySI)
+
+app.get('/api/search/SH', db.searchBySH)
+
+app.get('/api/search/Impact', db.searchByImpact)
+
+app.get('/api/search/Feeling', db.searchByFeeling)
+
+app.get('/api/search/Skill', db.searchBySkill)
+
+app.get('/api/search/Unfinished', db.searchByUnfinished)
+ 
 
 
+ 
 
 
 
@@ -100,10 +119,10 @@ app.get('/api/user', db.GetUserId)
 // // /api/setSkill
 
 // // body 
-// //   {
-// //     "record_id": "",
-// //    "skill_id":""
-// //   }
+//   {
+//     "record_id": "",
+//    "skill_id":""
+//   }
 
 
 

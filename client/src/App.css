@@ -1,16 +1,19 @@
-.sidenav {
-  height: 100%;
-  width: 150px;
+.pinataNav {
+  /* height: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
+  left: 0; */
+  background:hsla(360, 100%, 0%, 0 );
+  /* overflow-x: hidden;
+  padding-top: 20px; */
 }
 
-.sidenav a {
+#clear{
+  background:hsla(360, 100%, 0%, 0) ;
+}
+
+.pinataNav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: calc(10px + 1vmin);
@@ -18,17 +21,52 @@
   display: block;
 }
 
-.sidenav a:hover {
+.si :hover{
+
+  background-color:hsla(0, 100%, 100%, 1) !important; 
+
+}
+
+
+.si{
+  background-color:hsla(0, 100%, 100%, 0.1) !important; 
+}
+
+
+.pinataNav a:hover {
   color: #f1f1f1;
 }
 
+
 .main {
-  margin-left: 150px; /* Same as the width of the sidenav */
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 150px;
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
+  width:100%;
+  /* left:0; */
+  margin:0 auto;
+  font-size: calc(12px + 2vmin);
+  max-height:96vh !important;
+  
 }
 
+.recordsList{
+  /* background-color:white; */
+  background-color:hsla(0, 100%, 100%, 0.1); 
+  padding:15px 50px;
+  margin-top:20px;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+}
+.recordTitle{
+  
+  padding:15px;
 
+}
 
 
 
@@ -40,48 +78,103 @@
 }
 
 .background{
-  /* background: rgb(33,0,36); */
-/* background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%);} */
+  min-height: 100vh;
+  z-index:-100;
+  /* background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%); */
+  background: linear-gradient(43deg, rgba(91,0,99,1) 0%, rgba(37,1,83,1) 49%, rgba(1,35,143,1) 100%);
+  display: flex;
 }
+
 .hidden{
   display: none;
 }
 
 .form{
-  width:40%;
+  width:100%;
+  
 }
 
 .skillsGrid{
-  margin-top:20px; 
+  margin: 5px auto;
   align-items: center;
   justify-content: center;
-  max-height: 95vh;
+  width:80% !important;
+  max-height:96vh !important;
 }
 
 .skill_icon{
-  width:75%; 
+  width:90%;
+  
+}
 
+.skill_icon_heart{
+  width:85%;
+  padding:7%;
+  padding-top:26px;
 }
-.skill_details_icon{
-  width:40%;
-  float: left;
+
+.skill_title{
+  padding-top:10px;
+  font-size: calc(8px + 1vmin);
+  font-weight:bold;
+  color:white;
+ 
 }
+
 
 .skill{
-  width:25%;
+  
+ width:31%;
+ 
   float: left;
-  margin:10px;
+  margin:1%;
+  padding:1%;
   /* color:red; */
   font-size: calc(9px + 1vmin);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
-.topSkill  :hover{
-  /* background:red; */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black;
-  opacity: 0.75;
+.skill :hover{ 
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */
+    opacity: 0.70;
+    cursor: pointer;
+
+}
+
+.criticalSkill :hover{
+  
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */
+  opacity: 0.70;
   cursor: pointer;
+
+}
+
+
+.criticalSkill{
+  width:31%;
+  float: left;
+  margin-left:2%;
+  margin-right:2%;
+  margin-bottom: 30px;
+  /* color:red; */
+  font-size: calc(9px + 1vmin);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00000030;
+
+}
+
+.criticalGrid{
+  margin-left:14%;
+  margin-right:14%;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+  
+}
+
+.skill_details_icon{
+  width:75%;
+  
 }
 
 
@@ -90,18 +183,63 @@
 }
 
 
+#landing{
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold !important;
+
+  font-size: calc(60px + 2.5vmin);
+  color:white;
+}
+
+#feeling{
+  font-family: 'Quicksand', sans-serif;
+  font-weight: medium !important;
+  font-size: calc(30px + 2.5vmin)!important;
+  color:white;
+  padding:'25px 70px';
+}
+
+
 
 
 h1{
-  font-size: calc(20px + 2vmin);
+  font-family: 'Quicksand', sans-serif;
+  font-weight: medium !important;
+  font-size: calc(30px + 2.5vmin);
+  color:white;
 }
 
-.main {
-  margin-left: 5%; 
-  /* Same as the width of the sidenav */
-  font-size: calc(12px + 2vmin);
-  padding: 0px 10px;
+h2{
+  font-family: 'Roboto', sans-serif;
 }
+
+h3{
+  font-family: 'Quicksand', sans-serif;
+  font-weight: medium !important;
+  color:white;
+  font-weight:bold;
+  padding-top:20px;
+  padding-bottom:10px;
+}
+
+
+h4{
+  font-family: 'Quicksand', sans-serif;
+  font-weight: medium !important;
+  color:white;
+  font-weight:bold;
+  padding-top:20px;
+  padding-bottom:10px;
+}
+
+.recordTitles{
+  color:hsla(224, 100%, 34%, 1);
+  /* color:purple; */
+}
+
+
+
+
 
 .link {
   padding: 6px 8px 6px 16px;
@@ -118,10 +256,10 @@ h1{
 
 
 
-
+ 
 .AutoCompleteText{
   width: 100%;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
 }
 
@@ -129,6 +267,7 @@ h1{
   width: 100%;
   border: 1px #662D91;
   box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
+  
 }
 
 
@@ -137,7 +276,7 @@ h1{
   border:none;
   color:rgba(0,0,0,.73);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 22px;
   padding: 10px 5px;
   box-sizing: border-box;
   outline: none;
@@ -150,16 +289,21 @@ h1{
   padding: 0;
   border-top:1px solid gray;
   color:rgba(0,0,0,.73);
+  
 }
 .AutoCompleteText li {
   padding: 10px 5px;
   cursor: pointer;
   color:rgba(0,0,0,.73);
+  background-color:white;
+  font-size: 18px;
+
 }
 
 .AutoCompleteText li:hover {
 text-decoration: underline;
-background-color: rgba(128, 128, 128, 0.28);
+color:white;
+background-color: black;
 }
 
 .AutoCompleteText ul::before {
@@ -176,27 +320,18 @@ background-color: rgba(128, 128, 128, 0.28);
   cursor: pointer;
   }
 
-.App-Component{
-  margin: 150px auto 0 auto;
-  width: 600px;
-}
 
 
 .App {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
   /* background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%); */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
+
 
 .App-header {
-  /* background: rgb(63,94,251);
-  background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%); */
-  /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
+  
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -204,18 +339,271 @@ background-color: rgba(128, 128, 128, 0.28);
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  background:purple;
+  
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.siLink{
+  background-color:hsla(0, 100%, 100%, 0.1); 
+  padding:15px 50px;
+  margin-top:20px;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  /* width:100%; */
+}
+
+
+.myBtn {
+  /* default for <button>, but useful for <a> */
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+
+  /* create a small space when buttons wrap on 2 lines */
+  margin: 5px 5px;
+
+  /* invisible border (will be colored on hover/focus) */
+  border: solid 1px transparent;
+  border-radius: 4px;
+
+  /* size comes from text & padding (no width/height) */
+  padding: 0.5em 1em;
+
+  /* make sure colors have enough contrast! */
+  color: #ffffff;
+  /* background-color: #9555af; */
+  background-color: purple;
+}
+
+.myBtn {
+  /* ... */
+  /* all browsers: remove the default outline since
+      we are rolling our own focus styles */
+  outline: none;
+}
+/* old-school "down" effect on clic + color tweak */
+
+.myBtn:active {
+  transform: translateY(2px);
+  filter: saturate(150%);
+}
+
+/* Firefox: removes the inner border shown on focus */
+.myBtn::-moz-focus-inner {
+  border: none;
+}
+
+/* inverse colors on hover */
+.myBtn:hover,
+.myBtn:focus {
+  /* color: #9555af; */
+  color: purple;
+  border-color: currentColor;
+  background-color: white;
+}
+
+/* make sure we have a visible focus ring */
+.myBtn:focus {
+  outline: none;
+  /* box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
+    0 0 0 1.5px rgba(255, 105, 180, 0.5); */
+    box-shadow: 0 0 0 3px purple,
+    0 0 0 1.5px purple;
+}
+
+
+/* hide focus style if not from keyboard navigation */
+.js-focus-visible .myBtn:focus:not(.focus-visible) {
+  box-shadow: none;
+}
+
+
+
+.subBtn {
+  /* default for <button>, but useful for <a> */
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+
+  /* create a small space when buttons wrap on 2 lines */
+  margin: 50px 0px;
+
+  /* invisible border (will be colored on hover/focus) */
+  border: solid 1px transparent;
+  border-radius: 4px;
+
+  /* size comes from text & padding (no width/height) */
+  padding: 0.5em 1em;
+
+  /* make sure colors have enough contrast! */
+  color: purple;
+  background-color: white; 
+}
+
+.subBtn {
+  /* ... */
+  /* all browsers: remove the default outline since
+      we are rolling our own focus styles */
+  outline: none;
+}
+/* old-school "down" effect on clic + color tweak */
+
+.subBtn:active {
+  transform: translateY(2px);
+  filter: saturate(150%);
+}
+
+/* Firefox: removes the inner border shown on focus */
+.subBtn::-moz-focus-inner {
+  border: none;
+}
+
+/* inverse colors on hover */
+.subBtn:hover,
+.subBtn:focus {
+  color: white;
+  border-color: currentColor;
+  background-color: purple;
+}
+
+/* make sure we have a visible focus ring */
+.subBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px purple,
+    0 0 0 1.5px purple;
+}
+
+
+/* hide focus style if not from keyboard navigation */
+.js-focus-visible .subBtn:focus:not(.focus-visible) {
+  box-shadow: none;
+}
+
+
+
+.closeBtn {
+  /* default for <button>, but useful for <a> */
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+
+  /* create a small space when buttons wrap on 2 lines */
+  margin: 50px 0px;
+
+  /* invisible border (will be colored on hover/focus) */
+  border: solid 1px transparent;
+  border-radius: 4px;
+
+  /* size comes from text & padding (no width/height) */
+  padding: 0.5em 1em;
+
+  /* make sure colors have enough contrast! */
+  color: white;
+  background-color: black; 
+}
+
+.closeBtn {
+  /* ... */
+  /* all browsers: remove the default outline since
+      we are rolling our own focus styles */
+  outline: none;
+}
+/* old-school "down" effect on clic + color tweak */
+
+.closeBtn:active {
+  transform: translateY(2px);
+  filter: saturate(150%);
+}
+
+/* Firefox: removes the inner border shown on focus */
+.closeBtn::-moz-focus-inner {
+  border: none;
+}
+
+/* inverse colors on hover */
+.closeBtn:hover,
+.closeBtn:focus {
+  color: black;
+  border-color: currentColor;
+  background-color: white;
+}
+
+/* make sure we have a visible focus ring */
+.closeBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px black,
+    0 0 0 1.5px black;
+}
+
+
+/* hide focus style if not from keyboard navigation */
+.js-focus-visible .closeBtn:focus:not(.focus-visible) {
+  box-shadow: none;
+}
+
+
+.skipButton{
+  position: fixed;
+  bottom: 30px;
+  right:30px;
+  margin: auto;
+  text-align:center;
+
+}
+
+
+
+.skipBtn {
+  /* default for <button>, but useful for <a> */
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+ 
+  margin:  10px auto;
+  border: solid 1px transparent;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  color: #1302ff;
+  background-color: white; 
+  font-size: 18px;
+}
+
+.skipBtn {
+  outline: none;
+}
+
+
+.skipBtn:active {
+  transform: translateY(1px);
+  filter: saturate(150%);
+}
+
+
+.skipBtn::-moz-focus-inner {
+  border: none;
+}
+
+
+.skipBtn:hover,
+.skipBtn:focus {
+  color: white;
+  border-color: currentColor;
+  background-color: #1302ff;
+}
+
+
+.skipBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #1302ff,
+    0 0 0 1.5px #1302ff;
+}
+
+
+.js-focus-visible .skipBtn:focus:not(.focus-visible) {
+  box-shadow: none;
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import '../App.css';
-import { ButtonToolbar, Button }  from 'react-bootstrap';
+import { ButtonToolbar, Button, Card }  from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SkillsGrid from './SkillsGrid';
+import { MDBRow, MDBCol, MDBIcon } from "mdbreact";
 
 
 export default class Skill extends Component {
@@ -16,70 +17,48 @@ export default class Skill extends Component {
 
 
   render() {
-    const { skill_id, skill_title, skill_details, skill_icon} = this.props.skill;
-           
+    const { skill_id, skill_title, skill_details, skill_icon, is_critical} = this.props.skill;
+    // const { location } = this.props
     return (
-      <div className="topSkill">
-          <div className="skill" onClick = {()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
-          {skill_title}
-          <br/>
-                <img  src={skill_icon} className="skill_icon" />    
-                
-          </div>
-        
+      <div>
+      <div className= {window.location.pathname === "/grid"  ?  "skill":"criticalSkill"} 
+      onClick = 
+        { this.props.skill.skill_id === 0 ? this.props.getNewGrid : ()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
+ 
+      <div >
+        <Card >
+         
+          <Card.Body>
+            <div className= {this.props.skill.is_heart ? '':'hidden'}> 
+            <MDBIcon style={{position:'absolute', top: '10px', right: '10px', zIndex:'2'}}icon="heart" size="1x" className="pink-text pr-3" />
+            </div>
+            <div className= {this.props.skill.is_star ? '':'hidden'}>
+              <MDBIcon style={{position:'absolute', top: '10px', right: '10px', zIndex:'2'}} icon="star" size="1x" className="yellow-text pr-3"/>
+            </div>
+            <div >
+            <Card.Img variant="top" src={skill_icon} />
+            </div>
+          </Card.Body>
+          <Card.Footer  style={{padding:'2px', height:'30px', background:'white', color:'purple'}}>
+            {skill_title}
+          </Card.Footer>
+        </Card>
       </div>
+    </div> 
+    </div>
+
+
+
+
+
+
+
+
+
+     
     )
   }
 }
 
 
- 
-// OKAY! 
-//   put to the record by id 
-//     function 
-//       record id :   
-//         function to get the most recent id - it will be the one made from the last page - it will also not have a skill assigned.
-//       skill id : 
-//         in the state of the modal/ SkillsGrid(Skill)
-    
-//     UI 
-//       button to skip- close for now 
-//       button to run the funtion above 
-
-
-
-
-
- 
-// export class Skill extends Component {
-//     getStyle= ()=> {
-//         return {
-//         backgroundColor:'#fff',
-//         padding: '10px', 
-//         fontSize:'18px', 
-//         color:'#007fff'
-
-//         }
-//     }
   
-    
-//     render() {
-//     const { id, skill, completedStatus, icon, helpful, feel_change} = this.props.skill;
-//         return (
-//         <div style={this.getStyle()}>
-//             {skill}
-//             {Music}
-
-//         </div>
-//     )
-//   }
-// }
-
-// PropTypes
-// Skill.propTypes= {
-//     skill: PropTypes.object.isRequired
-// }
-
-
-
-// export default Skill

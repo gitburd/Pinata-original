@@ -20,7 +20,7 @@ export default class Navbar extends Component {
             <Link className="navbar-brand" to="/records/list">Records </Link>
             <Link className="navbar-brand" to="/records/add">New Record</Link>
             <Link className="navbar-brand" to="/records/update">Update Records</Link>
-            <Link className="navbar-brand" to="/records/finish"> Finish Record</Link>
+            <Link className="navbar-brand" to="/finish"> Finish Record</Link>
             <Link className="navbar-brand" to="/records/search">Search Records</Link>
 
           </div>

@@ -2,85 +2,75 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, ButtonToolbar, Form}  from 'react-bootstrap';
 
+import AfterLvlSlider from './AfterLvlSlider';
+
+ 
 export default class SkillDetails extends Component {
   constructor(props) {
     super(props)
     this.state={
       after_lvl:'',
-      tryItClicked:false 
+      tryItClicked:false, 
+      show: false
     }
     this.onSubmit= this.onSubmit.bind(this);
     this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
-   
+
+    this.closeModal = this.closeModal.bind(this)
+
     }
+
+ closeModal= ()=>{
+   this.props.showModalCallback();
+ }
 
   setSkill =(e)=> {
     e.preventDefault();
-    // let record_id = this.props.recentRecord[0].record_id
     console.log(`this is a test`)
     // this.props.updateRecord(this.state.record_id, this.state.skill_id);
     console.log(this.props.skill_title)
     console.log(this.props.skill_id)
     // console.log(record_id)
-    console.log('from details', this.props.recentRecord[0].record_id)
-
+    console.log('from details', this.props.recent_record.record_id)
     this.props.addSkillToRecord(this.props.skill_id)
     this.setState({tryItClicked:true})
+  }
 
-
+  
+  handleAfter_lvlChange(after_lvl) {
+    this.setState({after_lvl})
     }
 
+    onSubmit =(e)=> {
+    e.preventDefault();
+    console.log(this.props.state)
 
-    getRecentRecord = () => {
+    let recent_record = this.props.recent_record
 
-      console.log(  `hello from line 10ish`)
+    this.props.updateRecord(recent_record.record_id, recent_record.before_lvl, this.state.after_lvl);
 
-      let url = `http://localhost:3001/api/mostRecentRecord?user_id=2`
-    
-      fetch(url, {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json'}
-        })
-        .then(res => res.json()).then(json => this.setState({record_id:json.record_id})).catch(function(e) {console.log(e)})
-    
+    this.setState({
+        emotion:'',
+        emotion_id:'',
+        skill:'',
+        skill_id:'',
+        before_lvl:'',
+        after_lvl:'',
+        date:'',
+        si:false,
+        sh:false,
+        message:`Record updated.`
+        });
+
     }
-
-
-    handleAfter_lvlChange(after_lvl) {
-      this.setState({after_lvl: after_lvl.target.value})
-      }
-
-      onSubmit =(e)=> {
-      e.preventDefault();
-      console.log(this.props.state)
-
-      let recentRecord = this.props.recentRecord[0]
-
-      this.props.updateRecord(recentRecord.record_id, recentRecord.before_lvl, this.state.after_lvl);
-  
-      this.setState({
-          emotion:'',
-          emotion_id:'',
-          skill:'',
-          skill_id:'',
-          before_lvl:'',
-          after_lvl:'',
-          date:'',
-          si:false,
-          sh:false,
-          message:`Record updated.`
-          });
-  
-      }
   
       render() {
- 
-
-
-        return (
+      return (
           <Modal
+          // show={this.props.modalShow} 
+          onHide={this.closeModal}
             {...this.props}
-            size="lg"
+            size="sm"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             className='modal' 
@@ -92,54 +82,44 @@ export default class SkillDetails extends Component {
              
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-            <img  src={this.props.skill_icon} className="skill_details_icon" /> 
-           
+            <Modal.Body >
             <div className = {this.state.tryItClicked? 'hidden': ''}>
+            <img  src={this.props.skill_icon} className="skill_details_icon" /> 
               <p>{this.props.skill_details}</p>
             </div>
 
-            <div className = {this.state.tryItClicked? '': 'hidden'}>
-              <p>Good work choosing a coping strategy!
-              <br/> Check back in after finishing the activity and rate your distress level again. 
-              </p>
-              <hr/>
-              <p>How did it go?</p>
+            <div style={{fontSize:'22px'}} className = {this.state.tryItClicked? '': 'hidden'}>
+              <p>Great work!</p>
+              <p>How do you feel now?</p>
 
-              <div style={{width:'50%', margin:'0 auto'}}>
-                <Form>
-                  <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>After Level</Form.Label>
-                  <Form.Control as="select"  
-                    onChange={this.handleAfter_lvlChange.bind(this)}>
-            
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-            
-                  </Form.Control>
-                  </Form.Group>
-        
-                  <input type="submit" value="Submit" className="btn" style={{ margin:'20px'} }
-                  onClick={this.onSubmit.bind(this)} />
-                </Form>
+              <div style={{margin:'20px auto 30px auto'}}>
+              
+              <div className = {this.state.after_lvl? 'hidden': 'recordTitles'}>
+                Slide to set
+              
+              </div>
+
+              <span className='recordTitles'><b>  {this.state.after_lvl}</b></span>
+              <AfterLvlSlider  handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
+                
               </div>
             </div>
               
               
             </Modal.Body>
             <Modal.Footer>
-            <Button onClick={()=>this.props.onHide}>Close</Button>
+            <div className = {this.state.tryItClicked? 'hidden': ''}>
+            <Button onClick={this.closeModal}>Close</Button>
             <Button style={{margin:'10px'}} onClick = {this.setSkill}
               variant="outline-success">Try it</Button>
+            </div>
 
-
- 
-
+            <div className = {this.state.tryItClicked? '': 'hidden'}>
+            <Button onClick={this.closeModal}>Skip</Button>
+            <Button style={{margin:'10px'}}
+                  onClick={this.onSubmit.bind(this)} 
+                  variant="outline-success"> Submit </Button>
+            </div>
              
             </Modal.Footer>
           </Modal>
