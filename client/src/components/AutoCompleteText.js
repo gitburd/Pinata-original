@@ -294,7 +294,7 @@ export default class AutoCompleteText extends Component {
                 "skill_id": 26
               },
               {
-                "skill_title": "Nautre",
+                "skill_title": "Nature",
                 "skill_details": "Garden, visit the forest, go for a walk or hike. Spend sometime time with plants.",
                 "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/nature.png",
                 "skill_id": 27

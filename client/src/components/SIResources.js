@@ -11,20 +11,18 @@ import { ButtonToolbar, Button, OverlayTrigger, Tooltip, Card, CardDeck }  from 
 export default class SIResources extends Component {
   render() {
     return (
-      <div className='background' style={{width:'100%', margin:'0px'}}>
+    
       <div >
 
-<h4 style={{width:'70%', textAlign:'center', margin:'20px auto'}}> You are not alone. <br/> Explore the resources below or continue to the suggestions page.</h4>
+<h1 style={{width:'70%', color:'white',textAlign:'center', margin:'20px auto'}}> You are not alone</h1>
 
       <Link  to="/criticalgrid">
-        <button  style={{margin:'20px auto'}} className='subBtn' type="button">
+        <button  style={{margin:'10px auto', fontSize:'20px', width:'50%'}} className='subBtn' type="button">
           Skip these
-        </button>
-
-        
+        </button>    
       </Link>
  
-        <CardDeck style={{ margin:'30px 50px' }}>
+        <CardDeck style={{ margin:'30px 60px' }}>
           
           <Card className='si' >         
             <Card.Body>
@@ -118,11 +116,8 @@ export default class SIResources extends Component {
     
         </CardDeck>
 
-        
-
         </div>
 
-      </div>
     )
   }
 }

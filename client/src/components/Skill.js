@@ -39,7 +39,7 @@ export default class Skill extends Component {
             <Card.Img variant="top" src={skill_icon} />
             </div>
           </Card.Body>
-          <Card.Footer  style={{padding:'2px', height:'30px', background:'white', color:'purple'}}>
+          <Card.Footer  style={{padding:'1px', height:'30px',fontSize:'15px', background:'white', fontWeight:'bold', color:'purple'}}>
             {skill_title}
           </Card.Footer>
         </Card>

@@ -48,7 +48,7 @@ export default class UpdateModal extends Component {
           si:false,
           sh:false,
             message:`Record updated.`
-          });
+          }, this.closeModal);
     
       }
   
@@ -99,8 +99,8 @@ export default class UpdateModal extends Component {
                <h2>Intensity was <span className='recordTitles'><b> {this.props.update_before_lvl} </b></span></h2>
   
         <hr/>
-        <div style={{padding:'10px', margin:'0 auto', alignItems:'center'}}>
-            <h2>The intensity became <span className='recordTitles'><b>  {this.state.after_lvl}</b></span></h2>
+        <div style={{padding:'10px', margin:'0 auto', alignItems:'center', color:'white', backgroundColor:'#1d1f2b'}}>
+            <h2>The intensity became <span ><b>  {this.state.after_lvl}</b></span></h2>
               <div style={{ margin:'30px auto', width:'50%', alignItems:'center'}}>
 
               <AfterLvlSlider  handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
@@ -112,8 +112,8 @@ export default class UpdateModal extends Component {
             <Modal.Footer>
             
 
-            <button  style={{ margin:'0 auto',border:'2px solid purple', fontSize:'20px',  width:'40%'}} className='closeBtn' type="button" onClick={this.closeModal}>Close</button>
-            <button  style={{ margin:'0 auto',fontSize:'20px',  width:'40%'}} className='myBtn' type="button" onClick = {this.onSubmit.bind(this)} > Update</button>
+            <button  style={{ margin:'0 auto',border:'2px solid purple', fontSize:'20px',  width:'40%'}} className='subBtn' type="button" onClick={this.closeModal}>Close</button>
+            <button  style={{ margin:'0 auto',border:'2px solid purple', fontSize:'20px',  width:'40%'}}  className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} > Update</button>
         
              
             </Modal.Footer>

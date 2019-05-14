@@ -269,6 +269,21 @@ const newRecordWithSkill = (request, response) => {
     })
   }
 
+  const makeCustomSkill = (request, response) => {
+    var skill_title = request.body.skill_title;
+    var skill_details = request.body.skill_details;
+    var skill_icon = request.body.skill_icon;
+    var user_id = request.body.user_id;
+    pool.query(`INSERT INTO skills (skill_title, skill_details, skill_icon, is_heart, user_id) VALUES('${skill_title}','${skill_details}','${skill_icon}',true,'${user_id}') RETURNING *;`,(error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log('new record successful')
+      response.send({skill:results.rows[0]});
+    } )
+  
+  }
+
   
   module.exports = {
     getBaseSkills,
@@ -293,6 +308,7 @@ const newRecordWithSkill = (request, response) => {
     searchByImpact,
     searchByFeeling,
     searchBySkill,
-    searchByUnfinished
+    searchByUnfinished,
+    makeCustomSkill
 
   }

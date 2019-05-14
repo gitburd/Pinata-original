@@ -143,7 +143,7 @@ class App extends Component {
         "skill_id": 26
       },
       {
-        "skill_title": "Nautre",
+        "skill_title": "Nature",
         "skill_details": "Garden, visit the forest, go for a walk or hike. Spend sometime time with plants.",
         "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/nature.png",
         "skill_id": 27
@@ -953,15 +953,16 @@ class App extends Component {
             />
 
           <Route path="/suicideprevention" exact render = { props =>(
-            !this.props.auth.isAuthenticated() 
-              ? <React.Fragment>
-                  <header className="App-header"> 
-                        Let's learn Auth: 
-                  </header>                 
-                  <Secret {...this.props}/>
-              </React.Fragment>
-              :
+            // !this.props.auth.isAuthenticated() 
+            //   ? <React.Fragment>
+            //       <header className="App-header"> 
+            //             Let's learn Auth: 
+            //       </header>                 
+            //       <Secret {...this.props}/>
+              // </React.Fragment>
+              // :
               <React.Fragment>
+               
                 <SIResources />             
               </React.Fragment>              
           )} />

@@ -108,7 +108,7 @@
 }
 
 .skill_icon{
-  width:90%;
+  width:100%;
   
 }
 
@@ -169,11 +169,12 @@
 }
 
 .criticalGrid{
-  margin-left:14%;
-  margin-right:14%;
+  margin-left:auto;
+  margin-right:auto;
+  padding-left: 23.2%;
   align-items: center;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 40px;
   
 }
 
@@ -494,7 +495,7 @@ background-color: black;
   margin: 50px 0px;
 
   /* invisible border (will be colored on hover/focus) */
-  border: solid 1px transparent;
+  border: solid 1px black;
   border-radius: 4px;
 
   /* size comes from text & padding (no width/height) */
