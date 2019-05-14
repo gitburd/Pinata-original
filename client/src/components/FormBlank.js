@@ -111,7 +111,7 @@ export default class FormBlank extends Component {
 
   onSubmit =(e)=> {
     e.preventDefault();
-    this.props.addFullRecord( this.state.skill_id, this.state.emotion_id, this.state.before_lvl, this.state.after_lvl, this.state.sh, this.state.si, this.state.date);
+    this.props.addFullRecord( this.state.skill_id, this.state.emotion_id, this.state.before_lvl, this.state.after_lvl, this.state.si,this.state.sh, this.state.date);
 
 
     this.setState({

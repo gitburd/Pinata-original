@@ -256,7 +256,7 @@ export default class AutoCompleteText extends Component {
         pinata :   {
             "skill_title": "piñata",
             "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wind.png",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wildcard2.png",
             "skill_id": 0
         },
         baseSkillsArray :
@@ -746,12 +746,12 @@ console.log('grid array from 285', this.state.skillsGridArray)
                 </div>
                 <br/>
                 
-                <Form>
+               
                     <div className = {this.state.emotion_text === 'TEST' ? 'hidden': ''}>
                         <h3>
                         The intensity of this feeling is 
                         </h3>
-                        <MySlider handleBefore_lvlChange= {this.handleBefore_lvlChange}/>
+                        <MySlider style={{margin:'0 auto'}} handleBefore_lvlChange= {this.handleBefore_lvlChange}/>
                     </div>
                     <div className = {this.state.before_lvl<7 ? 'hidden': ''}>
                         <h3>I am also thinking about </h3>  
@@ -761,7 +761,7 @@ console.log('grid array from 285', this.state.skillsGridArray)
                     <div className = {this.state.before_lvl ? '':'hidden'}>
                         <button className="subBtn" onClick={this.newRecord}>Get suggestions</button> 
                     </div>             
-                </Form>
+               
             </div>
         )
     }

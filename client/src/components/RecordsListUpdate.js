@@ -33,7 +33,7 @@ class RecordsListUpdate extends Component {
     ))
     return (
       <div>
-        <button onClick={this.props.getUserRecords} style={{margin:'10px auto', fontSize:'20px',  width:'50%', alignItems:'center'}} className='subBtn' type="button">Get Records List
+        <button onClick={this.props.getUserRecords} style={{margin:'10px auto', fontSize:'20px',  width:'50%', minWidth:'200px', alignItems:'center'}} className='subBtn' type="button">Get Records List
         </button>  
         <div className='recordsList'>
           {recordsList}

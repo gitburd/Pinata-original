@@ -15,7 +15,7 @@ export default class SkillsGrid extends Component {
       pinata :   {
         "skill_title": "piñata",
         "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wind.png",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wildcard2.png",
         "skill_id": 0
       }, 
       isFirstGrid:true
@@ -30,28 +30,44 @@ export default class SkillsGrid extends Component {
     e.preventDefault();
     // console.log('out way ', this.props.baseSkillsArray)
    
-    let baseSkills = this.props.baseSkillsArray.concat(this.props.userSkillsArray)
+    
+    let baseSkills = []
+    for(let i=0;i<this.props.baseSkillsArray.length; i++){
+      baseSkills.push(this.props.baseSkillsArray[i])
+    }
+    for (let i ; i <this.props.userSkillsArray.length; i++){
+      baseSkills.push(this.props.userSkillsArray[i])
+    }
     
     let idx;
     let grid = [];
     while (grid.length < 9) {
-      console.log('38', grid.length)
+      console.log('the length at the top ', grid.length)
+      console.log(grid)
      
       idx = Math.floor((Math.random() * (baseSkills.length -1)))
+      console.log(baseSkills.length, 'base skills length at top')
       if (grid.length === 4) {
+        console.log('the before pinata is', grid.length )
         grid.push(this.state.pinata)
+        console.log('the after pinata is', grid.length )
       } else {
-        console.log('44', idx, baseSkills[idx] )
+        console.log('the skill is', idx, baseSkills[idx] )
         grid.push(baseSkills[idx])
-        
+        console.log('length after push', grid.length)
         baseSkills.splice(idx,1)
-      }   
+      }  
+      console.log('the grid length is', grid.length) 
     }
-    this.setGrid(grid, baseSkills)
+    if (grid.length>9){
+      grid.pop()
+      console.log('length ', grid.length)
+    }
+    this.setGrid(grid)
   }
 
-  setGrid = (grid,baseSkills) =>{
-    this.setState({newGrid:grid, isFirstGrid:false, baseSkills}, console.log(this.state.newGrid))
+  setGrid = (grid) =>{
+    this.setState({newGrid:grid, isFirstGrid:false})
 
   }
 
@@ -154,9 +170,9 @@ let grid = this.state.isFirstGrid ? skillsGrid : newSkillsGrid;
 
   return (
    
-      <div className = 'skillsGrid'>
-      {grid}
-    </div>
+      <div style={{width:'50%'}}className= 'skillsGrid' >
+        {grid}
+      </div>
     
  
   )

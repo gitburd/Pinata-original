@@ -24,7 +24,7 @@ export default class Skill extends Component {
       <div className= {window.location.pathname === "/grid"  ?  "skill":"criticalSkill"} 
       onClick = 
         { this.props.skill.skill_id === 0 ? this.props.getNewGrid : ()=>{this.props.skillClicked(skill_id, skill_icon, skill_details, skill_title)}}>
-
+ 
       <div >
         <Card >
          

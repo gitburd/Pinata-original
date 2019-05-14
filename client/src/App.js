@@ -66,7 +66,7 @@ class App extends Component {
       pinata :   {
         "skill_title": "piñata",
         "skill_details": "Lorium sermpra filler text is filling the text sapce.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wind.png",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wildcard2.png",
         "skill_id": 0
       },
 
@@ -717,7 +717,7 @@ class App extends Component {
 
         if (si){
             grid = '/suicideprevention'
-        } else if (before_lvl>5){
+        } else if (before_lvl>6){
             grid='/criticalgrid'
         } else {
             grid = '/grid'
@@ -762,11 +762,12 @@ class App extends Component {
       <MuiThemeProvider>
         <Router>
         <div className='background'>
-          <div className="App main">
+          <div className="main">
 
           <Route path="/" exact render = { props =>(
             <React.Fragment >
              
+             <div style={{width:'100%'}}>
               <Landing 
               {...this.props}{...props} 
               user_id ={this.props.user_id} 
@@ -774,6 +775,7 @@ class App extends Component {
               userIdCallback= {this.userIdCallback}
               getPromptRecord = {this.getPromptRecord}
               />
+              </div>
           
             </React.Fragment>)} 
           />
@@ -784,7 +786,17 @@ class App extends Component {
           
           <Route path="/" render = { props =>(
             <React.Fragment>    
-              <Sidenavbar/>    
+              <div>
+
+              <Sidenavbar
+               {...this.props}{...props} 
+              user_id ={this.props.user_id} 
+              getUserInfo={this.getUserInfo}  
+              userIdCallback= {this.userIdCallback}
+              getPromptRecord = {this.getPromptRecord}
+              />    
+
+              </div>
             </React.Fragment>)} 
           />
 
@@ -836,7 +848,7 @@ class App extends Component {
             this.props.auth.isAuthenticated() 
             ? 
             <React.Fragment>
-              <div >
+              <div className = 'skillsGrid'>
 
                 <SkillDetails 
                 updateRecord = {this.updateRecord}

@@ -8,13 +8,37 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 export default class Sidenavbar extends Component {
+
     render() {
+
+        let login =  this.props.auth.isAuthenticated()? (
+            <button style={{ cursor: 'pointer',backgroundColor:'transparent', border:'none' }} onClick={()=>{ this.props.auth.logout()
+                 window.location='/'             
+                }
+            }
+        > <i class="fas fa-sign-out-alt" style={{ fontSize: '2em' }} /></button> 
+        ) : (
+        <button  style={{ cursor: 'pointer',backgroundColor:'transparent', border:'none' }} onClick={this.props.auth.login}> <i class="fas fa-sign-out-alt" style={{ fontSize: '2em' }} /></button> 
+        )
         
         return (
+            <div className={this.props.auth.isAuthenticated()? 'clear':'hidden'}>
+          
           <div className='clear'>
               <SideNav id='clear' className='pinataNav'>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="/">
+                <NavItem eventKey="/login">
+                        <NavIcon>
+
+                      {login}
+                     
+                        </NavIcon>
+                        <NavText>
+                        <button  style={{ cursor: 'pointer',backgroundColor:'transparent', border:'none' }} onClick={this.props.auth.login}> Logout </button>
+                        </NavText>
+                    </NavItem>
+
                     <NavItem eventKey="/">
                         <NavIcon>
                             <Link className="navbar-brand" to="/"> 
@@ -96,6 +120,7 @@ export default class Sidenavbar extends Component {
                 </SideNav.Nav>
             </SideNav>
         </div> 
+        </div>
     )};
 }
     

@@ -37,17 +37,19 @@
   color: #f1f1f1;
 }
 
+
 .main {
-  padding-left: 150px; /* Same as the width of the pinataNav */
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 150px;
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
-}
-.main {
-  /* padding-left: 5%;  */
-  left:0;
+  width:100%;
+  /* left:0; */
   margin:0 auto;
   font-size: calc(12px + 2vmin);
-  /* padding: 0px 10px; */
+  max-height:96vh !important;
+  
 }
 
 .recordsList{
@@ -93,17 +95,15 @@
 }
 
 .skillsGrid{
- 
-  margin: 20px auto;
+  margin: 5px auto;
   align-items: center;
   justify-content: center;
-  width:100%;
-  max-height:96vh;
+  width:80% !important;
+  max-height:96vh !important;
 }
 
 .skill_icon{
   width:90%;
-  padding:5px;
   
 }
 
@@ -125,6 +125,7 @@
 .skill{
   
  width:31%;
+ 
   float: left;
   margin:1%;
   padding:1%;
@@ -319,10 +320,6 @@ background-color: black;
   cursor: pointer;
   }
 
-.App-Component{
-  margin: 150px auto 0 auto;
-  width: 600px;
-}
 
 
 .App {
@@ -331,16 +328,10 @@ background-color: black;
   /* background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%); */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
+
 
 .App-header {
-  /* background: rgb(63,94,251);
-  background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%); */
-  /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
+  
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -348,27 +339,13 @@ background-color: black;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  /* background:purple; */
+  
 }
 
 .App-link {
   color: #61dafb;
 }
 
-
-
-
-
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .siLink{
   background-color:hsla(0, 100%, 100%, 0.1); 

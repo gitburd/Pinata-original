@@ -27,29 +27,26 @@ export default class Landing extends Component {
         <header className="App-header ">
           
             <h1 id="landing">Piñata!</h1>
-            <img style={{"padding":"50px", "width":"25%"}} src={pinata_big} alt={'pinata'}/>
+            <img style={{"padding":"50px", "width":"30%"}} src={pinata_big} alt={'pinata'}/>
 
             {this.props.auth.isAuthenticated() 
           ? (
             <div>  
               <hr/>        
-              <h2> Welcome, {this.props.first_name}  <MDBIcon icon="heart" /> </h2>   
-              <div>
-    
-  </div>       
-                <button style={{ cursor: 'pointer' }} onClick={()=>{
-                  this.props.auth.logout()
-                  window.location='/'             
-                  }
-                  }
-                > logout</button>
+              <h2> Welcome, {this.props.first_name}  <MDBIcon icon="heart" /> </h2>         
+              <button className="subBtn" onClick={()=>{
+                this.props.auth.logout()
+                window.location='/'             
+                }
+                }
+              > logout</button>
             </div>
           ) 
           : (
             <div>
               <hr/>        
               <h2> Welcome, please login to continue.</h2>
-              <button  style={{ cursor: 'pointer' }} onClick={this.props.auth.login}> login</button>
+              <button className="subBtn" onClick={this.props.auth.login}> login</button>
             </div>
           )}
         </header>
