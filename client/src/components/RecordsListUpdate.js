@@ -32,12 +32,12 @@ class RecordsListUpdate extends Component {
         
     ))
     return (
-      <div>
+      <div >
         <button onClick={this.props.getUserRecords} style={{margin:'10px auto', fontSize:'20px',  width:'50%', minWidth:'200px', alignItems:'center'}} className='subBtn' type="button">Get Records List
         </button>  
-        <div className='recordsList'>
+       
           {recordsList}
-        </div>
+      
       </div> 
     )
   }

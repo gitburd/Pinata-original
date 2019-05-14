@@ -736,7 +736,7 @@ console.log('grid array from 285', this.state.skillsGridArray)
             grid = '/grid'
         }
         return (
-            <div >
+            <div style={{margin:'auto'}}>
                 <h1 id="feeling"style={{padding:'25px 70px'}}>I'm feeling</h1>
                 <div className="AutoCompleteText">
                     <input value={text} type="text" onChange={this.onTextChanged} />

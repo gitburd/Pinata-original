@@ -11,7 +11,8 @@ import { ButtonToolbar, Button, OverlayTrigger, Tooltip, Card, CardDeck }  from 
 export default class SIResources extends Component {
   render() {
     return (
-      <div>
+      <div className='background' style={{width:'100%', margin:'0px'}}>
+      <div >
 
 <h4 style={{width:'70%', textAlign:'center', margin:'20px auto'}}> You are not alone. <br/> Explore the resources below or continue to the suggestions page.</h4>
 
@@ -119,7 +120,7 @@ export default class SIResources extends Component {
 
         
 
-
+        </div>
 
       </div>
     )

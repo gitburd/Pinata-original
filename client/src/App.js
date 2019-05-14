@@ -761,8 +761,9 @@ class App extends Component {
       
       <MuiThemeProvider>
         <Router>
-        <div className='background'>
+        
           <div className="main">
+          <div className='background'>
 
           <Route path="/" exact render = { props =>(
             <React.Fragment >
@@ -1071,7 +1072,7 @@ class App extends Component {
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
                    
-                  <div >  
+                  <div style={{margin:'0 auto',paddingLeft:'10%',paddingRight:'10%', width:'75%'}} >  
                   <UpdateModal 
                   recordModalShow={this.state.recordModalShow}
                   update_date={this.state.update_date}
@@ -1092,20 +1093,6 @@ class App extends Component {
                   updateRecord = {this.updateRecord} 
      
                   />
-
-                    {/* <Update 
-                    updateRecord = {this.updateRecord}  
-                    record_id = {this.state.record_id} 
-                    before_lvl = {this.state.before_lvl} 
-                    after_lvl = {this.state.after_lvl}
-                    date = {this.state.date}
-                    emotion= {this.state.emotion}
-                    skill = {this.state.skill}
-                    searchByQuery={this.searchByQuery}
-                    /> */}
-                    
-                    
-                    {/* <button onClick={this.getUserRecords}>get user Records</button>   */}
                      
                     <RecordsListUpdate 
                     getUserRecords = {this.getUserRecords}

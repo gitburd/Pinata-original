@@ -131,8 +131,8 @@ export default class FormBlank extends Component {
   render() {
              
     return (
-      <div >
-        <div className='form main'>
+      <div className='addRecord' >
+        <div >
           <h1 style={{padding:'20px'}}>Add a New Record</h1>
           <Form>
             <Form.Group controlId="exampleForm.ControlSelect1">
