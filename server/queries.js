@@ -8,12 +8,23 @@ const pool = new Pool({
 
 const getBaseSkills = (request, response) => {
   
-    pool.query(`SELECT s.skill_title, s.skill_details, s.skill_icon, s.skill_id FROM skills AS s`, (error, results) => {
+    pool.query(`SELECT skill_title, skill_details, skill_icon, skill_id FROM skills`, (error, results) => {
       if (error) {
         throw error
       }
       response.status(200).json(results.rows)
     })
+  }
+
+  const getCustomSkills = (request, response) => {
+    var user_id = request.query.user_id;
+    pool.query(`SELECT * FROM skills WHERE user_id='${user_id}' `, (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    }) 
+
   }
 
   const getCriticalSkills = (request, response) => {
@@ -284,17 +295,7 @@ const newRecordWithSkill = (request, response) => {
   
   }
 
-  const getCustomSkills = (request, response) => {
-    var user_id = request.query.user_id;
-    pool.query(`SELECT * FROM skills WHERE user_id='${user_id}' `, (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    }) 
-  
 
-  }
 
   
   module.exports = {
