@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
 import '../App.css';
-import { Form, Button}  from 'react-bootstrap';
+import { Form, Button, Card, CardDeck}  from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import MySlider from './MySlider';
 import AfterLvlSlider from './AfterLvlSlider';
 import EmotionsTypeahead from './EmotionsTypeahead'
 import SkillsTypeahead from './SkillsTypeahead'
+
 
 export default class MakeCustomSkill extends Component {
   constructor(){
@@ -74,15 +75,50 @@ export default class MakeCustomSkill extends Component {
         <h3> Skill description </h3>
 
 
-        <input style={{margin:'20px auto', width:'100%'}} type='textarea' 
+        <input style={{margin:'20px auto', width:'75%'}} type='textarea' 
         value={this.state.skill_details}
         multiline = {true}
         numberOfLines={5}
         onChange={this.updateSkill_details.bind(this)}></input>
        
-             
+       <h3> Choose an image </h3>
+
+       <div style={{padding:'5% 25%'}}>
+       <CardDeck>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/maze.png" />
+  </Card>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/chess.png" />
+  </Card>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/heart.png" />
+  </Card>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png" />
+  </Card>
+  
+</CardDeck>;
+<CardDeck>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/blossom.png" />
+  </Card>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/rocket.png" />
+  </Card>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/triskele.png" />
+  </Card>
+  <Card>
+    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/target.png" />
+  </Card>
+  
+</CardDeck>
+</div>
+    
+  
      
-        <button  style={{margin:'0px auto 20px auto', fontSize:'20px',  width:'100%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Skill
+        <button  style={{margin:'0px auto 20px auto', fontSize:'20px',  width:'50%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Skill
         </button>
           
             
