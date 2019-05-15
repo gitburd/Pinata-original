@@ -197,6 +197,39 @@ insert into skills (skill_title, skill_details, is_heart, skill_icon) values ('B
 
 
 
+
+
+emotion_skills : anger based skills:
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Affirmations', '* I can diffuse anger and channel it productively * I control my anger by expressing myself in a firm yet positive manner * I can calm myself and detach from anger * I allow myself to acknowledge angry feelings without losing control',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/positive.png', 0);  # the id is 64 
+
+
+insert into all anger emotions:
+3,66,67, 16,26, 56, 61, 62,63,65,68,69,58
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (64, 3, true),(64, 66, true), (64, 67, true), (64, 16, true),(64, 26, true),(64, 56, true),(64, 61, true),(64, 62, true), (64, 63, true), (64, 65, true), (64, 68, true), (64, 68, true), (64, 58, true);
+
+opposite action:
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Opposite', 'Take a vacation! This means avoiding the source of your frustration, especially if you feel the urge to attack it. Explore sympathy and empathy. Also consider deep breathing exercises.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/oppositeaction.png', 0);  
+
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (65, 3, true),(65, 66, true), (65, 67, true), (65, 16, true),(65, 26, true),(65, 56, true),(65, 61, true),(65, 62, true), (65, 63, true), (65, 65, true), (65, 68, true), (65, 68, true), (65, 58, true);
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Quote', 'Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned. -Buddah',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/quote.png', 0);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (66, 3, true),(66, 66, true), (66, 67, true), (66, 16, true),(66, 26, true),(66, 56, true),(66, 61, true),(66, 62, true), (66, 63, true), (66, 65, true), (66, 68, true), (66, 68, true), (66, 58, true);
+
+
+//anger activities: 
+//workout, wing towel, punch pillow : 33,34,29
+//insert all into all anger emotions 
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (33, 3, true),(33, 66, true), (33, 67, true), (33, 16, true),(33, 26, true),(33, 56, true),(33, 61, true),(33, 62, true), (33, 63, true), (33, 65, true), (33, 68, true), (33, 68, true), (33, 58, true);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (34, 3, true),(34, 66, true), (34, 67, true), (34, 16, true),(34, 26, true),(34, 56, true),(34, 61, true),(34, 62, true), (34, 63, true), (34, 65, true), (34, 68, true), (34, 68, true), (34, 58, true);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (29, 3, true),(29, 66, true), (29, 67, true), (29, 16, true),(29, 26, true),(29, 56, true),(29, 61, true),(29, 62, true), (29, 63, true), (29, 65, true), (29, 68, true), (29, 68, true), (29, 58, true);
+
      
             
                   

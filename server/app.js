@@ -17,7 +17,7 @@ app.get('/', function(req,res){
     res.send("Hello World!!!");
 });
 
-app.get('/api/all', db.getBaseSkills)
+app.get('/api/baseskills', db.getBaseSkills)
 
 app.get('/api/criticalSkills', db.getCriticalSkills)
 

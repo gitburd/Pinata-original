@@ -29,15 +29,12 @@ export default class SkillsGrid extends Component {
   getNewGrid = (e) => {
     e.preventDefault();
     // console.log('out way ', this.props.baseSkillsArray)
-   
     
     let baseSkills = []
     for(let i=0;i<this.props.baseSkillsArray.length; i++){
       baseSkills.push(this.props.baseSkillsArray[i])
     }
-    for (let i ; i <this.props.userSkillsArray.length; i++){
-      baseSkills.push(this.props.userSkillsArray[i])
-    }
+
     
     let idx;
     let grid = [];
@@ -63,7 +60,8 @@ export default class SkillsGrid extends Component {
       grid.pop()
       console.log('length ', grid.length)
     }
-    this.setGrid(grid)
+    this.setState({newGrid:[]}, () => this.setGrid(grid))
+    
   }
 
   setGrid = (grid) =>{

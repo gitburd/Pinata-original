@@ -8,7 +8,7 @@ const pool = new Pool({
 
 const getBaseSkills = (request, response) => {
   
-    pool.query(`SELECT skill_title, skill_details, skill_icon, skill_id FROM skills`, (error, results) => {
+    pool.query(`SELECT skill_title, skill_details, skill_icon, skill_id FROM skills WHERE user_id is null`, (error, results) => {
       if (error) {
         throw error
       }
