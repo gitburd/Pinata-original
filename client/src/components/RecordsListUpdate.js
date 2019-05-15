@@ -42,7 +42,7 @@ class RecordsListUpdate extends Component {
     )
   }
 }
-  
+   
 // {searchList}
      
 

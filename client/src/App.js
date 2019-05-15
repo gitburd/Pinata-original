@@ -28,6 +28,8 @@ import Sidenavbar from './components/Sidenavbar';
 import SIResources from './components/SIResources';
 import UpdateModal from './components/UpdateModal';
 import MySlider from './components/MySlider';
+import CustomSkillList from './components/CustomSkillList';
+import MakeCustomSkill from './components/MakeCustomSkill';
 
 
 
@@ -36,6 +38,21 @@ const fetch = require('node-fetch');
 
 class App extends Component {
   state = { 
+    customSkillsList:[
+      {
+        skill_id:53,
+        skill_title:'chess',
+        skill_icon:'https://s3-us-west-2.amazonaws.com/pinata-images/icons/cute.png',
+        skill_details:'test faek make stake lake'
+      },
+      {
+        skill_id:54,
+        skill_title:'fake',
+        skill_icon:'https://s3-us-west-2.amazonaws.com/pinata-images/icons/fix.png',
+        skill_details:'test test test'
+      }
+
+    ],
     searchList:[],
     key:'feeling',
     query:'Sad',
@@ -486,15 +503,6 @@ class App extends Component {
   }
 
 
-
-
-
-
-
-
-
-
-
   updateRecord = (record_id, before_lvl, after_lvl) => {
     if(record_id!==''&& before_lvl!=='' && after_lvl!==''){
       let url = `http://localhost:3001/api/userRecords?record_id=${record_id}`
@@ -586,6 +594,21 @@ class App extends Component {
       })
     .catch(function(e) {console.log(`something is wrong! : ${e}`); })
 
+  }
+
+
+  getCustomSkills = () => {
+    if (this.state.user_id){
+      let url = `http://localhost:3001/api/customskills?user_id=${this.state.user_id}`
+      console.log(url)
+      fetch(url, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json()).then(json => this.setState({customSkillsList: json})).catch(function(e) {
+        console.log(e); // “oh, no!”
+      })
+    }else {console.log('user id req.')}
   }
 
   getUserSkills = () => {
@@ -845,6 +868,68 @@ class App extends Component {
               </React.Fragment>
             )}
           />
+
+
+
+          <Route path="/custom" exact render = { props =>(
+            this.props.auth.isAuthenticated() 
+            ?
+            <React.Fragment>
+                
+                <div style={{ paddingTop:'50px', margin:'0 auto'}}>
+
+                  <CustomSkillList 
+                    getCustomSkills={this.getCustomSkills}
+                    customSkillsList={this.state.customSkillsList}
+                    user_id= {this.state.user_id}
+                  />   
+                </div>
+                
+              </React.Fragment>
+              :
+              <React.Fragment>
+                  <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />
+              </React.Fragment>
+            )}
+          />
+
+          <Route path="/custom/new" exact render = { props =>(
+            this.props.auth.isAuthenticated() 
+            ?
+            <React.Fragment>
+                
+                <div style={{ paddingTop:'50px', margin:'0 auto'}}>
+
+                  <MakeCustomSkill
+                    getCustomSkills={this.getCustomSkills}
+                    customSkillsList={this.state.customSkillsList}
+                    user_id= {this.state.user_id}
+                  />   
+                </div>
+                
+              </React.Fragment>
+              :
+              <React.Fragment>
+                  <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />
+              </React.Fragment>
+            )}
+          />
+
+
+
+
           <Route exact path="/grid" exact render = { props =>(
             this.props.auth.isAuthenticated() 
             ? 

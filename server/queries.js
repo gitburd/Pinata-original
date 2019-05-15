@@ -284,6 +284,18 @@ const newRecordWithSkill = (request, response) => {
   
   }
 
+  const getCustomSkills = (request, response) => {
+    var user_id = request.query.user_id;
+    pool.query(`SELECT * FROM skills WHERE user_id='${user_id}' `, (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    }) 
+  
+
+  }
+
   
   module.exports = {
     getBaseSkills,
@@ -309,6 +321,7 @@ const newRecordWithSkill = (request, response) => {
     searchByFeeling,
     searchBySkill,
     searchByUnfinished,
-    makeCustomSkill
+    makeCustomSkill,
+    getCustomSkills
 
   }
