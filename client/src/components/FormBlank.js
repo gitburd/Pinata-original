@@ -150,9 +150,10 @@ export default class FormBlank extends Component {
               <h3>I tried </h3>
 
               <SkillsTypeahead     
+                  skillsTypeahead = {this.props.skillsTypeahead}
                   customSkillsArray = {this.props.customSkillsArray}
                   baseSkillsArray = {this.props.baseSkillsArray}
-                  setSkillCallback= {this.props.setSkillCallback}/>
+                  setSkillCallback= {this.setSkillCallback}/>
 
 
               <h3>then the intensity was </h3>

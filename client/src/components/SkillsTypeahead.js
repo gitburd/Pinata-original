@@ -13,35 +13,7 @@ export default class SkillsTypeahead extends Component {
 
     constructor(props){
         super(props);
-      this.items = [
-        "Aroma",
-        "Compassion",
-        "Cute Overload",
-        "Goals",
-        "Gratitude",
-        "Nature",
-        "Read",
-        "Punch a Pillow",
-        "Video Games",
-        "Listen to Music",
-        "Take a Walk",
-        "Workout",
-        "Wring Towel",
-        "Make Art",
-        "Write",
-        "Perform",
-        "Take a Bath",
-        "Tidy Up",
-        "Lay in Sun",
-        "Phone a Friend",
-        "Support Network",
-        "Comedy",
-        "Stretch",
-        "Meditate",
-        "Take a Breath",
-        "Play with Pet",
-        "Fix Something"   
-      ];
+    //   this.items = this.props.skillsTypeahead
   
       
         this.state={
@@ -225,7 +197,7 @@ export default class SkillsTypeahead extends Component {
         if (value.length >0){
             // const regex = new RegExp(`^${value}`, 'i');
             const regex = new RegExp(`${value}`, 'i');
-            suggestions = this.items.sort().filter(v => regex.test(v));
+            suggestions = this.props.skillsTypeahead.sort().filter(v => regex.test(v));
         }
             this.setState({suggestions, text:value});
     

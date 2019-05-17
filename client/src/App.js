@@ -185,11 +185,21 @@ class App extends Component {
         headers: { 'Content-Type': 'application/json'}
         })
         .then(res => res.json())
-        .then(json => this.setState({baseSkillsArray: json}, () => this.getPromptRecord(this.state.auth0_id)))
+        .then(json => this.setState({baseSkillsArray: json}, () => this.setSkillsTypeahead()))
         .catch(function(e) {console.log(e)})
     }else {console.log('user id req.')}
   }
 
+  setSkillsTypeahead = () => {
+    let skillsTypeahead = [];
+    for( let i=0; i< this.state.baseSkillsArray.length;i++){
+      skillsTypeahead.push(this.state.baseSkillsArray[i].skill_title)
+    }
+    for(let i=0; i< this.state.customSkillsList.length;i++){
+      skillsTypeahead.push(this.state.customSkillsList[i].skill_title)
+    }
+    this.setState({skillsTypeahead}, () => this.getPromptRecord(this.state.auth0_id))
+  }
 
    getCustomSkills = (user_id) => {
     if (this.state.user_id){
@@ -625,45 +635,51 @@ class App extends Component {
           <div className="main">
           <div className='background'>
 
-          <Route path="/" exact render = { props =>(
-            <React.Fragment >
-             
-             <div style={{width:'100%'}}>
-              <Landing 
-              {...this.props}{...props} 
-              user_id ={this.props.user_id} 
-              getUserInfo={this.getUserInfo}  
-              userIdCallback= {this.userIdCallback}
-              getPromptRecord = {this.getPromptRecord}
-              />
-              </div>
-          
-            </React.Fragment>)} 
-          />
-
           <Route path="/callback" exact 
             component={Callback}
           />
           
           <Route path="/" render = { props =>(
-            <React.Fragment>    
-              <div>
-              this.props.auth.isAuthenticated() 
-                ? <React.Fragment>
-                    <Sidenavbar
+             this.props.auth.isAuthenticated() 
+             ? <React.Fragment>
+                 
+                 <Sidenavbar
                   {...this.props}{...props} 
                   user_id ={this.props.user_id} 
                   getUserInfo={this.getUserInfo}  
                   userIdCallback= {this.userIdCallback}
                   getPromptRecord = {this.getPromptRecord}
                   />  
-                </React.Fragment>
-                :
-                <React.Fragment>            
-                </React.Fragment>              
-            </div>
-            </React.Fragment>)} 
-          />
+             </React.Fragment>
+             :
+             <React.Fragment>
+                  <Landing 
+                 {...this.props}{...props} 
+                 user_id ={this.props.user_id} 
+                 getUserInfo={this.getUserInfo}  
+                 userIdCallback= {this.userIdCallback}
+                 getPromptRecord = {this.getPromptRecord}
+               />   
+                    
+             </React.Fragment>     
+            )} />         
+
+              <Route path="/" exact render = { props =>(
+                this.props.auth.isAuthenticated() 
+                ? <React.Fragment>
+                   <Landing 
+                 {...this.props}{...props} 
+                 user_id ={this.props.user_id} 
+                 getUserInfo={this.getUserInfo}  
+                 userIdCallback= {this.userIdCallback}
+                 getPromptRecord = {this.getPromptRecord}
+               />       
+
+             </React.Fragment>
+             :
+             <React.Fragment>
+             </React.Fragment>     
+            )} />  
 
           <Route path="/secret" exact render = { props =>(
               this.props.auth.isAuthenticated() 
@@ -731,13 +747,7 @@ class App extends Component {
               </React.Fragment>
               :
               <React.Fragment>
-                  <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />
+                 
               </React.Fragment>
             )}
           />
@@ -759,13 +769,7 @@ class App extends Component {
               </React.Fragment>
               :
               <React.Fragment>
-                  <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />
+          
               </React.Fragment>
             )}
           />
@@ -816,13 +820,7 @@ class App extends Component {
               </div>    
               </React.Fragment>
             : <React.Fragment>
-                <Landing 
-                  {...this.props}{...props} 
-                  user_id ={this.props.user_id} 
-                  getUserInfo={this.getUserInfo}  
-                  userIdCallback= {this.userIdCallback}
-                  getPromptRecord = {this.getPromptRecord}
-                />
+          
               </React.Fragment>           
           )} 
           />     
@@ -870,13 +868,7 @@ class App extends Component {
             </React.Fragment>
             : 
             <React.Fragment>
-              <Landing 
-                  {...this.props}{...props} 
-                  user_id ={this.props.user_id} 
-                  getUserInfo={this.getUserInfo}  
-                  userIdCallback= {this.userIdCallback}
-                  getPromptRecord = {this.getPromptRecord}
-              />
+          
             </React.Fragment>         
             )} 
             />
@@ -884,14 +876,7 @@ class App extends Component {
           <Route path="/suicideprevention" exact render = { props =>(
             !this.props.auth.isAuthenticated() 
               ? <React.Fragment>
-                  <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />        
-                  <Secret {...this.props}/>
+          
               </React.Fragment>
               :
               <React.Fragment>
@@ -913,17 +898,11 @@ class App extends Component {
                 </div>
                 </React.Fragment>
               : <React.Fragment>
-                  <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />
+                 
                 </React.Fragment>
                 )} 
               />
-            <Route path="/records" render = { props =>(
+            {/* <Route path="/records" render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
                   <div >
@@ -940,7 +919,7 @@ class App extends Component {
                     getPromptRecord = {this.getPromptRecord}
                   />
                 </React.Fragment>
-            )} />
+            )} /> */}
 
             <Route exact path="/records/old" exact render = { props =>(
               this.props.auth.isAuthenticated() 
@@ -969,6 +948,8 @@ class App extends Component {
                   getEmotionId={this.getEmotionId} 
                   customSkillsArray = {this.state.customSkillsArray}
                   baseSkillsArray = {this.state.baseSkillsArray}
+                  skillsTypeahead = {this.state.skillsTypeahead}
+                  
                   />        
                 </React.Fragment>
               : <React.Fragment>
