@@ -648,34 +648,39 @@ class App extends Component {
           <Route path="/" render = { props =>(
             <React.Fragment>    
               <div>
-
-              <Sidenavbar
-               {...this.props}{...props} 
-              user_id ={this.props.user_id} 
-              getUserInfo={this.getUserInfo}  
-              userIdCallback= {this.userIdCallback}
-              getPromptRecord = {this.getPromptRecord}
-              />    
-
-              </div>
+              this.props.auth.isAuthenticated() 
+                ? <React.Fragment>
+                    <Sidenavbar
+                  {...this.props}{...props} 
+                  user_id ={this.props.user_id} 
+                  getUserInfo={this.getUserInfo}  
+                  userIdCallback= {this.userIdCallback}
+                  getPromptRecord = {this.getPromptRecord}
+                  />  
+                </React.Fragment>
+                :
+                <React.Fragment>            
+                </React.Fragment>              
+            </div>
             </React.Fragment>)} 
           />
 
           <Route path="/secret" exact render = { props =>(
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
-                    <header className="App-header"> 
+                    
                   <MySlider/>
 
-                          Let's learn Auth: 
-                    </header>                 
-                    <Secret {...this.props}/>
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <header className="App-header"> 
-                    Uh oh! You have to log in first! 
-                    </header>               
+                    <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />           
                 </React.Fragment>              
           )} />
 
@@ -877,14 +882,18 @@ class App extends Component {
             />
 
           <Route path="/suicideprevention" exact render = { props =>(
-            // !this.props.auth.isAuthenticated() 
-            //   ? <React.Fragment>
-            //       <header className="App-header"> 
-            //             Let's learn Auth: 
-            //       </header>                 
-            //       <Secret {...this.props}/>
-              // </React.Fragment>
-              // :
+            !this.props.auth.isAuthenticated() 
+              ? <React.Fragment>
+                  <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />        
+                  <Secret {...this.props}/>
+              </React.Fragment>
+              :
               <React.Fragment>
                
                 <SIResources />             
@@ -923,9 +932,13 @@ class App extends Component {
                 </React.Fragment>
             :
                 <React.Fragment>
-                        <header className="App-header"> 
-                        Uh oh! You have to log in first! 
-                        </header>
+                        <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />
                 </React.Fragment>
             )} />
 
@@ -951,7 +964,12 @@ class App extends Component {
             <Route exact path="/records/add" exact render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment> 
-                  <FormBlank addFullRecord= {this.addFullRecord} getEmotionId={this.getEmotionId} />        
+                  <FormBlank 
+                  addFullRecord= {this.addFullRecord} 
+                  getEmotionId={this.getEmotionId} 
+                  customSkillsArray = {this.state.customSkillsArray}
+                  baseSkillsArray = {this.state.baseSkillsArray}
+                  />        
                 </React.Fragment>
               : <React.Fragment>
                   <Landing 
@@ -974,9 +992,13 @@ class App extends Component {
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <header className="App-header"> 
-                    Uh oh! You have to log in first! 
-                    </header>               
+                    <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />             
                 </React.Fragment>              
             )} />
 
@@ -987,9 +1009,13 @@ class App extends Component {
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <header className="App-header"> 
-                    Uh oh! You have to log in first! 
-                    </header>               
+                    <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />   
                 </React.Fragment>              
               )} />
 

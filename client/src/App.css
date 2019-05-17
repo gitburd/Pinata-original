@@ -147,6 +147,38 @@
 
 }
 
+.customSkillIcon { 
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */
+  opacity: 1.0;
+  cursor: pointer;
+  border: solid 1px transparent;
+  border-radius: 4px;
+
+}
+
+
+.customSkillIcon :hover{ 
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */
+  opacity: 0.30;
+  cursor: pointer;
+  border-color: black;
+
+}
+
+.customSkillIcon :focus{ 
+outline: none;
+/* box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
+  0 0 0 1.5px rgba(255, 105, 180, 0.5); */
+  box-shadow: 0 0 0 3px purple,
+  0 0 0 1.5px purple;
+}
+
+.customSkillIcon :active {
+  transform: translateY(2px);
+  filter: saturate(150%);
+  border-color: hotpink;
+}
+
 .criticalSkill :hover{
   
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */

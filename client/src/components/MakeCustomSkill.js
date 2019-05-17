@@ -17,7 +17,7 @@ export default class MakeCustomSkill extends Component {
     this.state = { 
       skill_title:'',
       skill_details:'',
-      skill_icon:'https://s3-us-west-2.amazonaws.com/pinata-images/icons/write.png'
+      skill_icon:'https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png'
       
       // https://s3-us-west-2.amazonaws.com/pinata-images/icons/compassion.png
     }
@@ -57,72 +57,66 @@ export default class MakeCustomSkill extends Component {
         .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
       }
     
+      setSkillIcon = (e,skill_icon)=>{
+        e.preventDefault();
+        this.setState({skill_icon})
+      }
 
     
   render() {
             
     return (
       <div  >
-        
-      
         <h1 style={{padding:'20px'}}>Make a new skill</h1>
-        
         <h3> Skill name </h3>
-
         <input style={{margin:'20px'}} type='text' value={this.state.skill_title} onChange={this.updateSkill_title.bind(this)}></input>
-
-
         <h3> Skill description </h3>
-
-
         <input style={{margin:'20px auto', width:'75%'}} type='textarea' 
         value={this.state.skill_details}
         multiline = {true}
         numberOfLines={5}
-        onChange={this.updateSkill_details.bind(this)}></input>
-       
+        onChange={this.updateSkill_details.bind(this)}></input>       
        <h3> Choose an image </h3>
-
        <div style={{padding:'5% 25%'}}>
-       <CardDeck>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/maze.png" />
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/chess.png" />
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/heart.png" />
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png" />
-  </Card>
-  
-</CardDeck>;
-<CardDeck>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/blossom.png" />
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/rocket.png" />
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/triskele.png" />
-  </Card>
-  <Card>
-    <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/target.png" />
-  </Card>
-  
-</CardDeck>
-</div>
-    
-  
-     
-        <button  style={{margin:'0px auto 20px auto', fontSize:'20px',  width:'50%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Skill
-        </button>
-          
+        <CardDeck>
+          <Card className = 'customSkillIcon'>
+            <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/maze.png" onClick={ e =>this.setSkillIcon(e,"https://s3-us-west-2.amazonaws.com/pinata-images/icons/maze.png")}/>
+          </Card>
+          <Card className = 'customSkillIcon'>
+            <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/chess.png"
+            onClick={ e =>this.setSkillIcon(e,"https://s3-us-west-2.amazonaws.com/pinata-images/icons/chess.png")} />
+          </Card>
+          <Card className = 'customSkillIcon'>
+            <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/heart.png"
+            onClick={ e =>this.setSkillIcon(e, "https://s3-us-west-2.amazonaws.com/pinata-images/icons/heart.png")}/>
+          </Card>
+          <Card className = 'customSkillIcon'>
+            <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png" />
+          </Card>
+
+        </CardDeck>;
+        <CardDeck>
+          <Card className = 'customSkillIcon'>
+            <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/blossom.png" 
+             onClick={ e =>this.setSkillIcon(e, "https://s3-us-west-2.amazonaws.com/pinata-images/icons/blossom.png")}/>
+          </Card>
+          <Card className = 'customSkillIcon'>
+            <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/rocket.png"
+              onClick={ e =>this.setSkillIcon(e, "https://s3-us-west-2.amazonaws.com/pinata-images/icons/rocket.png")}/>
+          </Card>
+          <Card className = 'customSkillIcon'>
+            <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/triskele.png" 
+             onClick={ e =>this.setSkillIcon(e, "https://s3-us-west-2.amazonaws.com/pinata-images/icons/triskele.png")}/>
+          </Card>
+          <Card className = 'customSkillIcon'>
+            <Card.Img variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/target.png" 
+            onClick={ e =>this.setSkillIcon(e, "https://s3-us-west-2.amazonaws.com/pinata-images/icons/target.png")}/>
+          </Card>
             
-  
+          </CardDeck>
+        </div>
+        <button  style={{margin:'0px auto 20px auto', fontSize:'20px',  width:'50%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Skill
+        </button>  
       </div>         
     )
   }

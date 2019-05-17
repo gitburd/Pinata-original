@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,6 +47,15 @@
   ],
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "babel-install": "2.1.0"
+    "@babel/register": "^7.4.4",
+    "babel-install": "2.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "react-addons-test-utils": "^15.6.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }
