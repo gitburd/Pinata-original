@@ -22,9 +22,9 @@ export default class Sidenavbar extends Component {
         )
         
         return (
-            <div className={this.props.auth.isAuthenticated()? 'clear':'hidden'}>
+            // <div className={this.props.auth.isAuthenticated()? 'clear':'hidden'}>
+          <div>
           
-          <div className='clear'>
               <SideNav id='clear' className='pinataNav'>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="/">
@@ -119,7 +119,7 @@ export default class Sidenavbar extends Component {
 
                 </SideNav.Nav>
             </SideNav>
-        </div> 
+       
         </div>
     )};
 }

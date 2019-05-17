@@ -28,6 +28,8 @@ import Sidenavbar from './components/Sidenavbar';
 import SIResources from './components/SIResources';
 import UpdateModal from './components/UpdateModal';
 import MySlider from './components/MySlider';
+import CustomSkillList from './components/CustomSkillList';
+import MakeCustomSkill from './components/MakeCustomSkill';
 
 
 
@@ -36,6 +38,9 @@ const fetch = require('node-fetch');
 
 class App extends Component {
   state = { 
+    customSkillsList:[
+    
+    ],
     searchList:[],
     key:'feeling',
     query:'Sad',
@@ -108,177 +113,9 @@ class App extends Component {
           "emotion_text": "Hopeless"
         }
       ],
+
+      baseSkillsArray:[]
     
-      baseSkillsArray :
-      [
-        {
-            "skill_title": "Aroma",
-            "skill_details": "Breathing in something that smells good, essential oils, incense, candles, flowers, perfume, any smell you like.",
-            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/aroma.png ",
-            "skill_id": 22
-        },
-        {
-          "skill_title": "Compassion",
-          "skill_details": "Find love in your heart for yourself and others.",
-          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/compassion.png",
-          "skill_id": 23
-      },
-      {
-        "skill_title": "Cute Overload",
-        "skill_details": "Time for a few cat videos! Take some time to appreciate anything adorable.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/cute.png",
-        "skill_id": 24
-      },
-
-      {
-        "skill_title": "Goals",
-        "skill_details": "Make a todo list. Plan out your future or next steps.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/goals.png",
-        "skill_id": 25
-      },
-      {
-        "skill_title": "Gratitude ",
-        "skill_details": "Remember the kind words and deeds of loving people. Reflect on the things you are grateful for.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/gratitude.png",
-        "skill_id": 26
-      },
-      {
-        "skill_title": "Nautre",
-        "skill_details": "Garden, visit the forest, go for a walk or hike. Spend sometime time with plants.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/nature.png",
-        "skill_id": 27
-      },
-      {
-        "skill_title": "Read",
-        "skill_details": "Get out of your head and into a book. Break out your favorite or try something new.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/read.png",
-        "skill_id": 28
-      },
-      {
-        "skill_title": "Punch a Pillow",
-        "skill_details": "Get out some of those feelings on a pillow.",
-        "skill_icon": " https://s3-us-west-2.amazonaws.com/pinata-images/icons/punchpillow.png",
-        "skill_id": 29
-      },
-      {
-        "skill_title": "Video Games",
-        "skill_details": "Have fun! Take some time off and enjoy yourself.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/playvideogames.png",
-        "skill_id": 30
-      },
-      {
-        "skill_title": "Listen to Music",
-        "skill_details": "Play your favorites or check out something new.",
-        "skill_icon": " https://s3-us-west-2.amazonaws.com/pinata-images/icons/listenmusic.png",
-        "skill_id": 31
-      },
-      {
-        "skill_title": "Take a Walk",
-        "skill_details": "Get outside. Breath in the fresh air and get a bit of exercise.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takewalk.png ",
-        "skill_id": 32
-      },
-      {
-        "skill_title": "Workout",
-        "skill_details": "Exercise, lift weights, or otherwise get moving at the gym or anywhere else.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/workout.png",
-        "skill_id": 33
-      },
-      {
-        "skill_title": "Wring Towel",
-        "skill_details": "Let out your feelings physically.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wringtowel.png",
-        "skill_id": 34
-      },
-      {
-        "skill_title": "Make Art",
-        "skill_details": "Draw, paint, color, sculpt, dance, make music, write, be creative!",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/makeart.png",
-        "skill_id": 35
-      },
-
-      {
-        "skill_title": "Write",
-        "skill_details": "Journal, write a story or stream of consciousness, write a letter no need to send it, express yourself.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/write.png",
-        "skill_id": 36
-      },
-      {
-        "skill_title": "Perform",
-        "skill_details": "Karaoke, act out a scene, do comedy, dance, express yourself.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png",
-        "skill_id": 37
-      },
-      {
-        "skill_title": "Take a Bath",
-        "skill_details": "Bath or shower. Relax in the water, try some candles, music or bath salts.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebath.png",
-        "skill_id": 39
-      },
-  
-      {
-        "skill_title": "Tidy Up",
-        "skill_details": "Clean up your space.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/tidy.png",
-        "skill_id": 43
-      },
-      {
-        "skill_title": "Lay in Sun",
-        "skill_details": "Get outside and soak up some Vitamin D.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/sun.png ",
-        "skill_id": 44
-      },
-      {
-        "skill_title": "Phone a Friend",
-        "skill_details": "Reach out and call someone you trust.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/phonefriend.png",
-        "skill_id": 45
-      },
-      {
-        "skill_title": "Support Network",
-        "skill_details": "Spend time with friends or family. Reach out to your support network in person, over the phone or online.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/social1.png",
-        "skill_id": 46
-      },
-      {
-        "skill_title": "Comedy",
-        "skill_details": "Standup, improve, satire you have so many options!",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/comedy.png",
-        "skill_id": 47
-      },
-      {
-        "skill_title": "Stretch",
-        "skill_details": "Stretch out or practice yoga with others or on your own.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/strech.png",
-        "skill_id": 48
-      },
-      {
-        "skill_title": "Meditate",
-        "skill_details": "Clear your mind. Follow a guided practice or meditate on your own.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/meditate1.png",
-        "skill_id": 49
-      },
-      {
-        "skill_title": "Take a Breath",
-        "skill_details": "If you have a favorite breath it out. If try 'box breathing' Slowly. Count to four while breathing out. Count to four while holding your breath. Count to four while breathing in.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebreather2.png",
-        "skill_id": 50
-      },
-      {
-        "skill_title": "Play with Pet",
-        "skill_details": "Show some love to your fuzzy friend.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/playpet.png",
-        "skill_id": 51
-      },
-   
-      {
-        "skill_title": "Fix Something",
-        "skill_details": "Work on your car/bike or other project. Tinker around and solve a problem.",
-        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/fix.png",
-        "skill_id": 52
-      }
-  
-    ]
   }
   
 
@@ -327,7 +164,7 @@ class App extends Component {
         if (json.length>0) { 
           console.log(json);
           this.setState({user_id:json[0].user_id}, 
-          ()=> this.getPromptRecord(auth0_id)
+          ()=> this.getCustomSkills(json[0].user_id)
           ); 
           // localStorage.setItem( 'user_id', json[0].user_id )
         }else{
@@ -337,6 +174,35 @@ class App extends Component {
       .catch(function(e) {console.log(e);
       })
     }
+  }
+
+  getBaseSkills = () => {
+    if (this.state.user_id){
+      let url = `http://localhost:3001/api/baseskills`
+      console.log(url)
+      fetch(url, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(json => this.setState({baseSkillsArray: json}, () => this.getPromptRecord(this.state.auth0_id)))
+        .catch(function(e) {console.log(e)})
+    }else {console.log('user id req.')}
+  }
+
+
+   getCustomSkills = (user_id) => {
+    if (this.state.user_id){
+      let url = `http://localhost:3001/api/customskills?user_id=${user_id}`
+      console.log(url)
+      fetch(url, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(json => this.setState({customSkillsList: json}, () => this.getBaseSkills()))
+        .catch(function(e) {console.log(e)})
+    }else {console.log('user id req.')}
   }
 
   getPromptRecord = (auth0_id) => {
@@ -486,15 +352,6 @@ class App extends Component {
   }
 
 
-
-
-
-
-
-
-
-
-
   updateRecord = (record_id, before_lvl, after_lvl) => {
     if(record_id!==''&& before_lvl!=='' && after_lvl!==''){
       let url = `http://localhost:3001/api/userRecords?record_id=${record_id}`
@@ -587,6 +444,9 @@ class App extends Component {
     .catch(function(e) {console.log(`something is wrong! : ${e}`); })
 
   }
+
+
+ 
 
   getUserSkills = () => {
     if (this.state.user_id && this.state.emotion){   
@@ -761,8 +621,9 @@ class App extends Component {
       
       <MuiThemeProvider>
         <Router>
-        <div className='background'>
+        
           <div className="main">
+          <div className='background'>
 
           <Route path="/" exact render = { props =>(
             <React.Fragment >
@@ -787,34 +648,39 @@ class App extends Component {
           <Route path="/" render = { props =>(
             <React.Fragment>    
               <div>
-
-              <Sidenavbar
-               {...this.props}{...props} 
-              user_id ={this.props.user_id} 
-              getUserInfo={this.getUserInfo}  
-              userIdCallback= {this.userIdCallback}
-              getPromptRecord = {this.getPromptRecord}
-              />    
-
-              </div>
+              this.props.auth.isAuthenticated() 
+                ? <React.Fragment>
+                    <Sidenavbar
+                  {...this.props}{...props} 
+                  user_id ={this.props.user_id} 
+                  getUserInfo={this.getUserInfo}  
+                  userIdCallback= {this.userIdCallback}
+                  getPromptRecord = {this.getPromptRecord}
+                  />  
+                </React.Fragment>
+                :
+                <React.Fragment>            
+                </React.Fragment>              
+            </div>
             </React.Fragment>)} 
           />
 
           <Route path="/secret" exact render = { props =>(
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
-                    <header className="App-header"> 
+                    
                   <MySlider/>
 
-                          Let's learn Auth: 
-                    </header>                 
-                    <Secret {...this.props}/>
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <header className="App-header"> 
-                    Uh oh! You have to log in first! 
-                    </header>               
+                    <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />           
                 </React.Fragment>              
           )} />
 
@@ -828,6 +694,7 @@ class App extends Component {
                   <AutoCompleteText 
                   myCallback = {this.myCallback} 
                   baseSkillsArray={this.state.baseSkillsArray}  
+                  customSkillsArray= {this.state.customSkillsList}
                   user_id= {this.state.user_id}/>   
                 </div>
                 
@@ -844,6 +711,68 @@ class App extends Component {
               </React.Fragment>
             )}
           />
+
+
+
+          <Route path="/custom" exact render = { props =>(
+            this.props.auth.isAuthenticated() 
+            ?
+            <React.Fragment>
+                
+                <div style={{ paddingTop:'50px', margin:'0 auto'}}>
+
+                  <CustomSkillList 
+                    getCustomSkills={this.getCustomSkills}
+                    customSkillsList={this.state.customSkillsList}
+                    user_id= {this.state.user_id}
+                  />   
+                </div>
+                
+              </React.Fragment>
+              :
+              <React.Fragment>
+                  <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />
+              </React.Fragment>
+            )}
+          />
+
+          <Route path="/custom/new" exact render = { props =>(
+            this.props.auth.isAuthenticated() 
+            ?
+            <React.Fragment>
+                
+                <div style={{ paddingTop:'50px', margin:'0 auto'}}>
+
+                  <MakeCustomSkill
+                    getCustomSkills={this.getCustomSkills}
+                    customSkillsList={this.state.customSkillsList}
+                    user_id= {this.state.user_id}
+                  />   
+                </div>
+                
+              </React.Fragment>
+              :
+              <React.Fragment>
+                  <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />
+              </React.Fragment>
+            )}
+          />
+
+
+
+
           <Route exact path="/grid" exact render = { props =>(
             this.props.auth.isAuthenticated() 
             ? 
@@ -873,6 +802,7 @@ class App extends Component {
               skillClicked = {this.skillClicked} 
               userSkillsArray = {this.state.userSkillsArray} 
               emotionSkillsArray={this.state.emotionSkillsArray} 
+              customSkillsArray= {this.state.customSkillsList}
               baseSkillsArray={this.state.baseSkillsArray} 
               skillsGridArray={this.state.skillsGridArray}
               setRecord_id = {this.setRecord_id}
@@ -954,13 +884,18 @@ class App extends Component {
           <Route path="/suicideprevention" exact render = { props =>(
             !this.props.auth.isAuthenticated() 
               ? <React.Fragment>
-                  <header className="App-header"> 
-                        Let's learn Auth: 
-                  </header>                 
+                  <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />        
                   <Secret {...this.props}/>
               </React.Fragment>
               :
               <React.Fragment>
+               
                 <SIResources />             
               </React.Fragment>              
           )} />
@@ -997,9 +932,13 @@ class App extends Component {
                 </React.Fragment>
             :
                 <React.Fragment>
-                        <header className="App-header"> 
-                        Uh oh! You have to log in first! 
-                        </header>
+                        <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />
                 </React.Fragment>
             )} />
 
@@ -1025,7 +964,12 @@ class App extends Component {
             <Route exact path="/records/add" exact render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment> 
-                  <FormBlank addFullRecord= {this.addFullRecord} getEmotionId={this.getEmotionId} />        
+                  <FormBlank 
+                  addFullRecord= {this.addFullRecord} 
+                  getEmotionId={this.getEmotionId} 
+                  customSkillsArray = {this.state.customSkillsArray}
+                  baseSkillsArray = {this.state.baseSkillsArray}
+                  />        
                 </React.Fragment>
               : <React.Fragment>
                   <Landing 
@@ -1048,9 +992,13 @@ class App extends Component {
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <header className="App-header"> 
-                    Uh oh! You have to log in first! 
-                    </header>               
+                    <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />             
                 </React.Fragment>              
             )} />
 
@@ -1061,9 +1009,13 @@ class App extends Component {
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <header className="App-header"> 
-                    Uh oh! You have to log in first! 
-                    </header>               
+                    <Landing 
+                    {...this.props}{...props} 
+                    user_id ={this.props.user_id} 
+                    getUserInfo={this.getUserInfo}  
+                    userIdCallback= {this.userIdCallback}
+                    getPromptRecord = {this.getPromptRecord}
+                  />   
                 </React.Fragment>              
               )} />
 
@@ -1071,7 +1023,7 @@ class App extends Component {
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
                    
-                  <div >  
+                  <div style={{margin:'0 auto',paddingLeft:'10%',paddingRight:'10%', width:'75%'}} >  
                   <UpdateModal 
                   recordModalShow={this.state.recordModalShow}
                   update_date={this.state.update_date}
@@ -1092,20 +1044,6 @@ class App extends Component {
                   updateRecord = {this.updateRecord} 
      
                   />
-
-                    {/* <Update 
-                    updateRecord = {this.updateRecord}  
-                    record_id = {this.state.record_id} 
-                    before_lvl = {this.state.before_lvl} 
-                    after_lvl = {this.state.after_lvl}
-                    date = {this.state.date}
-                    emotion= {this.state.emotion}
-                    skill = {this.state.skill}
-                    searchByQuery={this.searchByQuery}
-                    /> */}
-                    
-                    
-                    {/* <button onClick={this.getUserRecords}>get user Records</button>   */}
                      
                     <RecordsListUpdate 
                     getUserRecords = {this.getUserRecords}

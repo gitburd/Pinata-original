@@ -40,25 +40,31 @@
 
 .main {
   text-align: center;
+  align-content: center;
   font-family: 'Roboto', sans-serif;
-  padding-left: 150px;
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
+  font-size: 28px;
   width:100%;
-  /* left:0; */
-  margin:0 auto;
+  /* margin:0 auto; */
   font-size: calc(12px + 2vmin);
-  max-height:96vh !important;
+  background: linear-gradient(43deg, rgba(91,0,99,1) 0%, rgba(37,1,83,1) 49%, rgba(1,35,143,1) 100%);
+  /* max-height:96vh !important; */
   
+}
+
+.addRecord{
+  margin: 0 auto !important;
+/* padding:0px 10%; */
+  align-content: center;
+  width:50%;
 }
 
 .recordsList{
   /* background-color:white; */
-  background-color:hsla(0, 100%, 100%, 0.1); 
-  padding:15px 50px;
+  /* background-color:hsla(0, 100%, 100%, 0.1);  */
+  padding:20px;
   margin-top:20px;
   text-align:center;
-  margin-left:auto;
+  margin-left:25%;
   margin-right:auto;
   width:100%;
 }
@@ -68,18 +74,17 @@
 
 }
 
-
-
-
-
-
-.addFullRecordForm{
-
+.recordTitles{
+  color:hsla(224, 100%, 34%, 1);
+  /* color:purple; */
 }
 
 .background{
   min-height: 100vh;
   z-index:-100;
+  width:100%;
+  /* margin: '0'; */
+  /* display: cover; */
   /* background: linear-gradient(43deg, rgba(33,0,36,1) 0%, rgba(56,9,121,1) 0%, rgba(0,212,255,1) 100%); */
   background: linear-gradient(43deg, rgba(91,0,99,1) 0%, rgba(37,1,83,1) 49%, rgba(1,35,143,1) 100%);
   display: flex;
@@ -103,7 +108,7 @@
 }
 
 .skill_icon{
-  width:90%;
+  width:100%;
   
 }
 
@@ -142,6 +147,38 @@
 
 }
 
+.customSkillIcon { 
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */
+  opacity: 1.0;
+  cursor: pointer;
+  border: solid 1px transparent;
+  border-radius: 4px;
+
+}
+
+
+.customSkillIcon :hover{ 
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */
+  opacity: 0.30;
+  cursor: pointer;
+  border-color: black;
+
+}
+
+.customSkillIcon :focus{ 
+outline: none;
+/* box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
+  0 0 0 1.5px rgba(255, 105, 180, 0.5); */
+  box-shadow: 0 0 0 3px purple,
+  0 0 0 1.5px purple;
+}
+
+.customSkillIcon :active {
+  transform: translateY(2px);
+  filter: saturate(150%);
+  border-color: hotpink;
+}
+
 .criticalSkill :hover{
   
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black; */
@@ -164,11 +201,12 @@
 }
 
 .criticalGrid{
-  margin-left:14%;
-  margin-right:14%;
+  margin-left:auto;
+  margin-right:auto;
+  padding-left: 23.2%;
   align-items: center;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 40px;
   
 }
 
@@ -231,13 +269,6 @@ h4{
   padding-top:20px;
   padding-bottom:10px;
 }
-
-.recordTitles{
-  color:hsla(224, 100%, 34%, 1);
-  /* color:purple; */
-}
-
-
 
 
 
@@ -496,7 +527,7 @@ background-color: black;
   margin: 50px 0px;
 
   /* invisible border (will be colored on hover/focus) */
-  border: solid 1px transparent;
+  border: solid 1px black;
   border-radius: 4px;
 
   /* size comes from text & padding (no width/height) */

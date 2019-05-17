@@ -60,7 +60,7 @@ export default class SkillDetails extends Component {
         si:false,
         sh:false,
         message:`Record updated.`
-        });
+        }, this.closeModal);
 
     }
   

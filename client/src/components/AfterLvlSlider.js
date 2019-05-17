@@ -39,8 +39,8 @@ export default class MySlider extends Component {
       );
     };
     
-    const wrapperStyle = { width: '100%'};
-
+    const wrapperStyle = { width: '70%', margin:'60px auto' };
+ 
 
     return (
        <div>

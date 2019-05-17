@@ -17,7 +17,7 @@ app.get('/', function(req,res){
     res.send("Hello World!!!");
 });
 
-app.get('/api/all', db.getBaseSkills)
+app.get('/api/baseskills', db.getBaseSkills)
 
 app.get('/api/criticalSkills', db.getCriticalSkills)
 
@@ -61,6 +61,10 @@ app.get('/api/search/Feeling', db.searchByFeeling)
 app.get('/api/search/Skill', db.searchBySkill)
 
 app.get('/api/search/Unfinished', db.searchByUnfinished)
+
+app.post('/api/customskills', db.makeCustomSkill)
+
+app.get('/api/customskills', db.getCustomSkills)
  
 
 

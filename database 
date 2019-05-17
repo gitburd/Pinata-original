@@ -186,7 +186,62 @@ insert into skills (skill_title, skill_icon, skill_details) VALUES('Punch a Pill
 insert into skills (skill_title, skill_icon, skill_details) VALUES('Tidy Up', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/tidy.png', 'Clean up your space.'), ('Lay in Sun', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/sun.png', 'Get outside and soak up some Vitamin D.'), ('Phone Friend', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/phonefriend.png', 'Reach out and call someone you trust.'), ('Support Network', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/social1.png', 'Spend time with friends or family. Reach out to your support network in person, over the phone or online.'), ('Comedy','https://s3-us-west-2.amazonaws.com/pinata-images/icons/meditate1.png', 'Standup, improve, satire you have so many options!'), ('Stretch', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/strech.png','Stretch out or practice yoga with others or on your own.'), ('Meditate', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/meditate1.png','Clear your mind. Follow a guided practice or meditate on your own.'), ('Take Breather', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebreather2.png','If you have a favorite breath it out. If try "box breathing" Slowly. Count to four while breathing out. Count to four while holding your breath. Count to four while breathing in.');
 
 
-insert into skills (skill_title, skill_icon, skill_details) values ('Play with Pet','https://s3-us-west-2.amazonaws.com/pinata-images/icons/playpet.png', 'Show some love to your fuzzy friend.'), ('Fix Somehting','https://s3-us-west-2.amazonaws.com/pinata-images/icons/fix.png', 'Work on your car/bike or other project. Tinker around and solve a problem.');  
+insert into skills (skill_title, skill_icon, skill_details) values ('Play with Pet','https://s3-us-west-2.amazonaws.com/pinata-images/icons/playpet.png', 'Show some love to your fuzzy friend.'), ('Fix Something','https://s3-us-west-2.amazonaws.com/pinata-images/icons/fix.png', 'Work on your car/bike or other project. Tinker around and solve a problem.');  
 
 
-If you have a favorite breath it out. If not try a technique called "box breathing" Slowly. Count to four while breathing out. Count to four while holding your breath. Count to four while breathing in.
+dbt skills : 
+
+insert into skills (skill_title, skill_details, is_heart, skill_icon) values ('Random Kindness', E'Go out of your way to improve someone\'s day. Show appreciation, offer assistance, give a compliment, make someone laugh, reach out to someone who is struggling, volunteer, buy a coffee or flowers for someone or make them a card.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/randomkindness.png')
+
+insert into skills (skill_title, skill_details, is_heart, skill_icon) values ('Bake', 'Make something yummy to share!',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/bake.png'),('I Owe You', 'Is there someone you rely on and appreciate? Repay a favor or offer support to someone who needs you.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/iou.png'), ('Timeout', 'Set a timer and walk away from the source of distress. When the timeout is over you may be able to face it with a fresh perspective.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/timeout.png'), ('Puzzle', E'Crossword, Sudoku, jigsaw, Rubik\'s cube, riddle, Picross, trivia,cryptic, pattern guessing - put your brain to work!',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/puzzle.png');
+
+
+
+
+
+emotion_skills : anger based skills:
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Affirmations', '* I can diffuse anger and channel it productively * I control my anger by expressing myself in a firm yet positive manner * I can calm myself and detach from anger * I allow myself to acknowledge angry feelings without losing control',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/positive.png', 0);  # the id is 64 
+
+
+insert into all anger emotions:
+3,66,67, 16,26, 56, 61, 62,63,65,68,69,58
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (64, 3, true),(64, 66, true), (64, 67, true), (64, 16, true),(64, 26, true),(64, 56, true),(64, 61, true),(64, 62, true), (64, 63, true), (64, 65, true), (64, 68, true), (64, 68, true), (64, 58, true);
+
+opposite action:
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Opposite', 'Take a vacation! This means avoiding the source of your frustration, especially if you feel the urge to attack it. Explore sympathy and empathy. Also consider deep breathing exercises.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/oppositeaction.png', 0);  
+
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (65, 3, true),(65, 66, true), (65, 67, true), (65, 16, true),(65, 26, true),(65, 56, true),(65, 61, true),(65, 62, true), (65, 63, true), (65, 65, true), (65, 68, true), (65, 68, true), (65, 58, true);
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Quote', 'Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned. -Buddah',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/quote.png', 0);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (66, 3, true),(66, 66, true), (66, 67, true), (66, 16, true),(66, 26, true),(66, 56, true),(66, 61, true),(66, 62, true), (66, 63, true), (66, 65, true), (66, 68, true), (66, 68, true), (66, 58, true);
+
+
+//anger activities: 
+//workout, wing towel, punch pillow : 33,34,29
+//insert all into all anger emotions 
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (33, 3, true),(33, 66, true), (33, 67, true), (33, 16, true),(33, 26, true),(33, 56, true),(33, 61, true),(33, 62, true), (33, 63, true), (33, 65, true), (33, 68, true), (33, 68, true), (33, 58, true);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (34, 3, true),(34, 66, true), (34, 67, true), (34, 16, true),(34, 26, true),(34, 56, true),(34, 61, true),(34, 62, true), (34, 63, true), (34, 65, true), (34, 68, true), (34, 68, true), (34, 58, true);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (29, 3, true),(29, 66, true), (29, 67, true), (29, 16, true),(29, 26, true),(29, 56, true),(29, 61, true),(29, 62, true), (29, 63, true), (29, 65, true), (29, 68, true), (29, 68, true), (29, 58, true);
+
+     
+            
+                  
+            
+            
+            
+           
+           
+           
+
+
+            
+            
+            
+           

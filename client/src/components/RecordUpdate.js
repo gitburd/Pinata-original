@@ -8,12 +8,12 @@ export default class RecordUpdate extends Component {
     constructor(props) {
         super(props)
         this.state={
-          record_id:'26',
+          record_id:'',
           emotion:'',
           emotion_id:'',
           skill:'',
           skill_id:'',
-          before_lvl:'6',
+          before_lvl:'',
           after_lvl:'',
           date:'',
           si:false,
@@ -64,7 +64,7 @@ onSelectRecord(){
             </div> 
           </div>
 
-          <Card.Header style={{background:'white', color:'purple'}} className="mb-2 "><span ><Moment unix>{date}</Moment></span></Card.Header> 
+          <Card.Header style={{background:'white', color:'purple'}} className="mb-2 "><span ><Moment format="D MMM YYYY" unix>{date}</Moment></span></Card.Header> 
           <div className='recordTitle'>    
             <Card.Title  as="h2">I was Feeling <span className='recordTitles'> <b> {emotion_text} </b> </span> </Card.Title>
             <Card.Title as="h2">I Tried <span className='recordTitles'><b>{skillDisplay}</b></span></Card.Title>

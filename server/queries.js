@@ -8,12 +8,23 @@ const pool = new Pool({
 
 const getBaseSkills = (request, response) => {
   
-    pool.query(`SELECT s.skill_title, s.skill_details, s.skill_icon, s.skill_id FROM skills AS s`, (error, results) => {
+    pool.query(`SELECT skill_title, skill_details, skill_icon, skill_id FROM skills WHERE user_id is null`, (error, results) => {
       if (error) {
         throw error
       }
       response.status(200).json(results.rows)
     })
+  }
+
+  const getCustomSkills = (request, response) => {
+    var user_id = request.query.user_id;
+    pool.query(`SELECT * FROM skills WHERE user_id='${user_id}' `, (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    }) 
+
   }
 
   const getCriticalSkills = (request, response) => {
@@ -269,6 +280,23 @@ const newRecordWithSkill = (request, response) => {
     })
   }
 
+  const makeCustomSkill = (request, response) => {
+    var skill_title = request.body.skill_title;
+    var skill_details = request.body.skill_details;
+    var skill_icon = request.body.skill_icon;
+    var user_id = request.body.user_id;
+    pool.query(`INSERT INTO skills (skill_title, skill_details, skill_icon, is_heart, user_id) VALUES('${skill_title}','${skill_details}','${skill_icon}',true,'${user_id}') RETURNING *;`,(error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log('new record successful')
+      response.send({skill:results.rows[0]});
+    } )
+  
+  }
+
+
+
   
   module.exports = {
     getBaseSkills,
@@ -293,6 +321,8 @@ const newRecordWithSkill = (request, response) => {
     searchByImpact,
     searchByFeeling,
     searchBySkill,
-    searchByUnfinished
+    searchByUnfinished,
+    makeCustomSkill,
+    getCustomSkills
 
   }
