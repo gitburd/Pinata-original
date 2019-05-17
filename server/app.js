@@ -19,6 +19,8 @@ app.get('/', function(req,res){
 
 app.get('/api/baseskills', db.getBaseSkills)
 
+app.get('/api/customskills', db.getCustomSkills)
+
 app.get('/api/criticalSkills', db.getCriticalSkills)
 
 app.get('/api/emotionSkills', db.getEmotionSkills)
@@ -64,7 +66,7 @@ app.get('/api/search/Unfinished', db.searchByUnfinished)
 
 app.post('/api/customskills', db.makeCustomSkill)
 
-app.get('/api/customskills', db.getCustomSkills)
+// app.get('/api/customskills', db.geCustomSkills)
  
 
 

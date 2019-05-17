@@ -23,19 +23,19 @@ export default class CustomSkill extends Component {
     return (
    
       <div >
-        <Card style={{width:'45%', margin:'10px', float:'left'}} >
+        <Card >
         <Card.Title style={{paddingTop:'10px',fontSize:'30px', background:'white', fontWeight:'bold', color:'purple'}}>
               {skill_title}
             </Card.Title>
           <Card.Body style={{padding:'0px'}}>
           <Card.Img style={{width:'80%'}} variant="top" src={skill_icon}/>  
-            <Card.Text>
+            <Card.Text style={{padding:'5px', fontSize:'18px'}}>
               {skill_details}
             </Card.Text>
           </Card.Body>
-          <Card.Footer >
+          {/* <Card.Footer >
             update btn
-          </Card.Footer>
+          </Card.Footer> */}
         </Card>
       </div>
      

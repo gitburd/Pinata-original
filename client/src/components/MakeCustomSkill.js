@@ -9,7 +9,8 @@ import MySlider from './MySlider';
 import AfterLvlSlider from './AfterLvlSlider';
 import EmotionsTypeahead from './EmotionsTypeahead'
 import SkillsTypeahead from './SkillsTypeahead'
-
+import {Link} from 'react-router-dom';
+ 
 
 export default class MakeCustomSkill extends Component {
   constructor(){
@@ -67,10 +68,15 @@ export default class MakeCustomSkill extends Component {
             
     return (
       <div  >
-        <h1 style={{padding:'20px'}}>Make a new skill</h1>
-        <h3> Skill name </h3>
+
+        <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >Make a new Action</h1></button>
+        
+        <Link className="navbar-brand" to="/custom">
+          <i class="far fa-arrow-alt-circle-left" style={{ fontSize: '2em', padding:'2px' }} ></i>
+          </Link>
+        <h3> Action Name </h3>
         <input style={{margin:'20px'}} type='text' value={this.state.skill_title} onChange={this.updateSkill_title.bind(this)}></input>
-        <h3> Skill description </h3>
+        <h3> Action Description </h3>
         <input style={{margin:'20px auto', width:'75%'}} type='textarea' 
         value={this.state.skill_details}
         multiline = {true}
@@ -115,7 +121,7 @@ export default class MakeCustomSkill extends Component {
             
           </CardDeck>
         </div>
-        <button  style={{margin:'0px auto 20px auto', fontSize:'20px',  width:'50%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Skill
+        <button  style={{margin:'0px auto 20px auto', fontSize:'20px',  width:'50%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Action
         </button>  
       </div>         
     )

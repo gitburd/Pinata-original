@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
 import Chart from './components/Chart';
-import Emotion from './components/Emotion'
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,7 +22,7 @@ import FormBlank from './components/FormBlank';
 import Update from './components/Update';
 import AfterLvlPrompt from './components/AfterLvlPrompt';
 import Landing from './components/Landing';
-import Secret from './components/Secret';
+
 import Callback from './Callback';
 import Sidenavbar from './components/Sidenavbar';
 import SIResources from './components/SIResources';
@@ -164,7 +164,7 @@ class App extends Component {
         if (json.length>0) { 
           console.log(json);
           this.setState({user_id:json[0].user_id}, 
-          ()=> this.getCustomSkills(json[0].user_id)
+          ()=> this.getCustomSkills()
           ); 
           // localStorage.setItem( 'user_id', json[0].user_id )
         }else{
@@ -201,9 +201,10 @@ class App extends Component {
     this.setState({skillsTypeahead}, () => this.getPromptRecord(this.state.auth0_id))
   }
 
-   getCustomSkills = (user_id) => {
+   getCustomSkills = () => {
+  
     if (this.state.user_id){
-      let url = `http://localhost:3001/api/customskills?user_id=${user_id}`
+      let url = `http://localhost:3001/api/customskills?user_id=${this.state.user_id}`
       console.log(url)
       fetch(url, {
         method: 'get',
@@ -681,24 +682,7 @@ class App extends Component {
              </React.Fragment>     
             )} />  
 
-          <Route path="/secret" exact render = { props =>(
-              this.props.auth.isAuthenticated() 
-                ? <React.Fragment>
-                    
-                  <MySlider/>
-
-                </React.Fragment>
-                :
-                <React.Fragment>
-                    <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />           
-                </React.Fragment>              
-          )} />
+          
 
          <Route path="/feeling" exact render = { props =>(
             this.props.auth.isAuthenticated() 

@@ -18,13 +18,12 @@ const getBaseSkills = (request, response) => {
 
   const getCustomSkills = (request, response) => {
     var user_id = request.query.user_id;
-    pool.query(`SELECT * FROM skills WHERE user_id='${user_id}' `, (error, results) => {
+    pool.query(`SELECT * FROM skills WHERE user_id=${user_id} `, (error, results) => {
       if (error) {
         throw error
       }
       response.status(200).json(results.rows)
-    }) 
-
+    })
   }
 
   const getCriticalSkills = (request, response) => {
@@ -65,7 +64,7 @@ const getUserSkills = (request, response) => {
 
   const getUserRecords = (request, response) => {
     var userId = request.query.user_id;
-    pool.query(`SELECT s.skill_title, s.skill_icon, r.record_id, r.skill_id, r.emotion_id, r.before_lvl, r.after_lvl, r.impact, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.user_id =${userId} ORDER BY r.record_id DESC;`, (error, results) => {
+    pool.query(`SELECT s.skill_title, s.skill_icon, r.record_id, r.skill_id, r.emotion_id, r.before_lvl, r.after_lvl, r.impact, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.user_id =${userId} ORDER BY r.date DESC;`, (error, results) => {
       if (error) {
         throw error
       }
