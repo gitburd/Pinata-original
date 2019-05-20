@@ -219,9 +219,9 @@ const newRecordWithSkill = (request, response) => {
     })
   };
 
-  const searchBySH = (request,response) =>{
+  const searchByCritical = (request,response) =>{
     var user_id = request.query.user_id;
-    const query = `SELECT * FROM records WHERE user_id='${user_id} ' AND sh='true'`;
+    const query = `SELECT * FROM records WHERE user_id='${user_id} ' AND sh='true' OR si='true'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
       if (error) {
@@ -316,7 +316,7 @@ const newRecordWithSkill = (request, response) => {
     MakeNewUser, 
     GetUserId,
     searchBySI,
-    searchBySH,
+    searchByCritical,
     searchByImpact,
     searchByFeeling,
     searchBySkill,
