@@ -139,11 +139,12 @@ export default class FormBlank extends Component {
       
         
         <div  style={{padding:'20px'}}>
-        <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >Add a New Record</h1></button>
+       
          
         <Link className="navbar-brand" to="/records/list">
-          <i class="far fa-arrow-alt-circle-left" style={{ fontSize: '2em', padding:'2px' }} ></i>
+          <i class="far fa-arrow-alt-circle-left" style={{ fontSize: '1.7em', padding:'2px' }} > <span style={{fontFamily: 'Roboto', fontSize:'34px' }}> Back </span></i>
         </Link>
+         <h1 >Add a New Record</h1>
           <h3>I was feeling </h3>
           <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback}/>
           <h3>The intensity was  </h3>

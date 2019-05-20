@@ -94,16 +94,6 @@ export default class Update extends Component {
     skillsTypeahead = {this.props.skillsTypeahead}
     setSkillCallback = {this.setSkillCallback}
     />
-  <div class="form-group">
-    <label >Query</label>
-    <Form.Control as="select" onChange={this.handleQueryChange.bind(this)}>
-      <option>true</option>
-      <option>Sad</option>
-      <option>Workout</option>
-      <option>3</option>
-      <option>5</option>
-    </Form.Control>
-  </div>
   
 </form>
 </div>

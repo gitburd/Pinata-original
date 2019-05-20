@@ -12,6 +12,10 @@ class RecordsListUpdate extends Component {
     this.props.handleSelectRecord(record)
   } 
 
+  componentDidMount() {
+   this.props.getUserRecords()
+  }
+
   render() {
     let searchList  = this.props.searchList.map((record)=>(
             
@@ -33,12 +37,13 @@ class RecordsListUpdate extends Component {
         
     ))
     return (
-      <div style={{margin:'3px auto'}} >
-        <button onClick={this.props.getUserRecords} style={{fontSize:'20px', width:'50%', minWidth:'200px', alignItems:'center'}} className='subBtn' type="button">Get Records List
-        </button>  
+      <div style={{margin:'10px auto'}} >
+        {/* <button onClick={this.props.getUserRecords} style={{fontSize:'20px', width:'50%', minWidth:'200px', alignItems:'center'}} className='subBtn' type="button">Get Records List
+        </button>   */}
           <Link className="navbar-brand" to="/records/add">
-            <i class="far fa-plus-square" style={{ fontSize: '2em', padding:'20px' }}  ></i>
+            <i class="far fa-plus-square" style={{ fontSize: '1.7em', padding:'2px' }} > <span style={{fontFamily: 'Roboto', fontSize:'34px' }}> New Record </span></i>
           </Link>
+
        
           {recordsList}
       
