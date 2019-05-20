@@ -259,7 +259,7 @@ const newRecordWithSkill = (request, response) => {
   const searchBySkill = (request,response) =>{
     var user_id = request.query.user_id;
     var skill = request.query.keyword;
-    const query = `SELECT * FROM records as r JOIN skills AS s ON r.skill_id = s.skill_id WHERE r.user_id='${user_id} ' AND s.skill_title='${skill}'`;
+    const query = `SELECT * FROM records as r JOIN skills AS s ON r.skill_id = s.skill_id WHERE r.user_id='${user_id} ' AND s.skill_id='${skill}'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
       if (error) {
