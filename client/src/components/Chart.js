@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import { Form,OverlayTrigger,Tooltip, Card}  from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Emotion from './Emotion'
+
 
 
 var CanvasJSReact = require('./canvasjs.react');
@@ -63,7 +63,7 @@ export default class Chart1 extends Component {
 			}]
         }
         console.log ('chart line 65 ',
-        <Emotion/>
+        
 );
 		console.log ('68  ', 
         

@@ -230,13 +230,32 @@ INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (34, 3, true),
 
 INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (29, 3, true),(29, 66, true), (29, 67, true), (29, 16, true),(29, 26, true),(29, 56, true),(29, 61, true),(29, 62, true), (29, 63, true), (29, 65, true), (29, 68, true), (29, 68, true), (29, 58, true);
 
-     
-            
+      
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Quote', 'Loving yourself isn’t vanity. It’s sanity. – Katrina Mayer',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/quote.png', 0);
+
+# it's 76 
                   
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Affirmations', '* I am STRONG! * I love myself unconditionally. * I allow only healthy and loving relationships into my life. * I will not let other people’s negative words or actions dictate my future.' ,true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/positive.png', 0);
+
+# it's 77 
+
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Opposite', E'Identify negative self talk. Imagine you are talking to a loved one or friend or someone you respect, if you wouldn\'t say them don\'t say it to yourself. Try to identify cognitive distortions in your self image.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/oppositeaction.png', 0);  
+78! 
+
+
+ 21,24,25,33,37,43,50,51,57,115,88,95,96, 97,98,118,120, 81,76,77,119,9,30,94, 107,113,114 
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (78, 21, true),(78, 24, true), (78, 25, true), (78, 33, true),(78, 37, true),(78, 43, true),(78, 50, true),(78, 51, true), (78, 57, true), (78, 115, true), (78, 88, true), (78, 95, true), (78, 96, true), (78, 97, true), (78, 98, true), (78, 118, true), (78, 120, true), (78, 81, true), (78, 76, true), (78, 77, true), (78, 119, true), (78, 9, true), (78, 30, true), (78, 94, true), (78, 107, true), (78, 113, true), (78, 114, true);
+
+
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (76, 21, true),(76, 24, true), (76, 25, true), (76, 33, true),(76, 37, true),(76, 43, true),(76, 50, true),(76, 51, true), (76, 57, true), (76, 115, true), (76, 88, true), (76, 95, true), (76, 96, true), (76, 97, true), (76, 98, true), (76, 118, true), (76, 120, true), (76, 81, true), (76, 76, true), (76, 77, true), (76, 119, true), (76, 9, true), (76, 30, true), (76, 94, true), (76, 107, true), (76, 113, true), (76, 114, true);
+             
             
-            
-            
-           
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (77, 21, true),(77, 24, true), (77, 25, true), (77, 33, true),(77, 37, true),(77, 43, true),(77, 50, true),(77, 51, true), (77, 57, true), (77, 115, true), (77, 88, true), (77, 95, true), (77, 96, true), (77, 97, true), (77, 98, true), (77, 118, true), (77, 120, true), (77, 81, true), (77, 76, true), (77, 77, true), (77, 119, true), (77, 9, true), (77, 30, true), (77, 94, true), (77, 107, true), (77, 113, true), (77, 114, true);
            
            
 

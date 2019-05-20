@@ -57,7 +57,7 @@ export default class Sidenavbar extends Component {
                             </Link>
                         </NavIcon>
                         <NavText>
-                            <Link class="navbar-brand" to="/feeling">Feeling </Link>
+                            <Link class="navbar-brand" to="/feeling">I'm feeling... </Link>
                         </NavText>
                     </NavItem>
                     
@@ -73,7 +73,7 @@ export default class Sidenavbar extends Component {
                     </NavText>
                     </NavItem>
                     
-                    <NavItem eventKey="/records/add">
+                    {/* <NavItem eventKey="/records/add">
                         <NavIcon>
                             <Link className="navbar-brand" to="/records/add">
                                 <i class="far fa-plus-square" style={{ fontSize: '2em' }} ></i>
@@ -82,20 +82,20 @@ export default class Sidenavbar extends Component {
                         <NavText>
                             <Link className="navbar-brand" to="/records/add">New Record</Link>
                         </NavText>
-                    </NavItem>
+                    </NavItem> */}
                     
                     <NavItem eventKey="/records/update">
                         <NavIcon>
-                            <Link className="navbar-brand" to="/records/update">
-                                <i class="far fa-edit" style={{ fontSize: '2em' }} ></i>
+                            <Link className="navbar-brand" to="/custom">
+                            <i class="fas fa-user" style={{ fontSize: '2em' }}></i>
                             </Link>
                         </NavIcon>
                         <NavText>
-                            <Link className="navbar-brand" to="/records/update">Update Records</Link>
+                            <Link className="navbar-brand" to="/custom">My Actions</Link>
                         </NavText>
                     </NavItem>
 
-                    <NavItem eventKey="/search">
+                    {/* <NavItem eventKey="/search">
                     <NavIcon>
                         <Link className="navbar-brand" to="/search">
                             <i class="fas fa-search" style={{ fontSize: '2em' }}></i>
@@ -114,7 +114,7 @@ export default class Sidenavbar extends Component {
                             <NavText>
                                 <Link className="navbar-brand" to="/finish"> Finish Record</Link>
                             </NavText>
-                    </NavItem>
+                    </NavItem> */}
 
 
                 </SideNav.Nav>

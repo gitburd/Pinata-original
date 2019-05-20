@@ -21,7 +21,8 @@ export default class SkillDetails extends Component {
     }
 
  closeModal= ()=>{
-   this.props.showModalCallback();
+  this.setState({tryItClicked:false}, this.props.showModalCallback())
+    
  }
 
   setSkill =(e)=> {
@@ -59,6 +60,7 @@ export default class SkillDetails extends Component {
         date:'',
         si:false,
         sh:false,
+        tryItClicked:false,
         message:`Record updated.`
         }, this.closeModal);
 

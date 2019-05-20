@@ -66,7 +66,7 @@ export default class AutoCompleteText extends Component {
         'Suspicious',
         'Shocked',
         'Self-conscious',
-        'Delusional',
+        
         'Terrified',
         'Trapped',
         'Uncomfortable',
@@ -494,10 +494,10 @@ console.log('target from 287', target)
 
         if (this.state.skillsGridArray.length === 9 ){
             console.log('correct length at end of function')
-           emotionSkillsArray = emotionSkillsArray.filter(e => e.user_id !== 0);
-            baseSkillsArray= baseSkillsArray.concat(userSkillsArray).concat(emotionSkillsArray).concat(customSkillsArray)
+            emotionSkillsArray = emotionSkillsArray.filter(e => e.user_id === 0);
             
 
+            baseSkillsArray= baseSkillsArray.concat(emotionSkillsArray).concat(customSkillsArray)
             this.setState({skillsGridArray:this.state.skillsGridArray, baseSkillsArray},() => this.getCriticalSkills())
 
             // this.setState({skillsGridArray:this.state.skillsGridArray},() => this.someFn())

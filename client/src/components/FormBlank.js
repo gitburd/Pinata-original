@@ -9,6 +9,7 @@ import MySlider from './MySlider';
 import AfterLvlSlider from './AfterLvlSlider';
 import EmotionsTypeahead from './EmotionsTypeahead'
 import SkillsTypeahead from './SkillsTypeahead'
+import {Link} from 'react-router-dom';
 
 export default class FormBlank extends Component {
   constructor(props) {
@@ -135,57 +136,43 @@ export default class FormBlank extends Component {
              
     return (
       <div className='addRecord' >
-        <div >
-          <h1 style={{padding:'20px'}}>Add a New Record</h1>
+      
         
-              <h3>I was feeling </h3>
-
-              <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback}/>
-              
-   
-              <h3>The intensity was  </h3>
-              <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>
- 
-           
-              <h3>I tried </h3>
-
-              <SkillsTypeahead     
-                  customSkillsArray = {this.props.customSkillsArray}
-                  baseSkillsArray = {this.props.baseSkillsArray}
-                  setSkillCallback= {this.props.setSkillCallback}/>
-
-
-              <h3>then the intensity was </h3>
-
-              <AfterLvlSlider  handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
-              
-
-            <h3> Date </h3>
-            <DatePicker
-              dateFormat="yyyy/MM/dd"
-              selected={this.state.startDate}
-              onChange={this.handleDateChange} 
-            />
-
-            <h3 style={{paddingTop:'60px'}}> I was also thinking about </h3>  
-
-            <div style={{margin:'15px auto 0px auto'}}>
-          
-              <button  style={{margin:'10px', fontSize:'16px',  width:'38%'}} className='myBtn' type="button" onClick = {this.handleSIChange.bind(this)} >Suicide
-              </button>
-
-                <button  style={{margin:'15px auto 0px auto', fontSize:'16px',  width:'38%'}} className='myBtn' type="button" onClick = {this.handleSHChange.bind(this)} >Self harm
-              </button>
-              
-            </div>
-
-            <br/>
-            
-            <button  style={{margin:'0px auto 30px auto', fontSize:'20px',  width:'100%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Record
+        <div  style={{padding:'20px'}}>
+        <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >Add a New Record</h1></button>
+         
+        <Link className="navbar-brand" to="/records/list">
+          <i class="far fa-arrow-alt-circle-left" style={{ fontSize: '2em', padding:'2px' }} ></i>
+        </Link>
+          <h3>I was feeling </h3>
+          <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback}/>
+          <h3>The intensity was  </h3>
+          <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>
+          <h3>I tried </h3>
+          <SkillsTypeahead     
+            skillsTypeahead = {this.props.skillsTypeahead}
+            customSkillsArray = {this.props.customSkillsArray}
+            baseSkillsArray = {this.props.baseSkillsArray}
+            setSkillCallback= {this.setSkillCallback}/>
+          <h3>then the intensity was </h3>
+          <AfterLvlSlider  handleAfter_lvlChange = {this.handleAfter_lvlChange}/> 
+          <h3> Date </h3>
+          <DatePicker
+            dateFormat="yyyy/MM/dd"
+            selected={this.state.startDate}
+            onChange={this.handleDateChange} 
+          />
+          <h3 style={{paddingTop:'60px'}}> I was also thinking about </h3>  
+          <div style={{margin:'15px auto 0px auto'}}>        
+            <button  style={{margin:'10px', fontSize:'16px',  width:'38%'}} className='myBtn' type="button" onClick = {this.handleSIChange.bind(this)} >Suicide
             </button>
-        
-          {this.state.message}
-
+            <button  style={{margin:'15px auto 0px auto', fontSize:'16px',  width:'38%'}} className='myBtn' type="button" onClick = {this.handleSHChange.bind(this)} >Self harm
+            </button>
+          </div>
+          <br/>         
+          <button  style={{margin:'0px auto 30px auto', fontSize:'20px',  width:'100%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Record
+          </button>     
+          {/* {this.state.message} */}
         </div>
       </div>      
     )

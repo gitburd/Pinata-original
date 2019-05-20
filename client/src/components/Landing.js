@@ -23,7 +23,7 @@ export default class Landing extends Component {
   render() {
        
     return (
-      <div className="App ">
+      <div className="App " style={{margin:'0 auto'}}>
         <header className="App-header ">
           
             <h1 id="landing">Piñata!</h1>
