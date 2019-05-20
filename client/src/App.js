@@ -551,6 +551,7 @@ class App extends Component {
     }
 
   }
+   
 
   getEmotionId =(emotion) => {
     if (emotion!==''){
@@ -1021,13 +1022,7 @@ class App extends Component {
                   </div>
                 </React.Fragment>
               : <React.Fragment>
-                  <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                    />
+                
                 </React.Fragment>
               )} 
             />

@@ -57,7 +57,7 @@ export default class Sidenavbar extends Component {
                             </Link>
                         </NavIcon>
                         <NavText>
-                            <Link class="navbar-brand" to="/feeling">Feeling </Link>
+                            <Link class="navbar-brand" to="/feeling">I'm feeling... </Link>
                         </NavText>
                     </NavItem>
                     
@@ -91,7 +91,7 @@ export default class Sidenavbar extends Component {
                             </Link>
                         </NavIcon>
                         <NavText>
-                            <Link className="navbar-brand" to="/custom">Your Actions</Link>
+                            <Link className="navbar-brand" to="/custom">My Actions</Link>
                         </NavText>
                     </NavItem>
 

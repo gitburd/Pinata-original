@@ -66,7 +66,7 @@ export default class AutoCompleteText extends Component {
         'Suspicious',
         'Shocked',
         'Self-conscious',
-        'Delusional',
+        
         'Terrified',
         'Trapped',
         'Uncomfortable',

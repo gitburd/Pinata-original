@@ -172,7 +172,7 @@ export default class FormBlank extends Component {
           <br/>         
           <button  style={{margin:'0px auto 30px auto', fontSize:'20px',  width:'100%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Record
           </button>     
-          {this.state.message}
+          {/* {this.state.message} */}
         </div>
       </div>      
     )

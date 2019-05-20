@@ -16,20 +16,28 @@ export default class MakeCustomSkill extends Component {
   constructor(){
     super();
     this.state = { 
+      iconSelected:false,
       skill_title:'',
       skill_details:'',
-      skill_icon:'https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png'
+      skill_icon:''
       
       // https://s3-us-west-2.amazonaws.com/pinata-images/icons/compassion.png
     }
   }
 
   updateSkill_title(e){
+    
     this.setState({skill_title:e.target.value.substr(0,13)})
   }
 
+//   const regex = new RegExp( `|\~|\!|\@|\#|\$|\%|\_|\-|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|`);
+//   if (regex.test(e.target.value)){
+//     console.log('no special characters please')
+//   }else {this.setState({skill_title:e.target.value.substr(0,13)})
+// }
+
   updateSkill_details(e){
-    this.setState({skill_details:e.target.value.substr(0,50)})
+    this.setState({skill_details:e.target.value.substr(0,100)})
   }
 
     onSubmit =(e)=> { 
@@ -60,11 +68,12 @@ export default class MakeCustomSkill extends Component {
     
       setSkillIcon = (e,skill_icon)=>{
         e.preventDefault();
-        this.setState({skill_icon})
+        this.setState({skill_icon, iconSelected:true})
       }
 
     
   render() {
+    let icon = ''
             
     return (
       <div  >
@@ -81,9 +90,10 @@ export default class MakeCustomSkill extends Component {
         value={this.state.skill_details}
         multiline = {true}
         numberOfLines={5}
-        onChange={this.updateSkill_details.bind(this)}></input>       
+        onChange={this.updateSkill_details.bind(this)}></input>      
+        <div className={this.state.iconSelected?'hidden':''}> 
        <h3> Choose an image </h3>
-       <div style={{padding:'5% 25%'}}>
+       <div style={{padding:'5% 25%'}} >
         <CardDeck>
           <Card className = 'customSkillIcon'>
             <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/maze.png" onClick={ e =>this.setSkillIcon(e,"https://s3-us-west-2.amazonaws.com/pinata-images/icons/maze.png")}/>
@@ -97,7 +107,8 @@ export default class MakeCustomSkill extends Component {
             onClick={ e =>this.setSkillIcon(e, "https://s3-us-west-2.amazonaws.com/pinata-images/icons/heart.png")}/>
           </Card>
           <Card className = 'customSkillIcon'>
-            <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png" />
+            <Card.Img  variant="top" src="https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png"  onClick={ e =>this.setSkillIcon(e, "https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png")} />
+         
           </Card>
 
         </CardDeck>;
@@ -120,10 +131,16 @@ export default class MakeCustomSkill extends Component {
           </Card>
             
           </CardDeck>
+          </div>
         </div>
+        <div className={!this.state.iconSelected?'hidden':''} style={{margin:'0px auto', alignItems:'center'}}> 
+        <Card style={{width:'25%', margin:'20px auto'}}>
+            <Card.Img variant="top" src={this.state.skill_icon} />
+          </Card>
         <button  style={{margin:'0px auto 20px auto', fontSize:'20px',  width:'50%'}} className='subBtn' type="button" onClick = {this.onSubmit.bind(this)} >Create Action
         </button>  
-      </div>         
+      </div>   
+      </div>      
     )
   }
 }

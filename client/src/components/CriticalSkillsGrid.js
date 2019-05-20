@@ -62,14 +62,14 @@ export default class criticalSkillsGrid extends Component {
     return (
         <div>          
                 
-            <div  className="criticalGrid"> 
-                {criticalSkillsGrid}
-            </div>      
-
             <Link to="/grid">
                 <button  style={{margin:'10px auto', fontSize:'16px',  width:'51%', alignItems:'center'}} className='subBtn' type="button">Skip these
                 </button>
-            </Link>           
+            </Link>   
+
+                <div  className="criticalGrid"> 
+                {criticalSkillsGrid}
+            </div>           
         </div>
     )
   }

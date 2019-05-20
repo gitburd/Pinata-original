@@ -1,0 +1,598 @@
+DBT : ACCEPTS 
+
+Activities:
+    Most of the things we suggest. 
+
+Contributing:
+    Do something kind for another person. 
+    Giving service can help you relieve emotional distress in a couple ways. 
+    Help cook dinner, mow the neighbor's lawn, or bake cookies for a friend or relative.   
+   **Random Kindness 
+    **Bake goodies to share 
+    **IOU 
+
+
+ //Comparisons:
+    Put your life in perspective. Is there a time when you've faced more difficult challenges than you're facing today? Maybe not—maybe this is the most intense situation and most intense emotion you've ever experienced. (If so, you may need to jump back up to the TIPP section.) If that's the case, is there another person who has suffered more than you? Are you in your safe home, while in another part of the world someone else is searching for food and shelter after a natural disaster? The goal of this exercise is not to add more distress and emotional pain to your current situation. Instead, use this skill to add a different perspective to what you’re experiencing right now.
+
+  Emotions:
+
+  opposite emotion: come up with an activity that is the opposite of each emotion and make a skill for it - user_id 0 so u can put it in the emotion-skills table but it won't get pulled into baseskills 
+
+    You have the power to invoke the opposite emotion of your current distressed feeling. If you are feeling anxious, practice meditation for 15 minutes. If you're feeling depressed, go ahead and Google Image search "adorable puppies". (If you're in need of a real laugh, search "ugly puppies".) Adding a dose of the opposite emotion helps reduce the intensity of the negative emotion.
+    
+Push away: 
+    **timeout:
+        set a timer and walk away from the source of distress, it will be waiting for you when the timeout is over and you may be able to face it with a fresh perspective. 
+    *schedule reflection: 
+        pick a time to process your thoughts and emotions. If you find yourself ruminating and being pulled inward throughout the day know that you have set time aside for that later and redirect outward.       
+
+Thoughts:
+    *Say the alphabet backwards, name capitol cities, run through multiplication tables or the period table. 
+    **Puzzle 
+   
+Sensation:
+    **armoa
+    **bath 
+    **listen to music 
+    *admire art 
+    *cook
+
+
+
+IMPROVE stands for Imagery, Meaning, Prayer, Relaxation, One thing in the moment, Vacation, and Encouragement.
+
+
+Imagery: 
+    *visualize success. what is the optimal outcome?
+    
+Meaning:    
+Try to find meaning in painful situations. Can this experience guide you to becoming more empathetic, patient or to build new relationships? Can anything positive come from your present suffering?
+
+//
+PRAYER
+Prayer can come in any form that works for you. The prayer can be to any higher power, including God or the universe. Surrender your problems and ask to tolerate the situation a little longer.
+//
+
+RELAXATION
+    for anxiety : 
+    deep breathing, yoga, a hot bath, and a relaxing walk.
+
+
+ONE THING IN THE MOMENT
+for overwhelming/helpless/stressed out  
+Stay in the moment by letting go of the past and future. Adding old issues to the situation, or future tripping about potential consequences of the situation, will not be helpful in solving the problem. Find one thing to do and focus your entire self to that task. A one-track mind helps emotions feel less overwhelming.
+
+VACATION
+On the ideal vacation, you’re able to take a break from all your stressors and return home ready to take on the challenges you left behind. Unfortunately, most of us aren't able to take a real vacation during a moment of crisis. Instead, you can take a vacation in your mind. Imagine yourself somewhere else, like taking an evening stroll around the lake or driving on the Pacific Coast Highway. Stay on your "vacation" as long as necessary, and revisit as often as needed. Hopefully, you'll "return" better able to tolerate your circumstances.
+
+ENCOURAGEMENT
+    *positive affirmation : make one for each emotion group 
+    *inspirational quotes: make one for each emotion group 
+
+
+Encouragement doesn't have to come from an external source to be effective. Give yourself encouragement by repeating phrases that are meaningful to you, such as “I got this”, “I can improve this moment”, or "¡sí se puede!". Say it loud, say it proud! You’ll be amazed at your ability to motivate yourself to make it through a challenging time.
+
+
+
+*pros and cons list
+
+!!self soothing!!
+SIGHT
+     Count how many places you can see a certain color in the room, or focus on an object’s texture. You can also pull out your phone and scroll through some of your favorite photos.
+
+HEARING
+    Listen to sounds—any sounds. Can you hear birds chirping or the sound of traffic outside? Turn the volume up on your favorite song and just listen. If you prefer soothing sounds, there are many apps you can install on your phone to play on the go.
+TOUCH
+    Embrace your sense of touch by noticing how a pen feels in your hand, running your fingers through your hair, or using a fidget toy. When appropriate, you can wrap yourself in a blanket or take a warm bath.
+
+SMELL
+Whether it’s good or bad, focus on whatever scent is in the air. Can you identify the smell, or break it down into its components? For easy access to a scent you find calming, put a few drops of your favorite essential oil onto a cotton ball and keep it with you in a plastic bag.
+
+MOVEMENT
+While you technically only have five senses, DBT introduces a sixth sense of movement. Your emotional state can be altered by your body’s movements, so take a walk around the block or dance to your favorite song!
+
+
+
+
+
+
+
+*base skills pull all with user_id null or user_id= user_id and set in inital state in ap.js 
+
+when we make the original grid - don't set baseskills- for loop push into it, non dangerous method. when we r done making the grid concat userskills and emotion skills so the random grid will pull from all of them. 
+
+
+make one for each emotion group 
+
+
+
+
+emotion groups : anger, sadness, anticipation, isolation, dissociation, low self-image, Overwhelmed 
+
+
+so, for each of these we will have : 
+
+*opposite action 
+*positive affirmation   
+*inspirational quotes
+*activities
+*cognitive intervention - somehting from each of the categories about 
+
+
+emotion skills 
+Don’t suppress the emotion, when we suppress emotions, they just get bigger. 
+Do the opposite of the emotional urge.
+
+
+
+
+opposite action - affermaitons - quotes  
+    grounding: Instead of emotionally separating from the experience notice physical sensations. Count objects and colors. Shift your balance from side to side. Wash Your Hands. Feel your feet on the ground. Count backwards from 100 by 3s.
+
+
+anger - 
+    activities: 
+    physical: work out/wring towel/ punch pillow 
+
+    opposite action:
+        Take a vacation! This means avoiding the source of your frustration, especially if you feel the urge to attack it. Explore sympathy and empathy. Also consider deep breathing exercises. 
+    inspirational quote:
+        "Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned." -Buddah
+    affirmations:
+
+    ('Puzzle', E'Crossword, Sudoku, jigsaw, Rubik\'s cube, riddle, Picross, trivia,cryptic, pattern guessing - put your brain to work!, true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/puzzle.png');
+
+
+
+
+
+
+
+
+        
+
+
+sadness - 
+    activities: 
+    value: making art, support network, gratitude, volunteer, cute  
+
+    opposite action: 
+    Embrace the situation, don't avoid it. Push yourself to find a solution that works for you. Take time to accomplish the things you've been putting off. Engage in activities that increase your sense of control and build mastery.
+
+    --The best opposite of depression is to move, because depression is about leaden paralysis. Get up and move your body. Walk around the block. Do the dishes or vacuum. Go to the gym. Do anything for 10 minutes that gets your blood circulating. 
+    
+    affermations:
+        I have the power to regulate my emotions.
+        Hope is now, not later.
+        I find and enjoy the simple pleasures life is offering right now.
+
+
+
+fear-
+    opposite action: 
+   Confront your fear. lean into the stimulus that gives you anxiety. Do things that increase your sense of control and build mastery. Desensitize yourself with repeatedly exposure.
+
+    inspirational quote: 
+    "Move, but don’t move the way fear makes you move." – Rumi
+
+    affermaitons:
+     My challenges bring me better opportunities.
+
+    
+
+isolation- 
+    activities: phone a friend, play with pet, write 
+
+    opposite action: 
+    Get out. Try going to a public place, you don't have to talk to anyone, but resist the urge to isolate completely. 
+
+    affermations:
+        Every single person on the planet feels lonely sometimes.
+        I am connected and comfortable in all environments, with all people.
+        I can make space for loneliness and practice being kind to myself.
+
+quote coming soon 
+
+dissociation- 
+    opposite action: 
+    Try grounding exercises. 
+
+    affermaitons:
+        My mood creates a physiological response in my body. 
+        I am peaceful and positive!
+        I am in control of my thoughts and my life.
+        I love myself and who I am.
+
+
+self image- 
+    opposite action:
+    Identify negative self talk. Imagine you are talking to a loved one or friend or someone you respect, if you wouldn't say them don't say it to yourself. Try to identify cognitive distortions in your self image.  
+
+    affermaitons:
+        <p>I am STRONG!</p>
+        <p>I love myself unconditionally.</p>
+        <p>I allow only healthy and loving relationships into my life.</p>
+        <p>I will not let other people’s negative words or actions dictate my future.</p>
+quote: 
+
+  “Loving yourself isn’t vanity. It’s sanity.”
+– Katrina Mayer
+
+    
+
+
+overwhelmed-
+    opposite action: 
+    Confront the source of your stress. Break the problem down into smaller and smaller chunks until you have a task you can accomplish and take it one step at a time.
+
+    affirmations:
+        I am in control	
+        I am calm, focused, and relaxed
+        I remain calm even when under intense stress
+        My challenges bring me better opportunities.
+
+    
+
+
+
+anticipation- anxiety, breathing, yoga/stretching, planning 
+
+isolation - expression, writing, reaching out, random act of kindness, iou, volunteering 
+
+dissociation - grounding skills,
+
+low self image -  value: writing/ making art, support network, address cognitive distortions, friend yourself
+
+overwhelmed -timeout, breather, walk, reachout *ask for help
+
+
+
+
+basic emotions: 
+
+67- 
+
+anger
+    "Angry" : 3,   
+    "Bitter" : 16, 
+    "Irritated" : 26,
+    "Resentful" : 56,
+    "Enraged" : 61,
+    "Furious" : 62,
+    "Hateful" : 63,
+    "Irate" : 65,
+    "Mad" : 66,
+    "Pissed Off" : 67,
+    "Provoked" : 68,
+    "Violent" : 69,
+    "Aggressive" : 58,
+    
+
+sadness
+    "Sad" : 4,
+    "Depressed" : 5,
+    "Miserable" : 29,
+    "Abused" : 31,
+    "Grieving" : 53,
+    "Disappointed" : 59,
+    "Pained" : 89,
+    "Dismayed" : 108,
+
+
+anticipation 
+    "Jittery" : 13,
+    "Anxious" : 14,
+    "Tense" : 34,
+    "Nervous" : 32,
+    "Worried" : 42,
+    "Pressure" : 105,
+     "Trapped" : 40,
+     "Hesitant" : 111,
+    "Scared" : 8,
+    "Terrified" : 39,
+    "Fearful" : 109,
+    "Frightened" : 110,
+    "Threatened" : 100,
+
+    fear 
+
+
+lonely 
+    "Isolated" : 6,
+    "Lonely" : 7,
+    "Abandoned" : 72,
+    "Alone" : 73,
+     "Rejected" : 90,
+     "Withdrawn" : 91,
+     "Avoidant" : 117,
+      "Ignored" : 80,
+      "Alienated" : 92,
+       "Aversion" : 116,
+
+dissociation
+    "Unreal" : 10,
+    "Disoriented" : 12,
+     "Confused" : 18,
+    "Lost" : 28,
+    "Apathetic" : 74,
+    "Numb" : 75,
+    "Empty" : 78,
+    "Hollow" : 79,
+    "Disconnected" : 121,
+    "Indifferent" : 102,
+    "Unaware" : 103,
+    "Flat" : 84,
+    "Distant" : 60,
+    "Delusional" : 38, 
+ 
+
+ 21,24,25,33,37,43,50,51,57,115,88,95,96, 97,98,118,120, 81,76,77,119,9,30,94, 107,113,87, 114, 
+low self image 
+    "Embarrassed" : 21,
+    "Inadequate" : 24,
+    "Insecure" : 25,
+     "Stupid" : 33,
+     "Self-conscious" : 37,
+    "Worthless" : 43,
+    "Helpless" : 50,
+    "Foolish" : 51,
+    "Ashamed" : 57,
+     "Self-Critical" : 115,
+     "Humiliated" : 88,
+     "Inferior" : 95,
+    "Insignificant" : 96,
+    "Ridiculed" : 97,
+    "Powerless" : 98,
+    "Victimized" : 99,
+     "Weak" : 118,
+     "Apologetic" : 120,
+     "Remorse" : 81,
+    "Violated" : 70,
+    "Wronged" : 71,
+    "Disparaged" : 76,
+    "Desperate" : 77,    
+    "Vulnerable" : 119, 
+    "Hopeless" : 9,
+    "Mistreated" : 30,  
+     "Disrespected" : 94, 
+     "Discouraged" : 107,
+     "Judged" : 113,
+     "Exposed" : 87,  
+    "Judgmental" : 114,  
+            
+Overwhelmed            
+   "Tired" : 82,
+    "Exhausted" : 83,   
+    "Sleepy" : 85,      
+     "Frustrated" : 52,   
+    "Overwhelmed" : 55,      
+    "Bored" : 17, 
+     "Awful" : 86,
+     "Devastated" : 93,
+     "Hurt" : 23, 
+     "Disillusioned" : 112,
+     "Stressed Out" : 122
+           
+
+///            
+ envy           
+    "Envious" : 22,
+    "Jealous" : 27,    
+    "Suspicious" : 35,  
+       
+disgust 
+    "Disdain" : 19,
+    "Disgusted" : 20,
+    
+surprise 
+   "Bewildered" : 106,
+   "Shocked" : 36,   
+
+
+
+   old base skills :
+
+   
+      baseSkillsArray :
+      [
+        {
+            "skill_title": "Aroma",
+            "skill_details": "Breathing in something that smells good, essential oils, incense, candles, flowers, perfume, any smell you like.",
+            "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/aroma.png ",
+            "skill_id": 22
+        },
+        {
+          "skill_title": "Compassion",
+          "skill_details": "Find love in your heart for yourself and others.",
+          "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/compassion.png",
+          "skill_id": 23
+      },
+      {
+        "skill_title": "Cute Overload",
+        "skill_details": "Time for a few cat videos! Take some time to appreciate anything adorable.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/cute.png",
+        "skill_id": 24
+      },
+
+      {
+        "skill_title": "Goals",
+        "skill_details": "Make a todo list. Plan out your future or next steps.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/goals.png",
+        "skill_id": 25
+      },
+      {
+        "skill_title": "Gratitude ",
+        "skill_details": "Remember the kind words and deeds of loving people. Reflect on the things you are grateful for.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/gratitude.png",
+        "skill_id": 26
+      },
+      {
+        "skill_title": "Nature",
+        "skill_details": "Garden, visit the forest, go for a walk or hike. Spend sometime time with plants.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/nature.png",
+        "skill_id": 27
+      },
+      {
+        "skill_title": "Read",
+        "skill_details": "Get out of your head and into a book. Break out your favorite or try something new.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/read.png",
+        "skill_id": 28
+      },
+      {
+        "skill_title": "Punch a Pillow",
+        "skill_details": "Get out some of those feelings on a pillow.",
+        "skill_icon": " https://s3-us-west-2.amazonaws.com/pinata-images/icons/punchpillow.png",
+        "skill_id": 29
+      },
+      {
+        "skill_title": "Video Games",
+        "skill_details": "Have fun! Take some time off and enjoy yourself.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/playvideogames.png",
+        "skill_id": 30
+      },
+      {
+        "skill_title": "Listen to Music",
+        "skill_details": "Play your favorites or check out something new.",
+        "skill_icon": " https://s3-us-west-2.amazonaws.com/pinata-images/icons/listenmusic.png",
+        "skill_id": 31
+      },
+      {
+        "skill_title": "Take a Walk",
+        "skill_details": "Get outside. Breath in the fresh air and get a bit of exercise.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takewalk.png ",
+        "skill_id": 32
+      },
+      {
+        "skill_title": "Workout",
+        "skill_details": "Exercise, lift weights, or otherwise get moving at the gym or anywhere else.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/workout.png",
+        "skill_id": 33
+      },
+      {
+        "skill_title": "Wring Towel",
+        "skill_details": "Let out your feelings physically.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/wringtowel.png",
+        "skill_id": 34
+      },
+      {
+        "skill_title": "Make Art",
+        "skill_details": "Draw, paint, color, sculpt, dance, make music, write, be creative!",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/makeart.png",
+        "skill_id": 35
+      },
+
+      {
+        "skill_title": "Write",
+        "skill_details": "Journal, write a story or stream of consciousness, write a letter no need to send it, express yourself.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/write.png",
+        "skill_id": 36
+      },
+      {
+        "skill_title": "Perform",
+        "skill_details": "Karaoke, act out a scene, do comedy, dance, express yourself.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png",
+        "skill_id": 37
+      },
+      {
+        "skill_title": "Take a Bath",
+        "skill_details": "Bath or shower. Relax in the water, try some candles, music or bath salts.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebath.png",
+        "skill_id": 39
+      },
+  
+      {
+        "skill_title": "Tidy Up",
+        "skill_details": "Clean up your space.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/tidy.png",
+        "skill_id": 43
+      },
+      {
+        "skill_title": "Lay in Sun",
+        "skill_details": "Get outside and soak up some Vitamin D.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/sun.png ",
+        "skill_id": 44
+      },
+      {
+        "skill_title": "Phone a Friend",
+        "skill_details": "Reach out and call someone you trust.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/phonefriend.png",
+        "skill_id": 45
+      },
+      {
+        "skill_title": "Support Network",
+        "skill_details": "Spend time with friends or family. Reach out to your support network in person, over the phone or online.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/social1.png",
+        "skill_id": 46
+      },
+      {
+        "skill_title": "Comedy",
+        "skill_details": "Standup, improve, satire you have so many options!",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/comedy.png",
+        "skill_id": 47
+      },
+      {
+        "skill_title": "Stretch",
+        "skill_details": "Stretch out or practice yoga with others or on your own.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/strech.png",
+        "skill_id": 48
+      },
+      {
+        "skill_title": "Meditate",
+        "skill_details": "Clear your mind. Follow a guided practice or meditate on your own.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/meditate1.png",
+        "skill_id": 49
+      },
+      {
+        "skill_title": "Take a Breath",
+        "skill_details": "If you have a favorite breath it out. If try 'box breathing' Slowly. Count to four while breathing out. Count to four while holding your breath. Count to four while breathing in.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebreather2.png",
+        "skill_id": 50
+      },
+      {
+        "skill_title": "Play with Pet",
+        "skill_details": "Show some love to your fuzzy friend.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/playpet.png",
+        "skill_id": 51
+      },
+   
+      {
+        "skill_title": "Fix Something",
+        "skill_details": "Work on your car/bike or other project. Tinker around and solve a problem.",
+        "skill_icon": "https://s3-us-west-2.amazonaws.com/pinata-images/icons/fix.png",
+        "skill_id": 52
+      }
+  
+    ]
+
+
+    update skills set skill_icon = 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/puzzle.png' WHERE skill_title = 'Chess';
+
+
+    custom skill icons : 
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/maze.png
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/chess.png
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/heart.png
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/unicorn.png
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/blossom.png
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/rocket.png
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/triskele.png
+    https://s3-us-west-2.amazonaws.com/pinata-images/icons/target.png
+
+
+-style custom skills icons onclick and hover 
+-populate skills type ahead with the baseskills.customskills
+
+TESTING!!!!!!!
+
+- finish style navbar - 
+
+
+
+
+
+
+
+
+
+in base skills address for emotion skills not being in the list (low priority) 
