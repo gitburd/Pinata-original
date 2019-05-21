@@ -29,13 +29,14 @@ export default class FormBlank extends Component {
     }
     this.handleBefore_lvlChange = this.handleBefore_lvlChange.bind(this);
     this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
+  this.handleChange = this.handleChange.bind(this);
   this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   handleChange(date) {
     this.setState({
       startDate: date
-    });
+    }, this.handleDateChange(date));
   }
 
   setEmotionCallback = (emotion)=>{
@@ -88,7 +89,7 @@ export default class FormBlank extends Component {
     // let fleldVal = event.target.value;
     let unixDate= new Date(date).getTime() / 1000
 
-    this.setState({Startdate: date, date:unixDate})
+    this.setState({date:unixDate})
   }
 
  
@@ -161,7 +162,7 @@ export default class FormBlank extends Component {
           <DatePicker
             dateFormat="yyyy/MM/dd"
             selected={this.state.startDate}
-            onChange={this.handleDateChange} 
+            onChange={this.handleChange} 
           />
           <h3 style={{paddingTop:'60px'}}> I was also thinking about </h3>  
           <div style={{margin:'15px auto 0px auto'}}>        

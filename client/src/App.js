@@ -303,7 +303,7 @@ class App extends Component {
     update_sh:record.sh,
     update_date:record.date  
 
-  },this.recordClicked(),console.log('after recordClicked')  )
+  },this.recordClicked(),console.log('after recordClicked'))
   }
 
   recordClicked=()=>{ 
@@ -315,7 +315,7 @@ class App extends Component {
   }
   
   recordModalClose = () =>{
-    this.setState({recordModalShow:false}, console.log('it should close?'))
+    this.setState({recordModalShow:false}, this.getUserRecords)
   }
 
 
@@ -1019,7 +1019,7 @@ class App extends Component {
                   
                   recordModalClose = {this.recordModalClose}
                   searchList = {this.state.searchList}
-                  handleSelectRecord = { this.selectRecord.bind(this) } 
+                  handleSelectRecord = { this.selectRecord.bind(this)} 
                   recordsList = {this.state.recordsList}
                   updateRecord = {this.updateRecord} 
      
