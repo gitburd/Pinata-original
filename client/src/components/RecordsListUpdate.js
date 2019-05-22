@@ -40,8 +40,9 @@ class RecordsListUpdate extends Component {
       <div style={{margin:'10px auto'}} >
         {/* <button onClick={this.props.getUserRecords} style={{fontSize:'20px', width:'50%', minWidth:'200px', alignItems:'center'}} className='subBtn' type="button">Get Records List
         </button>   */}
+        <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >My Records </h1></button>
           <Link className="navbar-brand" to="/records/add">
-            <i class="far fa-plus-square" style={{ fontSize: '1.7em', padding:'2px' }} > <span style={{fontFamily: 'Roboto', fontSize:'34px' }}> New Record </span></i>
+          <sup>  <i class="far fa-plus-square" style={{ fontSize: '1.9em', padding:'2px' }} ><span style={{fontFamily: 'Roboto' }}>  </span> </i></sup>
           </Link>
 
        
