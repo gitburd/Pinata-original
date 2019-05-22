@@ -7,13 +7,28 @@ import { Form,OverlayTrigger,Tooltip, Card}  from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SkillsTypeahead from './SkillsTypeahead';
+import EmotionsTypeahead from './EmotionsTypeahead';
 import RecordUpdate from './RecordUpdate';
+import MySlider from './MySlider';
 
-
+ 
 export default class Update extends Component {
   constructor(props){
     super(props);
-
+    // this.state={
+    //   emotion:'',
+    //   emotion_id:'',
+    //   skill:'',
+    //   skill_id:'0',
+    //   before_lvl:'5',
+    //   after_lvl:'5',
+    //   si:false,
+    //   sh:false,
+    //   message:'',
+    //   startDate: new Date(),
+    //   date:new Date().getTime() / 1000
+    // }
+    this.handleBefore_lvlChange = this.handleBefore_lvlChange.bind(this);
     this.handleKeyChange = this.handleKeyChange.bind(this);
     this.handleQueryChange = this.handleQueryChange.bind(this);
   }
@@ -36,7 +51,12 @@ export default class Update extends Component {
     if (this.state.key==='Thinking about suicide or self harm'){
         this.props.searchByQuery('critical', true);
     }
-    // this.props.searchByQuery(this.state.key, this.state.query);
+    if(this.state.key==='Feeling'){
+      this.props.searchByQuery('Feeling', this.state.query)
+    }
+    if(this.state.key==='Impact'){
+      this.props.searchByQuery('Impact', this.state.query)
+    }
   }
 
   setSkillCallback = (skill) =>{
@@ -57,55 +77,79 @@ export default class Update extends Component {
     this.props.handleSelectRecord(record)
   } 
 
+
+  setEmotionCallback = (emotion)=>{
+ 
+    this.setState({query:emotion})
+    
+    
+    let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
+  console.log(url)
+  fetch(url, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(json => this.setState({emotion_id:json[0].emotion_id})).catch(function(e) {
+    console.log(e); // “oh, no!”
+   })
+ 
+  }
+
+  handleBefore_lvlChange(impact) {
+    // let fieldName = event.target.name;
+    // let fleldVal = event.target.value;
+    this.setState({query:impact})
+  }
+
   render() {
 
-    let searchList  = this.props.searchList.map((record)=>(
-            
-        <RecordUpdate 
+    let searchList  = this.props.searchList.map((record)=>(           
+      <RecordUpdate 
         key={record.record_id} 
         record={record} 
         onSelectRecord = {this.onSelectRecord.bind(this)}
         currentRecord = {record}
-          />
-          
-      ))
-    
-           
+      />         
+    ))
+     
     return (
-<div style={{width:'100%'}}>
+      <div style={{width:'100%'}}>
         <div style={{width:'40%', margin:'0 auto'}}>
 
-<form>
+          <form>
 
-  <div class="form-group">
-    <label >Key</label>
-    <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>
-    
-      <option>Feeling</option>
-      <option>fullList</option>
-      <option>unfinished</option>
-      <option>impact</option>
-      <option>Action</option>
-      <option>Thinking about suicide or self harm</option>
-    </Form.Control>
-  </div>
-
-  <SkillsTypeahead  
-    skillsTypeahead = {this.props.skillsTypeahead}
-    setSkillCallback = {this.setSkillCallback}
-    />
-  
-</form>
-</div>
+            <div class="form-group">
+              <label >Key</label>
+              <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>
+              
+                <option>Feeling</option>
+                <option>Action</option>
+                <option>Impact</option>
+                <option>Unfinished</option> 
+                <option>FullList</option>
+                <option>Thinking about suicide or self harm</option>
+              </Form.Control>
+            </div>
 
 
-<div style={{width:'60%', margin:'0 auto'}}>
+          <h1>Emotions</h1>
+          <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback} />
 
 
-
-       <button onClick={this.search}>Search user Records</button> 
-       {searchList}
-      </div>
+          <h1>Actions</h1>
+            <SkillsTypeahead  
+              skillsTypeahead = {this.props.skillsTypeahead}
+              setSkillCallback = {this.setSkillCallback}
+            />
+            
+      <h1>Impact</h1>
+            <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>
+          </form>
+        </div>
+        <div style={{width:'60%', margin:'0 auto'}}>
+          <button onClick={this.search}>Search user Records</button> 
+          {searchList}
+        </div>
         
       </div>  
       

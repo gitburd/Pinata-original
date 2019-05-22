@@ -233,7 +233,7 @@ const newRecordWithSkill = (request, response) => {
 
   const searchByImpact = (request,response) =>{
     var user_id = request.query.user_id;
-    var impact = request.query.keyword;
+    var impact = request.query.keyword-1;
     const query = `SELECT * FROM records WHERE user_id='${user_id} ' AND impact >'${impact}'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
@@ -254,7 +254,7 @@ const newRecordWithSkill = (request, response) => {
       }
       response.status(200).json(results.rows)
     })
-  };
+  }; 
 
   const searchBySkill = (request,response) =>{
     var user_id = request.query.user_id;

@@ -18,14 +18,14 @@ export default class FormBlank extends Component {
       emotion:'',
       emotion_id:'',
       skill:'',
-      skill_id:'',
-      before_lvl:'',
-      after_lvl:'',
-      date:'',
+      skill_id:'0',
+      before_lvl:'5',
+      after_lvl:'5',
       si:false,
       sh:false,
       message:'',
-      startDate: new Date()
+      startDate: new Date(),
+      date:new Date().getTime() / 1000
     }
     this.handleBefore_lvlChange = this.handleBefore_lvlChange.bind(this);
     this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
@@ -148,7 +148,7 @@ export default class FormBlank extends Component {
          {/* <h1 >Add a New Record</h1> */}
           <h3>I was feeling </h3>
           <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback}/>
-          <h3>The intensity was  </h3>
+          <h3>The intensity was </h3>
           <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>
           <h3>I tried </h3>
           <SkillsTypeahead     
