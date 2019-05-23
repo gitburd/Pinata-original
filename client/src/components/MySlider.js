@@ -10,7 +10,7 @@ import 'rc-tooltip/assets/bootstrap.css';
 import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 
-
+ 
 export default class MySlider extends Component {
     state={
         

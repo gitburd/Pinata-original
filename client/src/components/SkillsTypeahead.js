@@ -202,7 +202,7 @@ export default class SkillsTypeahead extends Component {
             this.setState({suggestions, text:value});
     
     }
-    
+     
       suggestionSelected(value){
         console.log('line 106',value)
         console.log('line 107',this.state.skill_title)

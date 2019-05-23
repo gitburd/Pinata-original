@@ -54,7 +54,7 @@ app.get('/api/user', db.GetUserId)
 
 app.get('/api/search/SI', db.searchBySI)
 
-app.get('/api/search/SH', db.searchBySH)
+app.get('/api/search/critical', db.searchByCritical)
 
 app.get('/api/search/Impact', db.searchByImpact)
 

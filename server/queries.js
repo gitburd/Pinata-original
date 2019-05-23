@@ -219,9 +219,9 @@ const newRecordWithSkill = (request, response) => {
     })
   };
 
-  const searchBySH = (request,response) =>{
+  const searchByCritical = (request,response) =>{
     var user_id = request.query.user_id;
-    const query = `SELECT * FROM records WHERE user_id='${user_id} ' AND sh='true'`;
+    const query = `SELECT * FROM records WHERE user_id='${user_id} ' AND sh='true' OR si='true'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
       if (error) {
@@ -233,7 +233,7 @@ const newRecordWithSkill = (request, response) => {
 
   const searchByImpact = (request,response) =>{
     var user_id = request.query.user_id;
-    var impact = request.query.keyword;
+    var impact = request.query.keyword-1;
     const query = `SELECT * FROM records WHERE user_id='${user_id} ' AND impact >'${impact}'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
@@ -254,12 +254,12 @@ const newRecordWithSkill = (request, response) => {
       }
       response.status(200).json(results.rows)
     })
-  };
+  }; 
 
   const searchBySkill = (request,response) =>{
     var user_id = request.query.user_id;
     var skill = request.query.keyword;
-    const query = `SELECT * FROM records as r JOIN skills AS s ON r.skill_id = s.skill_id WHERE r.user_id='${user_id} ' AND s.skill_title='${skill}'`;
+    const query = `SELECT * FROM records as r JOIN skills AS s ON r.skill_id = s.skill_id WHERE r.user_id='${user_id} ' AND s.skill_id='${skill}'`;
     console.log(query);
     pool.query(`${query}`, (error, results) => {
       if (error) {
@@ -316,7 +316,7 @@ const newRecordWithSkill = (request, response) => {
     MakeNewUser, 
     GetUserId,
     searchBySI,
-    searchBySH,
+    searchByCritical,
     searchByImpact,
     searchByFeeling,
     searchBySkill,

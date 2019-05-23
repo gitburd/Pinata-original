@@ -93,7 +93,7 @@ export default class UpdateModal extends Component {
                     </OverlayTrigger>       
                 </div> 
               </div>
-              
+               
                <h2> I was feeling <span className='recordTitles'><b>{this.props.update_emotion}</b> </span></h2>
                <h2> I tried <span className='recordTitles'><b>{this.props.update_skill}</b></span></h2>
                <h2>Intensity was <span className='recordTitles'><b> {this.props.update_before_lvl} </b></span></h2>

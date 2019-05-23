@@ -33,7 +33,7 @@ export default class Landing extends Component {
           ? (
             <div>  
               <hr/>        
-              <h2> Welcome, {this.props.first_name}  <MDBIcon icon="heart" /> </h2>         
+              <h2> Welcome, {this.props.first_name} </h2>         
               <button className="subBtn" onClick={()=>{
                 this.props.auth.logout()
                 window.location='/'             

@@ -19,7 +19,7 @@ import CriticalSkillsGrid from './components/CriticalSkillsGrid'
 import RecordsList from './components/RecordsList'
 import RecordsListUpdate from './components/RecordsListUpdate'
 import FormBlank from './components/FormBlank';
-import Update from './components/Update';
+
 import AfterLvlPrompt from './components/AfterLvlPrompt';
 import Landing from './components/Landing';
 
@@ -30,6 +30,7 @@ import UpdateModal from './components/UpdateModal';
 import MySlider from './components/MySlider';
 import CustomSkillList from './components/CustomSkillList';
 import MakeCustomSkill from './components/MakeCustomSkill';
+import Search from './components/Search';
 
 
 
@@ -302,7 +303,7 @@ class App extends Component {
     update_sh:record.sh,
     update_date:record.date  
 
-  },this.recordClicked(),console.log('after recordClicked')  )
+  },this.recordClicked(),console.log('after recordClicked'))
   }
 
   recordClicked=()=>{ 
@@ -314,7 +315,7 @@ class App extends Component {
   }
   
   recordModalClose = () =>{
-    this.setState({recordModalShow:false}, console.log('it should close?'))
+    this.setState({recordModalShow:false}, this.getUserRecords)
   }
 
 
@@ -341,8 +342,13 @@ class App extends Component {
   }
 
   searchByQuery = (key, query) => {
-   
-    let url = `http://localhost:3001/api/search/${key}?user_id=${this.state.user_id}&keyword=${query}`
+    let url;
+    if(key === 'critical'){
+      url = `http://localhost:3001/api/search/critical?user_id=${this.state.user_id}`
+    }else{
+      url = `http://localhost:3001/api/search/${key}?user_id=${this.state.user_id}&keyword=${query}`
+    }
+    
 
     console.log(`the url is ${url}`)
     fetch(url, {
@@ -951,9 +957,17 @@ class App extends Component {
             <Route path="/search" exact render = { props =>(
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
-                    <header className="App-header"> 
-                          We will be able to search soon  
-                    </header>                 
+                   
+
+
+                    <Search  
+                    handleSelectRecord = { this.selectRecord.bind(this) } 
+                    skillsTypeahead = {this.state.skillsTypeahead}
+                    searchByQuery = {this.searchByQuery}
+                    searchList= {this.state.searchList}
+                    />
+                          
+                                
                     
                 </React.Fragment>
                 :
@@ -1005,7 +1019,7 @@ class App extends Component {
                   
                   recordModalClose = {this.recordModalClose}
                   searchList = {this.state.searchList}
-                  handleSelectRecord = { this.selectRecord.bind(this) } 
+                  handleSelectRecord = { this.selectRecord.bind(this)} 
                   recordsList = {this.state.recordsList}
                   updateRecord = {this.updateRecord} 
      

@@ -18,24 +18,25 @@ export default class FormBlank extends Component {
       emotion:'',
       emotion_id:'',
       skill:'',
-      skill_id:'',
-      before_lvl:'',
-      after_lvl:'',
-      date:'',
+      skill_id:'0',
+      before_lvl:'5',
+      after_lvl:'5',
       si:false,
       sh:false,
       message:'',
-      startDate: new Date()
+      startDate: new Date(),
+      date:new Date().getTime() / 1000
     }
     this.handleBefore_lvlChange = this.handleBefore_lvlChange.bind(this);
     this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
+  this.handleChange = this.handleChange.bind(this);
   this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   handleChange(date) {
     this.setState({
       startDate: date
-    });
+    }, this.handleDateChange(date));
   }
 
   setEmotionCallback = (emotion)=>{
@@ -88,7 +89,7 @@ export default class FormBlank extends Component {
     // let fleldVal = event.target.value;
     let unixDate= new Date(date).getTime() / 1000
 
-    this.setState({Startdate: date, date:unixDate})
+    this.setState({date:unixDate})
   }
 
  
@@ -137,16 +138,17 @@ export default class FormBlank extends Component {
     return (
       <div className='addRecord' >
       
-        
-        <div  style={{padding:'20px'}}>
-        <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >Add a New Record</h1></button>
          
+        <div  style={{padding:'20px'}}>
+       
+        <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >New Record </h1></button>
         <Link className="navbar-brand" to="/records/list">
-          <i class="far fa-arrow-alt-circle-left" style={{ fontSize: '2em', padding:'2px' }} ></i>
+         <sup> <i class="far fa-arrow-alt-circle-left" style={{ fontSize: '1.9em', padding:'2px'}} > </i> </sup>
         </Link>
+         {/* <h1 >Add a New Record</h1> */}
           <h3>I was feeling </h3>
           <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback}/>
-          <h3>The intensity was  </h3>
+          <h3>The intensity was </h3>
           <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>
           <h3>I tried </h3>
           <SkillsTypeahead     
@@ -160,7 +162,7 @@ export default class FormBlank extends Component {
           <DatePicker
             dateFormat="yyyy/MM/dd"
             selected={this.state.startDate}
-            onChange={this.handleDateChange} 
+            onChange={this.handleChange} 
           />
           <h3 style={{paddingTop:'60px'}}> I was also thinking about </h3>  
           <div style={{margin:'15px auto 0px auto'}}>        
