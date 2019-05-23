@@ -1,39 +1,92 @@
+this should work if you take the 1st 100 lines, there won't be any records
 CREATE DATABASE pinata;
 \connect pinata;
 
-CREATE TABLE users (user_id SERIAL PRIMARY KEY, auth0_id VARCH, user_name VARCHAR, first_name VARCHAR, last_name VARCHAR, email VARCHAR);
+CREATE TABLE users (user_id SERIAL PRIMARY KEY, auth0_id VARCH, user_name VARCHAR, first_name VARCHAR, last_name VARCHAR, email VARCHAR, user_name VARCHAR);
 
-CREATE TABLE skills (skill_id SERIAL PRIMARY KEY, skill_title VARCHAR, skill_details VARCHAR, skill_icon VARCHAR, is_critical BOOLEAN);
+CREATE TABLE skills (skill_id SERIAL PRIMARY KEY, skill_title VARCHAR, skill_details VARCHAR, skill_icon VARCHAR, is_critical BOOLEAN, user_id VARCHAR );
 
 CREATE TABLE emotions (emotion_id SERIAL PRIMARY KEY, emotion_text VARCHAR);
 
-CREATE TABLE emotion_skills (emotion_skills_id SERIAL PRIMARY KEY, skill_id INT , emotion_id INT);
+CREATE TABLE emotion_skills (emotion_skills_id SERIAL PRIMARY KEY, skill_id INT , emotion_id INT, is_star boolean);
 
-CREATE TABLE records (record_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id), skill_id INT REFERENCES skills(skill_id), emotion_id INT REFERENCES emotions(emotion_id), before_lvl INT, after_lvl INT, impact INT, date DATE, SI BOOLEAN, sh BOOLEAN);
+CREATE TABLE records (record_id SERIAL PRIMARY KEY, user_id INT, skill_id VARCHAR, emotion_id INT, before_lvl INT, after_lvl INT, impact INT, date DATE, si BOOLEAN, sh BOOLEAN);
 
-//ALTER TABLE records ADD COLUMN SI boolean;
-//ALTER TABLE records ADD COLUMN SH boolean; 
 
-//ALTER TABLE skills ADD COLUMN is_critical boolean; 
+update emotion_skills set is_star = true WHERE emotion_skills_id>0;
 
+
+
+insert into skills (skill_title, skill_icon, skill_details) VALUES('Aroma','https://s3-us-west-2.amazonaws.com/pinata-images/icons/aroma.png', 'Breathing in something that smells good, essential oils, incense, candles, flowers, perfume, any smell you like.')
+
+
+
+insert into skills (skill_title, skill_icon, skill_details) VALUES('Compassion', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/compassion.png', 'Find love in your heart for yourself and others.'), ('Cute Overload', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/cute.png','Time for a few cat videos! Take some time to appreciate anything adorable'), ('goals', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/goals.png', 'Make a todo list. Plan out your future or next steps.'), ('Gratitude', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/gratitude.png', 'Remember the kind words and deeds of loving people. Reflect on the things you are grateful for'), ('Nature','https://s3-us-west-2.amazonaws.com/pinata-images/icons/nature.png', 'Garden, visit the forest, go for a walk or hike. Spend sometime time with plants'), ('Read', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/read.png','Get out of your head and into a book. Break out your favorite or try something new.')
+
+
+insert into skills (skill_title, skill_icon, skill_details) VALUES('Punch a Pillow', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/punchpillow.png', 'Get out some of the feelings on a pillow.'), ('Play Video Games', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/playvideogames.png', 'Have fun! Take some time off and enjoy yourself.'), ('Listen to Music', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/listenmusic.png', 'Play your favorites or check out something new.'), ('Take a Walk', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/takewalk.png', 'Get outside. Breath in the fresh air and get a bit of exercise.'), ('Workout','https://s3-us-west-2.amazonaws.com/pinata-images/icons/workout.png', 'Exercise, lift weights, or otherwise get moving at the gym or anywhere else.'), ('Wring Towel', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/wringtowel.png','Let out your feelings physically.'), ('Make Art', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/makeart.png','Draw, paint, color, sculpt, dance, make music, write, be creative!'), ('Write', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/write.png','Journal, write a story or stream of consciousness, write a letter no need to send it, express yourself.'), ('Perform', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png','Karaoke, act out a scene, do comedy, dance, express yourself. '),('Perform', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png','Karaoke, act out a scene, do comedy, dance, express yourself.'),('Take a Bath', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebath.png','Bath or shower. Relax in the water, try some candles, music or bath salts.'),('Perform', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png','Karaoke, act out a scene, do comedy, dance, express yourself.'),('Perform', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png','Karaoke, act out a scene, do comedy, dance, express yourself.'),('Perform', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/perform.png','Karaoke, act out a scene, do comedy, dance, express yourself.')
+
+insert into skills (skill_title, skill_icon, skill_details) VALUES('Tidy Up', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/tidy.png', 'Clean up your space.'), ('Lay in Sun', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/sun.png', 'Get outside and soak up some Vitamin D.'), ('Phone Friend', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/phonefriend.png', 'Reach out and call someone you trust.'), ('Support Network', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/social1.png', 'Spend time with friends or family. Reach out to your support network in person, over the phone or online.'), ('Comedy','https://s3-us-west-2.amazonaws.com/pinata-images/icons/meditate1.png', 'Standup, improve, satire you have so many options!'), ('Stretch', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/strech.png','Stretch out or practice yoga with others or on your own.'), ('Meditate', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/meditate1.png','Clear your mind. Follow a guided practice or meditate on your own.'), ('Take Breather', 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/takebreather2.png','If you have a favorite breath it out. If try "box breathing" Slowly. Count to four while breathing out. Count to four while holding your breath. Count to four while breathing in.');
+
+
+insert into skills (skill_title, skill_icon, skill_details) values ('Play with Pet','https://s3-us-west-2.amazonaws.com/pinata-images/icons/playpet.png', 'Show some love to your fuzzy friend.'), ('Fix Something','https://s3-us-west-2.amazonaws.com/pinata-images/icons/fix.png', 'Work on your car/bike or other project. Tinker around and solve a problem.');  
+
+
+insert into skills (skill_title, skill_details, is_heart, skill_icon) values ('Random Kindness', E'Go out of your way to improve someone\'s day. Show appreciation, offer assistance, give a compliment, make someone laugh, reach out to someone who is struggling, volunteer, buy a coffee or flowers for someone or make them a card.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/randomkindness.png')
+
+insert into skills (skill_title, skill_details, is_heart, skill_icon) values ('Bake', 'Make something yummy to share!',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/bake.png'),('I Owe You', 'Is there someone you rely on and appreciate? Repay a favor or offer support to someone who needs you.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/iou.png'), ('Timeout', 'Set a timer and walk away from the source of distress. When the timeout is over you may be able to face it with a fresh perspective.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/timeout.png'), ('Puzzle', E'Crossword, Sudoku, jigsaw, Rubik\'s cube, riddle, Picross, trivia,cryptic, pattern guessing - put your brain to work!',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/puzzle.png');
+
+
+
+
+
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Affirmations', '* I can diffuse anger and channel it productively * I control my anger by expressing myself in a firm yet positive manner * I can calm myself and detach from anger * I allow myself to acknowledge angry feelings without losing control',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/positive.png', 0); 
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (64, 3, true),(64, 66, true), (64, 67, true), (64, 16, true),(64, 26, true),(64, 56, true),(64, 61, true),(64, 62, true), (64, 63, true), (64, 65, true), (64, 68, true), (64, 68, true), (64, 58, true);
+
+
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Opposite', 'Take a vacation! This means avoiding the source of your frustration, especially if you feel the urge to attack it. Explore sympathy and empathy. Also consider deep breathing exercises.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/oppositeaction.png', 0);  
+
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (65, 3, true),(65, 66, true), (65, 67, true), (65, 16, true),(65, 26, true),(65, 56, true),(65, 61, true),(65, 62, true), (65, 63, true), (65, 65, true), (65, 68, true), (65, 68, true), (65, 58, true);
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Quote', 'Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned. -Buddah',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/quote.png', 0);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (66, 3, true),(66, 66, true), (66, 67, true), (66, 16, true),(66, 26, true),(66, 56, true),(66, 61, true),(66, 62, true), (66, 63, true), (66, 65, true), (66, 68, true), (66, 68, true), (66, 58, true);
+
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (33, 3, true),(33, 66, true), (33, 67, true), (33, 16, true),(33, 26, true),(33, 56, true),(33, 61, true),(33, 62, true), (33, 63, true), (33, 65, true), (33, 68, true), (33, 68, true), (33, 58, true);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (34, 3, true),(34, 66, true), (34, 67, true), (34, 16, true),(34, 26, true),(34, 56, true),(34, 61, true),(34, 62, true), (34, 63, true), (34, 65, true), (34, 68, true), (34, 68, true), (34, 58, true);
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (29, 3, true),(29, 66, true), (29, 67, true), (29, 16, true),(29, 26, true),(29, 56, true),(29, 61, true),(29, 62, true), (29, 63, true), (29, 65, true), (29, 68, true), (29, 68, true), (29, 58, true);
+
+      
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Quote', 'Loving yourself isn’t vanity. It’s sanity. – Katrina Mayer',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/quote.png', 0);
+ 
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Affirmations', '* I am STRONG! * I love myself unconditionally. * I allow only healthy and loving relationships into my life. * I will not let other people’s negative words or actions dictate my future.' ,true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/positive.png', 0);
+
+
+INSERT into skills (skill_title, skill_details, is_heart, skill_icon, user_id) VALUES('Opposite', E'Identify negative self talk. Imagine you are talking to a loved one or friend or someone you respect, if you wouldn\'t say them don\'t say it to yourself. Try to identify cognitive distortions in your self image.',true,'https://s3-us-west-2.amazonaws.com/pinata-images/icons/oppositeaction.png', 0);  
+
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (78, 21, true),(78, 24, true), (78, 25, true), (78, 33, true),(78, 37, true),(78, 43, true),(78, 50, true),(78, 51, true), (78, 57, true), (78, 115, true), (78, 88, true), (78, 95, true), (78, 96, true), (78, 97, true), (78, 98, true), (78, 118, true), (78, 120, true), (78, 81, true), (78, 76, true), (78, 77, true), (78, 119, true), (78, 9, true), (78, 30, true), (78, 94, true), (78, 107, true), (78, 113, true), (78, 114, true);
+
+
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (76, 21, true),(76, 24, true), (76, 25, true), (76, 33, true),(76, 37, true),(76, 43, true),(76, 50, true),(76, 51, true), (76, 57, true), (76, 115, true), (76, 88, true), (76, 95, true), (76, 96, true), (76, 97, true), (76, 98, true), (76, 118, true), (76, 120, true), (76, 81, true), (76, 76, true), (76, 77, true), (76, 119, true), (76, 9, true), (76, 30, true), (76, 94, true), (76, 107, true), (76, 113, true), (76, 114, true);
+             
+            
+
+INSERT INTO emotion_skills (skill_id, emotion_id, is_star) VALUES (77, 21, true),(77, 24, true), (77, 25, true), (77, 33, true),(77, 37, true),(77, 43, true),(77, 50, true),(77, 51, true), (77, 57, true), (77, 115, true), (77, 88, true), (77, 95, true), (77, 96, true), (77, 97, true), (77, 98, true), (77, 118, true), (77, 120, true), (77, 81, true), (77, 76, true), (77, 77, true), (77, 119, true), (77, 9, true), (77, 30, true), (77, 94, true), (77, 107, true), (77, 113, true), (77, 114, true);
+           
 
 INSERT INTO users (first_name, last_name, email) VALUES('firstname test','lastname test','test@email.com');
-INSERT INTO skills (skill_title, skill_details, skill_icon) VALUES('Test skill', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image');
-INSERT INTO emotions (emotion_text) VALUES('test emotion');
-INSERT INTO emotion_skills (skill_id, emotion_id) VALUES(1,2);
-
-INSERT INTO records (user_id, skill_id, emotion_id, before_lvl, after_lvl, impact, date, si, sh) VALUES (2,1,2,8,5,3,'2019-04-20', true, true);
-
-SELECT * FROM users;
-SELECT * FROM skills;
-SELECT * FROM emotions; 
-SELECT * FROM emotion_skills;
-SELECT * FROM records;
 
 
-
-INSERT INTO skills (skill_title, skill_details, skill_icon) VALUES('Play Video Games','Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Wring a Towel', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Workout', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),  ('Take a Breather', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Punch a Pillow','Lorium sermpra filler text is filling the text sapce.', 'url to the image');
-INSERT INTO skills (skill_title, skill_details, skill_icon) VALUES('Dance','Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Listen to Music', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),('Make Art', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'),  ('Phone a Friend', 'Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Take a Walk','Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Cook','Lorium sermpra filler text is filling the text sapce.', 'url to the image'), ('Pinata','Lorium sermpra filler text is filling the text sapce.', 'url to the image');
 
 INSERT INTO emotions (emotion_text) VALUES('Bitter'),('Bored'),('Confused'),('Disdain'),('Disgusted'),('Embarrassed'), ('Envious'), ('Hurt'),('Inadequate'),('Insecure'),('Irritated'),('Jealous'),('Lost'),('Miserable'),('Mistreated'),('Abused'),('Nervous'),('Stupid'),('Tense'), ('Suspicious'),('Shocked'),('Self-conscious'),('Delusional'),('Terrified'),('Trapped'),('Uncomfortable'),('Worried'),('Worthless'),('Sad'),('Depressed'),('Isolated'),('Lonely'),('Scared'),('Hopeless'), ('Helpless'),('Foolish'), ('Frustrated'),('Grieving'),('Hurt'),('Overwhelmed'),('Resentful'),('Ashamed'), ('Aggressive'),('Disappointed'),('Distant'),('Enraged'), ('Furious'),('Hateful'),('Hostile'),('Irate'),('Mad'),('Pissed Off'),('Provoked'),('Violent'),('Violated'),('Wronged'),('Abandoned'),('Alone'),('Apathetic'),('Numb'),('Disparaged'),('Desperate'),('Empty'),('Hollow'),('Ignored'),('Remorse'),('Tired'),('Exhausted'),('Flat'),('Sleepy'),('Awful'),('Exposed'),('Humiliated'),('Pained'),('Rejected'),('Withdrawn'),('Alienated'),('Devastated'),('Disrespected'),('Inferior'),('Insignificant'),('Ridiculed'),('Powerless'),('Victimized'),('Threatened'),('Constricted'),('Indifferent'),('Unaware'),('Tight'),('Pressure'),('Bewildered'),('Discouraged'),('Dismayed'),('Fearful'),('Frightened'),('Hesitant'),('Disillusioned'),('Judged'),('Judgmental'),('Self-Critical'),('Aversion'),('Avoidant'),('Weak'),('Vulnerable'),('Apologetic'), ('Disconnected'),('Angry'),('Sad'),('Depressed'),('Isolated'),('Lonely'),('Scared'),('Hopeless');
 
@@ -42,33 +95,11 @@ INSERT INTO emotions (emotion_text) VALUES('Bitter'),('Bored'),('Confused'),('Di
 
 INSERT INTO emotion_skills (emotion_id, skill_id) VALUES(3,6), (3,5), (3,4), (3,3);
 
+////
 
+STOP HERE 
 
-INSERT INTO records (user_id, skill_id, emotion_id, before_lvl, after_lvl, impact, date) VALUES (2,2,3,8,5,3,'2019-04-15'), (2,5,3,7,2,5,'2019-04-16'), (2,6,3,8,9,-1,'2019-04-17');
-
-
-SEARCH for Angry skills:
-SELECT s.skill_title, s.skill_details, s.skill_icon FROM skills AS s JOIN emotion_skills AS es ON es.skill_id = s.skill_id JOIN emotions AS e ON es.emotion_id  =  e.emotion_id WHERE e.emotion_text = 'Angry';
-
-SEARCH for User skills:
-SELECT s.skill_title, s.skill_details, s.skill_icon FROM skills AS s JOIN records AS r ON r.skill_id  =  s.skill_id JOIN users AS u ON r.user_id  =  u.user_id WHERE u.user_id = 2 AND r.impact > 0; 
-
-SEARCH for all of a Users Records :
-SELECT s.skill_title, s.skill_icon, r.before_lvl, r.after_lvl, r.impact, r.date  FROM skills AS s JOIN records AS r ON r.skill_id  =  s.skill_id JOIN users AS u ON r.user_id  =  u.user_id WHERE u.user_id = 2; 
-
-
-SEARCH for user Angry skills: 
-SELECT s.skill_title, s.skill_details, s.skill_icon
-FROM skills AS s
-JOIN records AS r ON r.skill_id = s.skill_id
-JOIN users AS u ON r.user_id = u.user_id
-JOIN emotions AS e ON r.emotion_id = e.emotion_id
-WHERE u.user_id = 2
-AND r.impact > 0
-AND e.emotion_text = 'Angry'; 
-
-
-add image urls 
+////
 
 UPDATE skills set skill_icon= 'https://s3-us-west-2.amazonaws.com/pinata-images/icons/comedy.png' WHERE skill_id=47;
 
@@ -108,15 +139,6 @@ user_id, auth0_id, user_name, first_name, last_name, email
 
 
 
-
-ALTER TABLE users ADD COLUMN auth0_id VARCHAR;
-ALTER TABLE users ADD COLUMN email VARCHAR;
-ALTER TABLE users ADD COLUMN first_name VARCHAR;
-ALTER TABLE users ADD COLUMN last_name VARCHAR;
-
-ALTER TABLE users DROP password;
-
-
 INSERT INTO users (auth0_id, first_name, last_name) VALUES('Authtest','first_name test','last_name test');
 
 
@@ -127,8 +149,6 @@ INSERT INTO skills (skill_title, skill_details, skill_icon, is_critical) VALUES(
 
 
 
-ALTER TABLE emotion_skills ADD COLUMN is_star boolean;
-update emotion_skills set is_star = true WHERE emotion_skills_id>0;
 
 
 
@@ -153,14 +173,11 @@ INSERT INTO skills (skill_title, is_critical, skill_icon, skill_details) VALUES(
 
 
 
-ALTER TABLE records ALTER COLUMN skill_id VARCHAR;
-
-ALTER TABLE records  DROP "column_name";
 
 TIPP: DBT coping stratagies for critical moments - 
 
 
-ALTER TABLE skills ADD COLUMN user_id VARCHAR;
+
 
 
 
