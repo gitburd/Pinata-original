@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
-import Chart from './components/Chart';
+
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -31,6 +31,7 @@ import MySlider from './components/MySlider';
 import CustomSkillList from './components/CustomSkillList';
 import MakeCustomSkill from './components/MakeCustomSkill';
 import Search from './components/Search';
+import Chart from './components/Chart';
 
 
 
@@ -39,6 +40,7 @@ const fetch = require('node-fetch');
 
 class App extends Component {
   state = { 
+    chartData:{},
     customSkillsList:[
     
     ],
@@ -148,6 +150,42 @@ class App extends Component {
 
   saveStateToLocalStorage() {
     localStorage.setItem('backup', JSON.stringify(this.state))
+  }
+
+
+  componentWillMount(){
+    this.getChartData();
+  }
+
+  getChartData(){
+    // Ajax calls here
+    this.setState({
+      chartData:{
+        labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+        datasets:[
+          {
+            label:'Population',
+            data:[
+              617594,
+              181045,
+              153060,
+              106519,
+              105162,
+              95072
+            ],
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)'
+            ]
+          }
+        ]
+      }
+    });
   }
 
   
@@ -985,7 +1023,8 @@ class App extends Component {
             <Route path="/chart" exact render = { props =>(
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
-                  <Chart/>
+                   <Chart chartData={this.state.chartData} location="Massachusetts" legendPosition="bottom"/>
+                 
                 </React.Fragment>
                 :
                 <React.Fragment>

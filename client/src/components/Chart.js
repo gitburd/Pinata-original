@@ -1,79 +1,133 @@
 import React, { Component } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PropTypes from 'prop-types';
-import '../App.css';
-import Moment from 'react-moment';
-import { Form,OverlayTrigger,Tooltip, Card}  from 'react-bootstrap';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
+import {Bar, Line, Pie, Scatter} from 'react-chartjs-2';
 
+export default class Chart extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            chartData:{
+                labels: ['Boston'],
+                datasets:[
+                  {
+                    label:'Population',
+                    data: [{
+                        x: 0,
+                        y: 0
+                    }, {
+                        x: 1,
+                        y: 4
+                    }, {
+                        x: 2,
+                        y: 5
+                    } , {
+                        x: 3,
+                        y: 9
+                    }, 
+                    {
+                        x: 4,
+                        y: 8
+                    }, 
+                    {
+                        x: 5,
+                        y: 4
+                    }, 
+                    {
+                        x: 6,
+                        y: 1
+                    }
+                    ],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)'
+                    ], 
+                    pointRadius:6,
+                    borderColor: 'rgba(0, 0, 0, 0.3)'
+                  },
+                  {
+                    label:'cats',
+                    data: [{
+                        x: 0,
+                        y: 6
+                    }, {
+                        x: 1,
+                        y: 7
+                    }, {
+                        x: 2,
+                        y: 2
+                    }, {
+                        x: 3,
+                        y: 3
+                    }, 
+                    {
+                        x: 4,
+                        y: 8
+                    }, 
+                    {
+                        x: 5,
+                        y: 6
+                    }, 
+                    {
+                        x: 6,
+                        y: 2
+                    }
+                    ],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)'
+                    ], 
+                    pointRadius:6,
+                    borderColor: 'rgba(0, 0, 0, 0.3)'
+                  }
 
-var CanvasJSReact = require('./canvasjs.react');
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-export default class Chart1 extends Component {
-	render() {
-		const options = {
-			theme: "dark2",
-			animationEnabled: true,
-			zoomEnabled: true,
-			title:{
-				text: "Ice Cream Sales vs Temperature"
-			},
-			axisX: {
-				title:"Temperature (in °C)",
-				suffix: "°C",
-				crosshair: {
-					enabled: true,
-					snapToDataPoint: true
-				}
-			},
-			axisY:{
-				title: "Sales",
-				includeZero: false,
-				crosshair: {
-					enabled: true,
-					snapToDataPoint: true
-				}
-			},
-			data: [{
-				type: "scatter",
-				markerSize: 15,
-				toolTipContent: "<b>Temperature: </b>{x}°C<br/><b>Sales: </b>{y}",
-				dataPoints: [
-					{ x: 14.2, y: 215},
-					{ x: 12.9, y: 175},
-					{ x: 16.4, y: 325},
-					{ x: 26.9, y: 635},
-					{ x: 32.5, y: 464},
-					{ x: 22.1, y: 522},
-					{ x: 19.4, y: 412},
-					{ x: 25.1, y: 614},
-					{ x: 34.9, y: 374},
-					{ x: 28.7, y: 625},
-					{ x: 23.4, y: 544},
-					{ x: 31.4, y: 502},
-					{ x: 40.8, y: 262},
-					{ x: 37.4, y: 312},
-					{ x: 42.3, y: 202},
-					{ x: 39.1, y: 302},
-					{ x: 17.2, y: 408}
-				]
-			}]
+                ],
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'linear',
+                            position: 'bottom'
+                        }]
+                    }
+                }
+            }
+            
         }
-        console.log ('chart line 65 ',
+    }
+
+    
+
+    render() {
         
-);
-		console.log ('68  ', 
-        
-        
-			<CanvasJSChart options = {options}
-				
-			/>
-			
-		
-        );
-        return (<div>hello</div>)
-	}
+        return (
+            <div style={{margin:'40px auto auto auto', padding:'30px', width:'70%', backgroundColor:'hsla(360, 100%, 100%, .9)'}} className="chart">
+           
+            <Scatter
+              data={this.state.chartData}
+              options={{
+                title:{
+                  display:this.props.displayTitle,
+                  text:'Largest Cities In '+this.props.location,
+                  fontSize:25
+                },
+                legend:{
+                  display:this.props.displayLegend,
+                  position:this.props.legendPosition
+                }
+              }}
+            />
+    
+          
+          </div>
+        )
+    }
 }
