@@ -437,7 +437,6 @@ background-color: black;
   border-color: currentColor;
   background-color: white;
 }
-
 /* make sure we have a visible focus ring */
 .myBtn:focus {
   outline: none;

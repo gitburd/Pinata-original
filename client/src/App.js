@@ -373,7 +373,9 @@ class App extends Component {
         method: 'get',
         headers: { 'Content-Type': 'application/json'}
         })
-        .then(res => res.json()).then(json => this.setState({recordsList: json})).catch(function(e) {
+        .then(res => res.json())
+        .then(json => this.setState({recordsList:json}))
+        .catch(function(e) {
         console.log(e); // “oh, no!”
       })
     }else {console.log('user id req.')}
@@ -931,24 +933,7 @@ class App extends Component {
                 </React.Fragment>
                 )} 
               />
-            {/* <Route path="/records" render = { props =>(
-              this.props.auth.isAuthenticated() 
-              ? <React.Fragment>
-                  <div >
-                               
-                  </div>
-                </React.Fragment>
-            :
-                <React.Fragment>
-                        <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />
-                </React.Fragment>
-            )} /> */}
+  
 
             <Route exact path="/records/old" exact render = { props =>(
               this.props.auth.isAuthenticated() 
@@ -995,8 +980,6 @@ class App extends Component {
             <Route path="/search" exact render = { props =>(
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
-                   
-
 
                     <Search  
                     handleSelectRecord = { this.selectRecord.bind(this) } 
@@ -1004,9 +987,6 @@ class App extends Component {
                     searchByQuery = {this.searchByQuery}
                     searchList= {this.state.searchList}
                     />
-                          
-                                
-                    
                 </React.Fragment>
                 :
                 <React.Fragment>
@@ -1038,11 +1018,61 @@ class App extends Component {
                 </React.Fragment>              
               )} />
 
-            <Route exact path="/records/list" exact render = { props =>(
+            <Route exact path="/records/list" render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
                    
                   <div style={{margin:'0 auto',paddingLeft:'10%',paddingRight:'10%', width:'75%'}} >  
+                  <UpdateModal 
+                  recordModalShow={this.state.recordModalShow}
+                  update_date={this.state.update_date}
+                  update_record_id = {this.state.update_record_id}
+                  update_before_lvl = {this.state.update_before_lvl}
+                  update_after_lvl = {this.state.update_after_lvl}
+                  update_emotion = {this.state.update_emotion}
+                  update_skill = {this.state.update_skill}
+                  update_si = {this.state.update_si}
+                  update_sh = {this.state.update_sh}
+                  recordClicked = {this.recordClicked}
+                  recordModalClose = {this.recordModalClose}
+                  searchList = {this.state.searchList}
+                  handleSelectRecord = { this.selectRecord.bind(this)} 
+                  recordsList = {this.state.recordsList}
+                  updateRecord = {this.updateRecord} 
+     
+                  />
+                     
+                    <RecordsListUpdate  
+                    skillsTypeahead = {this.state.skillsTypeahead}
+                    searchByQuery = {this.searchByQuery}
+                    getUserRecords = {this.getUserRecords}
+                    recordClicked = {this.recordClicked}
+                    recordModalCloseCallback = {this.recordModalCloseCallback}
+                    searchList = {this.state.searchList}
+                    handleSelectRecord = { this.selectRecord.bind(this) } 
+                    recordsList = {this.state.recordsList}
+                    />   
+                  </div>
+                </React.Fragment>
+              : <React.Fragment>
+                
+                </React.Fragment>
+              )} 
+            />
+
+            <Route exact path="/records/search" render = { props =>(
+              this.props.auth.isAuthenticated() 
+              ? <React.Fragment>
+                   
+                  <div style={{margin:'0 auto',paddingLeft:'10%',paddingRight:'10%', width:'75%'}} >  
+                  <Search  
+                    handleSelectRecord = { this.selectRecord.bind(this) } 
+                    skillsTypeahead = {this.state.skillsTypeahead}
+                    searchByQuery = {this.searchByQuery}
+                    searchList= {this.state.searchList}
+                    recordsList = {this.state.recordsList}
+                    getUserRecords = {this.getUserRecords}
+                    />
                   <UpdateModal 
                   recordModalShow={this.state.recordModalShow}
                   update_date={this.state.update_date}
@@ -1064,14 +1094,17 @@ class App extends Component {
      
                   />
                      
-                    <RecordsListUpdate 
+                    {/* <RecordsListUpdate  
+                    skillsTypeahead = {this.state.skillsTypeahead}
+                    searchByQuery = {this.searchByQuery}
                     getUserRecords = {this.getUserRecords}
                     recordClicked = {this.recordClicked}
                     recordModalCloseCallback = {this.recordModalCloseCallback}
                     searchList = {this.state.searchList}
                     handleSelectRecord = { this.selectRecord.bind(this) } 
                     recordsList = {this.state.recordsList}
-                    />   
+                    />    */}
+
                   </div>
                 </React.Fragment>
               : <React.Fragment>

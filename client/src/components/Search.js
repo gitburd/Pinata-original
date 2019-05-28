@@ -12,27 +12,30 @@ import RecordUpdate from './RecordUpdate';
 import MySlider from './MySlider';
 
  
-export default class Update extends Component {
+export default class Search extends Component {
   constructor(props){
     super(props);
-    // this.state={
-    //   emotion:'',
-    //   emotion_id:'',
-    //   skill:'',
-    //   skill_id:'0',
-    //   before_lvl:'5',
-    //   after_lvl:'5',
-    //   si:false,
-    //   sh:false,
-    //   message:'',
-    //   startDate: new Date(),
-    //   date:new Date().getTime() / 1000
-    // }
+    this.state={
+      key:'',
+      emotion:'',
+      emotion_id:'',
+      skill:'',
+      skill_id:'0',
+      before_lvl:'5',
+      after_lvl:'5',
+      si:false,
+      sh:false,
+      message:'',
+      startDate: new Date(),
+      date:new Date().getTime() / 1000
+    }
     this.handleBefore_lvlChange = this.handleBefore_lvlChange.bind(this);
     this.handleKeyChange = this.handleKeyChange.bind(this);
     this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
+
+ 
   handleKeyChange(key) {
     this.setState({key: key.target.value})
     }
@@ -48,7 +51,7 @@ export default class Update extends Component {
         this.props.searchByQuery('Skill', this.state.skill_id);
     }
 
-    if (this.state.key==='Thinking about suicide or self harm'){
+    if (this.state.key==='Thoughts of suicide or self harm'){
         this.props.searchByQuery('critical', true);
     }
     if(this.state.key==='Feeling'){
@@ -101,6 +104,7 @@ export default class Update extends Component {
     this.setState({query:impact})
   }
 
+
   render() {
 
     let searchList  = this.props.searchList.map((record)=>(           
@@ -113,46 +117,48 @@ export default class Update extends Component {
     ))
      
     return (
-      <div style={{width:'100%'}}>
-        <div style={{width:'40%', margin:'0 auto'}}>
-
+      <div style={{width:'100%', paddingTop:'20px'}}>
+      <h1>Search by :  </h1>
+      
+        <div style={{width:'60%', margin:'0 auto'}}>
           <form>
 
             <div class="form-group">
-              <label >Key</label>
-              <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>
-              
+              <label> </label>
+              <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>    
+                <option>Select one</option>
                 <option>Feeling</option>
                 <option>Action</option>
                 <option>Impact</option>
                 <option>Unfinished</option> 
                 <option>FullList</option>
-                <option>Thinking about suicide or self harm</option>
+                <option>Thoughts of suicide or self harm</option>
               </Form.Control>
             </div>
 
-
-          <h1>Emotions</h1>
-          <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback} />
-
-
-          <h1>Actions</h1>
-            <SkillsTypeahead  
-              skillsTypeahead = {this.props.skillsTypeahead}
-              setSkillCallback = {this.setSkillCallback}
-            />
+            <div style={{padding:'10px'}} className= {this.state.key==='Feeling'? '':'hidden'}>
+              <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback} />
+            </div>
+         
+            <div style={{padding:'10px'}} className= {this.state.key==='Action'? '':'hidden'}>
+              <SkillsTypeahead  
+                skillsTypeahead = {this.props.skillsTypeahead}
+                setSkillCallback = {this.setSkillCallback}
+              />
+            </div>
             
-      <h1>Impact</h1>
-            <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>
+            <div className= {this.state.key==='Impact'? '':'hidden'}>
+              <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>           
+            </div>
           </form>
         </div>
-        <div style={{width:'60%', margin:'0 auto'}}>
-          <button onClick={this.search}>Search user Records</button> 
-          {searchList}
+        <div >
+          <button  style={{width:'40%', fontSize:'calc(12px + 1vmin)', margin:'10px auto'}} className='subBtn' onClick={this.search}>Search</button>              
         </div>
-        
+        {searchList}
       </div>  
-      
+       
     )
   }
 }
+
