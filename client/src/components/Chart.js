@@ -7,102 +7,94 @@ export default class Chart extends Component {
         super(props);
         this.state = {
             chartData:{
-                labels: ['Boston'],
-                datasets:[
-                  {
-                    label:'Population',
-                    data: [{
-                        x: 0,
-                        y: 0
-                    }, {
-                        x: 1,
-                        y: 4
-                    }, {
-                        x: 2,
-                        y: 5
-                    } , {
-                        x: 3,
-                        y: 9
-                    }, 
-                    {
-                        x: 4,
-                        y: 8
-                    }, 
-                    {
-                        x: 5,
-                        y: 4
-                    }, 
-                    {
-                        x: 6,
-                        y: 1
-                    }
-                    ],
-                    backgroundColor:[
-                      'rgba(255, 99, 132, 0.6)',
-                      'rgba(54, 162, 235, 0.6)',
-                      'rgba(255, 206, 86, 0.6)',
-                      'rgba(75, 192, 192, 0.6)',
-                      'rgba(153, 102, 255, 0.6)',
-                      'rgba(255, 159, 64, 0.6)',
-                      'rgba(255, 99, 132, 0.6)'
-                    ], 
-                    pointRadius:6,
-                    borderColor: 'rgba(0, 0, 0, 0.3)'
-                  },
-                  {
-                    label:'cats',
-                    data: [{
-                        x: 0,
-                        y: 6
-                    }, {
-                        x: 1,
-                        y: 7
-                    }, {
-                        x: 2,
-                        y: 2
-                    }, {
-                        x: 3,
-                        y: 3
-                    }, 
-                    {
-                        x: 4,
-                        y: 8
-                    }, 
-                    {
-                        x: 5,
-                        y: 6
-                    }, 
-                    {
-                        x: 6,
-                        y: 2
-                    }
-                    ],
-                    backgroundColor:[
-                      'rgba(255, 99, 132, 0.6)',
-                      'rgba(54, 162, 235, 0.6)',
-                      'rgba(255, 206, 86, 0.6)',
-                      'rgba(75, 192, 192, 0.6)',
-                      'rgba(153, 102, 255, 0.6)',
-                      'rgba(255, 159, 64, 0.6)',
-                      'rgba(255, 99, 132, 0.6)'
-                    ], 
-                    pointRadius:6,
-                    borderColor: 'rgba(0, 0, 0, 0.3)'
-                  }
-
-                ],
-                options: {
-                    scales: {
-                        xAxes: [{
-                            type: 'linear',
-                            position: 'bottom'
-                        }]
-                    }
-                }
             }
             
         }
+        this.getChartData = this.getChartData.bind(this)
     }
+
+    // static defaultProps = {
+    //     displayTitle:true,
+    //     displayLegend: true,
+    //     legendPosition:'right',
+    //     location:'City',
+    //     displayLabel:true
+    //   }
+    
+
+getChartData  = () => {
+    let beforeLvlSet = [];
+    let afterLvlSet = [];
+    let emotionLabels = [];
+    let skillLabels = [];
+    for(let i=0; i < this.props.recordsList.length && beforeLvlSet.length < 10; i++){    
+        beforeLvlSet.push({x:i, y:this.props.recordsList[i].before_lvl})
+        afterLvlSet.push({x:i, y:this.props.recordsList[i].after_lvl})
+        emotionLabels.push(this.props.recordsList[i].emotion_text)
+        skillLabels.push(this.props.recordsList[i].skill_title) 
+    }
+    this.setState({beforeLvlSet, afterLvlSet,
+        
+
+    chartData:{
+        labels: emotionLabels,
+        datasets:[
+            // rgba(91,0,99,1)0%, rgba(37,1,83,1) 49%, rgba(1,35,143,1)
+            {
+                label:'before',
+                data: beforeLvlSet,
+                backgroundColor:'#7a085e',
+                // backgroundColor:[
+                // 'rgba(255, 99, 132, 0.6)',
+                // 'rgba(54, 162, 235, 0.6)',
+                // 'rgba(255, 206, 86, 0.6)',
+                // 'rgba(75, 192, 192, 0.6)',
+                // 'rgba(153, 102, 255, 0.6)',
+                // 'rgba(255, 159, 64, 0.6)',
+                // 'rgba(255, 99, 132, 0.6)'
+                // ], 
+                pointRadius:6,
+                borderColor: 'rgba(0, 0, 0, 0.3)',
+                showLine:false
+            },
+
+            {
+                label:'after',
+                data: afterLvlSet,
+                
+                backgroundColor:  'rgb(2, 116, 255)',
+                // backgroundColor:[
+                // 'rgba(255, 99, 132, 0.6)',
+                // 'rgba(54, 162, 235, 0.6)',
+                // 'rgba(255, 206, 86, 0.6)',
+                // 'rgba(75, 192, 192, 0.6)',
+                // 'rgba(153, 102, 255, 0.6)',
+                // 'rgba(255, 159, 64, 0.6)',
+                // 'rgba(255, 99, 132, 0.6)'
+                // ], 
+                pointRadius:6,
+                borderColor: 'rgba(0, 0, 0, 0.3)',
+                showLine:false
+            }
+                // options: {
+                //     scales: {
+                //         xAxes: [{
+                //             type: 'linear',
+                //             position: 'bottom'
+                //         }]
+                //     }
+                // }
+            
+
+        ]     
+    }
+})
+    
+
+    console.log(beforeLvlSet)
+    console.log(afterLvlSet)
+ 
+}
 
     
 
@@ -110,19 +102,12 @@ export default class Chart extends Component {
         
         return (
             <div style={{margin:'40px auto auto auto', padding:'30px', width:'70%', backgroundColor:'hsla(360, 100%, 100%, .9)'}} className="chart">
-           
-            <Scatter
+           <button onClick={this.getChartData.bind(this)}> data time! </button>
+            <Line
               data={this.state.chartData}
               options={{
-                title:{
-                  display:this.props.displayTitle,
-                  text:'Largest Cities In '+this.props.location,
-                  fontSize:25
-                },
-                legend:{
-                  display:this.props.displayLegend,
-                  position:this.props.legendPosition
-                }
+               
+             
               }}
             />
     

@@ -1023,7 +1023,7 @@ class App extends Component {
             <Route path="/chart" exact render = { props =>(
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
-                   <Chart chartData={this.state.chartData} location="Massachusetts" legendPosition="bottom"/>
+                   <Chart recordsList={this.state.recordsList} />
                  
                 </React.Fragment>
                 :
