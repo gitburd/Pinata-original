@@ -10,6 +10,7 @@ import SkillsTypeahead from './SkillsTypeahead';
 import EmotionsTypeahead from './EmotionsTypeahead';
 import RecordUpdate from './RecordUpdate';
 import MySlider from './MySlider';
+import {Link} from 'react-router-dom';
 
  
 export default class Search extends Component {
@@ -59,6 +60,12 @@ export default class Search extends Component {
     }
     if(this.state.key==='Impact'){
       this.props.searchByQuery('Impact', this.state.query)
+    }
+    if(this.state.key==='Unfinished'){
+      this.props.searchByQuery('Unfinished', true)
+    }
+    if(this.state.key==='Full List'){
+      this.props.searchByQuery('FullList', true)
     }
   }
 
@@ -118,7 +125,14 @@ export default class Search extends Component {
      
     return (
       <div style={{width:'100%', paddingTop:'20px'}}>
-      <h1>Search by :  </h1>
+      <h1>Search Records  
+      <Link className="navbar-brand" to="/records/list">
+      <sup>  <i class="far fa-list-alt" style={{ fontSize: '1.9em', paddingLeft:'4px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> </sup>
+      </Link>
+      <Link className="navbar-brand" to="/records/add">
+           <sup>  <i class="far fa-plus-square" style={{ fontSize: '1.9em', paddingLeft:'2px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> </sup>
+      </Link>
+      </h1>
       
         <div style={{width:'60%', margin:'0 auto'}}>
           <form>
@@ -131,7 +145,7 @@ export default class Search extends Component {
                 <option>Action</option>
                 <option>Impact</option>
                 <option>Unfinished</option> 
-                <option>FullList</option>
+                <option>Full List</option>
                 <option>Thoughts of suicide or self harm</option>
               </Form.Control>
             </div>
