@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 
 import {Bar, Line, Pie, Scatter} from 'react-chartjs-2';
-import Search from './Search';
 import SkillsTypeahead from './SkillsTypeahead';
 import EmotionsTypeahead from './EmotionsTypeahead';
-import { Form,OverlayTrigger,Tooltip, Card}  from 'react-bootstrap';
+import { Form,OverlayTrigger,Tooltip}  from 'react-bootstrap';
 
 export default class Chart extends Component {
     constructor(props){
@@ -69,7 +68,6 @@ export default class Chart extends Component {
                         borderColor: 'rgba(0, 0, 0, 0.3)',
                         showLine:false
                     }
-
                 ]     
             }
         })
@@ -91,17 +89,14 @@ export default class Chart extends Component {
                   {
                     label: this.state.searchList.length > 0 ? this.state.searchList[0].emotion_text : '',
                     data:data,
-                    backgroundColor:
-                      ' #55153B'
-                    
+                    backgroundColor:' #55153B'                   
                   }
                 ]
              }, 
-             showFeelingChart:true,
-             showActionChart:false,
-             showCriticalChart:false
-            
-            })
+            showFeelingChart:true,
+            showActionChart:false,
+            showCriticalChart:false
+        })
 
     }
     getFeelingData = () => {
@@ -114,12 +109,12 @@ export default class Chart extends Component {
                 headers: {
                   'Content-Type': 'application/json'
                 }
-              }).then(res => res.json())
-              // .then(json => console.log(json))
-              .then(json => this.setState({
-                searchList: json}, this.makeFeelingChart))
-              .catch(e => { console.log(`fetch failed`)})
-    
+              })
+            .then(res => res.json())
+            // .then(json => console.log(json))
+            .then(json => this.setState({
+            searchList: json}, this.makeFeelingChart))
+            .catch(e => { console.log(`fetch failed`)})    
         }
 
         makeActionChart = () => {
@@ -149,12 +144,11 @@ export default class Chart extends Component {
                  showFeelingChart:false,
                  showCriticalChart:false
                 
-                })
+            })
     
         }
         getActionData = () => {
-    
-  
+     
             let url = `http://localhost:3001/api/search/Skill?user_id=${this.props.user_id}&keyword=${this.state.skill_id}`
                    
                 console.log(`the url is ${url}`)
@@ -163,13 +157,57 @@ export default class Chart extends Component {
                     headers: {
                       'Content-Type': 'application/json'
                     }
-                  }).then(res => res.json())
-                  // .then(json => console.log(json))
-                  .then(json => this.setState({
-                    searchList: json}, this.makeActionChart))
-                  .catch(e => { console.log(`fetch failed`)}) 
-            }
+                  })
+                .then(res => res.json())
+                // .then(json => console.log(json))
+                .then(json => this.setState({
+                searchList: json}, this.makeActionChart))
+                .catch(e => { console.log(`fetch failed`)}) 
+        }
         
+        makeCriticalChart = () => {
+            let labelsArray=[];
+            let data =  [];
+    
+            for (let i =0; i<this.state.searchList.length;i++){
+                labelsArray.push(this.state.searchList[i].skill_title);
+                data.push(this.state.searchList[i].impact);
+            }
+            this.setState({
+                criticalChartData:{
+                    labels: labelsArray,
+                    datasets:[
+                      {
+                        label: 'Thoughts of suicide or self harm',
+                        data:data,
+                        backgroundColor:' #55153B'                   
+                      }
+                    ]
+                 }, 
+                showCriticalChart:true,
+                showFeelingChart:false,
+                showActionChart:false
+                
+            })
+    
+        }
+        getCriticalData = () => {
+              
+            let url = `http://localhost:3001/api/search/critical?user_id=${this.props.user_id}`
+                   
+                console.log(`the url is ${url}`)
+                fetch(url, {
+                    method: 'get',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  })
+                .then(res => res.json())
+                // .then(json => console.log(json))
+                .then(json => this.setState({
+                searchList: json}, this.makeCriticalChart))
+                .catch(e => { console.log(`fetch failed`)})    
+            }
 
     handleKeyChange(key) {
     this.setState({key: key.target.value})
@@ -255,6 +293,7 @@ export default class Chart extends Component {
         let getData;
         if(this.state.key==='Feeling') getData = this.getFeelingData.bind(this)
         if(this.state.key==='Action') getData = this.getActionData.bind(this)
+        if(this.state.key==='Thoughts of suicide or self harm') getData = this.getCriticalData.bind(this)
         
         return (
             <div style={{width:'100%'}}>
@@ -268,11 +307,9 @@ export default class Chart extends Component {
               <label> </label>
               <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>    
                 <option>Select one</option>
+                <option>Full List</option>
                 <option>Feeling</option>
                 <option>Action</option>
-                <option>Impact</option>
-                <option>Unfinished</option> 
-                <option>Full List</option>
                 <option>Thoughts of suicide or self harm</option>
               </Form.Control>
             </div>
