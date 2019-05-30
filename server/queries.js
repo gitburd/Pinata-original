@@ -248,7 +248,7 @@ const newRecordWithSkill = (request, response) => {
     var user_id = request.query.user_id;
     var emotion = request.query.keyword;
     const query = `SELECT s.skill_title, s.skill_icon, r.record_id, r.skill_id, r.emotion_id, r.before_lvl, r.after_lvl, r.impact, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.user_id ='${user_id}' AND e.emotion_text ='${emotion}'`;
-    console.log(query);
+    
     pool.query(`${query}`, (error, results) => {
       if (error) {
         throw error

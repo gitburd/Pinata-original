@@ -1003,7 +1003,13 @@ class App extends Component {
             <Route path="/chart" exact render = { props =>(
               this.props.auth.isAuthenticated() 
                 ? <React.Fragment>
-                   <Chart recordsList={this.state.recordsList} />
+                   <Chart 
+                    skillsTypeahead = {this.state.skillsTypeahead}
+                    searchByQuery = {this.searchByQuery}
+                    user_id = {this.state.user_id}
+                    recordsList={this.state.recordsList}
+                    searchList = {this.state.searchList} 
+                  />
                  
                 </React.Fragment>
                 :
