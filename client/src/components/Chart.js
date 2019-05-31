@@ -77,11 +77,20 @@ export default class Chart extends Component {
     makeFeelingChart = () => {
         let labelsArray=[];
         let data =  [];
-
-        for (let i =0; i<this.state.searchList.length;i++){
-            labelsArray.push(this.state.searchList[i].skill_title);
-            data.push(this.state.searchList[i].impact);
-        }
+        let sortedSearchList = this.state.searchList.sort((a, b) => (a.skill_title > b.skill_title) ? 1 : -1)
+        let barColors = ['#040cf4', '#5701ad', '#0d4887', '#870d6a', '#0c5270' ]
+        let backgroundColors= ['#55153B']
+        for (let i =0; i<sortedSearchList.length;i++){
+            labelsArray.push(sortedSearchList[i].skill_title);
+            data.push(sortedSearchList[i].impact);
+            if (i>0 && sortedSearchList[i].skill_title === sortedSearchList[i-1].skill_title){
+              backgroundColors.push(backgroundColors[i-1])
+            }else if (i>0){
+              backgroundColors.push(barColors.shift());
+            } 
+            }
+        
+        
         this.setState({
             feelingChartData:{
                 labels: labelsArray,
@@ -89,7 +98,7 @@ export default class Chart extends Component {
                   {
                     label: this.state.searchList.length > 0 ? this.state.searchList[0].emotion_text : '',
                     data:data,
-                    backgroundColor:' #55153B'                   
+                    backgroundColor: backgroundColors                  
                   }
                 ]
              }, 
@@ -121,10 +130,18 @@ export default class Chart extends Component {
             console.log('hello from 127')
             let labelsArray=[];
             let data =  [];
-    
-            for (let i =0; i<this.state.searchList.length;i++){
-                labelsArray.push(this.state.searchList[i].emotion_text);
-                data.push(this.state.searchList[i].impact);
+            let sortedActionList = this.state.searchList.sort((a, b) => (a.emotion_text > b.emotion_text) ? 1 : -1)
+            let barColors = ['#040cf4', '#5701ad', '#0d4887', '#870d6a', '#0c5270' ]
+            let backgroundColors= ['#55153B']
+            
+            for (let i =0; i<sortedActionList.length;i++){
+                labelsArray.push(sortedActionList[i].emotion_text);
+                data.push(sortedActionList[i].impact);
+                if (i>0 && sortedActionList[i].emotion_text === sortedActionList[i-1].emotion_text){
+                  backgroundColors.push(backgroundColors[i-1])
+                }else if (i>0){
+                  backgroundColors.push(barColors.shift());
+                } 
             }
             console.log(this.state.searchList)
 
@@ -135,8 +152,7 @@ export default class Chart extends Component {
                       {
                         label: this.state.searchList.length > 0 ? this.state.searchList[0].skill_title: '',
                         data:data,
-                        backgroundColor:
-                          ' #55153B'                       
+                        backgroundColor:backgroundColors                     
                       }
                     ]
                  }, 
@@ -168,11 +184,18 @@ export default class Chart extends Component {
         makeCriticalChart = () => {
             let labelsArray=[];
             let data =  [];
-    
-            for (let i =0; i<this.state.searchList.length;i++){
-                labelsArray.push(this.state.searchList[i].skill_title);
-                data.push(this.state.searchList[i].impact);
-            }
+            let sortedSearchList = this.state.searchList.sort((a, b) => (a.skill_title > b.skill_title) ? 1 : -1)
+            let barColors = ['#040cf4', '#5701ad', '#0d4887', '#870d6a', '#0c5270' ]
+            let backgroundColors= ['#55153B'] 
+            for (let i =0; i<sortedSearchList.length;i++){
+                labelsArray.push(sortedSearchList[i].skill_title);
+                data.push(sortedSearchList[i].impact);
+                if (i>0 && sortedSearchList[i].skill_title === sortedSearchList[i-1].skill_title){
+                  backgroundColors.push(backgroundColors[i-1])
+                }else if (i>0){
+                  backgroundColors.push(barColors.shift());
+                } 
+              }
             this.setState({
                 criticalChartData:{
                     labels: labelsArray,
@@ -180,7 +203,7 @@ export default class Chart extends Component {
                       {
                         label: 'Thoughts of suicide or self harm',
                         data:data,
-                        backgroundColor:' #55153B'                   
+                        backgroundColor:backgroundColors                  
                       }
                     ]
                  }, 
