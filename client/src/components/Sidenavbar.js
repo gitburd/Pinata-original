@@ -119,6 +119,9 @@ export default class Sidenavbar extends Component {
 
                 </SideNav.Nav>
             </SideNav>
+            <div style={{width:'100%'}}>
+
+            </div>
        
         </div>
     )};

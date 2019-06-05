@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PropTypes from 'prop-types';
 import '../App.css';
-import Moment from 'react-moment';
-import { Form,OverlayTrigger,Tooltip, Card}  from 'react-bootstrap';
-import DatePicker from "react-datepicker";
+import { Form}  from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import SkillsTypeahead from './SkillsTypeahead';
 import EmotionsTypeahead from './EmotionsTypeahead';
@@ -35,18 +32,44 @@ export default class Search extends Component {
     this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
+  onSelectRecord(record){
+    this.props.handleSelectRecord(record)
+  } 
+  // componentDidMount() {
 
+  //   if (this.props.key==='Action'){
+  //     this.props.searchByQuery('Skill', this.state.skill_id);
+  //   }
+
+  //   if (this.props.propkey==='Thoughts of suicide or self harm'){
+  //       this.props.searchByQuery('critical', true);
+  //   }
+  //   if(this.props.propkey==='Feeling'){
+  //     this.props.searchByQuery('Feeling', this.state.query)
+  //   }
+  //   if(this.props.propkey==='Impact'){
+  //     this.props.searchByQuery('Impact', this.state.query)
+  //   }
+  //   if(this.props.propkey==='Unfinished'){
+  //     this.props.searchByQuery('Unfinished', true)
+  //   }
+  //   if(this.props.propkey==='Full List'){
+  //     this.props.searchByQuery('FullList', true)
+  //   }
+  // }
  
   handleKeyChange(key) {
     this.setState({key: key.target.value})
     }
 
-    handleQueryChange(query) {
-      this.setState({query: query.target.value})
-      }
+  handleQueryChange(query) {
+    this.setState({query: query.target.value})
+    }
 
   search=(e)=>{
     e.preventDefault();
+   
+    this.props.setKeyQueryCallback(this.state.key, this.state.query)
   
     if (this.state.key==='Action'){
         this.props.searchByQuery('Skill', this.state.skill_id);
@@ -69,6 +92,7 @@ export default class Search extends Component {
     }
   }
 
+  
   setSkillCallback = (skill) =>{
 
     this.setState({skill})
@@ -78,14 +102,14 @@ export default class Search extends Component {
       method: 'get',
       headers: { 'Content-Type': 'application/json'}
       })
-      .then(res => res.json()).then(json => this.setState({skill_id:json[0].skill_id})).catch(function(e) {
+      .then(res => res.json())
+      .then(json => this.setState({query:json[0].skill_id, skill_id:json[0].skill_id}))
+      .catch(function(e) {
       console.log(e); // “oh, no!”
      })
 
   }
-  onSelectRecord(record){
-    this.props.handleSelectRecord(record)
-  } 
+
 
 
   setEmotionCallback = (emotion)=>{
@@ -93,18 +117,18 @@ export default class Search extends Component {
     this.setState({query:emotion})
     
     
-    let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
-  console.log(url)
-  fetch(url, {
-    method: 'get',
-    headers: { 'Content-Type': 'application/json'}
-    })
-    .then(res => res.json()).then(json => this.setState({emotion_id:json[0].emotion_id})).catch(function(e) {
-    console.log(e); // “oh, no!”
-   })
+  //   let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
+  // console.log(url)
+  // fetch(url, {
+  //   method: 'get',
+  //   headers: { 'Content-Type': 'application/json'}
+  //   })
+  //   .then(res => res.json()).then(json => this.setState({emotion_id:json[0].emotion_id})).catch(function(e) {
+  //   console.log(e); // “oh, no!”
+  //  })
  
   }
-
+ 
   handleBefore_lvlChange(impact) {
     // let fieldName = event.target.name;
     // let fleldVal = event.target.value;
@@ -114,7 +138,7 @@ export default class Search extends Component {
 
   render() {
 
-    let searchList  = this.props.searchList.map((record)=>(           
+    let searchList  = this.props.recordsList.map((record)=>(           
       <RecordUpdate 
         key={record.record_id} 
         record={record} 
@@ -151,7 +175,9 @@ export default class Search extends Component {
             </div>
 
             <div style={{padding:'10px'}} className= {this.state.key==='Feeling'? '':'hidden'}>
-              <EmotionsTypeahead setEmotionCallback= {this.setEmotionCallback} />
+              <EmotionsTypeahead 
+                setEmotionCallback= {this.setEmotionCallback} 
+              />
             </div>
          
             <div style={{padding:'10px'}} className= {this.state.key==='Action'? '':'hidden'}>

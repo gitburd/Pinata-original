@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import '../App.css';
-import Record from './Record.js';
 import RecordUpdate from './RecordUpdate';
 import {Link} from 'react-router-dom';
 
@@ -47,6 +46,10 @@ class RecordsListUpdate extends Component {
           <Link className="navbar-brand" to="/records/search">
             <sup>  <i class="fas fa-search" style={{ fontSize: '1.9em', padding:'2px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> </sup>
           </Link>
+
+          {searchList}
+
+          next
        
           {recordsList}
       

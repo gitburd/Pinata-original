@@ -353,10 +353,11 @@ class App extends Component {
   }
   
   recordModalClose = () =>{
-    this.setState({recordModalShow:false}, this.getUserRecords)
+    // this.searchByQuery(this.state.key, this.state.query)
+    this.setState({recordModalShow:false}, console.log('just closed the modal')
+     
+    )
   }
-
-
 
   setRecord_id=(record_id) => {
     console.log('app 215 sent',record_id)
@@ -383,29 +384,35 @@ class App extends Component {
 
   searchByQuery = (key, query) => {
     let url;
-    if(key === 'critical'){
+    if(key === 'critical' || key === 'Thoughts of suicide or self harm'){
       url = `http://localhost:3001/api/search/critical?user_id=${this.state.user_id}`
-    }else{
+    }
+    else if (key === 'Full List'){
+      url = `http://localhost:3001/api/search/FullList?user_id=${this.state.user_id}`
+     
+    }
+    else if (key === 'Action'){
+      url = `http://localhost:3001/api/search/Skill?user_id=${this.state.user_id}&keyword=${query}`
+    }
+    else{
       url = `http://localhost:3001/api/search/${key}?user_id=${this.state.user_id}&keyword=${query}`
     }
-    
-
-    console.log(`the url is ${url}`)
+    console.log(`the search url is ${url}`)
     fetch(url, {
         method: 'get',
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(res => res.json())
+      })
+      .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => this.setState({
-        searchList: json
-      }, console.log('search results?',this.state.searchList)))
+        recordsList: json
+      }, console.log('the recordslist is', json)))
       .catch(e => {
         console.log(`fetch failed`)
       })
     
-    console.log(' app state searchList', this.state.searchList)
   }
 
 
@@ -422,8 +429,7 @@ class App extends Component {
         body: JSON.stringify(update),
         headers: { 'Content-Type': 'application/json'}
       })
-      // .then(r => r.json())
-      // .then(json=>{this.setState({recent_record:json}); console.log(json); return json})
+      .then(r => r.json(), this.searchByQuery(this.state.key, this.state.query), console.log('just called search from updaterecord'))
       .catch(function(e) {console.log(`something is wrong ${e}`)})
     }else{(console.log(`missing record_id or lvls`))}
   }
@@ -671,6 +677,12 @@ class App extends Component {
     .catch(function(e) {console.log(`something is wrong! : ${e}`); })
   }
 
+  setKeyQueryCallback = (key, query) => {
+    this.setState({
+      key,
+      query
+    })
+  }
 
   render() {
 
@@ -982,7 +994,7 @@ class App extends Component {
                 ? <React.Fragment>
 
                     <Search  
-                    handleSelectRecord = { this.selectRecord.bind(this) } 
+                    handleSelectRecord = { this.selectRecord} 
                     skillsTypeahead = {this.state.skillsTypeahead}
                     searchByQuery = {this.searchByQuery}
                     searchList= {this.state.searchList}
@@ -1069,47 +1081,40 @@ class App extends Component {
             <Route exact path="/records/search" render = { props =>(
               this.props.auth.isAuthenticated() 
               ? <React.Fragment>
-                   
-                  <div style={{margin:'0 auto',paddingLeft:'10%',paddingRight:'10%', width:'75%'}} >  
-                  <Search  
-                    handleSelectRecord = { this.selectRecord.bind(this) } 
-                    skillsTypeahead = {this.state.skillsTypeahead}
-                    searchByQuery = {this.searchByQuery}
-                    searchList= {this.state.searchList}
+                   <UpdateModal 
+                    recordModalShow={this.state.recordModalShow}
+                    update_date={this.state.update_date}
+                    update_record_id = {this.state.update_record_id}
+                    update_before_lvl = {this.state.update_before_lvl}
+                    update_after_lvl = {this.state.update_after_lvl}
+                    update_emotion = {this.state.update_emotion}
+                    update_skill = {this.state.update_skill}
+                    update_si = {this.state.update_si}
+                    update_sh = {this.state.update_sh}
+                    recordClicked = {this.recordClicked}
+                    recordModalClose = {this.recordModalClose}
+                    searchList = {this.state.searchList}
+                    handleSelectRecord = { this.selectRecord} 
                     recordsList = {this.state.recordsList}
-                    getUserRecords = {this.getUserRecords}
-                    />
-                  <UpdateModal 
-                  recordModalShow={this.state.recordModalShow}
-                  update_date={this.state.update_date}
-                  update_record_id = {this.state.update_record_id}
-                  update_before_lvl = {this.state.update_before_lvl}
-                  update_after_lvl = {this.state.update_after_lvl}
-                  update_emotion = {this.state.update_emotion}
-                  update_skill = {this.state.update_skill}
-                  update_si = {this.state.update_si}
-                  update_sh = {this.state.update_sh}
-
-                  recordClicked = {this.recordClicked}
-                  
-                  recordModalClose = {this.recordModalClose}
-                  searchList = {this.state.searchList}
-                  handleSelectRecord = { this.selectRecord.bind(this)} 
-                  recordsList = {this.state.recordsList}
-                  updateRecord = {this.updateRecord} 
-     
+                    updateRecord = {this.updateRecord} 
                   />
-                     
-                    {/* <RecordsListUpdate  
+
+                  <div style={{margin:'0 auto',paddingLeft:'10%',paddingRight:'10%', width:'75%'}} > 
+
+                  <Search 
                     skillsTypeahead = {this.state.skillsTypeahead}
                     searchByQuery = {this.searchByQuery}
                     getUserRecords = {this.getUserRecords}
                     recordClicked = {this.recordClicked}
                     recordModalCloseCallback = {this.recordModalCloseCallback}
                     searchList = {this.state.searchList}
-                    handleSelectRecord = { this.selectRecord.bind(this) } 
-                    recordsList = {this.state.recordsList}
-                    />    */}
+                    handleSelectRecord = { this.selectRecord.bind(this)} 
+                    recordsList = {this.state.recordsList} 
+                    user_id = {this.state.user_id}
+                    setKeyQueryCallback = {this.setKeyQueryCallback}
+                    propkey={this.state.key}
+                    query={this.state.query}
+                  />
 
                   </div>
                 </React.Fragment>
@@ -1127,3 +1132,4 @@ class App extends Component {
 }
 
 export default App;
+

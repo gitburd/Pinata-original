@@ -28,7 +28,8 @@ onSelectRecord(){
 }
 
   render() {
-    const { record_id, skill_id, skill_title, skill_icon, emotion_id, emotion_text, before_lvl, after_lvl, impact, date, si, sh} = this.props.record;
+    const { record_id, skill_id, skill_title, skill_icon, emotion_id, emotion_text, before_lvl, after_lvl, date, si, sh} = this.props.record;
+    let impact = this.props.record.impact
 
   
     

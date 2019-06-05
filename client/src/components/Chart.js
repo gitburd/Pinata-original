@@ -9,7 +9,7 @@ export default class Chart extends Component {
     constructor(props){
         super(props);
         this.state = {
-            chartData:{
+            fullChartData:{
             },
             feelingChartData:{},
             actionChartData:{},
@@ -17,7 +17,7 @@ export default class Chart extends Component {
             showActionChart:false,
             showCriticalChart:false
         }
-        this.getChartData = this.getChartData.bind(this)
+        this.getfullChartData = this.getFullChartData.bind(this)
         this.getFeelingData = this.getFeelingData.bind(this)
         this.getActionData = this.getActionData.bind(this)
         
@@ -34,7 +34,7 @@ export default class Chart extends Component {
     //   }
     
 
-    getChartData  = () => {
+    getFullChartData  = () => {
         let beforeLvlSet = [];
         let afterLvlSet = [];
         let emotionLabels = [];
@@ -48,7 +48,7 @@ export default class Chart extends Component {
         }
 
         this.setState({beforeLvlSet, afterLvlSet,
-            chartData:{
+            fullChartData:{
                 labels: emotionLabels,
                 datasets:[
                     {
@@ -313,6 +313,7 @@ export default class Chart extends Component {
         if (this.state.showActionChart) myData = this.state.actionChartData;
         if (this.state.showCriticalChart) myData = this.state.criticalChartData;
         
+        
         let getData;
         if(this.state.key==='Feeling') getData = this.getFeelingData.bind(this)
         if(this.state.key==='Action') getData = this.getActionData.bind(this)
@@ -320,48 +321,49 @@ export default class Chart extends Component {
         
         return (
             <div style={{width:'100%'}}>
-                
-                <h1>Search Records </h1>
-                
-                <div style={{margin:'auto', width:'40%'}}>
-          <form>
+              
+              <h1>Search Records </h1>
+              
+              <div style={{margin:'auto', width:'40%'}}>
+               <form>
+                  <div class="form-group">
+                    <label> </label>
+                    <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>    
+                      <option>Select one</option>
+                      <option>Full List</option>
+                      <option>Feeling</option>
+                      <option>Action</option>
+                      <option>Thoughts of suicide or self harm</option>
+                    </Form.Control>
+                  </div>
 
-            <div class="form-group">
-              <label> </label>
-              <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>    
-                <option>Select one</option>
-                <option>Full List</option>
-                <option>Feeling</option>
-                <option>Action</option>
-                <option>Thoughts of suicide or self harm</option>
-              </Form.Control>
-            </div>
-
-            <div style={{padding:'10px'}} className= {this.state.key==='Feeling'? '':'hidden'}>
-              <EmotionsTypeahead 
-              emotionsTypeahead = {this.props.emotionsTypeahead}
-              setEmotionCallback= {this.setEmotionCallback} />
-            </div>
-         
-            <div style={{padding:'10px'}} className= {this.state.key==='Action'? '':'hidden'}>
-              <SkillsTypeahead  
-                skillsTypeahead = {this.props.skillsTypeahead}
-                setSkillCallback = {this.setSkillCallback}
-              />
-            </div>
-          </form>
-          <button  style={{width:'40%', fontSize:'calc(12px + 1vmin)', margin:'10px auto'}} className='subBtn' onClick={this.search}>Search</button>              
-        </div>
-    
-                {/* <div style={{margin:'40px auto auto auto', padding:'30px', width:'70%', backgroundColor:'hsla(360, 100%, 100%, .9)'}} className="chart">
-                    <button onClick={this.getChartData.bind(this)}> data time! </button> */}
-                    {/* <Line
-                    data={this.state.chartData}
-                    options={{
-                    }}
-                    /> */}
+                  <div style={{padding:'10px'}} className= {this.state.key==='Feeling'? '':'hidden'}>
+                    <EmotionsTypeahead 
+                    emotionsTypeahead = {this.props.emotionsTypeahead}
+                    setEmotionCallback= {this.setEmotionCallback} />
+                  </div>
             
-                {/* </div> */}
+                  <div style={{padding:'10px'}} className= {this.state.key==='Action'? '':'hidden'}>
+                    <SkillsTypeahead  
+                      skillsTypeahead = {this.props.skillsTypeahead}
+                      setSkillCallback = {this.setSkillCallback}
+                    />
+                  </div>
+                </form>
+                <button  style={{width:'40%', fontSize:'calc(12px + 1vmin)', margin:'10px auto'}} className='subBtn' onClick={this.search}>Search</button>              
+              </div>
+    
+              <button onClick={this.getFullChartData.bind(this)}> data time! </button>
+
+              <div style={{margin:'40px auto auto auto', padding:'30px', width:'70%', backgroundColor:'hsla(360, 100%, 100%, .9)'}} className="chart">
+                
+                <Line
+                data={this.state.fullChartData}
+                options={{
+                }}
+                /> 
+        
+              </div>
                 <div style={{margin:'40px auto auto auto', padding:'30px', width:'70%', backgroundColor:'hsla(360, 100%, 100%, .9)'}} className="chart">
                     <button onClick={getData}> data time! </button>
                     <Bar
