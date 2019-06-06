@@ -25,7 +25,9 @@ export default class Search extends Component {
       sh:false,
       message:'',
       startDate: new Date(),
-      date:new Date().getTime() / 1000
+      date:new Date().getTime() / 1000,
+      showSearchBtn:false,
+      showSearchForm:false
     }
     this.handleBefore_lvlChange = this.handleBefore_lvlChange.bind(this);
     this.handleKeyChange = this.handleKeyChange.bind(this);
@@ -37,7 +39,7 @@ export default class Search extends Component {
   } 
   // componentDidMount() {
 
-  //   if (this.props.key==='Action'){
+  //   if (this.props.key==='Action'){`
   //     this.props.searchByQuery('Skill', this.state.skill_id);
   //   }
 
@@ -59,11 +61,15 @@ export default class Search extends Component {
   // }
  
   handleKeyChange(key) {
-    this.setState({key: key.target.value})
+    this.setState({showSearchBtn:false, key: key.target.value})
+    if (key.target.value === 'Unfinished' || key.target.value === 'Full List' || key.target.value === 'Thoughts of suicide or self harm'){
+      this.setState({showSearchBtn:true})
+    }
     }
 
   handleQueryChange(query) {
-    this.setState({query: query.target.value})
+    this.setState({showSearchBtn:true, query: query.target.value})
+
     }
 
   search=(e)=>{
@@ -103,7 +109,7 @@ export default class Search extends Component {
       headers: { 'Content-Type': 'application/json'}
       })
       .then(res => res.json())
-      .then(json => this.setState({query:json[0].skill_id, skill_id:json[0].skill_id}))
+      .then(json => this.setState({query:json[0].skill_id, skill_id:json[0].skill_id, showSearchBtn:true}))
       .catch(function(e) {
       console.log(e); // “oh, no!”
      })
@@ -114,7 +120,7 @@ export default class Search extends Component {
 
   setEmotionCallback = (emotion)=>{
  
-    this.setState({query:emotion})
+    this.setState({query:emotion, showSearchBtn:true})
     
     
   //   let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
@@ -132,7 +138,7 @@ export default class Search extends Component {
   handleBefore_lvlChange(impact) {
     // let fieldName = event.target.name;
     // let fleldVal = event.target.value;
-    this.setState({query:impact})
+    this.setState({query:impact, showSearchBtn:true})
   }
 
 
@@ -149,21 +155,27 @@ export default class Search extends Component {
      
     return (
       <div style={{width:'100%', paddingTop:'20px'}}>
-      <h1>Search Records  
-      <Link className="navbar-brand" to="/records/list">
+      <h1>My Records  
+      {/* <Link className="navbar-brand" to="/records/list">
       <sup>  <i class="far fa-list-alt" style={{ fontSize: '1.9em', paddingLeft:'4px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> </sup>
-      </Link>
+      </Link> */}
       <Link className="navbar-brand" to="/records/add">
-           <sup>  <i class="far fa-plus-square" style={{ fontSize: '1.9em', paddingLeft:'2px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> </sup>
+           <i class="far fa-plus-square" style={{ fontSize: '1.8em', paddingLeft:'8px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> 
+      </Link>
+
+      <Link to="/records/search">
+      <i className="navbar-brand" onClick = {() => {this.setState({showSearchForm:true})}} class="fas fa-search" style={{ fontSize: '.9em', padding:'8px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i>
       </Link>
       </h1>
+      <div className={this.state.showSearchForm ? '' : 'hidden'}>
       
-        <div style={{width:'60%', margin:'0 auto'}}>
-          <form>
+        <div style={{margin:'0 auto'}}>
+          <h3 style={{float:'left', paddingRight:'20px'}}><b>Search by : </b> </h3>
 
+          <form >
             <div class="form-group">
-              <label> </label>
-              <Form.Control as="select" onChange={this.handleKeyChange.bind(this)}>    
+
+              <Form.Control as="select"    style={{width:'60%', margin:'17px auto', float:'left'}} onChange={this.handleKeyChange.bind(this)}>    
                 <option>Select one</option>
                 <option>Feeling</option>
                 <option>Action</option>
@@ -173,14 +185,18 @@ export default class Search extends Component {
                 <option>Thoughts of suicide or self harm</option>
               </Form.Control>
             </div>
+          </form>
+          
+          <br/>
 
-            <div style={{padding:'10px'}} className= {this.state.key==='Feeling'? '':'hidden'}>
+            <div className= {this.state.key==='Feeling'? '':'hidden'}>
               <EmotionsTypeahead 
                 setEmotionCallback= {this.setEmotionCallback} 
+                
               />
             </div>
-         
-            <div style={{padding:'10px'}} className= {this.state.key==='Action'? '':'hidden'}>
+          
+            <div className= {this.state.key==='Action'? '':'hidden'}>
               <SkillsTypeahead  
                 skillsTypeahead = {this.props.skillsTypeahead}
                 setSkillCallback = {this.setSkillCallback}
@@ -190,11 +206,15 @@ export default class Search extends Component {
             <div className= {this.state.key==='Impact'? '':'hidden'}>
               <MySlider handleBefore_lvlChange = {this.handleBefore_lvlChange}/>           
             </div>
-          </form>
+          
+          </div>
+
+          <div className = {this.state.showSearchBtn ? '' : 'hidden'} >
+            <br/>
+            <button  style={{width:'30%', fontSize:'calc(12px + 1vmin)', margin:'5px auto'}} className='subBtn' onClick={this.search}>Search</button>              
+          </div>
         </div>
-        <div >
-          <button  style={{width:'40%', fontSize:'calc(12px + 1vmin)', margin:'10px auto'}} className='subBtn' onClick={this.search}>Search</button>              
-        </div>
+        
         {searchList}
       </div>  
        

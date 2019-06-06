@@ -62,14 +62,14 @@ export default class Sidenavbar extends Component {
                     </NavItem>
                     
 
-                    <NavItem eventKey="/records/list">
+                    <NavItem eventKey="/records/search">
                     <NavIcon>
-                        <Link className="navbar-brand" to="/records/list">
+                        <Link className="navbar-brand" to="/records/search">
                             <i class="far fa-list-alt" style={{ fontSize: '2em' }}></i>
                         </Link>
                     </NavIcon>
                     <NavText>
-                        <Link className="navbar-brand" to="/records/list"> List Records</Link>
+                        <Link className="navbar-brand" to="/records/search"> List Records</Link>
                     </NavText>
                     </NavItem>
                     
