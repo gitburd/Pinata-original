@@ -12,6 +12,7 @@ const getBaseSkills = (request, response) => {
       if (error) {
         throw error
       }
+      console.log("got base skills - yay!");
       response.status(200).json(results.rows)
     })
   }
@@ -46,7 +47,7 @@ const getEmotionSkills = (request, response) => {
       response.status(200).json(results.rows)
     })
   }
- 
+  
 const getUserSkills = (request, response) => {
   var userId = request.query.id;
   var emotion = request.query.emotion;

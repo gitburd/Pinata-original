@@ -64,7 +64,7 @@ app.get('/api/search/Skill', db.searchBySkill)
 
 app.get('/api/search/Unfinished', db.searchByUnfinished)
 
-app.get('/api/search/FullList', db.getUserRecords)
+app.get('/api/search/FullList', db.getUserRecords) 
 
 app.post('/api/customskills', db.makeCustomSkill)
 
