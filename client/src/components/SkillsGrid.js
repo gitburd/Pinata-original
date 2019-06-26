@@ -168,7 +168,7 @@ let grid = this.state.isFirstGrid ? skillsGrid : newSkillsGrid;
 
   return (
    
-      <div style={{width:'50%'}}className= 'skillsGrid' >
+      <div className= 'skillsGrid' >
         {grid}
       </div>
     

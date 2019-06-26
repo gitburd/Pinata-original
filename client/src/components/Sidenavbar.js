@@ -9,6 +9,13 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 export default class Sidenavbar extends Component {
 
+    searchClicked =  (e) =>{
+        e.preventDefault()
+        this.props.searchByQuery('Full List', true)
+        this.props.setKeyQueryCallback('Full List', true)
+        this.setState({key:'Full List'})
+
+    }
     render() {
 
         let login =  this.props.auth.isAuthenticated()? (
@@ -63,16 +70,16 @@ export default class Sidenavbar extends Component {
                     
 
                     <NavItem eventKey="/records/search">
-                    <NavIcon>
-                        <Link className="navbar-brand" to="/records/search">
-                            <i class="far fa-list-alt" style={{ fontSize: '2em' }}></i>
+                    <NavIcon onClick={this.searchClicked}>
+                        <Link className="navbar-brand" to="/records/search" >
+                            <i class="far fa-list-alt" style={{ fontSize: '2em' }} ></i>
                         </Link>
                     </NavIcon>
-                    <NavText>
+                    <NavText onClick={this.searchClicked}>
                         <Link className="navbar-brand" to="/records/search"> List Records</Link>
                     </NavText>
                     </NavItem>
-                    
+                     
                     {/* <NavItem eventKey="/records/add">
                         <NavIcon>
                             <Link className="navbar-brand" to="/records/add">

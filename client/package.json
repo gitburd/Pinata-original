@@ -12,6 +12,8 @@
     "bootstrap": "^4.3.1",
     "canvasjs": "^1.8.1",
     "chart.js": "^2.8.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "i": "^0.3.6",
     "jwt-decode": "^2.2.0",
     "material-ui": "^0.20.2",

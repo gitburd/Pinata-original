@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 import Tooltip from 'rc-tooltip';
 
 
-export default class MySlider extends Component {
+export default class AfterLvlSlider extends Component {
     state={
         
     }
@@ -39,14 +39,13 @@ export default class MySlider extends Component {
       );
     };
     
-    const wrapperStyle = { width: '70%', margin:'60px auto' };
+    const wrapperStyle = { width: '75%', margin:'20px auto' };
  
 
     return (
        <div>
             <div style={wrapperStyle}>
-                <Slider  onChange={this.handleChange} min={0} max={10} defaultValue={5} handle={handle} marks={{ 0:{style:{color:'white', fontSize: '18px',fontFamily: 'Roboto'}, label:'Mild'}, 10:{style:{color:'white', fontSize: '18px',fontFamily: 'Roboto'}, label:'Extreme'}}}/>
-       
+                <Slider  onChange={this.handleChange} min={0} max={10} defaultValue={5} handle={handle} marks={{ 0:{style:{color:'purple', fontweight:'bold', fontSize: '18px',fontFamily: 'Roboto'}, label:'Mild'}, 10:{style:{color:'purple', fontSize: '18px',fontFamily: 'Roboto'}, label:'Extreme'}}}/>
             </div>
             
             

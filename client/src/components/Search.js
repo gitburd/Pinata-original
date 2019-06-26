@@ -14,7 +14,7 @@ export default class Search extends Component {
   constructor(props){
     super(props);
     this.state={
-      key:'',
+      key:'Full List',
       emotion:'',
       emotion_id:'',
       skill:'',

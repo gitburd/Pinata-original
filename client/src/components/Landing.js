@@ -11,15 +11,27 @@ import { MDBRow, MDBCol, MDBIcon } from "mdbreact";
 export default class Landing extends Component {
 
   componentDidMount(){
-    if (this.props.auth.isAuthenticated){
-        let auth0_id = this.props.auth0_id;
+    let auth0_id = this.props.auth0_id;
         let first_name = this.props.first_name;
         let last_name = this.props.last_name;
+       
+    if (this.props.auth.isAuthenticated){
+           
+      let url = `http://localhost:3001/login/`
 
-        // app.js 440
-        this.props.getUserInfo(auth0_id, first_name, last_name);
+      fetch(url, {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(json => this.setState({auth_access: json},this.props.setAuthAccessCallback(json),this.props.getUserInfo(auth0_id, first_name, last_name) ))
+        .catch(function(e) {
+        console.log(e); // “oh, no!”
+      })
+    }else {console.log('user id and emotion required')}
+        
     }
-  }
+  
   render() {
        
     return (
@@ -27,7 +39,7 @@ export default class Landing extends Component {
         <header className="App-header ">
           
             <h1 id="landing">Piñata!</h1>
-            <img style={{"padding":"50px", "width":"30%"}} src={pinata_big} alt={'pinata'}/>
+            <img style={{padding:"30px", width:"25%"}} src={pinata_big} alt={'pinata'}/>
 
             {this.props.auth.isAuthenticated() 
           ? (

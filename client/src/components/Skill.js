@@ -35,11 +35,11 @@ export default class Skill extends Component {
             <div className= {this.props.skill.is_star ? '':'hidden'}>
               <MDBIcon style={{position:'absolute', top: '10px', right: '10px', zIndex:'2'}} icon="star" size="1x" className="yellow-text pr-3"/>
             </div>
-            <div >
-            <Card.Img variant="top" src={skill_icon} />
+            <div className='skill_icon'>
+            <Card.Img  src={skill_icon} />
             </div>
           </Card.Body>
-          <Card.Footer  style={{padding:'1px', height:'30px',fontSize:'15px', background:'white', fontWeight:'bold', color:'purple'}}>
+          <Card.Footer className='skill_footer' style={{padding:'1px'}}>
             {skill_title}
           </Card.Footer>
         </Card>

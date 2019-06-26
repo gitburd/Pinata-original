@@ -3,19 +3,26 @@ const db = require('./queries')
 const cors = require('cors')
 const app = express();
 const port = 3001;
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
-
-// const http= require('http');
-// const router = express.Router();
-
  
+
+const jwt = require('jsonwebtoken');
+
 app.use(express.json());
-app.use(cors())
+app.use(cors()); 
+
 
 app.get('/', function(req,res){
     res.send("Hello World!!!");
 });
+
+// get the token with log in then set it in the state, keep it in local storage and pass it was a header in all of the calls 
+
+app.get('/login/', db.login);
+app.get('/tokentest',verifyToken, db.tokenTest);
+
+app.get('/api/user', db.getUserId)
+app.post('/api/user', db.makeNewUser)
+
 
 app.get('/api/baseskills', db.getBaseSkills)
 
@@ -47,10 +54,7 @@ app.post('/api/fullRecord', db.addFullRecord)
 
 app.put('/api/userRecords', db.finishRecord)
 
-app.post('/api/user', db.MakeNewUser)
 
-app.get('/api/user', db.GetUserId)
-// http://localhost:3001/api/user?auth0_id=hbo28
 
 app.get('/api/search/SI', db.searchBySI)
 
@@ -71,97 +75,48 @@ app.post('/api/customskills', db.makeCustomSkill)
 // app.get('/api/customskills', db.geCustomSkills)
  
 
+// FORMAT OF TOKEN
+// Authorization: Bearer <access_token>
+
+// Verify Token
+function verifyToken(req, res, next) {
+    // Get auth header value
+    const bearerHeader = req.headers['authorization'];
+    // Check if bearer is undefined
+    if(typeof bearerHeader !== 'undefined') {
+      // Split at the space
+      const bearer = bearerHeader.split(' ');
+      // Get token from array
+      const bearerToken = bearer[1];
+      // Set the token
+      req.token = bearerToken;
+      // Next middleware
+      next();
+    } else {
+      // Forbidden
+      res.sendStatus(403);
+    }
+  
+  }
 
  
-
-
-
-
-// // this is Express middleware that will validate ID tokens
-// const checkJwt = jwt({
-//     secret: jwksRsa.expressJwtSecret({
-//       cache: true,
-//       rateLimit: true,
-//       jwksRequestsPerMinute: 5,
-//       jwksUri: `https://dev-g9bfudtd.auth0.com/.well-known/jwks.json`
-//     }),
-  
-//     // Validate the audience and the issuer.
-//     audience: '52nWjKf0RiI4Wlih3OzwLJSzjSmKPjju',
-//     issuer: `https://dev-g9bfudtd.auth0.com/`,
-//     algorithms: ['RS256']
-//   });
-
-// app.get('/api/all', db.getBaseSkills)
-
-// app.get('/api/emotionSkills', checkJwt, db.getEmotionSkills)
-//     // http://localhost:3001/api/emotionSkills?emotion=Angry
-
-// app.get('/api/userSkills/', checkJwt, db.getUserSkills)
-//     // ex -- http://localhost:3001/api/userSkills?id=2&emotion=Angry
-
-// app.get('/api/skill_id/', checkJwt, db.getSkillId)
-// // ex -- http://localhost:3001/api/skill_id?skillTiltle=Cook
-
-
-// app.get('/api/emotion_id/', checkJwt, db.getEmotionId)
-// // ex -- http://localhost:3001/api/emotion_id?emotion_text=Sad
-
-
-// app.get('/api/userRecords', checkJwt, db.getUserRecords)
-//     // http://localhost:3001/api/userRecords?id=2
-
-// // app.post('/api/userRecords', db.addRecord) 
-
-// app.get('/api/mostRecentRecord',checkJwt, db.getMostRecentRecord)
-// // /api/mostRecentRecord?user_id=2
-
-
-  
-
-// // app.post('/api/records', db.newRecord) 
-
-// app.post('/api/records', checkJwt, db.newRecord) 
-
-// app.put('/api/setSkill', checkJwt, db.setSkill)
-// // /api/setSkill
-
-// // body 
-//   {
-//     "record_id": "",
-//    "skill_id":""
-//   }
-
-
-
-
-// app.post('/api/fullRecord', checkJwt, db.addFullRecord)
-
-// // {
-// //     "user_id":"2",
-// //     "skill_id":"2",
-// //     "emotion_id":"2",
-// //     "before_lvl":"2",
-// //     "after_lvl":"2",
-// //     "impact":"2",
-// //     "date":"2020-02-20",
-// //     "si":"true",
-// //     "sh":"true"
-
-// //   }
-
-// app.put('/api/userRecords', checkJwt, db.finishRecord)
-
-// // body 
-// //   {
-// //     "record_id": "",
-// //     "after_lvl": "",
-// //     "before_lvl": ""
-// //   }
-
-
 app.listen(port);
 console.log(`I'm listening on 3001!`)
 
 
-
+// app.post('/api/login', (req,res) =>{
+    
+//     // here i would send user name and password, do auth with database 
+//     // mock user
+//     const user = {
+//         id:1, 
+//         user:'me',
+//         email:'email@gmail.com'
+//     }
+//     jwt.sign({user}, 'secretkey', (err,token) => {
+//         // this send the token back 
+//         res.json({
+//             token
+//         });
+//     }); 
+// });

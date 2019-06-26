@@ -96,7 +96,7 @@ export default class UpdateModal extends Component {
                <h2>Intensity was <span className='recordTitles'><b> {this.props.update_before_lvl} </b></span></h2>
   
         <hr/>
-        <div style={{padding:'10px', margin:'0 auto', alignItems:'center', color:'white', backgroundColor:'#1d1f2b'}}>
+        <div style={{padding:'10px', margin:'0 auto', alignItems:'center', color:'purple', backgroundColor:'#edf0fc'}}>
             <h2>The intensity became <span ><b>  {this.state.after_lvl}</b></span></h2>
               <div style={{ margin:'30px auto', width:'50%', alignItems:'center'}}>
 

@@ -1,0 +1,55 @@
+secure backend : https://auth0.com/blog/node-js-and-express-tutorial-building-and-securing-restful-apis/
+^sanitize inputs : seems okay? 
+improve form display 
+
+
+form validation 
+new user form
+
+^screen @media 
+deploy
+mobile 
+
+
+what should i study to get ready? 
+what ide whould i use?
+
+
+
+preventing html injection: 
+
+    escape < > & 
+&lt; &gt; &amp;
+
+Script injection: seen by other users 
+old facebook problem:update status with script tag 
+worst case : a bank - it can read the page ur on and send it to other sites 
+
+-- this is prevented with escaping the characters 
+
+covered by most frameworks, facilities for escaping user data
+SQL injection 
+php use  a prepared statement 
+
+
+used 
+manipulated 
+controlled 
+bad 
+
+
+
+-- after description 10 min
+i'm done/rate >> 
+
+chart - make an avg for the acitity bar graph 
+
+line chart - x axis : date 
+
+organize data by time : 
+
+    
+
+
+
+
