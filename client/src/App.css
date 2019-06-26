@@ -291,7 +291,7 @@ h4{
 .AutoCompleteText{
   width: 100%;
   /* border: 1px solid gray; */
-  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
+  /* box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18); */
 }
 
 .SkillsList{
@@ -437,7 +437,6 @@ background-color: black;
   border-color: currentColor;
   background-color: white;
 }
-
 /* make sure we have a visible focus ring */
 .myBtn:focus {
   outline: none;

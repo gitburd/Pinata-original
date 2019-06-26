@@ -25,38 +25,35 @@ export default class UpdateModal extends Component {
    this.props.recordModalClose()
  }
 
- 
-
-  
   handleAfter_lvlChange(after_lvl) {
     this.setState({after_lvl})
     }
 
-    onSubmit =(e)=> {
-        e.preventDefault();
-        console.log(this.props.state)
-        this.props.updateRecord(this.props.update_record_id, this.props.update_before_lvl, this.state.after_lvl);
-    
-        this.setState({
-          emotion:'',
-          emotion_id:'',
-          skill:'',
-          skill_id:'',
-          before_lvl:'',
-          after_lvl:'',
-          date:'',
-          si:false,
-          sh:false,
-            message:`Record updated.`
-          }, this.closeModal);
-    
-      }
+  onSubmit =(e)=> {
+    e.preventDefault();
+    console.log(this.props.state)
+    this.props.updateRecord(this.props.update_record_id, this.props.update_before_lvl, this.state.after_lvl);
+
+    this.setState({
+      emotion:'',
+      emotion_id:'',
+      skill:'',
+      skill_id:'',
+      before_lvl:'',
+      after_lvl:'',
+      date:'',
+      si:false,
+      sh:false,
+        message:`Record updated.`
+      }, this.closeModal);
   
+    }
+
       render() {
       return (
           <Modal
           show={this.props.recordModalShow}
-          close={this.closeModal} 
+          // close={this.closeModal} 
           onHide={this.closeModal}
             {...this.props}
             size="lg"

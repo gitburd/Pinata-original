@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import '../App.css';
-import Record from './Record.js';
 import RecordUpdate from './RecordUpdate';
 import {Link} from 'react-router-dom';
 
@@ -42,9 +41,15 @@ class RecordsListUpdate extends Component {
         </button>   */}
         <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >My Records </h1></button>
           <Link className="navbar-brand" to="/records/add">
-          <sup>  <i class="far fa-plus-square" style={{ fontSize: '1.9em', padding:'2px' }} ><span style={{fontFamily: 'Roboto' }}>  </span> </i></sup>
+           <sup>  <i class="far fa-plus-square" style={{ fontSize: '1.9em', padding:'2px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> </sup>
+          </Link>
+          <Link className="navbar-brand" to="/records/search">
+            <sup>  <i class="fas fa-search" style={{ fontSize: '1.9em', padding:'2px' }} > <span style={{fontFamily: 'Roboto' }}>  </span> </i> </sup>
           </Link>
 
+          {searchList}
+
+          next
        
           {recordsList}
       
