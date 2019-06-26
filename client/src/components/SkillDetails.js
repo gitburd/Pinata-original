@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button, ButtonToolbar, Form}  from 'react-bootstrap';
+import { Modal, Button, ButtonToolbar, Form, ThemeProvider}  from 'react-bootstrap';
 
 import AfterLvlSlider from './AfterLvlSlider';
 
@@ -11,17 +11,17 @@ export default class SkillDetails extends Component {
     this.state={
       after_lvl:'',
       tryItClicked:false, 
+      skipClicked:false,
       show: false
     }
     this.onSubmit= this.onSubmit.bind(this);
     this.handleAfter_lvlChange = this.handleAfter_lvlChange.bind(this);
-
     this.closeModal = this.closeModal.bind(this)
 
     }
 
  closeModal= ()=>{
-  this.setState({tryItClicked:false}, this.props.showModalCallback())
+  this.setState({tryItClicked:false, skipClicked:false}, this.props.showModalCallback())
     
  }
 
@@ -65,6 +65,14 @@ export default class SkillDetails extends Component {
         }, this.closeModal);
 
     }
+
+    skipClicked = (e) => {
+      e.preventDefault()
+      this.setState({
+        skipClicked:true,
+        tryItClicked:false
+      })
+    }
   
       render() {
       return (
@@ -85,42 +93,46 @@ export default class SkillDetails extends Component {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body >
-            <div className = {this.state.tryItClicked? 'hidden': ''}>
+            <div className = {this.state.tryItClicked || this.state.skipClicked? 'hidden': ''}>
             <img  src={this.props.skill_icon} className="skill_details_icon" /> 
               <p>{this.props.skill_details}</p>
             </div>
 
             <div style={{fontSize:'22px'}} className = {this.state.tryItClicked? '': 'hidden'}>
-              <p>Great work!</p>
-              <p>How do you feel now?</p>
+            <div style={{padding:'0px', margin:'0 auto', alignItems:'center'}}>
+            <p style={{backgroundColor:'purple', color:'white', fontWeight:'400'}}>After trying the activity</p>
+              <p> The intensity of my mood is <span style={{color:'purple', fontWeight:'400'}} ><b>  {this.state.after_lvl}</b></span></p>
+              <div >
 
-              <div style={{margin:'20px auto 30px auto'}}>
-              
-              <div className = {this.state.after_lvl? 'hidden': 'recordTitles'}>
-                Slide to set
-              
-              </div>
-
-              <span className='recordTitles'><b>  {this.state.after_lvl}</b></span>
-              <AfterLvlSlider  handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
+              <AfterLvlSlider style={{margin:'0', padding:'0'}}  handleAfter_lvlChange = {this.handleAfter_lvlChange}/>
+           
                 
               </div>
+              </div>  
+              
+            </div>
+
+            <div className = {this.state.skipClicked? '': 'hidden'}>
+              <h2 style={{fontWeight:'400'}}> Great work! </h2>
+              <p style={{color:'purple', fontSize:'20px',fontWeight:'400'}}>in 10 minutes</p> 
+              <p style={{fontSize:'18px'}}> You'll get a reminder to record your feeling intensity</p>
+            
             </div>
               
               
             </Modal.Body>
             <Modal.Footer>
-            <div className = {this.state.tryItClicked? 'hidden': ''}>
-            <Button onClick={this.closeModal}>Close</Button>
-            <Button style={{margin:'10px'}} onClick = {this.setSkill}
-              variant="outline-success">Try it</Button>
+            <div className = {this.state.tryItClicked || this.state.skipClicked? 'hidden': ''}>
+            {/* <Button onClick={this.closeModal}>Close</Button> */}
+            <button style={{margin:'10px'}} onClick = {this.setSkill}
+              className='myBtn'>Try it</button>
             </div>
 
             <div className = {this.state.tryItClicked? '': 'hidden'}>
-            <Button onClick={this.closeModal}>Skip</Button>
-            <Button style={{margin:'10px'}}
+            <button className='myBtn' onClick={this.skipClicked}>Skip</button>
+            <button style={{margin:'10px'}}
                   onClick={this.onSubmit.bind(this)} 
-                  variant="outline-success"> Submit </Button>
+                  className='myBtn'> Submit </button>
             </div>
              
             </Modal.Footer>

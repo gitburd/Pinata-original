@@ -30,7 +30,7 @@ export default class CustomSkillList extends Component {
       </button>  */}
        <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >My Actions</h1></button>
       <Link   style={{marginTop:'0', paddingTop:'0'}} className="navbar-brand" to="/custom/new">
-        <sup><i class="far fa-plus-square" style={{ fontSize: '1.9em', padding:'2px' }} > </i></sup>
+        <i class="far fa-plus-square" style={{ fontSize: '1.8em', padding:'2px' }} > </i>
         </Link>
 
         {/* <h1 style={{padding:'20px'}} >My Actions </h1> */}

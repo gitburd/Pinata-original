@@ -103,7 +103,7 @@
   margin: 5px auto;
   align-items: center;
   justify-content: center;
-  width:80% !important;
+  width:83% !important;
   max-height:96vh !important;
 }
 
@@ -118,6 +118,8 @@
   padding-top:26px;
 }
 
+
+/* for small screens  */
 .skill_title{
   padding-top:10px;
   font-size: calc(8px + 1vmin);
@@ -126,17 +128,175 @@
  
 }
 
+.skill_footer{
 
-.skill{
-  
- width:31%;
- 
+  font-size: 8px; 
+  background: white; 
+  font-weight: bold; 
+  color: purple;
+  height: 20px; 
+
+}
+
+
+.skill{ 
+  align-content: center;
+  margin:auto;
+  vertical-align: center;
+  width:30%;
   float: left;
   margin:1%;
   padding:1%;
   /* color:red; */
   font-size: calc(9px + 1vmin);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* /* iphone 5s */
+@media screen and (min-width: 361px) {
+  .skill {
+    width:31%;
+    margin:1%;
+  }
+
+  .skillsGrid{
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    width:85% !important;
+    max-height:96vh !important;
+  }
+  .skill_footer{
+    padding: 1px;
+    height: 20px; 
+    font-size: 8px; 
+    background: white; 
+    font-weight: bold; 
+    color: purple;
+  }
+}
+
+/* iphone 6/7/8 */
+@media screen and (min-width: 566px) {
+  .skill {
+    width:31%;
+    margin:1%;
+  }
+
+  .skillsGrid{
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    width:85% !important;
+    max-height:96vh !important;
+  }
+  .skill_footer{
+    padding: 1px;
+    height: 20px; 
+    font-size: 12px; 
+    background: white; 
+    font-weight: bold; 
+    color: purple;
+  }
+
+}
+/* ipad */
+@media screen and (min-width: 766px) {
+  .skill {
+    width:31%;
+    margin:1%;
+  }
+
+  .skillsGrid{
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    width:75% !important;
+    max-height:96vh !important;
+  }
+  .skill_footer{
+    padding: 1px;
+    height: 20px; 
+    font-size: 14px; 
+    background: white; 
+    font-weight: bold; 
+    color: purple;
+  }
+}
+
+/* large screens  */
+@media screen and (min-width: 999px) {
+  .skill {
+    width:30%;
+    margin:1%;
+  }
+
+  .skillsGrid{
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    width:73% !important;
+    max-height:96vh !important;
+  }
+  .skill_footer{
+    padding: 1px;
+    height: 20px; 
+    font-size: 14px; 
+    background: white; 
+    font-weight: bold; 
+    color: purple;
+  }
+
+}
+
+@media screen and (min-width: 1150px) {
+  .skill {
+    width:30%;
+    margin:1%;
+  }
+
+  .skillsGrid{
+   margin:auto;
+    /* padding:0 10px; */
+    align-items: center;
+    justify-content: center;
+    width:70% !important;
+    /* max-height:96vh !important; */
+  }
+  .skill_footer{
+    padding: 1px;
+    height: 25px; 
+    font-size: 16px; 
+    background: white; 
+    font-weight: bold; 
+    color: purple;
+  }
+
+}
+
+@media screen and (min-width: 1400px) {
+  .skill {
+    width:30%;
+    /* padding:1%; */
+    /* margin:1%; */
+  }
+
+  .skillsGrid{
+    margin: auto;
+    /* margin-right:9%; */
+    align-items: center;
+    justify-content: center;
+    width:60% !important;
+    max-height:96vh !important;
+  }
+  .skill_footer{
+    padding: 1px;
+    height: 20px; 
+    font-size: 14px; 
+    background: white; 
+    font-weight: bold; 
+    color: purple;
+  }
 
 }
 

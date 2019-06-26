@@ -115,19 +115,24 @@ export default class FormBlank extends Component {
   onSubmit =(e)=> {
     e.preventDefault();
     this.props.addFullRecord( this.state.skill_id, this.state.emotion_id, this.state.before_lvl, this.state.after_lvl, this.state.si,this.state.sh, this.state.date);
+    this.props.searchByQuery('Full List', true)
+    this.props.setKeyQueryCallback('Full List', true,  window.location='/records/search')
+    
+    ;
 
+    
 
-    this.setState({
-      emotion:'',
-      emotion_id:'',
-      skill:'',
-      skill_id:'',
-      before_lvl:'',
-      after_lvl:'',
-      date:'',
-      si:false,
-      sh:false
-      },  window.location='/records/search');
+    // this.setState({
+    //   emotion:'',
+    //   emotion_id:'',
+    //   skill:'',
+    //   skill_id:'',
+    //   before_lvl:'',
+    //   after_lvl:'',
+    //   date:'',
+    //   si:false,
+    //   sh:false
+    //   }); 
   }
 
 

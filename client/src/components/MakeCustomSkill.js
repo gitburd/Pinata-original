@@ -78,9 +78,9 @@ export default class MakeCustomSkill extends Component {
     return (
       <div  >
          <button style={{background:'transparent', border:'none', cursor:'auto'}}> <h1 >New Action</h1></button>
-        <Link className="navbar-brand" to="/custom">
+        {/* <Link className="navbar-brand" to="/custom">
         <sup><i class="far fa-arrow-alt-circle-left" style={{ fontSize: '1.9em', padding:'2px' }} > </i></sup>
-          </Link>
+          </Link> */}
           
         <h3> Action Name </h3>
         <input style={{margin:'20px'}} type='text' value={this.state.skill_title} onChange={this.updateSkill_title.bind(this)}></input>

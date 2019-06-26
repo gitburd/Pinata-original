@@ -45,8 +45,8 @@ class App extends Component {
     
     ],
     searchList:[],
-    key:'feeling',
-    query:'Sad',
+    key:'Full List',
+    query:true,
     test:'fail',
     modalShow: false,
     recordModalShow: false,
@@ -153,41 +153,45 @@ class App extends Component {
   }
 
 
-  componentWillMount(){
-    this.getChartData();
-  }
+  // componentWillMount(){
+  //   this.getChartData();
+  // }
 
-  getChartData(){
-    // Ajax calls here
-    this.setState({
-      chartData:{
-        labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-        datasets:[
-          {
-            label:'Population',
-            data:[
-              617594,
-              181045,
-              153060,
-              106519,
-              105162,
-              95072
-            ],
-            backgroundColor:[
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)'
-            ]
-          }
-        ]
-      }
-    });
-  }
+  // getChartData(){
+  //   // Ajax calls here
+  //   this.setState({
+  //     chartData:{
+  //       labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+  //       datasets:[
+  //         {
+  //           label:'Population',
+  //           data:[
+  //             617594,
+  //             181045,
+  //             153060,
+  //             106519,
+  //             105162,
+  //             95072
+  //           ],
+  //           backgroundColor:[
+  //             'rgba(255, 99, 132, 0.6)',
+  //             'rgba(54, 162, 235, 0.6)',
+  //             'rgba(255, 206, 86, 0.6)',
+  //             'rgba(75, 192, 192, 0.6)',
+  //             'rgba(153, 102, 255, 0.6)',
+  //             'rgba(255, 159, 64, 0.6)',
+  //             'rgba(255, 99, 132, 0.6)'
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   });
+  // }
 
+
+  setAuthAccessCallback = (auth_access_token) => {
+    this.setState({auth_access_token}, console.log('hi from app 193', auth_access_token))
+  }
   
   getUserInfo = (auth0_id, first_name, last_name) => {
     
@@ -196,12 +200,15 @@ class App extends Component {
     if (auth0_id ){
       fetch(url, {
         method: 'get',
-        headers: { 'Content-Type': 'application/json'}
+        headers: { 
+          'Authorization':'Bearer ' + this.state.auth_access_token,
+          'Content-Type': 'application/json'
+      }        
       })
       .then(res => res.json())
       .then(json => {
         if (json.length>0) { 
-          console.log(json);
+          console.log('app 207',json);
           this.setState({user_id:json[0].user_id}, 
           ()=> this.getCustomSkills()
           ); 
@@ -254,6 +261,9 @@ class App extends Component {
         .catch(function(e) {console.log(e)})
     }else {console.log('user id req.')}
   }
+
+  
+
 
   getPromptRecord = (auth0_id) => {
     
@@ -709,12 +719,16 @@ class App extends Component {
                   getUserInfo={this.getUserInfo}  
                   userIdCallback= {this.userIdCallback}
                   getPromptRecord = {this.getPromptRecord}
+                  searchByQuery = {this.searchByQuery}
+                  setKeyQueryCallback = {this.setKeyQueryCallback}
                   />  
              </React.Fragment>
              :
              <React.Fragment>
                   <Landing 
                  {...this.props}{...props} 
+                 setAuthAccessCallback = {this.setAuthAccessCallback}
+                //  auth_token={localStorage.access_token}
                  user_id ={this.props.user_id} 
                  getUserInfo={this.getUserInfo}  
                  userIdCallback= {this.userIdCallback}
@@ -729,6 +743,7 @@ class App extends Component {
                 ? <React.Fragment>
                    <Landing 
                  {...this.props}{...props} 
+                 setAuthAccessCallback = {this.setAuthAccessCallback}
                  user_id ={this.props.user_id} 
                  getUserInfo={this.getUserInfo}  
                  userIdCallback= {this.userIdCallback}
@@ -760,13 +775,6 @@ class App extends Component {
               </React.Fragment>
               :
               <React.Fragment>
-                  <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />
               </React.Fragment>
             )}
           />
@@ -781,6 +789,7 @@ class App extends Component {
                 <div style={{ paddingTop:'50px', margin:'0 auto'}}>
 
                   <CustomSkillList 
+        
                     getCustomSkills={this.getCustomSkills}
                     customSkillsList={this.state.customSkillsList}
                     user_id= {this.state.user_id}
@@ -970,6 +979,8 @@ class App extends Component {
               this.props.auth.isAuthenticated() 
               ? <React.Fragment> 
                   <FormBlank 
+                  searchByQuery = {this.searchByQuery}
+                  setKeyQueryCallback = {this.setKeyQueryCallback}
                   addFullRecord= {this.addFullRecord} 
                   getEmotionId={this.getEmotionId} 
                   customSkillsArray = {this.state.customSkillsArray}
@@ -1002,13 +1013,7 @@ class App extends Component {
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />             
+                      
                 </React.Fragment>              
             )} />
 
@@ -1026,13 +1031,7 @@ class App extends Component {
                 </React.Fragment>
                 :
                 <React.Fragment>
-                    <Landing 
-                    {...this.props}{...props} 
-                    user_id ={this.props.user_id} 
-                    getUserInfo={this.getUserInfo}  
-                    userIdCallback= {this.userIdCallback}
-                    getPromptRecord = {this.getPromptRecord}
-                  />   
+                
                 </React.Fragment>              
               )} />
 
@@ -1132,4 +1131,3 @@ class App extends Component {
 }
 
 export default App;
-
