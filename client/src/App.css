@@ -14,11 +14,20 @@
 }
 
 .pinataNav a {
-  padding: 6px 8px 6px 16px;
+  padding: 0px 8px 8px 16px;
   text-decoration: none;
   font-size: calc(10px + 1vmin);
   color: #818181;
+  display: block; 
+}
+
+.pinataNavText {
+  padding: 0px 8px 12px 8px;
+  text-decoration: none;
+  font-size: calc(10px + 1.2vmin);
+  color: #818181;
   display: block;
+
 }
 
 .si :hover{
@@ -33,9 +42,14 @@
 }
 
 
-.pinataNav a:hover {
+.pinataNav :hover {
   color: #f1f1f1;
 }
+
+.pinataNavText a:hover{
+ color: #f1f1f1;
+}
+
 
 
 .main {

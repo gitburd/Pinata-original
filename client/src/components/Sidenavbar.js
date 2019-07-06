@@ -42,7 +42,7 @@ export default class Sidenavbar extends Component {
                      
                         </NavIcon>
                         <NavText>
-                        <button  style={{ cursor: 'pointer',backgroundColor:'transparent', border:'none' }} onClick={this.props.auth.login}> Logout </button>
+                        <button  style={{ cursor: 'pointer',backgroundColor:'transparent', border:'none' }} onClick={this.props.auth.login}> <span className='pinataNavText'> Logout </span></button>
                         </NavText>
                     </NavItem>
 
@@ -53,7 +53,7 @@ export default class Sidenavbar extends Component {
                             </Link>    
                         </NavIcon>
                         <NavText>
-                            <Link className="navbar-brand" to="/"> Home</Link>
+                            <Link className="navbar-brand" to="/"> <span className='pinataNavText'>Home </span></Link>
                         </NavText>
                     </NavItem>
 
@@ -64,7 +64,7 @@ export default class Sidenavbar extends Component {
                             </Link>
                         </NavIcon>
                         <NavText>
-                            <Link class="navbar-brand" to="/feeling">I'm feeling... </Link>
+                            <Link class="navbar-brand" to="/feeling"> <span className='pinataNavText'>I'm feeling... </span></Link>
                         </NavText>
                     </NavItem>
                     
@@ -75,8 +75,9 @@ export default class Sidenavbar extends Component {
                             <i class="far fa-list-alt" style={{ fontSize: '2em' }} ></i>
                         </Link>
                     </NavIcon>
+
                     <NavText onClick={this.searchClicked}>
-                        <Link className="navbar-brand" to="/records/search"> List Records</Link>
+                        <Link className="navbar-brand" to="/records/search"> <span className='pinataNavText'> List Records </span></Link>
                     </NavText>
                     </NavItem>
                      
@@ -98,9 +99,22 @@ export default class Sidenavbar extends Component {
                             </Link>
                         </NavIcon>
                         <NavText>
-                            <Link className="navbar-brand" to="/custom">My Actions</Link>
+                            <Link className="navbar-brand" to="/custom"> <span className='pinataNavText'>My Actions </span></Link>
                         </NavText>
                     </NavItem>
+
+                    <NavItem eventKey="/chart">
+                        <NavIcon>
+                            <Link className="navbar-brand" to="/chart">
+                            <i class="fas fa-chart-bar" style={{ fontSize: '2em' }}></i>
+                            </Link>
+                        </NavIcon>
+                        <NavText>
+                            <Link className="navbar-brand" to="/custom"> <span className='pinataNavText'>Charts </span></Link>
+                        </NavText>
+                    </NavItem>
+
+
 
                     {/* <NavItem eventKey="/search">
                     <NavIcon>
