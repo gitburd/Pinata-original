@@ -11,7 +11,7 @@ export default class SkillDetails extends Component {
     this.state={
       after_lvl:'',
       tryItClicked:false, 
-      skipClicked:false,
+      rateClicked:false,
       show: false
     }
     this.onSubmit= this.onSubmit.bind(this);
@@ -21,7 +21,7 @@ export default class SkillDetails extends Component {
     }
 
  closeModal= ()=>{
-  this.setState({tryItClicked:false, skipClicked:false}, this.props.showModalCallback())
+  this.setState({tryItClicked:false, rateClicked:false}, this.props.showModalCallback())
     
  }
 
@@ -66,10 +66,10 @@ export default class SkillDetails extends Component {
 
     }
 
-    skipClicked = (e) => {
+    rateClicked = (e) => {
       e.preventDefault()
       this.setState({
-        skipClicked:true,
+        rateClicked:true,
         tryItClicked:false
       })
     }
@@ -93,14 +93,22 @@ export default class SkillDetails extends Component {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body >
-            <div className = {this.state.tryItClicked || this.state.skipClicked? 'hidden': ''}>
+            <div className = {this.state.tryItClicked || this.state.rateClicked? 'hidden': ''}>
             <img  src={this.props.skill_icon} className="skill_details_icon" /> 
               <p>{this.props.skill_details}</p>
             </div>
 
             <div style={{fontSize:'22px'}} className = {this.state.tryItClicked? '': 'hidden'}>
+            <h2 style={{fontWeight:'400'}}> Great work
+            
+            ! </h2>
+              <p style={{color:'purple', fontSize:'20px',fontWeight:'400'}}>in 10 minutes</p> 
+              <p style={{fontSize:'18px'}}> You'll get a reminder to rate the impact of the action</p> 
+            </div>
+
+            <div className = {this.state.rateClicked? '': 'hidden'}>
             <div style={{padding:'0px', margin:'0 auto', alignItems:'center'}}>
-            <p style={{backgroundColor:'purple', color:'white', fontWeight:'400'}}>After trying the activity</p>
+            <p style={{backgroundColor:'purple', color:'white', fontWeight:'bold'}}>After trying the activity</p>
               <p> The intensity of my mood is <span style={{color:'purple', fontWeight:'400'}} ><b>  {this.state.after_lvl}</b></span></p>
               <div >
 
@@ -109,27 +117,24 @@ export default class SkillDetails extends Component {
                 
               </div>
               </div>  
-              
-            </div>
-
-            <div className = {this.state.skipClicked? '': 'hidden'}>
-              <h2 style={{fontWeight:'400'}}> Great work! </h2>
-              <p style={{color:'purple', fontSize:'20px',fontWeight:'400'}}>in 10 minutes</p> 
-              <p style={{fontSize:'18px'}}> You'll get a reminder to record your feeling intensity</p>
             
             </div>
               
               
             </Modal.Body>
             <Modal.Footer>
-            <div className = {this.state.tryItClicked || this.state.skipClicked? 'hidden': ''}>
+            <div className = {this.state.tryItClicked || this.state.rateClicked? 'hidden': ''}>
             {/* <Button onClick={this.closeModal}>Close</Button> */}
             <button style={{margin:'10px'}} onClick = {this.setSkill}
               className='myBtn'>Try it</button>
             </div>
 
             <div className = {this.state.tryItClicked? '': 'hidden'}>
-            <button className='myBtn' onClick={this.skipClicked}>Skip</button>
+            <p style={{fontSize:'16px', margin:'auto', color:'purple', textAlign:'center',fontWeight:'bold'}}>Done with this action? </p>
+            <button className='myBtn' onClick={this.rateClicked}>Rate It Now</button>            
+            </div>
+
+            <div className = {this.state.rateClicked? '': 'hidden'}>
             <button style={{margin:'10px'}}
                   onClick={this.onSubmit.bind(this)} 
                   className='myBtn'> Submit </button>

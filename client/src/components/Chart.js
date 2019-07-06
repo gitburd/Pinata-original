@@ -4,6 +4,7 @@ import {Bar, Line, Pie, Scatter} from 'react-chartjs-2';
 import SkillsTypeahead from './SkillsTypeahead';
 import EmotionsTypeahead from './EmotionsTypeahead';
 import { Form,OverlayTrigger,Tooltip}  from 'react-bootstrap';
+import Moment from 'react-moment';
 
 export default class Chart extends Component {
     constructor(props){
@@ -39,17 +40,19 @@ export default class Chart extends Component {
         let afterLvlSet = [];
         let emotionLabels = [];
         let skillLabels = [];
+        let dateLabels = [];
 
         for(let i=0; i < this.props.recordsList.length && beforeLvlSet.length < 10; i++){    
             beforeLvlSet.push({x:i, y:this.props.recordsList[i].before_lvl})
             afterLvlSet.push({x:i, y:this.props.recordsList[i].after_lvl})
             emotionLabels.push(this.props.recordsList[i].emotion_text)
             skillLabels.push(this.props.recordsList[i].skill_title) 
+            dateLabels.push(<Moment format="D MMM YYYY" unix>{this.props.recordsList[i].date}</Moment>)
         }
 
         this.setState({beforeLvlSet, afterLvlSet,
             fullChartData:{
-                labels: emotionLabels,
+                labels: dateLabels,
                 datasets:[
                     {
                         label:'before',
@@ -75,21 +78,57 @@ export default class Chart extends Component {
     }
 
     makeFeelingChart = () => {
+        console.log("inside makeFeelingChart line 78");
         let labelsArray=[];
         let data =  [];
-        let sortedSearchList = this.state.searchList.sort((a, b) => (a.skill_title > b.skill_title) ? 1 : -1)
-        let barColors = ['#040cf4', '#5701ad', '#0d4887', '#870d6a', '#0c5270' ]
-        let backgroundColors= ['#55153B']
-        for (let i =0; i<sortedSearchList.length;i++){
+        let sortedSearchList = this.state.searchList.sort((a, b) => (a.skill_title > b.skill_title) ? 1 : -1);
+        let barColors = ['#040cf4', '#5701ad', '#0d4887', '#870d6a', '#0c5270','#55153B'];
+        let backgroundColors= [];
+        let tempArray = [];
+        // let avgValuesArray = [];
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+        tempArray.push(sortedSearchList[0].impact);
+        // labelsArray.push(sortedSearchList[0].skill_title);
+        console.log("inside makeFeelingChart line 88", tempArray);
+        for (let i = 1; i<sortedSearchList.length;i++){
+         
+         
+          console.log("inside makeFeelingChart line 92", tempArray);
+         
+         if (sortedSearchList[i].skill_title !== sortedSearchList[i-1].skill_title){
+           labelsArray.push(sortedSearchList[i-1].skill_title);
+            data.push(tempArray.reduce(reducer)/tempArray.length); 
+            tempArray = [];
+            tempArray.push(sortedSearchList[i].impact);
+            backgroundColors.push(barColors.shift()); 
+            console.log("HEY, look here, they were different", data, labelsArray, backgroundColors)
+         }else{
+            // console.log("new number 105")
+            tempArray.push(sortedSearchList[i].impact);
+            console.log("HEY, look here! they were the same", data, labelsArray, backgroundColors)
+          }
+         
+
+
+          // if (sortedSearchList[i].skill_title === sortedSearchList[i-1].skill_title){
+          //   tempArray.push(sortedSearchList[i].impact);
+          //   console.log("HEY, look here!", data, labelsArray, backgroundColors)
+          // }
+          // else if
+          if (i === sortedSearchList.length-1){
+            // tempArray.push(sortedSearchList[i].impact);
+            console.log("end of the list",tempArray);
+            
+            data.push(tempArray.reduce(reducer)/tempArray.length); 
             labelsArray.push(sortedSearchList[i].skill_title);
-            data.push(sortedSearchList[i].impact);
-            if (i>0 && sortedSearchList[i].skill_title === sortedSearchList[i-1].skill_title){
-              backgroundColors.push(backgroundColors[i-1])
-            }else if (i>0){
-              backgroundColors.push(barColors.shift());
-            } 
-            }
-        
+            backgroundColors.push(barColors.shift());
+            console.log("HEY, this should have all 3", data, labelsArray, backgroundColors)
+            
+          
+          }
+            
+        }
         
         this.setState({
             feelingChartData:{
@@ -98,7 +137,10 @@ export default class Chart extends Component {
                   {
                     label: this.state.searchList.length > 0 ? this.state.searchList[0].emotion_text : '',
                     data:data,
-                    backgroundColor: backgroundColors                  
+                    backgroundColor: backgroundColors
+                    // ,
+                    //  yAxisID: "-10"
+
                   }
                 ]
              }, 
@@ -369,6 +411,7 @@ export default class Chart extends Component {
                     <Bar
                         data={myData}
                         options={{
+                          yAxisID: "-10"
                     
                         }}
                     />

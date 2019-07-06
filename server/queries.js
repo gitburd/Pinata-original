@@ -58,50 +58,62 @@ const tokenTest = (req, res) => {
 }
 
 
-const getUserId = (req, res) => {
- jwt.verify(req.token, 'secretkey', (err, authData) => {
-    if (err){
-        res.send('token test failed...');
-    } else {
-      var auth0_id = req.query.auth0_id;
+// const getUserId = (req, res) => {
+//  jwt.verify(req.token, 'secretkey', (err, authData) => {
+//     if (err){
+//         res.send('token test failed...');
+//     } else {
+//       var auth0_id = req.query.auth0_id;
   
-      pool.query(`SELECT * FROM users WHERE auth0_id='${auth0_id}' `, (error, results) => {
-        if (error) {
-          throw error
-        }
-        res.status(200).json(results.rows)
-      }) 
-    }
-  });
-}
-
-//  const getUserId = (request, response) => {
-//   var auth0_id = request.query.auth0_id;
-  
-//   pool.query(`SELECT * FROM users WHERE auth0_id='${auth0_id}' `, (error, results) => {
-//     if (error) {
-//       throw error
+//       pool.query(`SELECT * FROM users WHERE auth0_id='${auth0_id}' `, (error, results) => {
+//         if (error) {
+//           throw error
+//         }
+//         res.status(200).json(results.rows)
+//       }) 
 //     }
-//     response.status(200).json(results.rows)
-//   }) 
-
+//   });
 // }
 
+// const makeNewUser = (req, res) => {
+//   jwt.verify(req.token, 'secretkey', (err, authData) => {
+//      if (err){
+//          res.send('token test failed...');
+//      } else {
+//       pool.query(`INSERT INTO users (auth0_id, first_name, last_name) VALUES('${req.body.auth0_id}','${req.body.first_name}','${req.body.last_name}');`,(error, results) => {
+//         if (error) {
+//           throw errorR
+//         }
+//         console.log("add user successful - yay!");
+//       } )
+//      }
+//    });
+//  }
 
-const makeNewUser = (req, res) => {
-  jwt.verify(req.token, 'secretkey', (err, authData) => {
-     if (err){
-         res.send('token test failed...');
-     } else {
-      pool.query(`INSERT INTO users (auth0_id, first_name, last_name) VALUES('${req.body.auth0_id}','${req.body.first_name}','${req.body.last_name}');`,(error, results) => {
-        if (error) {
-          throw errorR
-        }
-        console.log("add user successful - yay!");
-      } )
-     }
-   });
- }
+ const getUserId = (request, response) => {
+  var auth0_id = request.query.auth0_id;
+  
+  pool.query(`SELECT * FROM users WHERE auth0_id='${auth0_id}' `, (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  }) 
+
+}
+
+  const makeNewUser = (request, response) => {
+    pool.query(`INSERT INTO users (auth0_id, first_name, last_name) VALUES('${request.body.auth0_id}','${request.body.first_name}','${request.body.last_name}');`,(error, results) => {
+      if (error) {
+        throw errorR
+      }
+      console.log("add user successful - yay!");
+    } )
+
+  }
+
+
+
 
  const getBaseSkills = (request, response) => {
   
@@ -164,7 +176,7 @@ const getUserRecords = (request, response) => {
   var userId = request.query.user_id;
   pool.query(`SELECT s.skill_title, s.skill_icon, r.record_id, r.skill_id, r.emotion_id, r.before_lvl, r.after_lvl, r.impact, r.date, r.si, r.sh, e.emotion_text FROM skills AS s FULL OUTER JOIN records AS r ON r.skill_id = s.skill_id FULL OUTER JOIN emotions AS e on r.emotion_id = e.emotion_id FULL OUTER JOIN users AS u ON r.user_id = u.user_id WHERE u.user_id =${userId} ORDER BY r.date DESC;`, (error, results) => {
     if (error) {
-      throw error
+      throw error 
     }
     response.status(200).json(results.rows)
   })

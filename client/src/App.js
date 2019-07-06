@@ -815,6 +815,7 @@ class App extends Component {
                     getCustomSkills={this.getCustomSkills}
                     customSkillsList={this.state.customSkillsList}
                     user_id= {this.state.user_id}
+                    setSkillsTypeahead = {this.state.setSkillsTypeahead}
                   />   
                 </div>
                 

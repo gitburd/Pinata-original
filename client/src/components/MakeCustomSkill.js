@@ -61,7 +61,7 @@ export default class MakeCustomSkill extends Component {
           body: JSON.stringify(skill),
           headers: { 'Content-Type': 'application/json'}
         })
-        .then(r => r.json())
+        .then(r => this.props.setSkillsTypeahead)
         // .then(json=>{this.setState({recent_record:json.record}); return json})
         .catch(function(e) {console.log(`something is wrong! : ${e}`); })           
       }
