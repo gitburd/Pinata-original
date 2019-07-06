@@ -152,7 +152,7 @@ export default class Chart extends Component {
     }
     getFeelingData = () => {
           
-        let url = `http://localhost:3001/api/search/Feeling?user_id=${this.props.user_id}&keyword=${this.state.query}`
+        let url = `/api/search/Feeling?user_id=${this.props.user_id}&keyword=${this.state.query}`
                
             console.log(`the url is ${url}`)
             fetch(url, {
@@ -207,7 +207,7 @@ export default class Chart extends Component {
         }
         getActionData = () => {
      
-            let url = `http://localhost:3001/api/search/Skill?user_id=${this.props.user_id}&keyword=${this.state.skill_id}`
+            let url = `/api/search/Skill?user_id=${this.props.user_id}&keyword=${this.state.skill_id}`
                    
                 console.log(`the url is ${url}`)
                 fetch(url, {
@@ -258,7 +258,7 @@ export default class Chart extends Component {
         }
         getCriticalData = () => {
               
-            let url = `http://localhost:3001/api/search/critical?user_id=${this.props.user_id}`
+            let url = `/api/search/critical?user_id=${this.props.user_id}`
                    
                 console.log(`the url is ${url}`)
                 fetch(url, {
@@ -309,7 +309,7 @@ export default class Chart extends Component {
   setSkillCallback = (skill) =>{
 
     this.setState({skill})
-    let url = `http://localhost:3001/api/skill_id?skill_title=${skill}`
+    let url = `/api/skill_id?skill_title=${skill}`
     
     fetch(url, {
       method: 'get',
@@ -330,7 +330,7 @@ export default class Chart extends Component {
     this.setState({query:emotion})
     
     
-    let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
+    let url = `/api/emotion_id?emotion_text=${emotion}`
   console.log(url)
   fetch(url, {
     method: 'get',

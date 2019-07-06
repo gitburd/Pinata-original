@@ -339,7 +339,7 @@ export default class AutoCompleteText extends Component {
         // make new record
         console.log('216 newRecord')
         e.preventDefault();
-        let url = `http://localhost:3001/api/records`            
+        let url = `/api/records`            
         let record = 
             {
             before_lvl:this.state.before_lvl,
@@ -365,7 +365,7 @@ export default class AutoCompleteText extends Component {
         console.log('216 getNewRecord')
         e.preventDefault();
         let auth0_id= this.props.auth0_id
-        let url = `http://localhost:3001/api/newRecord?auth0_id=${auth0_id}`
+        let url = `/api/newRecord?auth0_id=${auth0_id}`
         if (this.props.auth0_id && this.props.auth0_id!==''){
     
         fetch(url, {
@@ -384,7 +384,7 @@ export default class AutoCompleteText extends Component {
 
     getEmotionSkills = (emotion_text) => {
         console.log(`line 148`, this.state.emotion_text)
-    let url = `http://localhost:3001/api/emotionSkills?emotion=${emotion_text}`
+    let url = `/api/emotionSkills?emotion=${emotion_text}`
     console.log(url)
     console.log("line 151", this.state.emotion_text)
     fetch(url, {
@@ -402,7 +402,7 @@ export default class AutoCompleteText extends Component {
 
     getUserSkills = () => {
 
-        let url = `http://localhost:3001/api/userSkills?id=${this.props.user_id}&emotion=${this.state.emotion_text}`
+        let url = `/api/userSkills?id=${this.props.user_id}&emotion=${this.state.emotion_text}`
     
         console.log(`userSkills ${url}`)
         fetch(url, {
@@ -510,7 +510,7 @@ console.log('target from 287', target)
         console.log('made it to critical skills')
         if (this.state.si || this.state.sh || this.state.before_lvl>6 ){
     
-            let url = 'http://localhost:3001/api/criticalSkills'
+            let url = '/api/criticalSkills'
     
             fetch(url, {
                 method: 'get',
