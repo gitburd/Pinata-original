@@ -17,7 +17,7 @@ export default class Landing extends Component {
        
     if (this.props.auth.isAuthenticated){
            
-      let url = `http://localhost:3001/login/`
+      let url = `/login/`
 
       fetch(url, {
         method: 'get',

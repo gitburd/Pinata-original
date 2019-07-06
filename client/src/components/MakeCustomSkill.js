@@ -47,7 +47,7 @@ export default class MakeCustomSkill extends Component {
     
 
       makeNewCustomSkill  = (skill_title,skill_icon,skill_details, user_id) => { 
-        let url = `http://localhost:3001/api/customskills`            
+        let url = `/api/customskills`            
         let skill = 
           {
           skill_title,

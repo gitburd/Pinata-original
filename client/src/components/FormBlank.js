@@ -44,7 +44,7 @@ export default class FormBlank extends Component {
     this.setState({emotion})
     
     
-    let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
+    let url = `/api/emotion_id?emotion_text=${emotion}`
   console.log(url)
   fetch(url, {
     method: 'get',
@@ -59,7 +59,7 @@ export default class FormBlank extends Component {
   setSkillCallback = (skill) =>{
 
     this.setState({skill})
-    let url = `http://localhost:3001/api/skill_id?skill_title=${skill}`
+    let url = `/api/skill_id?skill_title=${skill}`
     
     fetch(url, {
       method: 'get',

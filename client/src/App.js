@@ -195,7 +195,7 @@ class App extends Component {
   
   getUserInfo = (auth0_id, first_name, last_name) => {
     
-    let url = `http://localhost:3001/api/user?auth0_id=${auth0_id}`
+    let url = `/api/user?auth0_id=${auth0_id}`
     
     if (auth0_id ){
       fetch(url, {
@@ -224,7 +224,7 @@ class App extends Component {
 
   getBaseSkills = () => {
     if (this.state.user_id){
-      let url = `http://localhost:3001/api/baseskills`
+      let url = `/api/baseskills`
       console.log(url)
       fetch(url, {
         method: 'get',
@@ -250,7 +250,7 @@ class App extends Component {
    getCustomSkills = () => {
   
     if (this.state.user_id){
-      let url = `http://localhost:3001/api/customskills?user_id=${this.state.user_id}`
+      let url = `/api/customskills?user_id=${this.state.user_id}`
       console.log(url)
       fetch(url, {
         method: 'get',
@@ -267,7 +267,7 @@ class App extends Component {
 
   getPromptRecord = (auth0_id) => {
     
-    let url = `http://localhost:3001/api/promptRecord?auth0_id=${auth0_id}`
+    let url = `/api/promptRecord?auth0_id=${auth0_id}`
     if (this.state.user_id && this.state.user_id!==''){
       fetch(url, {
         method: 'get',
@@ -293,7 +293,7 @@ class App extends Component {
   }
 
   recentRecord = (json) => {
-  let url = `http://localhost:3001/api/mostRecentRecord?user_id=${json[0].user_id}`
+  let url = `/api/mostRecentRecord?user_id=${json[0].user_id}`
     if (json[0].user_id && json[0].user_id!==''){
       fetch(url, {
         method: 'get',
@@ -317,7 +317,7 @@ class App extends Component {
 
 
   newRecord = () =>{
-    let url = `http://localhost:3001/api/newRecord?user_id=${this.state.user_id}`
+    let url = `/api/newRecord?user_id=${this.state.user_id}`
       if (this.state.user_id && this.state.user_id!==''){
         fetch(url, {
           method: 'get',
@@ -378,7 +378,7 @@ class App extends Component {
 
   getUserRecords = () => {
     if (this.state.user_id){
-      let url = `http://localhost:3001/api/userRecords?user_id=${this.state.user_id}`
+      let url = `/api/userRecords?user_id=${this.state.user_id}`
       console.log(url)
       fetch(url, {
         method: 'get',
@@ -395,17 +395,17 @@ class App extends Component {
   searchByQuery = (key, query) => {
     let url;
     if(key === 'critical' || key === 'Thoughts of suicide or self harm'){
-      url = `http://localhost:3001/api/search/critical?user_id=${this.state.user_id}`
+      url = `/api/search/critical?user_id=${this.state.user_id}`
     }
     else if (key === 'Full List'){
-      url = `http://localhost:3001/api/search/FullList?user_id=${this.state.user_id}`
+      url = `/api/search/FullList?user_id=${this.state.user_id}`
      
     }
     else if (key === 'Action'){
-      url = `http://localhost:3001/api/search/Skill?user_id=${this.state.user_id}&keyword=${query}`
+      url = `/api/search/Skill?user_id=${this.state.user_id}&keyword=${query}`
     }
     else{
-      url = `http://localhost:3001/api/search/${key}?user_id=${this.state.user_id}&keyword=${query}`
+      url = `/api/search/${key}?user_id=${this.state.user_id}&keyword=${query}`
     }
     console.log(`the search url is ${url}`)
     fetch(url, {
@@ -428,7 +428,7 @@ class App extends Component {
 
   updateRecord = (record_id, before_lvl, after_lvl) => {
     if(record_id!==''&& before_lvl!=='' && after_lvl!==''){
-      let url = `http://localhost:3001/api/userRecords?record_id=${record_id}`
+      let url = `/api/userRecords?record_id=${record_id}`
       let update = {
         before_lvl: parseInt(before_lvl),
         after_lvl: parseInt(after_lvl)
@@ -446,7 +446,7 @@ class App extends Component {
 
   addSkillToRecord = (skill_id) => {
       if (!this.state.recent_record.skill_id){
-        let url = `http://localhost:3001/api/setSkill`
+        let url = `/api/setSkill`
         let body = {
           record_id:this.state.recent_record.record_id,
           skill_id:this.state.skill_id
@@ -470,7 +470,7 @@ class App extends Component {
     
     console.log('grid 40 newRecord')
  
-    let url = `http://localhost:3001/api/recordwithskill`            
+    let url = `/api/recordwithskill`            
     let record = 
       {
       before_lvl:this.state.recent_record.before_lvl,
@@ -492,7 +492,7 @@ class App extends Component {
   }
 
   addFullRecord = (skill_id,emotion_id, before_lvl, after_lvl,si,sh, date) => {
-    let url = `http://localhost:3001/api/fullRecord`
+    let url = `/api/fullRecord`
 
     let newRecord = 
 
@@ -523,7 +523,7 @@ class App extends Component {
 
   getUserSkills = () => {
     if (this.state.user_id && this.state.emotion){   
-      let url = `http://localhost:3001/api/userSkills?user_id=${this.state.user_id}&emotion=${this.state.emotion}`
+      let url = `/api/userSkills?user_id=${this.state.user_id}&emotion=${this.state.emotion}`
 
       fetch(url, {
         method: 'get',
@@ -538,7 +538,7 @@ class App extends Component {
   }
 
   getEmotionSkills = () => {
-    let url = `http://localhost:3001/api/emotionSkills?emotion=${this.state.emotion}`
+    let url = `/api/emotionSkills?emotion=${this.state.emotion}`
     fetch(url, {
       method: 'get',
       headers: { 'Content-Type': 'application/json'}
@@ -617,7 +617,7 @@ class App extends Component {
 
   getEmotionId =(emotion) => {
     if (emotion!==''){
-      let url = `http://localhost:3001/api/emotion_id?emotion_text=${emotion}`
+      let url = `/api/emotion_id?emotion_text=${emotion}`
       console.log(url)
       fetch(url, {
         method: 'get',
@@ -671,7 +671,7 @@ class App extends Component {
 
 
   makeNewUser =  (auth0_id, first_name, last_name) =>{
-    let url = `http://localhost:3001/api/user`
+    let url = `/api/user`
     let body = {
       auth0_id, 
       first_name,
