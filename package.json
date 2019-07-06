@@ -30,12 +30,5 @@
   },
   "start": "node server/server.js",
   "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-  
-    "buildpacks": [
-      {
-        "url": "mars/create-react-app"
-      }
-    ]
-  
-
+  "heroku-run-build-script": true
 }
