@@ -29,6 +29,8 @@
     "node": "11.9.0"
   },
   "scripts": {
+    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",  
+    "heroku-postbuild": "echo This runs afterwards.",
     "start": "node src/index.js",
     "build": "webpack"
   },
