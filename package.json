@@ -26,12 +26,11 @@
     "request": "^2.88.0"
   },
   "engines": {
-    "node": "11.9.0",
-    "npm": "11.9.0"
+    "node": "11.9.0"
   },
   "scripts": {
     "start": "node src/index.js",
     "build": "webpack"
-},
-"heroku-run-build-script": true
+  },
+  "heroku-run-build-script": true
 }
