@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Piñata",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "dena",
   "license": "ISC",
   "plugins": [
@@ -28,6 +25,7 @@
     "pg": "^7.11.0",
     "request": "^2.88.0"
   },
+   "engines" : { "node" : ">=0.11" },
   "scripts": {
     "start": "node src/index.js",
     "build": "webpack"
