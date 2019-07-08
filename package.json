@@ -2,7 +2,6 @@
   "name": "hmh",
   "version": "1.0.0",
   "description": "Piñata",
-  "main": "app.js",
   "author": "dena",
   "license": "ISC",
   "plugins": [
@@ -32,6 +31,5 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
-  },
-  "heroku-run-build-script": true
+  }
 }
