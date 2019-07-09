@@ -1,7 +1,11 @@
 {
-  "name": "hmh",
+  "name": "piñata",
   "version": "1.0.0",
   "description": "Piñata",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "author": "dena",
   "license": "ISC",
   "plugins": [
@@ -20,19 +24,9 @@
     "inquirer": "^6.2.2",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.4.0",
+    "mongoose": "^5.4.18",
     "nodemon": "^1.19.1",
     "pg": "^7.11.0",
     "request": "^2.88.0"
-  },
-  "engines": {
-    "node": "11.9.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/app.js",
-    "dev": "webpack-dev-server --config ./webpack/webpack-dev.config.js --watch --colors",
-      "build": "rm -rf dist && webpack --config ./webpack/webpack-prod.config.js --colors",
-    "heroku-prebuild": "npm install --dev",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   }
 }

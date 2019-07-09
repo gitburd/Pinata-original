@@ -38,9 +38,9 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "PORT=3000 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -52,9 +52,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "engines": {
-    "node": "11.9.0"
-  },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/register": "^7.4.4",
@@ -67,6 +64,6 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     }
-  },
+  }, 
   "proxy": "http://localhost:3001"
 }
