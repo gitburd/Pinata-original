@@ -20,7 +20,7 @@
     "mdbreact": "^4.13.0",
     "moment": "^2.24.0",
     "node-fetch": "^2.3.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "npm": "^6.9.0",
     "rc-slider": "^8.6.9",
     "react": "^16.8.6",
